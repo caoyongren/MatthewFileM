@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+[remote "origin"]
+	url = git://192.168.0.185/lollipop-x86/manifest.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "default"]
+	remote = origin
+	merge = refs/heads/multiwindow

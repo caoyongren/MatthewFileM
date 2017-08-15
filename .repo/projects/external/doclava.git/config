@@ -1,0 +1,7 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+[remote "aosp"]
+	url = git://192.168.0.185/lollipop-x86/platform/external/doclava
+	projectname = platform/external/doclava
+	fetch = +refs/heads/*:refs/remotes/aosp/*

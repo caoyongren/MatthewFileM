@@ -1,0 +1,7 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+[remote "aosp"]
+	url = git://192.168.0.185/lollipop-x86/platform/external/chromium_org/third_party/libaddressinput/src
+	projectname = platform/external/chromium_org/third_party/libaddressinput/src
+	fetch = +refs/heads/*:refs/remotes/aosp/*

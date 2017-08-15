@@ -1,0 +1,7 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+[remote "aosp"]
+	url = git://192.168.0.185/lollipop-x86/platform/prebuilts/python/darwin-x86/2.7.5
+	projectname = platform/prebuilts/python/darwin-x86/2.7.5
+	fetch = +refs/heads/*:refs/remotes/aosp/*

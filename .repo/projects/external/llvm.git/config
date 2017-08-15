@@ -1,0 +1,7 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+[remote "x86"]
+	url = git://192.168.0.185/lollipop-x86/platform/external/llvm
+	projectname = platform/external/llvm
+	fetch = +refs/heads/*:refs/remotes/x86/*

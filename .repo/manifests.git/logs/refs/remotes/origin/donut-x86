@@ -1,0 +1,1 @@
+0000000000000000000000000000000000000000 8b703787785179089a3f72bdc481a83b7e8d6d6a CaoYongren <m18410261910@163.com> 1489392001 +0800	fetch --progress origin --tags +refs/heads/*:refs/remotes/origin/* +refs/heads/multiwindow:refs/remotes/origin/multiwindow: storing head

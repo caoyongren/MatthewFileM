@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content" >
 
-    <com.openthos.filemanager.component.MyImageView
+    <com.openthos.filem.component.MyImageView
         android:id="@+id/child_image"
         android:layout_width="fill_parent"
         android:layout_height="120dp"

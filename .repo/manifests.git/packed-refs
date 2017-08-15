@@ -1,0 +1,32 @@
+# pack-refs with: peeled fully-peeled 
+87b927fe93a3f8e6a87e08015ed55a44b64a8f71 refs/remotes/origin/android-x86-1.6
+bf2bf5036f15499b9502ba6ed589426899ae7555 refs/remotes/origin/android-x86-2.2
+03cfded2ab43174674b599366b6d1f4f0ba1e454 refs/remotes/origin/android-x86-2.2-r2
+a8a081fc437890d96b0f5926a1daa0b934c56356 refs/remotes/origin/android-x86-4.0-r1
+c38637928431de750246bbf4962038686ca5994a refs/remotes/origin/android-x86-4.4-r1
+c0babc4e6df67645e3d05f9c4a606fe27a090c8f refs/remotes/origin/android-x86-4.4-r2
+25c8374c73702a7ccc975170bb74ef215e9c4b78 refs/remotes/origin/android-x86-4.4-r3
+43b4b07464e89c0c0cb9a62dfbf3d99b07a870de refs/remotes/origin/android-x86-4.4-r4
+36922277e384d1184ea705e1ca68e1102fb4efab refs/remotes/origin/android-x86-4.4-r5
+3bcc17d60dc2e49ccf036261f1a36d6db90c1a2c refs/remotes/origin/bugfix
+4b0a085f8c32f22da6e853c88f87caa465814263 refs/remotes/origin/cm-13.0-x86
+18f82e80e3fe60f2379e030e5de92d3c2ef3ba5d refs/remotes/origin/cupcake-x86
+8b703787785179089a3f72bdc481a83b7e8d6d6a refs/remotes/origin/donut-x86
+1f1151f26c9b19d3740e323d1a524a53487fe5bc refs/remotes/origin/eclair-x86
+03d4d92a8aca715d07a55c8481199162359f0956 refs/remotes/origin/feature
+4b45724cf9c6f7bdee74f766fdb5acaee4e2a48f refs/remotes/origin/froyo-x86
+507ad7895cf4b49cf1822d828f3768eed8d6a6c4 refs/remotes/origin/gingerbread-x86
+68e30da58943267cbcad476fa0f9cb9fb8b20b69 refs/remotes/origin/honeycomb-x86
+36029bb189c078676c9685d00c3cd02792e8c95f refs/remotes/origin/ics-x86
+085c7b15558b9af03ab3079d70555331d34f736e refs/remotes/origin/jb-x86
+dbfcd645841553dd101e376d384fa96a28aff340 refs/remotes/origin/kitkat-x86
+856ee00c6bae88fca28a8198be5fd96d553e70b1 refs/remotes/origin/lollipop-x86
+2d96d6aae0ccdd2e473ca86c00612ce31d1f9afb refs/remotes/origin/marshmallow-x86
+93b9e5e9d856b31053df09fd3599632e2102d97d refs/remotes/origin/multiwin-english
+0ee712eb48d2e422bdb93be898dd63173972743e refs/remotes/origin/multiwindow
+95514a4b8d9f56f86a1390733531c3e225dcf464 refs/remotes/origin/multiwindow-l-bugfix
+08f98d3fe81cbbae8b98931bd1e68c599485991e refs/remotes/origin/oto-ota
+9b4a8b430e1b940dd8f71589d3560725ca83b14e refs/remotes/origin/publish
+e13505f6cfa2be113c5bc30a3eaad1675c67c4b5 refs/remotes/origin/singlewindow
+4f4f9fda74de3d52e9cc72cffaf9aba03d12e85f refs/tags/openthos_20170213
+^057db6b85038c0878961979380a0679254a11730

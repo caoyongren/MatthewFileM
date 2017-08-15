@@ -271,7 +271,7 @@
             android:background="#E6E6E6" />
     </LinearLayout>
 
-    <com.openthos.filemanager.view.CustomGridView
+    <com.openthos.filem.view.CustomGridView
         android:id="@+id/usb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
