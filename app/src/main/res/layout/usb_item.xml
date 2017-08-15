@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/usb_item_rl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="20dp"
+    android:background="@drawable/sd_page_bg_selector"
+    android:gravity="center"
+    android:paddingBottom="20dp"
+    android:paddingTop="10dp"
+    >
+
+    <ImageView
+        android:id="@+id/usb_item_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/usb_service" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/usb_item_icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/usb_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/text_removable_disk1"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <ProgressBar
+            android:id="@+id/usb_item_pb"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="230dp"
+            android:layout_height="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:progressDrawable="@drawable/my_progressbar" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_size"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/usb_item_total_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/text_available"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/usb_item_available_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

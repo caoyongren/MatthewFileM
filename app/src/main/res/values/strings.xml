@@ -1,0 +1,305 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">File Manager</string>
+    <string name="confirm">OK</string>
+    <string name="menu_item_search">Search</string>
+    <string name="operation_create_folder">New Folder</string>
+    <string name="operation_create_file">New File</string>
+    <string name="menu_item_sort">Sort</string>
+    <string name="menu_item_sort_name">Name</string>
+    <string name="menu_item_sort_size">Size</string>
+    <string name="menu_item_sort_date">Time</string>
+    <string name="menu_item_sort_type">Type</string>
+    <string name="operation_open">Open</string>
+    <string name="operation_open_with">Open with</string>
+    <string name="operation_copy">Copy</string>
+    <string name="operation_folder">Create Folder</string>
+    <string name="operation_copy_path">Copy Path</string>
+    <string name="operation_paste">Paste</string>
+    <string name="operation_move">Cut</string>
+    <string name="operation_send">Send</string>
+    <string name="operation_rename">Rename</string>
+    <string name="operation_delete">Delete</string>
+    <string name="operation_info">Details</string>
+    <string name="operation_cancel">Cancel</string>
+    <string name="operation_refresh">Refresh</string>
+    <string name="operation_selectall">Select All</string>
+    <string name="operation_selectall_or_cancel">Select All(Cancel)</string>
+    <string name="operation_cancel_selectall">Cancel Select All</string>
+    <string name="operation_show_sys">Show hidden files</string>
+    <string name="operation_hide_sys">Hidden point file and Hidden file</string>
+    <string name="operation_delete_permanent">Delete permanent</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_file">No File</string>
+    <string name="tab_system_category">Android System</string>
+    <string name="tab_sd_category">Disk Save</string>
+    <string name="tab_usb_category">Movable Disk</string>
+    <string name="tab_yun_category">Cloud Storage</string>
+    <string name="tab_sd">File Manager</string>
+    <string name="tab_remote">Remote Management</string>
+    <string name="sd_folder">SDCard</string>
+    <string name="category_all">All</string>
+    <string name="category_music">Music</string>
+    <string name="category_video">Videos</string>
+    <string name="category_picture">Pictures</string>
+    <string name="category_theme">theme</string>
+    <string name="category_document">Document</string>
+    <string name="category_zip">Zip File</string>
+    <string name="category_apk">Unzip</string>
+    <string name="category_other">Other</string>
+    <string name="category_favorite">Favorite</string>
+    <string name="operation_rename_message">Please input new name</string>
+    <string name="operation_create_folder_message">Please input folder name</string>
+    <string name="operation_create_file_message">Please input file name</string>
+    <string name="operation_delete_confirm_message">Confirm deletion?</string>
+    <string name="new_folder_name">New Folder</string>
+    <string name="new_file_name">New File</string>
+    <string name="sd_card_size">SDCard:<xliff:g id="total_size">%1$s</xliff:g></string>
+    <string name="sd_card_available">Available:<xliff:g id="available_size">%1$s</xliff:g></string>
+    <string name="file_info_location">Location:</string>
+    <string name="file_info_size">Size:</string>
+    <string name="file_info_modified">Modified:</string>
+    <string name="file_info_canread">Readable:</string>
+    <string name="file_info_canwrite">Writable:</string>
+    <string name="file_info_ishidden">Ishidden:</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="operation_deleting">Deleting...</string>
+    <string name="operation_pasting">Pasting...</string>
+    <string name="operation_moving">Moving...</string>
+    <string name="confirm_know">Know</string>
+    <string name="install_successful">Install Successfully</string>
+    <string name="install_failed">Install Failed</string>
+    <string name="error_info_cant_send_folder">The folder can not be sent</string>
+    <string name="added_favorite">Added to the favorite</string>
+    <string name="removed_favorite">Removed from favorite</string>
+    <string name="fail_to_create_folder">Faild, the file is alread exist.</string>
+    <string name="fail_to_rename">Faild, file used this name is already exist.</string>
+    <string name="enable_sd_card">No usable SDCard, please insert or connect SDCard.</string>
+    <string name="start_server">Start Service</string>
+    <string name="stop_server">Stop Service</string>
+    <string name="notif_server_starting">Remote Management Services is already started.</string>
+    <string name="notif_title">Remote Management Services is running.</string>
+    <string name="storage_warning">External storage is not available.</string>
+    <string name="wifi_state">WiFi Status</string>
+    <string name="instruction_pre">After starting, you can remotely manage phone files from computer.</string>
+    <string name="instruction">Please input in "My Computer" address:</string>
+    <string name="no_wifi">No WiFi</string>
+    <string name="no_wifi_hint">No WiFi network, click and check WiFi setting</string>
+    <string name="search_title">Search File</string>
+    <string name="search_hint">Please input partial or full file name</string>
+    <string name="file_size">%d Byte</string>
+    <string name="dialog_select_type">Select file type</string>
+    <string name="dialog_type_text">Text</string>
+    <string name="dialog_type_audio">Audio</string>
+    <string name="dialog_type_video">Video</string>
+    <string name="dialog_type_image">Image</string>
+    <string name="favorite_photo">Photo</string>
+    <string name="favorite_sdcard">SDCard</string>
+    <string name="favorite_root">Root directory</string>
+    <string name="favorite_screen_cap">MIUI Screenshots</string>
+    <string name="favorite_ringtone">Ring</string>
+    <string name="multi_select_title">Selected <xliff:g id="number">%1$s</xliff:g></string>
+    <string name="menu_setting">Settings</string>
+    <string name="menu_exit">Exit</string>
+    <string name="preference_title">General Settings</string>
+    <string name="pref_primary_folder">Home Folder</string>
+    <string name="pref_read_root">Read the root directory</string>
+    <string name="pref_show_real_path">Displays the real path</string>
+    <string name="pref_primary_folder_summary">Folder displayed when the program starts, current path: <xliff:g id="string">%1$s</xliff:g></string>
+    <string name="pref_show_real_path_summary">Show real path in the navigation bar</string>
+    <string name="default_system_primary_folder">/storage/emulated/0/</string>
+    <string name="default_sd_primary_folder">/mnt/sdcard</string>
+    <string name="default_usb_primary_folder">/storage/usb0</string>
+    <string name="default_yun_primary_folder">Hold</string>
+    <string name="default_system_primary_folder_cn">Android System</string>
+    <string name="default_sd_primary_folder_cn">Disk Space</string>
+    <string name="qi_ta">Search</string>
+    <string name="video">Video</string>
+    <string name="picture">Picture</string>
+    <string name="desk">Desktop</string>
+    <string name="music">Music</string>
+    <string name="computer">Computer</string>
+    <string name="usb">USB</string>
+    <string name="internet">My Network Places</string>
+    <string name="cloud">Cloud Service</string>
+    <string name="text_about">About</string>
+    <string name="text_app_name">File Manager</string>
+    <string name="text_theme">In the trend of the classic forever</string>
+    <string name="text_version">Version: 1.0</string>
+    <string name="text_public">Official Website</string>
+    <string name="text_discuss">Forum</string>
+    <string name="text_address">http://www.emindsoft.com.cn</string>
+    <string name="text_help">Help and feedback</string>
+    <string name="text_help_title">You can send feedback directly, or go to the forum feedback, or find the answer in help center.</string>
+    <string name="text_to_public">Go to official website feedback</string>
+    <string name="text_help_center">Go to official website help center</string>
+    <string name="tv_storage_page">Collect</string>
+    <string name="left_local_up">Local</string>
+    <string name="left_net_up">Internet</string>
+    <string name="text_local_storage">Local Storage</string>
+    <string name="text_android">Android System</string>
+    <string name="text_size">Size: </string>
+    <string name="text_available">Available: </string>
+    <string name="text_disk_storage">Disk Storage</string>
+    <string name="text_mobile_device">Mobile Device</string>
+    <string name="text_removable_disk">Movable Disk</string>
+    <string name="text_removable_disk1">Movable Disk1</string>
+    <string name="text_removable_disk2">Movable Disk2</string>
+    <string name="text_removable_disk3">Movable Disk3</string>
+    <string name="text_cloud_services">Cloud Service</string>
+    <string name="text_cloud_disk">Cloud Storage</string>
+    <string name="text_device_storage">Devices Storage: 1.22G</string>
+    <string name="text_name">Name: </string>
+    <string name="text_no_icon_found">No Desktop Icon</string>
+    <string name="text_no_audio_found">No Music...</string>
+    <string name="text_no_pictures_found">No Picture...</string>
+    <string name="text_internet_page">My Network Places Page</string>
+    <string name="text_coming_soon">To be continued...</string>
+    <string name="text_dimens">Size</string>
+    <string name="text_prefrence">Prefrence</string>
+    <string name="text_every_year">All Years</string>
+    <string name="text_file_path">Path</string>
+    <string name="text_input_content">Please input search content</string>
+    <string name="text_no_video_found">No Video...</string>
+    <string name="group_count">5</string>
+    <string name="group_title">Camera</string>
+    <string name="USB_device_connected">USB device is connected</string>
+    <string name="USB_device_disconnected">USB device is disconnected</string>
+    <string name="operation_not_support">The current page does not support this operation</string>
+    <string name="grid_view">View items as a grid of icons!</string>
+    <string name="list_view">View items as a list!</string>
+    <string name="success_paste">Paste success!</string>
+    <string name="success_refresh">Refresh Success!</string>
+    <string name="success_cut">Cut Success!</string>
+    <string name="success_create_file">Create file success!</string>
+    <string name="success_create_folder">Create folder success!</string>
+    <string name="success_rename">Rename success!</string>
+    <string name="success_delete">Delete success!</string>
+    <string name="scroll_down">Scroll down...</string>
+    <string name="scroll_up">Scroll up...</string>
+    <string name="single_choice">Radio!</string>
+    <string name="select_file_to_copy">Please select file to copy</string>
+    <string name="select_file_to_send">Please select file to send</string>
+    <string name="found_no_file">No file, please check and re-enter!</string>
+    <string name="operation_failed_permission_refuse">The system directory has read permissions only! Current operation failed!</string>
+    <string name="external_storage_not_exist">No external storage temporarily</string>
+    <string name="file_title_name">Name</string>
+    <string name="file_title_modified">Modified</string>
+    <string name="file_title_type">Type</string>
+    <string name="file_title_size">Size</string>
+    <string name="file_type_folder">Folder</string>
+    <string name="file_type_file">File</string>
+    <string name="address_search_false">Invalid Address</string>
+    <string name="downloads">Downloads</string>
+    <string name="docement">Docement</string>
+    <string name="recycle">Recycle</string>
+    <string name="text_personal">My Space</string>
+    <string name="dialog_property_title">Propertys</string>
+    <string name="dialog_property_file_type">Type of file:</string>
+    <string name="dialog_property_open_way">Description:</string>
+    <string name="dialog_property_location">Location:</string>
+    <string name="dialog_property_size">Size:</string>
+    <string name="dialog_property_space_usage">Size on deis:</string>
+    <string name="dialog_property_creation_time">Created:</string>
+    <string name="dialog_property_modification_time">Modified:</string>
+    <string name="dialog_property_access_time">Accessed:</string>
+    <string name="dialog_property_limits_of_authority">Limits of authority:</string>
+    <string name="dialog_property_user">User:</string>
+    <string name="dialog_property_group">Group:</string>
+    <string name="dialog_property_other">Other:</string>
+    <string name="dialog_property_read">R</string>
+    <string name="dialog_property_write">W</string>
+    <string name="dialog_property_execute">X</string>
+    <string name="dialog_property_confirm">OK</string>
+    <string name="dialog_property_cancel">Cancel</string>
+    <string name="dialog_property_apply">Apply</string>
+    <string name="dialog_compress_title">Please select the compression format</string>
+    <string name="launcher_tar">tar</string>
+    <string name="launcher_tar_gz">tar.gz</string>
+    <string name="launcher_tar_bz2">tar.bz2</string>
+    <string name="launcher_zip">zip</string>
+    <string name="operation_compress">Compress</string>
+    <string name="operation_decompress">Decompress</string>
+    <string name="qq_image">QQ_Images</string>
+    <string name="qq_file">QQfile_recv</string>
+    <string name="winxin">WinXin</string>
+    <string name="baidu_disk">BaiduNetdisk</string>
+    <string name="USB_recognising">USB_recognising</string>
+    <string name="copy_info">Do in progress...</string>
+    <string name="file_type_default">.doc</string>
+    <string name="delete_dialog_move">Are you sure you want to move it/them to the Recycle?</string>
+    <string name="delete_dialog_delete">Are you sure you want to delete it/them permanently?</string>
+    <string name="delete_dialog_clean">Are you sure you want to clean the Recycle?</string>
+    <string name="found_no_corresponding_application_to_open">found_no_corresponding_application_to_open</string>
+    <string name="cloud_create_folder">Create Folder</string>
+    <string name="cloud_sync">Sync</string>
+    <string name="cloud_desync">Desync</string>
+    <string name="no_app_open_with">No application to open this file.\nPlease download in AppStore.</string>
+    <string name="USB_umounting">USB_umounting</string>
+    <string name="can_not_search">You can\'t search in the current path.</string>
+    <string name="remove_usb_device">Umount usb devices</string>
+    <string name="file_name_illegal">File name has illegal character /</string>
+    <string name="dialog_delete_yes">Yes</string>
+    <string name="dialog_delete_no">No</string>
+    <string name="umount">Umount</string>
+    <string name="bind_openthosid">OpenthosID is not exists, please bind OpenthosID</string>
+    <string name="init_seafile">System is initializing seafile services</string>
+    <string name="init_seafile_data">System is initializing seafile\'s data from Internet</string>
+    <string name="dialog_decompress_text">"%1$s" is already exists at Desktop, whether to decompress (which will cover the duplicate file)?</string>
+    <string name="fail_seafile_name">Create directory failed, because this is contains the same name directory.</string>
+    <string name="fail_seafile_name_by_error">File name only be composed of numbers, letters or spaces.</string>
+    <string name="file_name_not_null">File name must not be null.</string>
+    <string name="file_name_warning">Warning:\nAvoid containing these chractors: @ # $ ^ &amp; * ( ) [ ].\nDo you determine use this file name?</string>
+    <string-array name="file_type_array">
+        <item>.doc</item>
+        <item>.xls</item>
+        <item>.ppt</item>
+        <item>.txt</item>
+    </string-array>
+    <string-array name="common_folder_menu">
+        <item>@string/operation_open</item>
+        <item>@string/operation_copy</item>
+        <item>@string/operation_move</item>
+        <item>@string/operation_delete</item>
+        <item>@string/operation_delete_permanent</item>
+        <item>@string/operation_rename</item>
+        <item>@string/operation_send</item>
+        <item>@string/operation_copy_path</item>
+        <item>@string/operation_compress</item>
+        <item>@string/operation_decompress</item>
+        <item>@string/operation_info</item>
+    </string-array>
+    <string-array name="protected_folder_menu">
+        <item>@string/operation_open</item>
+        <item>@string/operation_info</item>
+    </string-array>
+    <string-array name="common_file_menu">
+        <item>@string/operation_open</item>
+        <item>@string/operation_open_with</item>
+        <item>@string/operation_copy</item>
+        <item>@string/operation_move</item>
+        <item>@string/operation_delete</item>
+        <item>@string/operation_delete_permanent</item>
+        <item>@string/operation_rename</item>
+        <item>@string/operation_send</item>
+        <item>@string/operation_copy_path</item>
+        <item>@string/operation_compress</item>
+        <item>@string/operation_decompress</item>
+        <item>@string/operation_info</item>
+    </string-array>
+    <string-array name="protected_file_menu">
+        <item>@string/operation_open</item>
+        <item>@string/operation_open_with</item>
+        <item>@string/operation_info</item>
+    </string-array>
+    <string-array name="common_blank_menu">
+        <item>@string/operation_paste</item>
+        <item>@string/menu_item_sort</item>
+        <item>@string/operation_create_folder</item>
+        <item>@string/operation_create_file</item>
+        <item>@string/operation_show_sys</item>
+    </string-array><string-array name="protected_blank_menu">
+        <item>@string/menu_item_sort</item>
+        <item>@string/operation_show_sys</item>
+    </string-array>
+</resources>
