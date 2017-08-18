@@ -14,6 +14,7 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //“无标题”功能的标志，关闭屏幕顶部的标题.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(getLayoutId());
         AppManager.getAppManager().addActivity(this);
@@ -23,21 +24,20 @@ public abstract class BaseActivity extends FragmentActivity {
         initListener();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        AppManager.getAppManager().finishActivity(this);
-    }
-
-    public void setNavigationBar(String displayPath) {
-    }
+    public void setNavigationBar(String displayPath) {}
 
     public FileSortHelper getFileSortHelper() {
         return mFileSortHelper;
     }
 
-    protected abstract void initListener();
-    protected abstract void initData();
-    protected abstract void initView();
     protected abstract int getLayoutId();
+    protected abstract void initView();
+    protected abstract void initData();
+    protected abstract void initListener();
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        AppManager.getAppManager().finishActivity(this);
+    }
 }

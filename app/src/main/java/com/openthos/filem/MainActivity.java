@@ -1,9 +1,10 @@
 package com.openthos.filem;
 
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
+import android.content.ClipboardManager;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.ClipboardManager;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -23,11 +25,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.support.v4.app.FragmentTransaction;
-import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
-import android.app.ProgressDialog;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.openthos.filem.bean.SeafileAccount;
 import com.openthos.filem.bean.SeafileLibrary;
@@ -35,37 +36,39 @@ import com.openthos.filem.component.CopyInfoDialog;
 import com.openthos.filem.component.PopOnClickLintener;
 import com.openthos.filem.component.PopWinShare;
 import com.openthos.filem.component.SearchOnKeyListener;
+import com.openthos.filem.component.UsbPropertyDialog;
 import com.openthos.filem.fragment.OnlineNeighborFragment;
-import com.openthos.filem.fragment.SdStorageFragment;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
+import com.openthos.filem.fragment.SdStorageFragment;
+import com.openthos.filem.fragment.SeafileFragment;
 import com.openthos.filem.fragment.SearchFragment;
-import com.openthos.filem.system.Util;
-import com.openthos.filem.system.FileListAdapter;
-import com.openthos.filem.utils.LocalCache;
 import com.openthos.filem.fragment.SystemSpaceFragment;
-import com.openthos.filem.system.IFileInteractionListener;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.system.FileInfo;
+import com.openthos.filem.system.FileListAdapter;
 import com.openthos.filem.system.FileOperationHelper;
-import com.openthos.filem.fragment.SeafileFragment;
+import com.openthos.filem.system.IFileInteractionListener;
+import com.openthos.filem.system.Util;
+import com.openthos.filem.utils.L;
+import com.openthos.filem.utils.LocalCache;
 import com.openthos.filem.utils.SeafileUtils;
-import com.openthos.filem.component.UsbPropertyDialog;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.io.File;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class MainActivity extends BaseActivity
                  implements View.OnClickListener, View.OnTouchListener {
+    public static final String TAG = "MainActivity -- > DEBUG::";
     private static final int POPWINDOW_WINTH = 120;
     private static final int POPWINDOW_HEIGHT = 40;
     private static final int POPWINDOW_X = -15;
@@ -82,24 +85,27 @@ public class MainActivity extends BaseActivity
     private static final String IV_SWITCH_VIEW = "iv_switch_view";
     private static final String SETTING_POPWINDOW_TAG = "iv_setting";
     private static final String USB_POPWINDOW_TAG = "iv_usb";
-    private TextView mTv_desk;
-    private TextView mTv_music;
-    private TextView mTv_video;
-    private TextView mTv_computer;
-    private TextView mTv_picture;
+    //控件命名原则：１．控件名要简写　２．控件位置　３．控件的个性
+    private TextView mTvMainDesktop;
+    private TextView mTvMainMusic;
+    private TextView mTvMainVideo;
+    private TextView mTvMainPicture;
+    private TextView mTvMainDocument;
+    private TextView mTvMainDownload;
+    private TextView mTvMainRecycle;
+    private TextView mTvMainComputer;
+    private TextView mTvMainCloudService;
+
     private TextView mTv_storage_one;
     private TextView mTv_storage_two;
     private TextView mTv_storage_three;
-    private TextView mTv_document;
-    private TextView mTv_download;
-    private TextView mTv_recycle;
-    private TextView mTv_cloud_service;
+
     private TextView mTv_net_service;
     private ImageView mIv_list_view;
     private ImageView mIv_grid_view;
     private ImageView mIv_back;
     private ImageView mIv_setting;
-    private EditText mEt_nivagation;
+    private EditText mEtNavigation;
     private EditText mEt_search_view;
     private ImageView mIv_search_view;
     private TextView mTv_pop_up_one;
@@ -148,9 +154,284 @@ public class MainActivity extends BaseActivity
     private SeafileThread mSeafileThread;
     private String mUsbPath;
     private ExecutorService mUsbSingleExecutor;
-
+/**
+ * </===============================分　割　线==============================================================>
+ * */
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    protected void initView() {
+        mInitSeafileThread = new InitSeafileThread();
+        mInitSeafileThread.start();
+        mSharedPreferences = getSharedPreferences(VIEW_TAG, Context.MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
+        String viewTag = mSharedPreferences.getString(VIEW_TAG, VIEW_TAG_GRID);
+        LocalCache.getInstance(MainActivity.this).setViewTag(viewTag);
+        mTvMainDesktop = (TextView) findViewById(R.id.tv_desk);
+        mTvMainMusic = (TextView) findViewById(R.id.tv_music);
+        mTvMainVideo = (TextView) findViewById(R.id.tv_video);
+        mTvMainPicture = (TextView) findViewById(R.id.tv_picture);
+        mTvMainDocument = (TextView) findViewById(R.id.tv_document);
+        mTvMainDownload = (TextView) findViewById(R.id.tv_download);
+        mTvMainRecycle = (TextView) findViewById(R.id.tv_recycle);
+        mTvMainComputer = (TextView) findViewById(R.id.tv_computer);
+        mTv_storage_one = (TextView) findViewById(R.id.tv_storage_one);
+        mTv_storage_two = (TextView) findViewById(R.id.tv_storage_two);
+        mTv_storage_three = (TextView) findViewById(R.id.tv_storage_three);
+        mTvMainCloudService = (TextView) findViewById(R.id.tv_cloud_service);
+        mTv_net_service = (TextView) findViewById(R.id.tv_net_service);
+        mIv_list_view = (ImageView) findViewById(R.id.iv_list_view);
+        mIv_grid_view = (ImageView) findViewById(R.id.iv_grid_view);
+        mIv_back = (ImageView) findViewById(R.id.iv_back);
+        mIv_setting = (ImageView) findViewById(R.id.iv_setting);
+        mEtNavigation = (EditText) findViewById(R.id.et_nivagation);
+        mIv_search_view = (ImageView) findViewById(R.id.iv_search);
+        mEt_search_view = (EditText) findViewById(R.id.search_view);
+        mTv_pop_up_one = (TextView) findViewById(R.id.tv_pop_up_one);
+        mTv_pop_up_two = (TextView) findViewById(R.id.tv_pop_up_two);
+        mTv_pop_up_three = (TextView) findViewById(R.id.tv_pop_up_three);
+        mRl_usb_one = (RelativeLayout) findViewById(R.id.rl_usb_one);
+        mRl_usb_two = (RelativeLayout) findViewById(R.id.rl_usb_two);
+        mRl_usb_three = (RelativeLayout) findViewById(R.id.rl_usb_three);
+        if (LocalCache.getViewTag() != null && "list".equals(LocalCache.getViewTag())) {
+            mIv_grid_view.setSelected(false);
+            mIv_list_view.setSelected(true);
+        } else {
+            mIv_grid_view.setSelected(true);
+            mIv_list_view.setSelected(false);
+        }
+        File file = new File(Constants.DOCUMENT_PATH);
+        if (!file.exists() && !file.isDirectory()) {
+            file.mkdir();
+        }
+
+        mUsbSingleExecutor = Executors.newSingleThreadExecutor();
+        mHashMap = new HashMap<>();
+        mHashMap.put(Constants.DESKFRAGMENT_TAG, R.id.tv_desk);
+        mHashMap.put(Constants.MUSICFRAGMENT_TAG, R.id.tv_music);
+        mHashMap.put(Constants.VIDEOFRAGMENT_TAG, R.id.tv_video);
+        mHashMap.put(Constants.PICTRUEFRAGMENT_TAG, R.id.tv_picture);
+        mHashMap.put(Constants.DOCUMENTFRAGMENT_TAG, R.id.tv_document);
+        mHashMap.put(Constants.DOWNLOADFRRAGMENT_TAG, R.id.tv_download);
+        mHashMap.put(Constants.RECYCLEFRAGMENT_TAG, R.id.tv_recycle);
+        mHashMap.put(Constants.SDSTORAGEFRAGMENT_TAG, R.id.tv_computer);
+        mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_net_service);
+        mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_cloud_service);
+        mHashMap.put(Constants.DETAILFRAGMENT_TAG, R.id.tv_picture);
+        mHashMap.put(Constants.SYSTEMSPACEFRAGMENT_TAG, R.id.tv_storage_one);
+        mHashMap.put(Constants.ADDRESSFRAGMENT_TAG, R.id.tv_storage_one);
+        mHashMap.put(Constants.SYSTEM_SPACE_FRAGMENT_TAG, R.id.tv_computer);
+        mHashMap.put(Constants.USBFRAGMENT_TAG,R.id.tv_storage_one);
+        mCopyInfoDialog = CopyInfoDialog.getInstance(MainActivity.this);
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                if (!Thread.currentThread().isInterrupted()) {
+                    switch (msg.what) {
+                        case Constants.DESKTOP_SHOW_FILE:
+                            Intent showIntent = new Intent();
+                            showIntent.setAction("android.intent.action.DESKTOP_SHOW_FILE");
+                            showIntent.putExtra("path", (String) msg.obj);
+                            MainActivity.this.sendBroadcast(showIntent);
+                            break;
+                        case Constants.DESKTOP_DELETE_FILE:
+                            Intent deleteIntent = new Intent();
+                            deleteIntent.setAction("android.intent.action.DESKTOP_DELETE_FILE");
+                            deleteIntent.putExtra("path", (String) msg.obj);
+                            MainActivity.this.sendBroadcast(deleteIntent);
+                            break;
+                        case UsbConnectReceiver.USB_STATE_ON:
+                            initUsb(UsbConnectReceiver.USB_STATE_ON);
+                            break;
+                        case UsbConnectReceiver.USB_STATE_OFF:
+                            initUsb(UsbConnectReceiver.USB_STATE_OFF);
+                            break;
+                        case 2:
+                            initUsb(0);
+                            break;
+                        case Constants.USB1_READY:
+                            mRl_usb_one.setVisibility(View.VISIBLE);
+                            if (mProgressDialog != null) {
+                                mProgressDialog.dismiss();
+                            }
+                            if (TextUtils.isEmpty(getCurPath()) ) {
+                                mTvMainComputer.performClick();
+                            }
+                            break;
+                        case Constants.USB2_READY:
+                            mRl_usb_two.setVisibility(View.VISIBLE);
+                            if (mProgressDialog != null) {
+                                mProgressDialog.dismiss();
+                            }
+                            if (TextUtils.isEmpty(getCurPath()) ) {
+                                mTvMainComputer.performClick();
+                            }
+                            break;
+                        case Constants.USB3_READY:
+                            mRl_usb_three.setVisibility(View.VISIBLE);
+                            if (mProgressDialog != null) {
+                                mProgressDialog.dismiss();
+                            }
+                            if (TextUtils.isEmpty(getCurPath()) ) {
+                                mTvMainComputer.performClick();
+                            }
+                            break;
+                        case Constants.REFRESH:
+                            ((IFileInteractionListener) getVisibleFragment())
+                                    .onRefreshFileList((String) msg.obj, getFileSortHelper());
+                            resetClipboard();
+                            break;
+                        case Constants.COPY:
+                            copy();
+                            break;
+                        case Constants.CUT:
+                            cut();
+                            break;
+                        case Constants.PASTE:
+                            paste();
+                            break;
+                        case Constants.COPY_INFO_SHOW:
+                            mCopyInfoDialog.showDialog();
+                            mCopyInfoDialog.changeTitle(MainActivity.this.getResources()
+                                    .getString(R.string.copy_info));
+                            break;
+                        case Constants.COPY_INFO:
+                            mCopyInfoDialog.changeMsg((String) msg.obj);
+                            break;
+                        case Constants.COPY_INFO_HIDE:
+                            mCopyInfoDialog.cancel();
+                            break;
+                        case Constants.ONLY_REFRESH:
+                            ((IFileInteractionListener) getVisibleFragment())
+                                    .onRefreshFileList((String) msg.obj, getFileSortHelper());
+                            break;
+                        case Constants.USB_ONE:
+                            if (Util.execUsb(new String[]{"df"}).size() != 1) {
+                                mSdStorageFragment.hideMountSpaceOne();
+                                if (getCurPath() != null && getCurPath().equals(mUsb0[0])) {
+                                    showSdSFragmentAfterInstallUSB();
+                                }
+                            } else {
+                                removeMobileDevice();
+                            }
+                            mRl_usb_one.setVisibility(View.GONE);
+                            if (mPopUpProgressDialog != null) {
+                                mPopUpProgressDialog.dismiss();
+                            }
+                            break;
+                        case Constants.USB_TWO:
+                            mRl_usb_two.setVisibility(View.GONE);
+                            if (Util.execUsb(new String[]{"df"}).size() != 1) {
+                                mSdStorageFragment.hideMountSpaceTwo();
+                                if (getCurPath() != null && getCurPath().equals(mUsb1[0])) {
+                                    showSdSFragmentAfterInstallUSB();
+                                }
+                            } else {
+                                removeMobileDevice();
+                            }
+                            if (mPopUpProgressDialog != null) {
+                                mPopUpProgressDialog.dismiss();
+                            }
+                            break;
+                        // case Constants.USB_THREE:
+                        //     mRl_usb_three.setVisibility(View.GONE);
+                        //     if (Util.execUsb(new String[]{"df"}).size() != 1) {
+                        //         mSdStorageFragment.hideMountSpaceThree();
+                        //         if (getCurPath() != null && getCurPath().equals(mUsb2[0])) {
+                        //             showSdSFragmentAfterInstallUSB();
+                        //         }
+                        //     } else {
+                        //         removeMobileDevice();
+                        //     }
+                        //     if (mPopUpProgressDialog != null) {
+                        //         mPopUpProgressDialog.dismiss();
+                        //     }
+                        //     break;
+                        case Constants.MENU_SHOWHIDE:
+                            Toast.makeText(MainActivity.this,
+                                    getResources().getString(R.string.can_not_search),
+                                    Toast.LENGTH_SHORT).show();
+                            break;
+                        case Constants.SEAFILE_DATA_OK:
+                            mSeafileFragment.setData(mAccount.mLibrarys);
+                            mSeafileFragment.getAdapter().notifyDataSetChanged();
+                            break;
+                    }
+                }
+                super.handleMessage(msg);
+            }
+        };
+    }
+
+    protected void initData() {
+        initFragment();
+        checkFolder(null);
+    }
+
+    @Override
+    protected void initListener() {
+        mTvMainDesktop.setOnClickListener(this);
+        mTvMainMusic.setOnClickListener(this);
+        mTvMainVideo.setOnClickListener(this);
+        mTvMainComputer.setOnClickListener(this);
+        mTvMainPicture.setOnClickListener(this);
+        mTvMainDocument.setOnClickListener(this);
+        mTvMainDownload.setOnClickListener(this);
+        mTvMainRecycle.setOnClickListener(this);
+        mTvMainCloudService.setOnClickListener(this);
+        mTv_net_service.setOnClickListener(this);
+        mIv_list_view.setOnClickListener(this);
+        mIv_grid_view.setOnClickListener(this);
+        mIv_back.setOnClickListener(this);
+        mIv_setting.setOnClickListener(this);
+        mTvMainComputer.performClick();
+        mTv_storage_one.setOnTouchListener(this);
+        mTv_storage_two.setOnTouchListener(this);
+        mTv_storage_three.setOnTouchListener(this);
+        //search_view.addTextChangedListener(new EditTextChangeListener(mManager,
+        //                                                       MainActivity.this));
+        mSearchOnKeyListener = new SearchOnKeyListener(mManager,
+                mEt_search_view.getText(), MainActivity.this);
+        mEt_search_view.setOnKeyListener(mSearchOnKeyListener);
+        //mIv_search_view.setOnClickListener(new SearchOnClickListener(mManager,
+        //                                          mEt_search_view.getText(), MainActivity.this));
+        mIv_search_view.setOnClickListener(this);
+        NivagationOnClickLinstener nivagationOnClickLinstener = new NivagationOnClickLinstener();
+        NivagationOnKeyLinstener nivagationOnKeyLinstener =new NivagationOnKeyLinstener();
+        mEtNavigation.setOnClickListener(nivagationOnClickLinstener);
+        mEtNavigation.setOnKeyListener(nivagationOnKeyLinstener);
+        mEtNavigation.addTextChangedListener(new TextChangeListener());
+        initUsb(-1);
+        mCurFragment = mSdStorageFragment;
+        Intent intent = getIntent();
+        String path = intent.getStringExtra("path");
+        if (path != null) {
+            mEtNavigation.setText(path);
+            mEtNavigation.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,
+                    KeyEvent.KEYCODE_ENTER));
+            mEtNavigation.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,
+                    KeyEvent.KEYCODE_ENTER));
+        }
+        setCurPath(path);
+    }
+
+    @Override
+    public void setNavigationBar(String displayPath) {
+        //顶部的：path显示．例如：SD卡/Download/app
+        L.i(TAG + ":" + displayPath);
+        if (displayPath != null) {
+            if (mCurFragment == mSdStorageFragment &&
+                    mSdStorageFragment.mCurFragment != null) {
+                mEtNavigation.setText(displayPath);
+            } else {
+                if (mCurFragment instanceof SystemSpaceFragment) {
+                    mEtNavigation.setText(displayPath);
+                } else {
+                    mEtNavigation.setText(null);
+                }
+            }
+        }
     }
 
     private class InitSeafileThread extends Thread {
@@ -252,209 +533,6 @@ public class MainActivity extends BaseActivity
         return mSeafileThread.isAlive();
     }
 
-    protected void initView() {
-        mInitSeafileThread = new InitSeafileThread();
-        mInitSeafileThread.start();
-        mSharedPreferences = getSharedPreferences(VIEW_TAG, Context.MODE_PRIVATE);
-        mEditor = mSharedPreferences.edit();
-        String viewTag = mSharedPreferences.getString(VIEW_TAG, VIEW_TAG_GRID);
-        LocalCache.getInstance(MainActivity.this).setViewTag(viewTag);
-        mTv_desk = (TextView) findViewById(R.id.tv_desk);
-        mTv_music = (TextView) findViewById(R.id.tv_music);
-        mTv_video = (TextView) findViewById(R.id.tv_video);
-        mTv_computer = (TextView) findViewById(R.id.tv_computer);
-        mTv_picture = (TextView) findViewById(R.id.tv_picture);
-        mTv_document = (TextView) findViewById(R.id.tv_document);
-        mTv_download = (TextView) findViewById(R.id.tv_download);
-        mTv_recycle = (TextView) findViewById(R.id.tv_recycle);
-        mTv_storage_one = (TextView) findViewById(R.id.tv_storage_one);
-        mTv_storage_two = (TextView) findViewById(R.id.tv_storage_two);
-        mTv_storage_three = (TextView) findViewById(R.id.tv_storage_three);
-        mTv_cloud_service = (TextView) findViewById(R.id.tv_cloud_service);
-        mTv_net_service = (TextView) findViewById(R.id.tv_net_service);
-        mIv_list_view = (ImageView) findViewById(R.id.iv_list_view);
-        mIv_grid_view = (ImageView) findViewById(R.id.iv_grid_view);
-        mIv_back = (ImageView) findViewById(R.id.iv_back);
-        mIv_setting = (ImageView) findViewById(R.id.iv_setting);
-        mEt_nivagation = (EditText) findViewById(R.id.et_nivagation);
-        mIv_search_view = (ImageView) findViewById(R.id.iv_search);
-        mEt_search_view = (EditText) findViewById(R.id.search_view);
-        mTv_pop_up_one = (TextView) findViewById(R.id.tv_pop_up_one);
-        mTv_pop_up_two = (TextView) findViewById(R.id.tv_pop_up_two);
-        mTv_pop_up_three = (TextView) findViewById(R.id.tv_pop_up_three);
-        mRl_usb_one = (RelativeLayout) findViewById(R.id.rl_usb_one);
-        mRl_usb_two = (RelativeLayout) findViewById(R.id.rl_usb_two);
-        mRl_usb_three = (RelativeLayout) findViewById(R.id.rl_usb_three);
-        if (LocalCache.getViewTag() != null && "list".equals(LocalCache.getViewTag())) {
-             mIv_grid_view.setSelected(false);
-             mIv_list_view.setSelected(true);
-        } else {
-             mIv_grid_view.setSelected(true);
-             mIv_list_view.setSelected(false);
-        }
-        File file = new File(Constants.DOCUMENT_PATH);
-        if (!file.exists() && !file.isDirectory()) {
-            file.mkdir();
-        }
-
-        mUsbSingleExecutor = Executors.newSingleThreadExecutor();
-        mHashMap = new HashMap<>();
-        mHashMap.put(Constants.DESKFRAGMENT_TAG, R.id.tv_desk);
-        mHashMap.put(Constants.MUSICFRAGMENT_TAG, R.id.tv_music);
-        mHashMap.put(Constants.VIDEOFRAGMENT_TAG, R.id.tv_video);
-        mHashMap.put(Constants.PICTRUEFRAGMENT_TAG, R.id.tv_picture);
-        mHashMap.put(Constants.DOCUMENTFRAGMENT_TAG, R.id.tv_document);
-        mHashMap.put(Constants.DOWNLOADFRRAGMENT_TAG, R.id.tv_download);
-        mHashMap.put(Constants.RECYCLEFRAGMENT_TAG, R.id.tv_recycle);
-        mHashMap.put(Constants.SDSTORAGEFRAGMENT_TAG, R.id.tv_computer);
-        mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_net_service);
-        mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_cloud_service);
-        mHashMap.put(Constants.DETAILFRAGMENT_TAG, R.id.tv_picture);
-        mHashMap.put(Constants.SYSTEMSPACEFRAGMENT_TAG, R.id.tv_storage_one);
-        mHashMap.put(Constants.ADDRESSFRAGMENT_TAG, R.id.tv_storage_one);
-        mHashMap.put(Constants.SYSTEM_SPACE_FRAGMENT_TAG, R.id.tv_computer);
-        mHashMap.put(Constants.USBFRAGMENT_TAG,R.id.tv_storage_one);
-        mCopyInfoDialog = CopyInfoDialog.getInstance(MainActivity.this);
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (!Thread.currentThread().isInterrupted()) {
-                    switch (msg.what) {
-                        case Constants.DESKTOP_SHOW_FILE:
-                            Intent showIntent = new Intent();
-                            showIntent.setAction("android.intent.action.DESKTOP_SHOW_FILE");
-                            showIntent.putExtra("path", (String) msg.obj);
-                            MainActivity.this.sendBroadcast(showIntent);
-                            break;
-                        case Constants.DESKTOP_DELETE_FILE:
-                            Intent deleteIntent = new Intent();
-                            deleteIntent.setAction("android.intent.action.DESKTOP_DELETE_FILE");
-                            deleteIntent.putExtra("path", (String) msg.obj);
-                            MainActivity.this.sendBroadcast(deleteIntent);
-                            break;
-                        case UsbConnectReceiver.USB_STATE_ON:
-                            initUsb(UsbConnectReceiver.USB_STATE_ON);
-                            break;
-                        case UsbConnectReceiver.USB_STATE_OFF:
-                            initUsb(UsbConnectReceiver.USB_STATE_OFF);
-                            break;
-                        case 2:
-                            initUsb(0);
-                            break;
-                        case Constants.USB1_READY:
-                            mRl_usb_one.setVisibility(View.VISIBLE);
-                            if (mProgressDialog != null) {
-                                mProgressDialog.dismiss();
-                            }
-                            if (TextUtils.isEmpty(getCurPath()) ) {
-                                mTv_computer.performClick();
-                            }
-                            break;
-                        case Constants.USB2_READY:
-                            mRl_usb_two.setVisibility(View.VISIBLE);
-                            if (mProgressDialog != null) {
-                                mProgressDialog.dismiss();
-                            }
-                            if (TextUtils.isEmpty(getCurPath()) ) {
-                                mTv_computer.performClick();
-                            }
-                            break;
-                        case Constants.USB3_READY:
-                            mRl_usb_three.setVisibility(View.VISIBLE);
-                            if (mProgressDialog != null) {
-                                mProgressDialog.dismiss();
-                            }
-                            if (TextUtils.isEmpty(getCurPath()) ) {
-                                mTv_computer.performClick();
-                            }
-                            break;
-                        case Constants.REFRESH:
-                            ((IFileInteractionListener) getVisibleFragment())
-                                         .onRefreshFileList((String) msg.obj, getFileSortHelper());
-                            resetClipboard();
-                            break;
-                        case Constants.COPY:
-                            copy();
-                            break;
-                        case Constants.CUT:
-                            cut();
-                            break;
-                        case Constants.PASTE:
-                            paste();
-                            break;
-                        case Constants.COPY_INFO_SHOW:
-                            mCopyInfoDialog.showDialog();
-                            mCopyInfoDialog.changeTitle(MainActivity.this.getResources()
-                                                                    .getString(R.string.copy_info));
-                            break;
-                        case Constants.COPY_INFO:
-                            mCopyInfoDialog.changeMsg((String) msg.obj);
-                            break;
-                        case Constants.COPY_INFO_HIDE:
-                            mCopyInfoDialog.cancel();
-                            break;
-                        case Constants.ONLY_REFRESH:
-                            ((IFileInteractionListener) getVisibleFragment())
-                                    .onRefreshFileList((String) msg.obj, getFileSortHelper());
-                            break;
-                        case Constants.USB_ONE:
-                            if (Util.execUsb(new String[]{"df"}).size() != 1) {
-                                mSdStorageFragment.hideMountSpaceOne();
-                                if (getCurPath() != null && getCurPath().equals(mUsb0[0])) {
-                                    showSdSFragmentAfterInstallUSB();
-                                }
-                            } else {
-                                removeMobileDevice();
-                            }
-                            mRl_usb_one.setVisibility(View.GONE);
-                            if (mPopUpProgressDialog != null) {
-                                mPopUpProgressDialog.dismiss();
-                            }
-                            break;
-                        case Constants.USB_TWO:
-                            mRl_usb_two.setVisibility(View.GONE);
-                            if (Util.execUsb(new String[]{"df"}).size() != 1) {
-                                mSdStorageFragment.hideMountSpaceTwo();
-                                if (getCurPath() != null && getCurPath().equals(mUsb1[0])) {
-                                    showSdSFragmentAfterInstallUSB();
-                                }
-                            } else {
-                                removeMobileDevice();
-                            }
-                            if (mPopUpProgressDialog != null) {
-                                mPopUpProgressDialog.dismiss();
-                            }
-                            break;
-                       // case Constants.USB_THREE:
-                       //     mRl_usb_three.setVisibility(View.GONE);
-                       //     if (Util.execUsb(new String[]{"df"}).size() != 1) {
-                       //         mSdStorageFragment.hideMountSpaceThree();
-                       //         if (getCurPath() != null && getCurPath().equals(mUsb2[0])) {
-                       //             showSdSFragmentAfterInstallUSB();
-                       //         }
-                       //     } else {
-                       //         removeMobileDevice();
-                       //     }
-                       //     if (mPopUpProgressDialog != null) {
-                       //         mPopUpProgressDialog.dismiss();
-                       //     }
-                       //     break;
-                        case Constants.MENU_SHOWHIDE:
-                            Toast.makeText(MainActivity.this,
-                                           getResources().getString(R.string.can_not_search),
-                                           Toast.LENGTH_SHORT).show();
-                            break;
-                        case Constants.SEAFILE_DATA_OK:
-                            mSeafileFragment.setData(mAccount.mLibrarys);
-                            mSeafileFragment.getAdapter().notifyDataSetChanged();
-                            break;
-                    }
-                }
-                super.handleMessage(msg);
-            }
-        };
-    }
-
     private void showSdSFragmentAfterInstallUSB() {
         mManager.beginTransaction().remove(mCurFragment).show(mSdStorageFragment).commit();
         mCurFragment = mSdStorageFragment;
@@ -536,7 +614,7 @@ public class MainActivity extends BaseActivity
                 mSdStorageFragment.mCurFragment = visibleFragment;
             }
           //  T.showShort(MainActivity.this, getResources().getString(R.string.USB_device_connected));
-          //  mTv_computer.performClick();
+          //  mTvMainComputer.performClick();
             if (mProgressDialog == null) {
                 mProgressDialog = new ProgressDialog(this);
             }
@@ -624,11 +702,6 @@ public class MainActivity extends BaseActivity
         transaction.commit();
     }
 
-    protected void initData() {
-        initFragment();
-        checkFolder(null);
-    }
-
     private void checkFolder(Fragment fragment) {
         List<String> fileList = new ArrayList<>();
         fileList.add(Constants.DESKTOP_PATH);
@@ -647,53 +720,6 @@ public class MainActivity extends BaseActivity
         if (fragment != null) {
             ((SystemSpaceFragment) fragment).refreshUI();
         }
-    }
-
-    @Override
-    protected void initListener() {
-        mTv_desk.setOnClickListener(this);
-        mTv_music.setOnClickListener(this);
-        mTv_video.setOnClickListener(this);
-        mTv_computer.setOnClickListener(this);
-        mTv_picture.setOnClickListener(this);
-        mTv_document.setOnClickListener(this);
-        mTv_download.setOnClickListener(this);
-        mTv_recycle.setOnClickListener(this);
-        mTv_cloud_service.setOnClickListener(this);
-        mTv_net_service.setOnClickListener(this);
-        mIv_list_view.setOnClickListener(this);
-        mIv_grid_view.setOnClickListener(this);
-        mIv_back.setOnClickListener(this);
-        mIv_setting.setOnClickListener(this);
-        mTv_computer.performClick();
-        mTv_storage_one.setOnTouchListener(this);
-        mTv_storage_two.setOnTouchListener(this);
-        mTv_storage_three.setOnTouchListener(this);
-//        search_view.addTextChangedListener(new EditTextChangeListener(mManager,
-//                                                                        MainActivity.this));
-        mSearchOnKeyListener = new SearchOnKeyListener(mManager,
-                                        mEt_search_view.getText(), MainActivity.this);
-        mEt_search_view.setOnKeyListener(mSearchOnKeyListener);
-//        mIv_search_view.setOnClickListener(new SearchOnClickListener(mManager,
-//                                          mEt_search_view.getText(), MainActivity.this));
-        mIv_search_view.setOnClickListener(this);
-        NivagationOnClickLinstener nivagationOnClickLinstener = new NivagationOnClickLinstener();
-        NivagationOnKeyLinstener nivagationOnKeyLinstener =new NivagationOnKeyLinstener();
-        mEt_nivagation.setOnClickListener(nivagationOnClickLinstener);
-        mEt_nivagation.setOnKeyListener(nivagationOnKeyLinstener);
-        mEt_nivagation.addTextChangedListener(new TextChangeListener());
-        initUsb(-1);
-        mCurFragment = mSdStorageFragment;
-        Intent intent = getIntent();
-        String path = intent.getStringExtra("path");
-        if (path != null) {
-            mEt_nivagation.setText(path);
-            mEt_nivagation.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,
-                                                         KeyEvent.KEYCODE_ENTER));
-            mEt_nivagation.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_UP,
-                                                         KeyEvent.KEYCODE_ENTER));
-        }
-        setCurPath(path);
     }
 
     class NivagationOnClickLinstener implements View.OnClickListener {
@@ -832,7 +858,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_DEL && !mEt_search_view.hasFocus()
-                                                                  && !mEt_nivagation.isFocused()) {
+                                                                  && !mEtNavigation.isFocused()) {
             onBackPressed();
         }
         if (event.isCtrlPressed()) {
@@ -908,7 +934,7 @@ public class MainActivity extends BaseActivity
                   ((BaseFragment) getVisibleFragment()).mFileViewInteractionHub.getCurrentPath()));
         }
         if (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER) {
-            if (mEt_nivagation.isFocused() || mEt_search_view.isFocused()) {
+            if (mEtNavigation.isFocused() || mEt_search_view.isFocused()) {
                 return false;
             }
             if (getVisibleFragment() instanceof BaseFragment) {
@@ -922,7 +948,7 @@ public class MainActivity extends BaseActivity
         return getVisibleFragment() instanceof PersonalSpaceFragment
                 || getVisibleFragment() instanceof SdStorageFragment
                 || getVisibleFragment() instanceof OnlineNeighborFragment
-                || mEt_nivagation.isFocused() || mEt_search_view.isFocused();
+                || mEtNavigation.isFocused() || mEt_search_view.isFocused();
     }
 
     public void cut() {
@@ -1059,7 +1085,7 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.tv_computer:
                 mIsSdStorageFragment = true;
-                mEt_nivagation.setText(null);
+                mEtNavigation.setText(null);
                 Fragment fragment = mManager.findFragmentByTag(Constants.SYSTEMSPACEFRAGMENT_TAG);
                 if (fragment != null) {
                     FragmentTransaction transaction = mManager.beginTransaction();
@@ -1217,7 +1243,7 @@ public class MainActivity extends BaseActivity
             }
         }
         setSelectedBackground(id);
-        mEt_nivagation.setText(path);
+        mEtNavigation.setText(path);
         setCurPath(path);
         FragmentTransaction transaction = mManager.beginTransaction();
         if (mCurFragment != null) {
@@ -1233,199 +1259,199 @@ public class MainActivity extends BaseActivity
     private void setSelectedBackground(int id) {
         switch (id) {
             case R.id.tv_computer:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(true);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(true);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_desk:
-                mTv_desk.setSelected(true);
-                mTv_music.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainDesktop.setSelected(true);
+                mTvMainMusic.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_music:
-                mTv_music.setSelected(true);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(true);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_video:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(true);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(true);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_picture:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(true);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(true);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_document:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(true);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(true);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_download:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(true);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(true);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_recycle:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(true);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(true);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_storage_one:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(true);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_storage_two:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(true);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_storage_three:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(true);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_net_service:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
                 mTv_net_service.setSelected(true);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
-                mTv_cloud_service.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
+                mTvMainCloudService.setSelected(false);
                 break;
             case R.id.tv_cloud_service:
-                mTv_music.setSelected(false);
-                mTv_desk.setSelected(false);
-                mTv_video.setSelected(false);
-                mTv_computer.setSelected(false);
-                mTv_picture.setSelected(false);
+                mTvMainMusic.setSelected(false);
+                mTvMainDesktop.setSelected(false);
+                mTvMainVideo.setSelected(false);
+                mTvMainComputer.setSelected(false);
+                mTvMainPicture.setSelected(false);
                 mTv_storage_one.setSelected(false);
                 mTv_storage_two.setSelected(false);
                 mTv_storage_three.setSelected(false);
-                mTv_cloud_service.setSelected(true);
+                mTvMainCloudService.setSelected(true);
                 mTv_net_service.setSelected(false);
-                mTv_document.setSelected(false);
-                mTv_download.setSelected(false);
-                mTv_recycle.setSelected(false);
+                mTvMainDocument.setSelected(false);
+                mTvMainDownload.setSelected(false);
+                mTvMainRecycle.setSelected(false);
                 break;
             default:
                 break;
@@ -1497,7 +1523,7 @@ public class MainActivity extends BaseActivity
                 SystemSpaceFragment sdCurFrament = (SystemSpaceFragment) mCurFragment;
                 String currentPath = sdCurFrament.getCurrentPath();
                 setCurPath(currentPath);
-                mEt_nivagation.setText(currentPath);
+                mEtNavigation.setText(currentPath);
                 if (mCurFragment.getTag() != null &&
                     mCurFragment.getTag().equals(Constants.PERSONALSYSTEMSPACE_TAG)) {
                     if (mPersonalSpaceFragment.canGoBack()) {
@@ -1667,7 +1693,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mDeskFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.DESKTOP_PATH);
+        mEtNavigation.setText(Constants.DESKTOP_PATH);
         setSelectedBackground(R.id.tv_desk);
         mCurFragment = mDeskFragment;
     }
@@ -1677,7 +1703,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mMusicFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.MUSIC_PATH);
+        mEtNavigation.setText(Constants.MUSIC_PATH);
         setSelectedBackground(R.id.tv_music);
         mCurFragment = mMusicFragment;
     }
@@ -1687,7 +1713,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mVideoFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.VIDEOS_PATH);
+        mEtNavigation.setText(Constants.VIDEOS_PATH);
         setSelectedBackground(R.id.tv_video);
         mCurFragment = mVideoFragment;
     }
@@ -1697,7 +1723,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mPictrueFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.PICTURES_PATH);
+        mEtNavigation.setText(Constants.PICTURES_PATH);
         setSelectedBackground(R.id.tv_picture);
         mCurFragment = mPictrueFragment;
     }
@@ -1707,7 +1733,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mDocumentFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.DOCUMENT_PATH);
+        mEtNavigation.setText(Constants.DOCUMENT_PATH);
         setSelectedBackground(R.id.tv_document);
         mCurFragment = mDocumentFragment;
     }
@@ -1717,7 +1743,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mDownloadFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.DOWNLOAD_PATH);
+        mEtNavigation.setText(Constants.DOWNLOAD_PATH);
         setSelectedBackground(R.id.tv_download);
         mCurFragment = mDownloadFragment;
     }
@@ -1727,7 +1753,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mRecycleFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(Constants.RECYCLE_PATH);
+        mEtNavigation.setText(Constants.RECYCLE_PATH);
         setSelectedBackground(R.id.tv_recycle);
         mCurFragment = mRecycleFragment;
     }
@@ -1737,7 +1763,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mSeafileFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(getResources().getString(R.string.cloud));
+        mEtNavigation.setText(getResources().getString(R.string.cloud));
         setSelectedBackground(R.id.tv_computer);
         mCurFragment = mSeafileFragment;
     }
@@ -1747,7 +1773,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mPersonalSpaceFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText("SDCard");
+        mEtNavigation.setText("SDCard");
         setSelectedBackground(R.id.tv_computer);
         mCurFragment = mPersonalSpaceFragment;
     }
@@ -1757,7 +1783,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(mCurFragment);
         fragmentTransaction.show(mSdStorageFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText(null);
+        mEtNavigation.setText(null);
         setSelectedBackground(R.id.tv_computer);
         mSdStorageFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
         mCurFragment = mSdStorageFragment;
@@ -1768,7 +1794,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.hide(getVisibleFragment());
         fragmentTransaction.show(mSeafileFragment);
         fragmentTransaction.commit();
-        mEt_nivagation.setText("seafile");
+        mEtNavigation.setText("seafile");
         setSelectedBackground(R.id.tv_cloud_service);
         mCurFragment = mSeafileFragment;
     }
@@ -1776,33 +1802,8 @@ public class MainActivity extends BaseActivity
     public interface IBackPressedListener {
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mReceiver.unregisterReceiver();
-        if (mCustomFileObserver != null) {
-            mCustomFileObserver.stopWatching();
-            mCustomFileObserver = null;
-        }
-    }
-
-    @Override
-    public void setNavigationBar(String displayPath) {
-        if (displayPath != null) {
-            if (mCurFragment == mSdStorageFragment && mSdStorageFragment.mCurFragment != null) {
-                mEt_nivagation.setText(displayPath);
-            } else {
-                if (mCurFragment instanceof SystemSpaceFragment) {
-                    mEt_nivagation.setText(displayPath);
-                }else {
-                    mEt_nivagation.setText(null);
-                }
-            }
-        }
-    }
-
     public void setNavigationPath(String displayPath) {
-        mEt_nivagation.setText(displayPath);
+        mEtNavigation.setText(displayPath);
     }
 
     public void setCurPath(String path) {
@@ -1814,6 +1815,7 @@ public class MainActivity extends BaseActivity
     }
 
     class usbListener implements View.OnClickListener{
+
         private int mWhichUsb;
         public usbListener(int whichUsb){
             mWhichUsb = whichUsb;
@@ -1840,7 +1842,6 @@ public class MainActivity extends BaseActivity
             }
         }
     }
-
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
         clearNivagateFocus();
@@ -1862,10 +1863,10 @@ public class MainActivity extends BaseActivity
     }
 
     class CustomFileObserver extends FileObserver {
+
         public CustomFileObserver(String path) {
             super(path);
         }
-
         @Override
         public void onEvent(int event, String path) {
             switch (event) {
@@ -1882,14 +1883,14 @@ public class MainActivity extends BaseActivity
                     break;
             }
         }
-    }
 
+    }
     private class TextChangeListener implements TextWatcher {
+
         @Override
         public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
 
         }
-
         @Override
         public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
 
@@ -1909,10 +1910,20 @@ public class MainActivity extends BaseActivity
             mCustomFileObserver = new CustomFileObserver(path);
             mCustomFileObserver.startWatching();
         }
-    }
 
+    }
     public void clearNivagateFocus(){
         mEt_search_view.clearFocus();
-        mEt_nivagation.clearFocus();
+        mEtNavigation.clearFocus();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mReceiver.unregisterReceiver();
+        if (mCustomFileObserver != null) {
+            mCustomFileObserver.stopWatching();
+            mCustomFileObserver = null;
+        }
     }
 }
