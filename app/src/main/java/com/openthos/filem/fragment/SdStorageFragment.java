@@ -426,7 +426,7 @@ public class SdStorageFragment extends BaseFragment {
         } else {
             mCurFragment = new SystemSpaceFragment(tag, path,
                                                    mFileInfoArrayList, copyOrMove, false);
-            transaction.add(R.id.fl_mian, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
+            transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
         }
         mMainActivity.mCurFragment = mCurFragment;
         mCurId = Constants.RETURN_TO_WHITE;

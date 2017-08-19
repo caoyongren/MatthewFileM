@@ -1,0 +1,13 @@
+Unstaged changes after reset:
+M	.idea/misc.xml
+M	app/src/main/java/com/openthos/filem/MainActivity.java
+M	app/src/main/java/com/openthos/filem/component/SearchOnClickListener.java
+M	app/src/main/java/com/openthos/filem/component/SearchOnKeyListener.java
+M	app/src/main/java/com/openthos/filem/fragment/PersonalSpaceFragment.java
+M	app/src/main/java/com/openthos/filem/fragment/PictrueFragment.java
+M	app/src/main/java/com/openthos/filem/fragment/SdStorageFragment.java
+M	app/src/main/java/com/openthos/filem/fragment/SeafileFragment.java
+M	app/src/main/java/com/openthos/filem/fragment/SearchFragment.java
+M	app/src/main/java/com/openthos/filem/utils/LocalCache.java
+M	app/src/main/res/layout-land/activity_main.xml
+M	app/src/main/res/layout/activity_main.xml

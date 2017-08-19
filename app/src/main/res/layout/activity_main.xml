@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar" />
+    <include layout="@layout/title_bar_main" />
 
     <View
         android:layout_width="match_parent"
@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <include layout="@layout/left_bar" />
+            <include layout="@layout/left_bar_main" />
 
         </LinearLayout>
 
@@ -35,7 +35,7 @@
             android:background="@android:color/darker_gray" />
 
         <FrameLayout
-            android:id="@+id/fl_mian"
+            android:id="@+id/framelayout_right_mian"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6" />

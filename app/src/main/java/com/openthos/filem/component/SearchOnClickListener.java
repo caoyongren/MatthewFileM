@@ -71,7 +71,7 @@ public class SearchOnClickListener implements View.OnClickListener {
     private void startSearchFragment() {
         SearchFragment searchFragment = new SearchFragment(manager, mFileList);
         manager.popBackStack();
-        manager.beginTransaction().replace(R.id.fl_mian, searchFragment).commit();
+        manager.beginTransaction().replace(R.id.framelayout_right_mian, searchFragment).commit();
         progressDialog.dismiss();
     }
 

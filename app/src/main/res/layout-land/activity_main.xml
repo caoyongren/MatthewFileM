@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
-        <include layout="@layout/title_bar" />
+        <include layout="@layout/title_bar_main" />
 
     </RelativeLayout>
 
@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:background="@drawable/left_bg_shape">
 
-            <include layout="@layout/left_bar" />
+            <include layout="@layout/left_bar_main" />
 
         </RelativeLayout>
 
@@ -43,7 +43,7 @@
             android:background="#E6E6E6" />
 
         <FrameLayout
-            android:id="@+id/fl_mian"
+            android:id="@+id/framelayout_right_mian"
             android:layout_width="0dp"
             android:background="@android:color/white"
             android:layout_height="match_parent"
