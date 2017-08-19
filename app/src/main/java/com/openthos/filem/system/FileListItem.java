@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.openthos.filem.R;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.IconHolder;
 
 public class FileListItem {
@@ -23,7 +23,7 @@ public class FileListItem {
 //        } else {
 //            checkbox.setVisibility(fileViewInteractionHub.canShowCheckBox()
 //                    ? View.VISIBLE : View.GONE);
-//            if ("grid".equals(LocalCache.getViewTag())) {
+//            if ("grid".equals(LocalCacheLayout.getViewTag())) {
 //                checkbox.setBackgroundResource(fileInfo.Selected
 //                        ? R.mipmap.btn_check_on_holo_light
 //                        : R.mipmap.btn_check_off_holo_light);
@@ -35,7 +35,7 @@ public class FileListItem {
 //        }
 
         ImageView lFileImage = (ImageView) view.findViewById(R.id.file_image);
-        if ("list".equals(LocalCache.getViewTag())) {
+        if ("list".equals(LocalCacheLayout.getViewTag())) {
             Util.setText(view, R.id.file_name, fileInfo.fileName,
                          context.getResources().getColor(R.color.file_name_color));
             Util.setText(view, R.id.file_count, (fileInfo.IsDir ?
@@ -81,7 +81,7 @@ public class FileListItem {
 //            tag.Selected = !tag.Selected;
 ////            ll_tag.Selected = !ll_tag.Selected;
 //            if (mFileViewInteractionHub.onCheckItem(tag, v)) {
-//                if ("grid".equals(LocalCache.getViewTag())) {
+//                if ("grid".equals(LocalCacheLayout.getViewTag())) {
 //                    img.setBackgroundResource(tag.Selected ? R.mipmap.btn_check_on_holo_light
 //                            : R.mipmap.btn_check_off_holo_light);
 //                }

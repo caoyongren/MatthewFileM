@@ -20,7 +20,7 @@ import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.system.FileIconHelper;
 import com.openthos.filem.system.IntentBuilder;
 import com.openthos.filem.system.Util;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.system.Constants;
 import java.io.File;
 import java.util.ArrayList;
@@ -162,7 +162,7 @@ public class SearchFragment extends BaseFragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LocalCache.setSearchText(null);
+        LocalCacheLayout.setSearchText(null);
     }
 
     @Override

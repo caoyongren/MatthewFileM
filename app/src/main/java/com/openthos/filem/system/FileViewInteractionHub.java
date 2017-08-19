@@ -25,7 +25,7 @@ import com.openthos.filem.component.MenuFirstDialog;
 import com.openthos.filem.R;
 import com.openthos.filem.component.PropertyDialog;
 import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.fragment.SystemSpaceFragment;
 
 import java.io.File;
@@ -365,9 +365,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private boolean createFolder(String text) {
         if (mFileOperationHelper.CreateFolder(mCurrentPath, text)) {
             mFileViewListener.addSingleFile(Util.GetFileInfo(Util.makePath(mCurrentPath, text)));
-            if ("list".equals(LocalCache.getViewTag())) {
+            if ("list".equals(LocalCacheLayout.getViewTag())) {
                 mFileListView.setSelection(mFileListView.getCount() - 1);
-            } else if ("grid".equals(LocalCache.getViewTag())) {
+            } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                 mFileGridView.setSelection(mFileGridView.getCount() - 1);
             }
             clearSelection();
@@ -432,9 +432,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private boolean createFile(String text) {
         if (mFileOperationHelper.CreateFile(mCurrentPath, text)) {
             mFileViewListener.addSingleFile(Util.GetFileInfo(Util.makePath(mCurrentPath, text)));
-            if ("list".equals(LocalCache.getViewTag())) {
+            if ("list".equals(LocalCacheLayout.getViewTag())) {
                 mFileListView.setSelection(mFileListView.getCount() - 1);
-            } else if ("grid".equals(LocalCache.getViewTag())) {
+            } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                 mFileGridView.setSelection(mFileGridView.getCount() - 1);
             }
             clearSelection();
@@ -917,7 +917,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private ListView mFileListView;
 
     private void setupFileListView() {
-        final String title = LocalCache.getViewTag();
+        final String title = LocalCacheLayout.getViewTag();
         if ("list".equals(title)) {
             mFileListView = (ListView) mFileViewListener.getViewById(R.id.file_path_list);
         } else if ("grid".equals(title)) {

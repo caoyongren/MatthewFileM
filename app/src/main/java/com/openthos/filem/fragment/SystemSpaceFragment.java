@@ -36,7 +36,7 @@ import com.openthos.filem.system.IFileInteractionListener;
 import com.openthos.filem.system.Settings;
 import com.openthos.filem.system.Util;
 import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.T;
 
 import java.io.File;
@@ -235,12 +235,12 @@ public class SystemSpaceFragment extends BaseFragment implements
         mFileIconHelper = new FileIconHelper(mActivity);
         mGridMotionListener = new GridViewOnGenericMotionListener();
 //        mListMotionListener = new ListViewOnGenericMotionListener();
-        if ("list".equals(LocalCache.getViewTag())) {
+        if ("list".equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mListMotionListener);
-        } else if ("grid".equals(LocalCache.getViewTag())) {
+        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mGridMotionListener);
@@ -288,12 +288,12 @@ public class SystemSpaceFragment extends BaseFragment implements
     }
 
     private void switchMode() {
-     if ("list".equals(LocalCache.getViewTag())) {
+     if ("list".equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mListMotionListener);
-        } else if ("grid".equals(LocalCache.getViewTag())) {
+        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mGridMotionListener);
@@ -650,11 +650,11 @@ public class SystemSpaceFragment extends BaseFragment implements
     }
 
     private void operatorData() {
-        if ("list".equals(LocalCache.getViewTag())) {
+        if ("list".equals(LocalCacheLayout.getViewTag())) {
             file_path_grid.setVisibility(View.GONE);
             file_path_list.setVisibility(View.VISIBLE);
             file_path_list.setAdapter(mAdapter);
-        } else if ("grid".equals(LocalCache.getViewTag())) {
+        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             file_path_list.setVisibility(View.GONE);
             file_path_grid.setVisibility(View.VISIBLE);
             file_path_grid.setAdapter(mAdapter);
@@ -702,9 +702,9 @@ public class SystemSpaceFragment extends BaseFragment implements
         if (mPreviousPath != null) {
             if (path.startsWith(mPreviousPath)) {
                 int firstVisiblePosition = 0;
-                if ("list".equals(LocalCache.getViewTag())) {
+                if ("list".equals(LocalCacheLayout.getViewTag())) {
                     firstVisiblePosition = file_path_list.getFirstVisiblePosition();
-                } else if ("grid".equals(LocalCache.getViewTag())) {
+                } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                     firstVisiblePosition = file_path_grid.getFirstVisiblePosition();
                 }
                 if (mScrollPositionList.size() != 0
@@ -776,14 +776,14 @@ public class SystemSpaceFragment extends BaseFragment implements
 
         sortCurrentList(sort);
         showEmptyView(fileList.size() == 0);
-        if ("list".equals(LocalCache.getViewTag())) {
+        if ("list".equals(LocalCacheLayout.getViewTag())) {
             file_path_list.post(new Runnable() {
                 @Override
                 public void run() {
                     file_path_list.setSelection(pos);
                 }
             });
-        } else if ("grid".equals(LocalCache.getViewTag())) {
+        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             file_path_grid.post(new Runnable() {
                 @Override
                 public void run() {
@@ -798,9 +798,9 @@ public class SystemSpaceFragment extends BaseFragment implements
 
     private void updateUI() {
         mNoSdView.setVisibility(mSdCardReady ? View.GONE : View.VISIBLE);
-        if ("list".equals(LocalCache.getViewTag())) {
+        if ("list".equals(LocalCacheLayout.getViewTag())) {
             file_path_list.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
-        } else if ("grid".equals(LocalCache.getViewTag())) {
+        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             file_path_grid.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
         }
 

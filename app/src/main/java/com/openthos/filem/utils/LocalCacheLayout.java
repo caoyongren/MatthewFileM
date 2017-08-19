@@ -5,19 +5,19 @@ import android.content.SharedPreferences;
 
 import com.openthos.filem.MainActivity;
 
-public class LocalCache {
-    private static LocalCache localCache;
+public class LocalCacheLayout {
+    private static LocalCacheLayout localCache;
     private static SharedPreferences sPreferences;
 
-    private LocalCache(Context context) {
+    private LocalCacheLayout(Context context) {
         sPreferences = context.getSharedPreferences(context.getPackageName(),
                 Context.MODE_PRIVATE);
     }
 
     //单例模式
-    public static LocalCache getInstance(Context context) {
+    public static LocalCacheLayout getInstance(Context context) {
         if (localCache == null) {
-            localCache = new LocalCache(context);
+            localCache = new LocalCacheLayout(context);
         }
         return localCache;
     }

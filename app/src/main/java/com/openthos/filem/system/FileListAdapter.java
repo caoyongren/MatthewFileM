@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.openthos.filem.R;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.IconHolder;
 
 import java.util.ArrayList;
@@ -73,9 +73,9 @@ public class FileListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null)  {
-            if ("list".equals(LocalCache.getViewTag())) {
+            if ("list".equals(LocalCacheLayout.getViewTag())) {
                 convertView = mInflater.inflate(R.layout.file_browser_item_list, parent, false);
-            } else if ("grid".equals(LocalCache.getViewTag())) {
+            } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                 convertView = mInflater.inflate(R.layout.file_browser_item_grid, parent, false);
             }
             viewHolder = new ViewHolder(convertView);

@@ -50,7 +50,7 @@ import com.openthos.filem.system.FileOperationHelper;
 import com.openthos.filem.system.IFileInteractionListener;
 import com.openthos.filem.system.Util;
 import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.SeafileUtils;
 
 import org.json.JSONArray;
@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity
         mSharedPreferences = getSharedPreferences(KEY_VIEW_TAG, Context.MODE_PRIVATE);
         String strViewTag = mSharedPreferences.getString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
         L.i(TAG + "strViewTag:" +strViewTag);
-        LocalCache.getInstance(mContext).setViewTag(strViewTag);
+        LocalCacheLayout.getInstance(mContext).setViewTag(strViewTag);
         mEditor = mSharedPreferences.edit();
 
         mInitSeafileThread = new InitSeafileThread();
@@ -204,7 +204,7 @@ public class MainActivity extends BaseActivity
         mRl_usb_one = (RelativeLayout) findViewById(R.id.rl_usb_one);
         mRl_usb_two = (RelativeLayout) findViewById(R.id.rl_usb_two);
         mRl_usb_three = (RelativeLayout) findViewById(R.id.rl_usb_three);
-        if (LocalCache.getViewTag() != null && "list".equals(LocalCache.getViewTag())) {
+        if (LocalCacheLayout.getViewTag() != null && "list".equals(LocalCacheLayout.getViewTag())) {
             mIvMainGridView.setSelected(false);
             mIvMainListView.setSelected(true);
         } else {
@@ -1162,7 +1162,7 @@ public class MainActivity extends BaseActivity
             case R.id.iv_main_grid_view:
                 mIvMainGridView.setSelected(true);
                 mIvMainListView.setSelected(false);
-                LocalCache.setViewTag(DEFAULT_VIEW_TAG_GRID);
+                LocalCacheLayout.setViewTag(DEFAULT_VIEW_TAG_GRID);
                 sendBroadcastMessage(IV_SWITCH_VIEW, DEFAULT_VIEW_TAG_GRID, false);
                 mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
                 mEditor.commit();
@@ -1170,7 +1170,7 @@ public class MainActivity extends BaseActivity
             case R.id.iv_main_list_view:
                 mIvMainGridView.setSelected(false);
                 mIvMainListView.setSelected(true);
-                LocalCache.setViewTag(VIEW_TAG_LIST);
+                LocalCacheLayout.setViewTag(VIEW_TAG_LIST);
                 sendBroadcastMessage(IV_SWITCH_VIEW, VIEW_TAG_LIST, false);
                 mEditor.putString(KEY_VIEW_TAG, VIEW_TAG_LIST);
                 mEditor.commit();

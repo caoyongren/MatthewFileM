@@ -20,7 +20,7 @@ import com.openthos.filem.system.FileInfo;
 import com.openthos.filem.system.FileViewInteractionHub;
 import com.openthos.filem.system.Util;
 import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.T;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.view.CustomGridView;
@@ -514,7 +514,7 @@ public class SdStorageFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LocalCache.setSearchText(null);
+        LocalCacheLayout.setSearchText(null);
     }
 
     public boolean canGoBack() {

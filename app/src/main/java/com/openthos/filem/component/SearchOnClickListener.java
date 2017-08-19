@@ -12,7 +12,7 @@ import com.openthos.filem.R;
 import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.fragment.SearchFragment;
 import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
+import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.T;
 
 import java.io.File;
@@ -38,7 +38,7 @@ public class SearchOnClickListener implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         v.requestFocus();
-        if (mFileList.size() > 0 && LocalCache.getSearchText() != null) {
+        if (mFileList.size() > 0 && LocalCacheLayout.getSearchText() != null) {
             mFileList.clear();
             startSearch(input.trim());
             if (mFileList.size() > 0) {
@@ -51,7 +51,7 @@ public class SearchOnClickListener implements View.OnClickListener {
         }
         assert mFileList != null;
         mFileList.clear();
-        LocalCache.setSearchText(input.trim());
+        LocalCacheLayout.setSearchText(input.trim());
         startSearch(input.trim());
         L.e(LOG_TAG, mFileList.size() + "");
         if (mFileList.size() > 0) {
