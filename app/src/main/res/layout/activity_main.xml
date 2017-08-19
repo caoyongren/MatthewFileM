@@ -28,7 +28,6 @@
 
         </LinearLayout>
 
-
         <View
             android:layout_width="2dp"
             android:layout_height="match_parent"
