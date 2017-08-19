@@ -15,14 +15,14 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <ImageButton
-                android:id="@+id/iv_back"
+                android:id="@+id/iv_main_back"
                 android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
                 android:background="@drawable/back_bg_selector"
                 android:src="@mipmap/back" />
             <ImageView
-                android:id="@+id/iv_setting"
+                android:id="@+id/iv_main_setting"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_marginLeft="25dp"
@@ -44,7 +44,7 @@
                 android:layout_weight="1.1"
                 android:gravity="center">
                 <ImageView
-                    android:id="@+id/iv_grid_view"
+                    android:id="@+id/iv_main_grid_view"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -53,16 +53,16 @@
                     android:paddingTop="2dp"
                     android:src="@drawable/grid_view_selector" />
                 <ImageView
-                    android:id="@+id/iv_list_view"
+                    android:id="@+id/iv_main_list_view"
                     android:layout_width="30dp"
                     android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/iv_grid_view"
+                    android:layout_toRightOf="@id/iv_main_grid_view"
                     android:paddingBottom="2dp"
                     android:paddingTop="2dp"
                     android:src="@drawable/list_view_selector" />
             </RelativeLayout>
             <EditText
-                android:id="@+id/et_nivagation"
+                android:id="@+id/et_main_nivagation"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="2dp"
@@ -82,7 +82,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp">
                 <EditText
-                    android:id="@+id/search_view"
+                    android:id="@+id/search_main_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/edit_bg_shape"
@@ -92,7 +92,7 @@
                     android:layout_alignParentRight="true"
                     android:paddingRight="8dp" />
                 <ImageView
-                    android:id="@+id/iv_search"
+                    android:id="@+id/iv_main_search"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/search"

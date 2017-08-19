@@ -25,43 +25,43 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/tv_desk"
+                android:id="@+id/tv_main_desk"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_desk_selector"
                 android:text="@string/desk" />
 
             <TextView
-                android:id="@+id/tv_music"
+                android:id="@+id/tv_main_music"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_music_selector"
                 android:text="@string/music" />
 
             <TextView
-                android:id="@+id/tv_video"
+                android:id="@+id/tv_main_video"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_video_selector"
                 android:text="@string/video" />
 
             <TextView
-                android:id="@+id/tv_picture"
+                android:id="@+id/tv_main_picture"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_picture_selector"
                 android:text="@string/picture" />
 
             <TextView
-                android:id="@+id/tv_document"
+                android:id="@+id/tv_main_document"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_document_selector"
                 android:text="@string/docement" />
 
             <TextView
-                android:id="@+id/tv_download"
+                android:id="@+id/tv_main_download"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_picture_selector"
                 android:text="@string/downloads" />
 
             <TextView
-                android:id="@+id/tv_recycle"
+                android:id="@+id/tv_main_recycle"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_picture_selector"
                 android:text="@string/recycle" />
@@ -78,7 +78,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/tv_computer"
+                android:id="@+id/tv_main_computer"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_computer_selector"
                 android:text="@string/computer" />
@@ -90,7 +90,7 @@
                 android:visibility="gone" >
 
                 <TextView
-                    android:id="@+id/tv_storage_one"
+                    android:id="@+id/tv_main_storage_one"
                     style="@style/textSet"
                     android:drawableLeft="@drawable/left_usb_selector"
                     android:text="@string/text_removable_disk1" />
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" >
                 <TextView
-                    android:id="@+id/tv_storage_two"
+                    android:id="@+id/tv_main_storage_two"
                     style="@style/textSet"
                     android:drawableLeft="@drawable/left_usb_selector"
                     android:text="@string/text_removable_disk2" />
@@ -130,7 +130,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" >
                 <TextView
-                    android:id="@+id/tv_storage_three"
+                    android:id="@+id/tv_main_storage_three"
                     style="@style/textSet"
                     android:drawableLeft="@drawable/left_usb_selector"
                     android:text="@string/text_removable_disk3" />
@@ -145,7 +145,7 @@
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/left_net_up"
+                android:id="@+id/left_main_net_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
@@ -163,7 +163,7 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/tv_cloud_service"
+                android:id="@+id/tv_main_cloud_service"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_cloud_selector"
                 android:text="@string/cloud" />
