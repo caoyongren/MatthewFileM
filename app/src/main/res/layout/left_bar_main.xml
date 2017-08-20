@@ -156,7 +156,7 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/tv_net_service"
+                android:id="@+id/tv_main_net_service"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_internet_selector"
                 android:text="@string/internet"

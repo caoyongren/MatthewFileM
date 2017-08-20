@@ -82,7 +82,7 @@ public class MainActivity extends BaseActivity
 
     public static final String KEY_VIEW_TAG = "viewtag";
     private static final String DEFAULT_VIEW_TAG_GRID = "grid";
-    private static final String VIEW_TAG_LIST = "list";
+    private static final String DEFAULT_VIEW_TAG_LIST = "list";
     private static final String IV_SWITCH_VIEW = "iv_switch_view";
     private static final String SETTING_POPWINDOW_TAG = "iv_setting";
     private static final String USB_POPWINDOW_TAG = "iv_usb";
@@ -166,13 +166,6 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void initView() {
-        //获取当前布局状态，进行保存．
-        mSharedPreferences = getSharedPreferences(KEY_VIEW_TAG, Context.MODE_PRIVATE);
-        String strViewTag = mSharedPreferences.getString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
-        L.i(TAG + "strViewTag:" +strViewTag);
-        LocalCacheLayout.getInstance(mContext).setViewTag(strViewTag);
-        mEditor = mSharedPreferences.edit();
-
         mInitSeafileThread = new InitSeafileThread();
         mInitSeafileThread.start();
 
@@ -197,20 +190,38 @@ public class MainActivity extends BaseActivity
         mIvMainSearchView = (ImageView) findViewById(R.id.iv_main_search);
         mEtSearchView = (EditText) findViewById(R.id.search_main_view);
 
-        mTv_net_service = (TextView) findViewById(R.id.tv_net_service);
+        mTv_net_service = (TextView) findViewById(R.id.tv_main_net_service);
         mTv_pop_up_one = (TextView) findViewById(R.id.tv_pop_up_one);
         mTv_pop_up_two = (TextView) findViewById(R.id.tv_pop_up_two);
         mTv_pop_up_three = (TextView) findViewById(R.id.tv_pop_up_three);
         mRl_usb_one = (RelativeLayout) findViewById(R.id.rl_usb_one);
         mRl_usb_two = (RelativeLayout) findViewById(R.id.rl_usb_two);
         mRl_usb_three = (RelativeLayout) findViewById(R.id.rl_usb_three);
-        if (LocalCacheLayout.getViewTag() != null && "list".equals(LocalCacheLayout.getViewTag())) {
+
+        //获取当前布局状态，进行保存．
+        mSharedPreferences = getSharedPreferences(KEY_VIEW_TAG, Context.MODE_PRIVATE);
+        String strViewTag = mSharedPreferences.getString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
+        L.i(TAG + "strViewTag:" +strViewTag);
+        LocalCacheLayout.getInstance(mContext).setViewTag(strViewTag);
+        mEditor = mSharedPreferences.edit();
+
+/*        if (LocalCacheLayout.getViewTag() != null &&
+                DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             mIvMainGridView.setSelected(false);
             mIvMainListView.setSelected(true);
         } else {
             mIvMainGridView.setSelected(true);
             mIvMainListView.setSelected(false);
+        }*/
+
+        //set default state.
+        if (LocalCacheLayout.getViewTag() != null) {
+            mIvMainGridView.setSelected(DEFAULT_VIEW_TAG_GRID.
+                                        equals(LocalCacheLayout.getViewTag()));
+            mIvMainListView.setSelected(DEFAULT_VIEW_TAG_LIST.
+                                        equals(LocalCacheLayout.getViewTag()));
         }
+
         File file = new File(Constants.DOCUMENT_PATH);
         if (!file.exists() && !file.isDirectory()) {
             file.mkdir();
@@ -226,7 +237,7 @@ public class MainActivity extends BaseActivity
         mHashMap.put(Constants.DOWNLOADFRRAGMENT_TAG, R.id.tv_main_download);
         mHashMap.put(Constants.RECYCLEFRAGMENT_TAG, R.id.tv_main_recycle);
         mHashMap.put(Constants.SDSTORAGEFRAGMENT_TAG, R.id.tv_main_computer);
-        mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_net_service);
+        mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_main_net_service);
         mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_main_cloud_service);
         mHashMap.put(Constants.DETAILFRAGMENT_TAG, R.id.tv_main_picture);
         mHashMap.put(Constants.SYSTEMSPACEFRAGMENT_TAG, R.id.tv_main_storage_one);
@@ -1170,9 +1181,9 @@ public class MainActivity extends BaseActivity
             case R.id.iv_main_list_view:
                 mIvMainGridView.setSelected(false);
                 mIvMainListView.setSelected(true);
-                LocalCacheLayout.setViewTag(VIEW_TAG_LIST);
-                sendBroadcastMessage(IV_SWITCH_VIEW, VIEW_TAG_LIST, false);
-                mEditor.putString(KEY_VIEW_TAG, VIEW_TAG_LIST);
+                LocalCacheLayout.setViewTag(DEFAULT_VIEW_TAG_LIST);
+                sendBroadcastMessage(IV_SWITCH_VIEW, DEFAULT_VIEW_TAG_LIST, false);
+                mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_LIST);
                 mEditor.commit();
                 break;
             case R.id.iv_main_search:
@@ -1434,7 +1445,7 @@ public class MainActivity extends BaseActivity
                 mTvMainRecycle.setSelected(false);
                 mTvMainCloudService.setSelected(false);
                 break;
-            case R.id.tv_net_service:
+            case R.id.tv_main_net_service:
                 mTvMainMusic.setSelected(false);
                 mTvMainDesktop.setSelected(false);
                 mTvMainVideo.setSelected(false);
