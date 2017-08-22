@@ -10,7 +10,7 @@ public class LocalCacheLayout {
     private static SharedPreferences sPreferences;
 
     private LocalCacheLayout(Context context) {
-        sPreferences = context.getSharedPreferences(context.getPackageName(),
+        sPreferences = context.getSharedPreferences(MainActivity.KEY_VIEW_TAG,
                 Context.MODE_PRIVATE);
     }
 

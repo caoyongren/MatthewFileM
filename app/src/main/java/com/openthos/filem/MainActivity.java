@@ -203,17 +203,7 @@ public class MainActivity extends BaseActivity
         String strViewTag = mSharedPreferences.getString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
         L.i(TAG + "strViewTag:" +strViewTag);
         LocalCacheLayout.getInstance(mContext).setViewTag(strViewTag);
-        mEditor = mSharedPreferences.edit();
-
-/*        if (LocalCacheLayout.getViewTag() != null &&
-                DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
-            mIvMainGridView.setSelected(false);
-            mIvMainListView.setSelected(true);
-        } else {
-            mIvMainGridView.setSelected(true);
-            mIvMainListView.setSelected(false);
-        }*/
-
+        //mEditor = mSharedPreferences.edit();
         //set default state.
         if (LocalCacheLayout.getViewTag() != null) {
             mIvMainGridView.setSelected(DEFAULT_VIEW_TAG_GRID.
@@ -1175,16 +1165,16 @@ public class MainActivity extends BaseActivity
                 mIvMainListView.setSelected(false);
                 LocalCacheLayout.setViewTag(DEFAULT_VIEW_TAG_GRID);
                 sendBroadcastMessage(IV_SWITCH_VIEW, DEFAULT_VIEW_TAG_GRID, false);
-                mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
-                mEditor.commit();
+                //mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
+                //mEditor.commit();
                 break;
             case R.id.iv_main_list_view:
                 mIvMainGridView.setSelected(false);
                 mIvMainListView.setSelected(true);
                 LocalCacheLayout.setViewTag(DEFAULT_VIEW_TAG_LIST);
                 sendBroadcastMessage(IV_SWITCH_VIEW, DEFAULT_VIEW_TAG_LIST, false);
-                mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_LIST);
-                mEditor.commit();
+                //mEditor.putString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_LIST);
+                //mEditor.commit();
                 break;
             case R.id.iv_main_search:
                 mEtSearchView.dispatchKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN,
