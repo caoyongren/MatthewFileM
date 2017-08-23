@@ -527,7 +527,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 //    }
 
     private void updateNavigationPane() {
-        ((MainActivity) mContext).setNavigationBar(mFileViewListener.getDisplayPath(mCurrentPath));
+        ((MainActivity) mContext).setFilePathBar(mFileViewListener.getDisplayPath(mCurrentPath));
     }
 
     public void onOperationSend() {

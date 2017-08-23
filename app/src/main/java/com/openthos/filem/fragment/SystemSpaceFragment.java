@@ -90,9 +90,9 @@ public class SystemSpaceFragment extends BaseFragment implements
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             switch (action) {
-                case "com.switchview":
-                    if (null != intent.getExtras().getString("switch_view")) {
-                        String switch_view = intent.getExtras().getString("switch_view");
+                case MainActivity.INTENT_SWITCH_VIEW:
+                    if (null != intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW)) {
+                        String switch_view = intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW);
                         selectorMenuId(switch_view);
                     }
                     break;

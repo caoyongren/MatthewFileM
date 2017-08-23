@@ -24,7 +24,7 @@ public abstract class BaseActivity extends FragmentActivity {
         initListener();
     }
 
-    public void setNavigationBar(String displayPath) {}
+    public void setFilePathBar(String displayPath) {}
 
     public FileSortHelper getFileSortHelper() {
         return mFileSortHelper;

@@ -62,7 +62,7 @@
                     android:src="@drawable/list_view_selector" />
             </RelativeLayout>
             <EditText
-                android:id="@+id/et_main_nivagation"
+                android:id="@+id/et_main_file_path"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="2dp"
@@ -82,7 +82,7 @@
                 android:layout_marginBottom="2dp"
                 android:layout_marginTop="2dp">
                 <EditText
-                    android:id="@+id/search_main_view"
+                    android:id="@+id/et_search_main_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/edit_bg_shape"
