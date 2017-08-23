@@ -56,16 +56,11 @@ public class SystemSpaceFragment extends BaseFragment implements
     private ArrayList<FileInfo> mFileNameList = new ArrayList<>();
     private Activity mActivity;
     private MainActivity mMainActivity;
-//    private View view;
     private DragListView file_path_list;
     private DragGridView file_path_grid;
     private FrameLayout mFragmentSysFl;
     private static final String sdDir = Util.getSdDirectory();
-//    private String sdOrSystem;
-//    private String directorPath;
     private String curRootDir = "";
-//    private ArrayList<FileInfo> fileInfoList = null;
-//    FileViewInteractionHub.CopyOrMove copyOrMove = null;
     private boolean isCtrlPress;
     private String mouseRightTag = "mouse";
     private boolean isDialogShow = false;

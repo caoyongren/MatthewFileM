@@ -134,7 +134,6 @@ public class MainActivity extends BaseActivity
     private UsbConnectReceiver mReceiver;
     private String[] mUsb0;
     private String[] mUsb1;
-   // private String[] mUsb2;
     private boolean mIsMutiSelect;
     private SharedPreferences mSharedPreferences;
     private Editor mEditor;
@@ -160,7 +159,7 @@ public class MainActivity extends BaseActivity
     private String mUsbPath;
     private ExecutorService mUsbSingleExecutor;
 /**
- * </===============================分　割　线==============================================================>
+ * </=============================== 分　割　线 ===================================================================== >
  * */
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -702,9 +701,10 @@ public class MainActivity extends BaseActivity
         transaction.commit();
     }
 
+    //对于六个文件夹，不存在就需要创建．（系统中）
     private void checkFolder(Fragment fragment) {
         List<String> fileList = new ArrayList<>();
-        fileList.add(Constants.DESKTOP_PATH);
+        fileList.add(Constants.DESKTOP_PATH);//storage/emulated/0/Desktop
         fileList.add(Constants.MUSIC_PATH);
         fileList.add(Constants.VIDEOS_PATH);
         fileList.add(Constants.PICTURES_PATH);
@@ -717,6 +717,7 @@ public class MainActivity extends BaseActivity
                 file.mkdir();
             }
         }
+        //刷新file path 'storage/emulated/0/Desktop' --> 'SD卡'
         if (fragment != null) {
             ((SystemSpaceFragment) fragment).refreshUI();
         }
@@ -775,7 +776,7 @@ public class MainActivity extends BaseActivity
             //transaction.show(mAddressFragment).addToBackStack(null).commit();
             transaction.show(mAddressFragment).commit();
             mCurFragment = mAddressFragment;
-            setFileInfo(R.id.et_main_file_path, path, mAddressFragment);
+            showRightFileInfo(R.id.et_main_file_path, path, mAddressFragment);
         } else {
             Toast.makeText(this, "" + getResources().getString(R.string.address_search_false),
                     Toast.LENGTH_SHORT).show();
@@ -1056,31 +1057,31 @@ public class MainActivity extends BaseActivity
         clearNivagateFocus();
         switch (view.getId()) {
             case R.id.tv_main_desk:
-                setFileInfo(R.id.tv_main_desk, Constants.DESKTOP_PATH, mDeskFragment);
+                showRightFileInfo(R.id.tv_main_desk, Constants.DESKTOP_PATH, mDeskFragment);
                 checkFolder(mDeskFragment);
                 break;
             case R.id.tv_main_music:
-                setFileInfo(R.id.tv_main_music, Constants.MUSIC_PATH, mMusicFragment);
+                showRightFileInfo(R.id.tv_main_music, Constants.MUSIC_PATH, mMusicFragment);
                 checkFolder(mMusicFragment);
                 break;
             case R.id.tv_main_video:
-                setFileInfo(R.id.tv_main_video, Constants.VIDEOS_PATH, mVideoFragment);
+                showRightFileInfo(R.id.tv_main_video, Constants.VIDEOS_PATH, mVideoFragment);
                 checkFolder(mVideoFragment);
                 break;
             case R.id.tv_main_picture:
-                setFileInfo(R.id.tv_main_picture, Constants.PICTURES_PATH, mPictrueFragment);
+                showRightFileInfo(R.id.tv_main_picture, Constants.PICTURES_PATH, mPictrueFragment);
                 checkFolder(mPictrueFragment);
                 break;
             case R.id.tv_main_document:
-                setFileInfo(R.id.tv_main_document, Constants.DOCUMENT_PATH, mDocumentFragment);
+                showRightFileInfo(R.id.tv_main_document, Constants.DOCUMENT_PATH, mDocumentFragment);
                 checkFolder(mDocumentFragment);
                 break;
             case R.id.tv_main_download:
-                setFileInfo(R.id.tv_main_download, Constants.DOWNLOAD_PATH, mDownloadFragment);
+                showRightFileInfo(R.id.tv_main_download, Constants.DOWNLOAD_PATH, mDownloadFragment);
                 checkFolder(mDownloadFragment);
                 break;
             case R.id.tv_main_recycle:
-                setFileInfo(R.id.tv_main_recycle, Constants.RECYCLE_PATH, mRecycleFragment);
+                showRightFileInfo(R.id.tv_main_recycle, Constants.RECYCLE_PATH, mRecycleFragment);
                 checkFolder(mRecycleFragment);
                 break;
             case R.id.tv_main_computer:
@@ -1092,7 +1093,7 @@ public class MainActivity extends BaseActivity
                     transaction.remove(fragment).commit();
                 }
 
-                setFileInfo(R.id.tv_main_computer, "", mSdStorageFragment);
+                showRightFileInfo(R.id.tv_main_computer, "", mSdStorageFragment);
                 if (mSdStorageFragment != null) {
                     mSdStorageFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
                 }
@@ -1140,7 +1141,7 @@ public class MainActivity extends BaseActivity
            //     uninstallUSB(Constants.USB_THREE);
            //     break;
             case R.id.tv_main_cloud_service:
-                setFileInfo(R.id.tv_main_cloud_service, "", mSeafileFragment);
+                showRightFileInfo(R.id.tv_main_cloud_service, "", mSeafileFragment);
                 break;
             case R.id.iv_main_back:
                 onBackPressed();
@@ -1194,19 +1195,6 @@ public class MainActivity extends BaseActivity
                 String line;
                 while ((line = in.readLine()) != null) {
                 }
-//                switch(mWhichUsb) {
-//                    case Constants.USB_ONE:
-//                        getMountService().unmountVolume(mUsb0[0], true, false);
-//                        break;
-//                    case Constants.USB_TWO:
-//                        getMountService().unmountVolume(mUsb1[0], true, false);
-//                        break;
-//                   // case Constants.USB_THREE:
-//                   //     getMountService().unmountVolume(mUsb2[0], true, false);
-//                   //     break;
-//                    default:
-//                        break;
-//                }
                 MainActivity.mHandler.sendEmptyMessage(mWhichUsb);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -1214,19 +1202,20 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    private void setFileInfo(int id, String path, Fragment fragment) {
+    //通过点击左侧导航栏显示右侧的文件夹信息．－－> 碎片展示
+    private void showRightFileInfo(int id, String path, Fragment fragment) {
         if (fragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) fragment;
-            systemSpaceFragment.setPath(path);
-            FileListAdapter adapter = systemSpaceFragment.getAdapter();
+            ((SystemSpaceFragment) fragment).setPath(path);
+            FileListAdapter adapter = ((SystemSpaceFragment) fragment).getAdapter();
             if (adapter != null) {
                 adapter.getSelectFileInfoList().clear();
-                systemSpaceFragment.getFileViewInteractionHub().clearSelection();
+                ((SystemSpaceFragment) fragment).getFileViewInteractionHub().clearSelection();
             }
         }
         setSelectedBackground(id);
         mEtMainFilePath.setText(path);
         setCurPath(path);
+        //碎片管理
         FragmentTransaction transaction = mManager.beginTransaction();
         if (mCurFragment != null) {
             transaction.hide(mCurFragment);
