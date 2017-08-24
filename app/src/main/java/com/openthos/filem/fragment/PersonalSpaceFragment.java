@@ -83,9 +83,9 @@ public class PersonalSpaceFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            canGoBack = systemSpaceFragment.canGoBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            canGoBack = rightShowFileFragment.canGoBack();
         }
         return canGoBack;
     }
@@ -93,9 +93,9 @@ public class PersonalSpaceFragment extends BaseFragment {
     @Override
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            systemSpaceFragment.goBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            rightShowFileFragment.goBack();
         }
     }
 
@@ -149,14 +149,14 @@ public class PersonalSpaceFragment extends BaseFragment {
     @Override
     protected void enter(String tag, String path) {
         if (mCurFragment != null) {
-            mFileInfoArrayList = ((SystemSpaceFragment) mCurFragment).getFileInfoList();
-            mCopyOrMove = ((SystemSpaceFragment) mCurFragment).getCurCopyOrMoveMode();
+            mFileInfoArrayList = ((RightShowFileFragment) mCurFragment).getFileInfoList();
+            mCopyOrMove = ((RightShowFileFragment) mCurFragment).getCurCopyOrMoveMode();
         }
         if (mFileInfoArrayList != null && mCopyOrMove != null) {
             T.showShort(context,
                     context.getString(R.string.operation_failed_permission_refuse));
         }
-        mCurFragment = new SystemSpaceFragment(tag, path, mFileInfoArrayList, mCopyOrMove, false);
+        mCurFragment = new RightShowFileFragment(tag, path, mFileInfoArrayList, mCopyOrMove, false);
         FragmentTransaction transaction = mManager.beginTransaction();
         transaction.hide(mMainActivity.mCurFragment);
         transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.PERSONALSYSTEMSPACE_TAG).commit();

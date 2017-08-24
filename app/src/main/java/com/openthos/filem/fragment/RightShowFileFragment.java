@@ -50,9 +50,9 @@ import java.util.HashMap;
  * Date:
  *
  * */
-public class SystemSpaceFragment extends BaseFragment implements
+public class RightShowFileFragment extends BaseFragment implements
         IFileInteractionListener, MainActivity.IBackPressedListener {
-    private static final String TAG = SystemSpaceFragment.class.getSimpleName();
+    private static final String TAG = RightShowFileFragment.class.getSimpleName();
     public static final String ROOT_DIRECTORY = "root_directory";
     private FileListAdapter mAdapter;
     private FileCategoryHelper mFileCagetoryHelper;
@@ -98,17 +98,16 @@ public class SystemSpaceFragment extends BaseFragment implements
     private int ADAPTER_WIDTH_POS = 0;
     private int ADAPTER_HEIGHT_POS = 1;
 
-
     @SuppressLint({"NewApi", "ValidFragment"})
-    public SystemSpaceFragment(String sdSpaceFragment, String directPath,
-                               ArrayList<FileInfo> fileInfoList,
-                               FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
+    public RightShowFileFragment(String sdSpaceFragment, String directPath,
+                                 ArrayList<FileInfo> fileInfoList,
+                                 FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
         super(sdSpaceFragment,directPath,fileInfoList,mCopyOrMove);
         mIsLeftItem = isLeftItem;
     }
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public SystemSpaceFragment() {
+    public RightShowFileFragment() {
         super();
     }
 
@@ -120,7 +119,7 @@ public class SystemSpaceFragment extends BaseFragment implements
 
     @Override
     public int getLayoutId() {
-        return R.layout.system_fragment_layout;
+        return R.layout.right_total_fragment_layout;
     }
 
     @Override

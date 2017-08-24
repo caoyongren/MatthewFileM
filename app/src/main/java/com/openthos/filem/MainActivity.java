@@ -39,10 +39,10 @@ import com.openthos.filem.component.SearchOnKeyListener;
 import com.openthos.filem.component.UsbPropertyDialog;
 import com.openthos.filem.fragment.OnlineNeighborFragment;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
+import com.openthos.filem.fragment.RightShowFileFragment;
 import com.openthos.filem.fragment.SdStorageFragment;
 import com.openthos.filem.fragment.SeafileFragment;
 import com.openthos.filem.fragment.SearchFragment;
-import com.openthos.filem.fragment.SystemSpaceFragment;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.system.FileInfo;
 import com.openthos.filem.system.FileListAdapter;
@@ -125,7 +125,7 @@ public class MainActivity extends BaseActivity
     public Fragment mCurFragment;
     public SdStorageFragment mSdStorageFragment;
     public boolean mIsSdStorageFragmentHided;
-    private SystemSpaceFragment mDeskFragment, mMusicFragment, mVideoFragment,
+    private RightShowFileFragment mDeskFragment, mMusicFragment, mVideoFragment,
                                 mPictrueFragment, mAddressFragment,
                                 mDocumentFragment, mDownloadFragment,
                                 mRecycleFragment;
@@ -147,7 +147,7 @@ public class MainActivity extends BaseActivity
     private ProgressDialog mProgressDialog;
     private ProgressDialog mPopUpProgressDialog;
     public PersonalSpaceFragment mPersonalSpaceFragment;
-    private SystemSpaceFragment mUsbStorageFragment;
+    private RightShowFileFragment mUsbStorageFragment;
     public BaseFragment mStartSearchFragment;
     private SearchFragment mSearchFragment;
     public String mCurPath;
@@ -424,7 +424,7 @@ public class MainActivity extends BaseActivity
                     mSdStorageFragment.mCurFragment != null) {
                 mEtMainFilePath.setText(displayPath);
             } else {
-                if (mCurFragment instanceof SystemSpaceFragment) {
+                if (mCurFragment instanceof RightShowFileFragment) {
                     mEtMainFilePath.setText(displayPath);
                 } else {
                     mEtMainFilePath.setText(null);
@@ -644,43 +644,43 @@ public class MainActivity extends BaseActivity
             transaction.add(R.id.framelayout_right_mian, mSdStorageFragment).hide(mSdStorageFragment);
         }
         if (mDeskFragment == null) {
-            mDeskFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                     Constants.DESKTOP_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mDeskFragment, Constants.DESKFRAGMENT_TAG)
                        .hide(mDeskFragment);
         }
         if (mMusicFragment == null) {
-            mMusicFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mMusicFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                      Constants.MUSIC_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
                        .hide(mMusicFragment);
         }
         if (mVideoFragment == null) {
-            mVideoFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mVideoFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                      Constants.VIDEOS_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
                        .hide(mVideoFragment);
         }
         if (mPictrueFragment == null) {
-            mPictrueFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mPictrueFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                        Constants.PICTURES_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
                        .hide(mPictrueFragment);
         }
         if (mDocumentFragment == null) {
-            mDocumentFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mDocumentFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                         Constants.DOCUMENT_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
                        .hide(mDocumentFragment);
         }
         if (mDownloadFragment == null) {
-            mDownloadFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mDownloadFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                         Constants.DOWNLOAD_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
                        .hide(mDownloadFragment);
         }
         if (mRecycleFragment == null) {
-            mRecycleFragment = new SystemSpaceFragment(Constants.LEFT_FAVORITES,
+            mRecycleFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                                                         Constants.RECYCLE_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_mian, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
                        .hide(mRecycleFragment);
@@ -719,7 +719,7 @@ public class MainActivity extends BaseActivity
         }
         //刷新file path 'storage/emulated/0/Desktop' --> 'SD卡'
         if (fragment != null) {
-            ((SystemSpaceFragment) fragment).refreshUI();
+            ((RightShowFileFragment) fragment).refreshUI();
         }
     }
 
@@ -770,7 +770,7 @@ public class MainActivity extends BaseActivity
         File file = new File(path);
         if (file.exists()) {
             transaction.hide(mCurFragment);
-            mAddressFragment = new SystemSpaceFragment(
+            mAddressFragment = new RightShowFileFragment(
                                    Constants.LEFT_FAVORITES, path, null, null, false);
             transaction.add(R.id.framelayout_right_mian, mAddressFragment, Constants.ADDRESSFRAGMENT_TAG);
             //transaction.show(mAddressFragment).addToBackStack(null).commit();
@@ -895,8 +895,8 @@ public class MainActivity extends BaseActivity
         }
         if (event.isCtrlPressed() && keyCode == KeyEvent.KEYCODE_A) {
             sendBroadcastMessage("iv_menu", "pop_cacel", false);
-            if (getVisibleFragment() instanceof SystemSpaceFragment) {
-                final SystemSpaceFragment fragment = (SystemSpaceFragment) getVisibleFragment();
+            if (getVisibleFragment() instanceof RightShowFileFragment) {
+                final RightShowFileFragment fragment = (RightShowFileFragment) getVisibleFragment();
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
                 FileListAdapter adapter = fragment.getAdapter();
                 List<FileInfo> list = adapter.getFileInfoList();
@@ -1103,7 +1103,7 @@ public class MainActivity extends BaseActivity
                 if (mCurFragment != null) {
                     mManager.beginTransaction().hide(mCurFragment).commit();
                 }
-                mUsbStorageFragment = new SystemSpaceFragment(
+                mUsbStorageFragment = new RightShowFileFragment(
                                       Constants.USB_SPACE_FRAGMENT, mUsb0[0], null, null, false);
                 mManager.beginTransaction().add(R.id.framelayout_right_mian, mUsbStorageFragment,
                                                Constants.USBFRAGMENT_TAG).commit();
@@ -1114,7 +1114,7 @@ public class MainActivity extends BaseActivity
                 if (mCurFragment != null) {
                     mManager.beginTransaction().hide(mCurFragment).commit();
                 }
-                mUsbStorageFragment = new SystemSpaceFragment(
+                mUsbStorageFragment = new RightShowFileFragment(
                         Constants.USB_SPACE_FRAGMENT, mUsb1[0], null, null, false);
                 mManager.beginTransaction().add(R.id.framelayout_right_mian, mUsbStorageFragment,
                         Constants.USBFRAGMENT_TAG).commit();
@@ -1190,12 +1190,12 @@ public class MainActivity extends BaseActivity
 
     //通过点击左侧导航栏显示右侧的文件夹信息．－－> 碎片展示
     private void showRightFileInfo(int id, String path, Fragment fragment) {
-        if (fragment instanceof SystemSpaceFragment) {
-            ((SystemSpaceFragment) fragment).setPath(path);
-            FileListAdapter adapter = ((SystemSpaceFragment) fragment).getAdapter();
+        if (fragment instanceof RightShowFileFragment) {
+            ((RightShowFileFragment) fragment).setPath(path);
+            FileListAdapter adapter = ((RightShowFileFragment) fragment).getAdapter();
             if (adapter != null) {
                 adapter.getSelectFileInfoList().clear();
-                ((SystemSpaceFragment) fragment).getFileViewInteractionHub().clearSelection();
+                ((RightShowFileFragment) fragment).getFileViewInteractionHub().clearSelection();
             }
         }
         setSelectedBackground(id);
@@ -1339,8 +1339,8 @@ public class MainActivity extends BaseActivity
         mSearchOnKeyListener.setInputData(null);
         mManager.findFragmentById(R.id.framelayout_right_mian);
         if (mCurFragment != mSdStorageFragment) {
-            if (mCurFragment instanceof SystemSpaceFragment) {
-                SystemSpaceFragment sdCurFrament = (SystemSpaceFragment) mCurFragment;
+            if (mCurFragment instanceof RightShowFileFragment) {
+                RightShowFileFragment sdCurFrament = (RightShowFileFragment) mCurFragment;
                 String currentPath = sdCurFrament.getCurrentPath();
                 setCurPath(currentPath);
                 mEtMainFilePath.setText(currentPath);
@@ -1459,7 +1459,7 @@ public class MainActivity extends BaseActivity
                     }
                 } else if (mCurFragment.getTag() != null
                                && mCurFragment.getTag().equals(Constants.SEARCHSYSTEMSPACE_TAG)) {
-                    SystemSpaceFragment searchSysFragment = (SystemSpaceFragment) mCurFragment;
+                    RightShowFileFragment searchSysFragment = (RightShowFileFragment) mCurFragment;
                     if (searchSysFragment.canGoBack()) {
                         searchSysFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1469,7 +1469,7 @@ public class MainActivity extends BaseActivity
                     }
                 } else if (mCurFragment.getTag() != null
                                && mCurFragment.getTag().equals(Constants.ADDRESSFRAGMENT_TAG)) {
-                    SystemSpaceFragment addressFragment = (SystemSpaceFragment) mCurFragment;
+                    RightShowFileFragment addressFragment = (RightShowFileFragment) mCurFragment;
                     if (addressFragment.canGoBack()) {
                         addressFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {

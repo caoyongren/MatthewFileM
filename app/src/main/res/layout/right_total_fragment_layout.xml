@@ -6,7 +6,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
+<!--
+　　　右侧的文件／文件夹内容布局
+    有文件存在：
+    　　１．网格布局
+    　　２．list布局
+    没有文件／文件夹存在则只有一个　空．
 
+-->
     <FrameLayout
         android:id="@+id/fragment_sys_fl"
         android:layout_width="fill_parent"
@@ -46,6 +53,7 @@
                 android:src="@drawable/empty_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
+            <!--没有文件-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,74 +80,6 @@
                 android:layout_width="wrap_content"
                 android:textSize="22px"
                 android:gravity="center" />
-
         </LinearLayout>
     </FrameLayout>
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/moving_operation_bar"-->
-        <!--android:visibility="gone"-->
-        <!--style="@style/BottomButtonBar">-->
-
-        <!--<Button-->
-            <!--android:id="@+id/button_moving_confirm"-->
-            <!--style="@style/BottomButton.Left"-->
-            <!--android:text="@string/operation_paste" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/button_moving_cancel"-->
-            <!--style="@style/BottomButton.Right"-->
-            <!--android:text="@string/operation_cancel" />-->
-    <!--</LinearLayout>-->
-
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/pick_operation_bar"-->
-        <!--android:visibility="gone"-->
-        <!--style="@style/BottomButtonBar">-->
-
-        <!--<Button-->
-            <!--android:id="@+id/button_pick_confirm"-->
-            <!--style="@style/BottomButton.Left"-->
-            <!--android:text="@string/confirm" />-->
-
-        <!--<Button-->
-            <!--android:id="@+id/button_pick_cancel"-->
-            <!--style="@style/BottomButton.Right"-->
-            <!--android:text="@string/operation_cancel" />-->
-    <!--</LinearLayout>-->
-
-
-    <!--<LinearLayout-->
-        <!--android:id="@+id/operation_bar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:visibility="gone"-->
-        <!--android:background="@drawable/operation_bar_bg">-->
-        <!--<TextView-->
-            <!--android:id="@+id/button_operation_delete"-->
-            <!--android:text="@string/operation_delete"-->
-            <!--android:drawableTop="@drawable/operation_button_delete"-->
-            <!--style="@style/FileViewOperationButtonStytle" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/button_operation_copy"-->
-            <!--android:drawableTop="@drawable/operation_button_copy"-->
-            <!--android:text="@string/operation_copy"-->
-            <!--style="@style/FileViewOperationButtonStytle" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/button_operation_move"-->
-            <!--android:drawableTop="@drawable/operation_button_move"-->
-            <!--android:text="@string/operation_move"-->
-            <!--style="@style/FileViewOperationButtonStytle" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/button_operation_send"-->
-            <!--android:drawableTop="@drawable/operation_button_send"-->
-            <!--android:text="@string/operation_send"-->
-            <!--style="@style/FileViewOperationButtonStytle" />-->
-        <!--<TextView-->
-            <!--android:id="@+id/button_operation_cancel"-->
-            <!--android:drawableTop="@drawable/operation_button_cancel"-->
-            <!--android:text="@string/operation_cancel"-->
-            <!--style="@style/FileViewOperationButtonStytle" />-->
-    <!--</LinearLayout>-->
 </LinearLayout>

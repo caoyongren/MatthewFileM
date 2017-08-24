@@ -92,9 +92,9 @@ public class SeafileFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            canGoBack = systemSpaceFragment.canGoBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            canGoBack = rightShowFileFragment.canGoBack();
         }
         return canGoBack;
     }
@@ -102,9 +102,9 @@ public class SeafileFragment extends BaseFragment {
     @Override
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            systemSpaceFragment.goBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            rightShowFileFragment.goBack();
         }
     }
 
@@ -183,7 +183,7 @@ public class SeafileFragment extends BaseFragment {
             return;
         }
         transaction.hide(mMainActivity.mCurFragment);
-        mCurFragment = new SystemSpaceFragment(
+        mCurFragment = new RightShowFileFragment(
                 Constants.LEFT_FAVORITES, path, null, null, false);
         transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.SEAFILESYSTEMSPACE_TAG);
         transaction.show(mCurFragment).commit();

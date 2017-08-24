@@ -24,9 +24,9 @@ import com.openthos.filem.MainActivity;
 import com.openthos.filem.component.MenuFirstDialog;
 import com.openthos.filem.R;
 import com.openthos.filem.component.PropertyDialog;
+import com.openthos.filem.fragment.RightShowFileFragment;
 import com.openthos.filem.utils.L;
 import com.openthos.filem.utils.LocalCacheLayout;
-import com.openthos.filem.fragment.SystemSpaceFragment;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -857,7 +857,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         }
         String[] files = FileOperationHelper.list(file.filePath);
         for (String s : files) {
-            for (FileInfo info : ((SystemSpaceFragment) mFileViewListener).getAllFiles()) {
+            for (FileInfo info : ((RightShowFileFragment) mFileViewListener).getAllFiles()) {
                 if (info.fileName.equals(s)) {
                     new AlertDialog.Builder(mMainActivity)
                          .setMessage(String.format(mMainActivity.getResources().getString(
@@ -928,7 +928,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private FileViewInteractionHub.Mode mCurrentMode;
     private String mCurrentPath;
     private String mRoot;
-    private SystemSpaceFragment.SelectFilesCallback mSelectFilesCallback;
+    private RightShowFileFragment.SelectFilesCallback mSelectFilesCallback;
     public boolean isFileSelected(String filePath) {
         return mFileOperationHelper.isFileSelected(filePath);
     }
@@ -967,7 +967,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             }
         } else if (doubleTag != null && Constants.DOUBLE_TAG.equals(doubleTag)) {
 //            mCheckedFileNameList.remove(lFileInfo);  //
-            ((SystemSpaceFragment) mFileViewListener).getAdapter().getSelectFileInfoList().clear();
+            ((RightShowFileFragment) mFileViewListener).getAdapter().getSelectFileInfoList().clear();
             clearSelection();
             mCurrentPath = getAbsoluteName(mCurrentPath, fileInfo.fileName);
             refreshFileList();
@@ -1103,7 +1103,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         notifyFileSystemChanged(path);
     }
 //
-//    public void startSelectFiles(SystemSpaceFragment.SelectFilesCallback callback) {
+//    public void startSelectFiles(RightShowFileFragment.SelectFilesCallback callback) {
 //        mSelectFilesCallback = callback;
 //        showConfirmOperationBar(true);
 //        updateConfirmButtons();

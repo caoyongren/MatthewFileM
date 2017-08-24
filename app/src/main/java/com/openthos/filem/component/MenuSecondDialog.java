@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.openthos.filem.R;
 import com.openthos.filem.system.FileSortHelper;
 import com.openthos.filem.system.FileViewInteractionHub;
-import com.openthos.filem.fragment.SystemSpaceFragment;
+import com.openthos.filem.fragment.RightShowFileFragment;
 
 public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     private TextView dialog_sort_name;
@@ -100,7 +100,7 @@ public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     }
 
     private void setSortPositive(Enum sort) {
-        SystemSpaceFragment fragment = (SystemSpaceFragment)(mFileViewInteractionHub.
+        RightShowFileFragment fragment = (RightShowFileFragment)(mFileViewInteractionHub.
                                                      getMainActivity().mCurFragment);
         fragment.setSortTag(sort, !fragment.getSortTag(sort));
     }

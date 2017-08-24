@@ -408,9 +408,9 @@ public class SdStorageFragment extends BaseFragment {
     @Override
     protected void enter(String tag, String path) {
         if (mCurFragment != null) {
-            if (mCurFragment instanceof SystemSpaceFragment) {
-                mFileInfoArrayList = ((SystemSpaceFragment) mCurFragment).getFileInfoList();
-                copyOrMove = ((SystemSpaceFragment) mCurFragment).getCurCopyOrMoveMode();
+            if (mCurFragment instanceof RightShowFileFragment) {
+                mFileInfoArrayList = ((RightShowFileFragment) mCurFragment).getFileInfoList();
+                copyOrMove = ((RightShowFileFragment) mCurFragment).getCurCopyOrMoveMode();
             }
         }
         if (mFileInfoArrayList != null && copyOrMove != null) {
@@ -424,7 +424,7 @@ public class SdStorageFragment extends BaseFragment {
             transaction.show(mMainActivity.mPersonalSpaceFragment).commit();
             mCurFragment = mMainActivity.mPersonalSpaceFragment;
         } else {
-            mCurFragment = new SystemSpaceFragment(tag, path,
+            mCurFragment = new RightShowFileFragment(tag, path,
                                                    mFileInfoArrayList, copyOrMove, false);
             transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
         }
@@ -520,9 +520,9 @@ public class SdStorageFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            canGoBack = systemSpaceFragment.canGoBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            canGoBack = rightShowFileFragment.canGoBack();
         }
        //else {
        //    PersonalSpaceFragment personalSpaceFragment = (PersonalSpaceFragment) baseFragment;
@@ -533,9 +533,9 @@ public class SdStorageFragment extends BaseFragment {
 
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof SystemSpaceFragment) {
-            SystemSpaceFragment systemSpaceFragment = (SystemSpaceFragment) baseFragment;
-            systemSpaceFragment.goBack();
+        if (baseFragment instanceof RightShowFileFragment) {
+            RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
+            rightShowFileFragment.goBack();
         }
        // else {
        //     PersonalSpaceFragment personalSpaceFragment = (PersonalSpaceFragment) baseFragment;
