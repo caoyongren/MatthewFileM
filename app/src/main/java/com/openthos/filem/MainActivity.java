@@ -80,8 +80,8 @@ public class MainActivity extends BaseActivity
     private static final String USB_DEVICE_ATTACHED = "usb_device_attached";
     private static final String USB_DEVICE_DETACHED = "usb_device_detached";
 
-    private static final String DEFAULT_VIEW_TAG_GRID = "grid";
-    private static final String DEFAULT_VIEW_TAG_LIST = "list";
+    public static final String DEFAULT_VIEW_TAG_GRID = "grid";
+    public static final String DEFAULT_VIEW_TAG_LIST = "list";
     private static final String IV_SWITCH_VIEW = "iv_switch_view";
     private static final String SETTING_POPWINDOW_TAG = "iv_setting";
     private static final String USB_POPWINDOW_TAG = "iv_usb";
@@ -1120,26 +1120,12 @@ public class MainActivity extends BaseActivity
                         Constants.USBFRAGMENT_TAG).commit();
                 mCurFragment = mUsbStorageFragment;
                 break;
-           // case R.id.tv_storage_three:
-           //     setSelectedBackground(R.id.tv_storage_three);
-           //     if (mCurFragment != null) {
-           //         mManager.beginTransaction().hide(mCurFragment).commit();
-           //     }
-           //     mUsbStorageFragment = new SystemSpaceFragment(
-           //             Constants.USB_SPACE_FRAGMENT, mUsb2[0], null, null, false);
-           //     mManager.beginTransaction().add(R.id.fl_mian, mUsbStorageFragment,
-           //             Constants.USBFRAGMENT_TAG).commit();
-           //     mCurFragment = mUsbStorageFragment;
-           //     break;
             case R.id.tv_pop_up_one:
                 uninstallUSB(Constants.USB_ONE);
                 break;
             case R.id.tv_pop_up_two:
                 uninstallUSB(Constants.USB_TWO);
                 break;
-           // case R.id.tv_pop_up_three:
-           //     uninstallUSB(Constants.USB_THREE);
-           //     break;
             case R.id.tv_main_cloud_service:
                 showRightFileInfo(R.id.tv_main_cloud_service, "", mSeafileFragment);
                 break;

@@ -45,7 +45,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.HashMap;
-
+/**
+ * Author: MasterMan
+ * Date:
+ *
+ * */
 public class SystemSpaceFragment extends BaseFragment implements
         IFileInteractionListener, MainActivity.IBackPressedListener {
     private static final String TAG = SystemSpaceFragment.class.getSimpleName();
@@ -80,38 +84,7 @@ public class SystemSpaceFragment extends BaseFragment implements
     private boolean mSizePositive = true;
     private boolean mDatePositive = true;
     private boolean mTypePositive = true;
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            switch (action) {
-                case MainActivity.INTENT_SWITCH_VIEW:
-                    if (null != intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW)) {
-                        String switch_view = intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW);
-                        selectorMenuId(switch_view);
-                    }
-                    break;
-                case "com.switchmenu":
-                    if (null != intent.getExtras().getString("pop_menu")) {
-                        String pop_menu = intent.getExtras().getString("pop_menu");
-                        //selectorMenuId(pop_menu);
-                    }
-                    break;
-                case "com.isCtrlPress":
-                    isCtrlPress = intent.getExtras().getBoolean("is_ctrl_press");
-                    break;
-                case Intent.ACTION_MEDIA_MOUNTED:
-                case Intent.ACTION_MEDIA_UNMOUNTED:
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            updateUI();
-                        }
-                    });
-                    break;
-            }
-        }
-    };
+
     private GridViewOnGenericMotionListener mGridMotionListener;
     private ListViewOnGenericMotionListener mListMotionListener;
     private FrameSelectView mFrameSelectView;
@@ -125,56 +98,6 @@ public class SystemSpaceFragment extends BaseFragment implements
     private int ADAPTER_WIDTH_POS = 0;
     private int ADAPTER_HEIGHT_POS = 1;
 
-    private void selectorMenuId(String tag) {
-        if (mFileViewInteractionHub.getSelectedFileList() != null) {
-
-        }
-        switch (tag) {
-            case "pop_refresh":
-                mFileViewInteractionHub.onOperationReferesh();
-                break;
-            case "pop_cancel_all":
-                mFileViewInteractionHub.onOperationSelectAllOrCancel();
-                break;
-            case "pop_copy":
-                if (mFileViewInteractionHub.getSelectedFileList() != null) {
-                    mFileViewInteractionHub.doOnOperationCopy();
-                }
-                T.showShort(mActivity, getString(R.string.select_file_to_copy));
-                break;
-            case "pop_delete":
-                if (mFileViewInteractionHub.getSelectedFileList() != null) {
-                    //mFileViewInteractionHub.onOperationDelete();
-                }
-                break;
-            case "pop_send":
-                if (mFileViewInteractionHub.getSelectedFileList() != null) {
-                    mFileViewInteractionHub.onOperationSend();
-                }
-                T.showShort(mActivity, getString(R.string.select_file_to_send));
-                break;
-            case "pop_create":
-                mFileViewInteractionHub.onOperationCreateFolder();
-                break;
-            case "view_or_dismiss":
-                mFileViewInteractionHub.onOperationShowSysFiles();
-                break;
-            case "pop_cut":
-                mFileViewInteractionHub.onOperationMove();
-                break;
-            case "pop_paste":
-                mFileViewInteractionHub.onOperationButtonConfirm();
-                break;
-            case "pop_cacel":
-                mFileViewInteractionHub.onOperationButtonCancel();
-                break;
-            case "grid":
-            case "list":
-                switchMode();
-                mFileViewInteractionHub.clearSelection();
-                break;
-        }
-    }
 
     @SuppressLint({"NewApi", "ValidFragment"})
     public SystemSpaceFragment(String sdSpaceFragment, String directPath,
@@ -195,10 +118,12 @@ public class SystemSpaceFragment extends BaseFragment implements
         setHasOptionsMenu(true);
     }
 
+    @Override
     public int getLayoutId() {
         return R.layout.system_fragment_layout;
     }
 
+    @Override
     protected void initView() {
         mActivity = getActivity();
         mMainActivity = (MainActivity) getActivity();
@@ -214,14 +139,7 @@ public class SystemSpaceFragment extends BaseFragment implements
         initSortMap();
     }
 
-    private void initSortMap() {
-        mSortMap = new HashMap<>();
-        mSortMap.put(FileSortHelper.SortMethod.name, mNamePositive);
-        mSortMap.put(FileSortHelper.SortMethod.size, mSizePositive);
-        mSortMap.put(FileSortHelper.SortMethod.date, mDatePositive);
-        mSortMap.put(FileSortHelper.SortMethod.type, mTypePositive);
-    }
-
+    @Override
     protected void initData() {
         mFileCagetoryHelper = new FileCategoryHelper(mActivity);
         mFileViewInteractionHub = new FileViewInteractionHub(this);
@@ -233,15 +151,15 @@ public class SystemSpaceFragment extends BaseFragment implements
         if ("list".equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
-                                           mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mListMotionListener);
+                    mFileNameList, mFileViewInteractionHub,
+                    mFileIconHelper, mListMotionListener);
         } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
-                                           mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mGridMotionListener);
+                    mFileNameList, mFileViewInteractionHub,
+                    mFileIconHelper, mGridMotionListener);
         }
         boolean baseSd = intent.getBooleanExtra(Constants.KEY_BASE_SD,
-                         !FileManagerPreferenceActivity.isReadRoot(mActivity));
+                !FileManagerPreferenceActivity.isReadRoot(mActivity));
         Log.i(TAG, "baseSd = " + baseSd);
 
         String rootDir = intent.getStringExtra(ROOT_DIRECTORY);
@@ -255,7 +173,7 @@ public class SystemSpaceFragment extends BaseFragment implements
         mFileViewInteractionHub.setRootPath(rootDir);
 
         String currentDir = FileManagerPreferenceActivity.getPrimaryFolder
-                                                              (mActivity, sdOrSystem, directorPath);
+                (mActivity, sdOrSystem, directorPath);
         if (!mIsLeftItem) {
             mMainActivity.setCurPath(currentDir);
         }
@@ -275,47 +193,10 @@ public class SystemSpaceFragment extends BaseFragment implements
         if (mFileInfoList != null && mFileInfoList.size() > 0) {
             mFileViewInteractionHub.setCheckedFileList(mFileInfoList, mCopyOrMove);
         }
-
-        initReciever();
+        initRegisterBroadcast();
         updateUI();
         setHasOptionsMenu(true);
         mFileListInfo = mAdapter.getFileInfoList();
-    }
-
-    private void switchMode() {
-     if ("list".equals(LocalCacheLayout.getViewTag())) {
-            addHeadView(mActivity);
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
-                                           mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mListMotionListener);
-        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
-                                           mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mGridMotionListener);
-        }
-        operatorData();
-    }
-
-    private void addHeadView(Context context) {
-        if (file_path_list.getHeaderViewsCount() == 0) {
-            View headView =
-                    LayoutInflater.from(context).inflate(R.layout.file_browser_item_list, null);
-            ImageView lFileImage = (ImageView) headView.findViewById(R.id.file_image);
-            Util.setText(headView, R.id.file_name,
-                    context.getResources().getString(R.string.file_title_name),
-                    context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.file_count,
-                    context.getResources().getString(R.string.file_title_type),
-                    context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.modified_time,
-                    context.getResources().getString(R.string.file_title_modified),
-                    context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.file_size,
-                    context.getResources().getString(R.string.file_title_size),
-                    context.getResources().getColor(R.color.file_title_color));
-            lFileImage.setVisibility(View.GONE);
-            file_path_list.addHeaderView(headView);
-        }
     }
 
     @Override
@@ -368,6 +249,134 @@ public class SystemSpaceFragment extends BaseFragment implements
                 return false;
             }
         });*/
+    }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case MainActivity.INTENT_SWITCH_VIEW:
+                    if (null != intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW)) {
+                        String switch_view = intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW);
+                        selectorMenuId(switch_view);
+                    }
+                    break;
+                case "com.switchmenu":
+                    if (null != intent.getExtras().getString("pop_menu")) {
+                        String pop_menu = intent.getExtras().getString("pop_menu");
+                        //selectorMenuId(pop_menu);
+                    }
+                    break;
+                case "com.isCtrlPress":
+                    isCtrlPress = intent.getExtras().getBoolean("is_ctrl_press");
+                    break;
+                case Intent.ACTION_MEDIA_MOUNTED:
+                case Intent.ACTION_MEDIA_UNMOUNTED:
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            updateUI();
+                        }
+                    });
+                    break;
+            }
+        }
+    };
+
+    private void selectorMenuId(String tag) {
+        if (mFileViewInteractionHub.getSelectedFileList() != null) {
+
+        }
+        switch (tag) {
+            case "pop_refresh":
+                mFileViewInteractionHub.onOperationReferesh();
+                break;
+            case "pop_cancel_all":
+                mFileViewInteractionHub.onOperationSelectAllOrCancel();
+                break;
+            case "pop_copy":
+                if (mFileViewInteractionHub.getSelectedFileList() != null) {
+                    mFileViewInteractionHub.doOnOperationCopy();
+                }
+                T.showShort(mActivity, getString(R.string.select_file_to_copy));
+                break;
+            case "pop_delete":
+                if (mFileViewInteractionHub.getSelectedFileList() != null) {
+                    //mFileViewInteractionHub.onOperationDelete();
+                }
+                break;
+            case "pop_send":
+                if (mFileViewInteractionHub.getSelectedFileList() != null) {
+                    mFileViewInteractionHub.onOperationSend();
+                }
+                T.showShort(mActivity, getString(R.string.select_file_to_send));
+                break;
+            case "pop_create":
+                mFileViewInteractionHub.onOperationCreateFolder();
+                break;
+            case "view_or_dismiss":
+                mFileViewInteractionHub.onOperationShowSysFiles();
+                break;
+            case "pop_cut":
+                mFileViewInteractionHub.onOperationMove();
+                break;
+            case "pop_paste":
+                mFileViewInteractionHub.onOperationButtonConfirm();
+                break;
+            case "pop_cacel":
+                mFileViewInteractionHub.onOperationButtonCancel();
+                break;
+            case "grid":
+            case "list":
+                switchMode();
+                mFileViewInteractionHub.clearSelection();
+                break;
+        }
+    }
+
+    private void initSortMap() {
+        mSortMap = new HashMap<>();
+        mSortMap.put(FileSortHelper.SortMethod.name, mNamePositive);
+        mSortMap.put(FileSortHelper.SortMethod.size, mSizePositive);
+        mSortMap.put(FileSortHelper.SortMethod.date, mDatePositive);
+        mSortMap.put(FileSortHelper.SortMethod.type, mTypePositive);
+    }
+
+    private void switchMode() {
+     if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
+            addHeadView(mActivity);
+            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
+                                           mFileNameList, mFileViewInteractionHub,
+                                           mFileIconHelper, mListMotionListener);
+        } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
+            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
+                                           mFileNameList, mFileViewInteractionHub,
+                                           mFileIconHelper, mGridMotionListener);
+        }
+        operatorData();
+    }
+
+    private void addHeadView(Context context) {
+        if (file_path_list.getHeaderViewsCount() == 0) {
+            View headView =
+                    LayoutInflater.from(context).inflate(R.layout.file_browser_item_list, null);
+            ImageView lFileImage = (ImageView) headView.findViewById(R.id.file_image);
+            Util.setText(headView, R.id.file_name,
+                    context.getResources().getString(R.string.file_title_name),
+                    context.getResources().getColor(R.color.file_title_color));
+            Util.setText(headView, R.id.file_count,
+                    context.getResources().getString(R.string.file_title_type),
+                    context.getResources().getColor(R.color.file_title_color));
+            Util.setText(headView, R.id.modified_time,
+                    context.getResources().getString(R.string.file_title_modified),
+                    context.getResources().getColor(R.color.file_title_color));
+            Util.setText(headView, R.id.file_size,
+                    context.getResources().getString(R.string.file_title_size),
+                    context.getResources().getColor(R.color.file_title_color));
+            lFileImage.setVisibility(View.GONE);
+            file_path_list.addHeaderView(headView);
+        }
     }
 
     public class GridViewOnGenericMotionListener implements View.OnTouchListener {
@@ -656,7 +665,7 @@ public class SystemSpaceFragment extends BaseFragment implements
         }
     }
 
-    private void initReciever() {
+    private void initRegisterBroadcast() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.switchview");
         intentFilter.addAction("com.switchmenu");
@@ -669,9 +678,9 @@ public class SystemSpaceFragment extends BaseFragment implements
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         mActivity.unregisterReceiver(mReceiver);
         mAdapter.dispose();
+        super.onDestroyView();
     }
 
     public boolean onBack() {
