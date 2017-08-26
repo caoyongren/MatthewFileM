@@ -11,7 +11,7 @@ import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
-import com.openthos.filem.fragment.SdStorageFragment;
+import com.openthos.filem.fragment.leftbar.ComputerFragment;
 import com.openthos.filem.fragment.SearchFragment;
 import com.openthos.filem.BaseFragment;
 import com.openthos.filem.system.Constants;
@@ -53,7 +53,7 @@ public class SearchOnKeyListener implements TextView.OnKeyListener {
             case KeyEvent.KEYCODE_ENTER:
             case KeyEvent.KEYCODE_NUMPAD_ENTER:
                 v.clearFocus();
-                if (mMainActivity.mCurFragment instanceof SdStorageFragment) {
+                if (mMainActivity.mCurFragment instanceof ComputerFragment) {
                     mCurPath = Constants.SD_PATH;
                 } else if (mMainActivity.mCurFragment instanceof PersonalSpaceFragment) {
                     mCurPath = Constants.ROOT_PATH;

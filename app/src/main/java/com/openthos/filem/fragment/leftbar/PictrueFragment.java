@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.openthos.filem.fragment.leftbar;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -19,6 +19,7 @@ import com.openthos.filem.BaseFragment;
 import com.openthos.filem.R;
 import com.openthos.filem.adapter.GroupAdapter;
 import com.openthos.filem.bean.ImageBean;
+import com.openthos.filem.fragment.DetailFragment;
 import com.openthos.filem.system.Util;
 import com.openthos.filem.system.Constants;
 

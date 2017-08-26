@@ -43,7 +43,7 @@ import com.openthos.filem.component.UsbPropertyDialog;
 import com.openthos.filem.fragment.OnlineNeighborFragment;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
 import com.openthos.filem.fragment.RightShowFileFragment;
-import com.openthos.filem.fragment.SdStorageFragment;
+import com.openthos.filem.fragment.leftbar.ComputerFragment;
 import com.openthos.filem.fragment.SeafileFragment;
 import com.openthos.filem.fragment.SearchFragment;
 import com.openthos.filem.system.Constants;
@@ -55,7 +55,6 @@ import com.openthos.filem.system.Util;
 import com.openthos.filem.utils.L;
 import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.SeafileUtils;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +70,13 @@ import java.util.concurrent.Executors;
 
 public class MainActivity extends BaseActivity
                  implements View.OnClickListener, View.OnTouchListener {
+
     public static final String TAG = "MainActivity -- > DEBUG::";
+    public static final String KEY_VIEW_TAG = "viewtag";
+    public static final String INTENT_SWITCH_VIEW = "com.switchview";
+    public static final String KEY_SWITCH_VIEW = "switch_view";
+    public static final String DEFAULT_VIEW_TAG_GRID = "grid";
+    public static final String DEFAULT_VIEW_TAG_LIST = "list";
     private static final int POPWINDOW_WINTH = 120;
     private static final int POPWINDOW_HEIGHT = 40;
     private static final int POPWINDOW_X = -15;
@@ -82,15 +87,9 @@ public class MainActivity extends BaseActivity
     private static final String USB_SPACE_FRAGMENT = "usb_space_fragment";
     private static final String USB_DEVICE_ATTACHED = "usb_device_attached";
     private static final String USB_DEVICE_DETACHED = "usb_device_detached";
-
-    public static final String DEFAULT_VIEW_TAG_GRID = "grid";
-    public static final String DEFAULT_VIEW_TAG_LIST = "list";
     private static final String IV_SWITCH_VIEW = "iv_switch_view";
     private static final String SETTING_POPWINDOW_TAG = "iv_setting";
     private static final String USB_POPWINDOW_TAG = "iv_usb";
-    public static final String KEY_VIEW_TAG = "viewtag";
-    public static final String INTENT_SWITCH_VIEW = "com.switchview";
-    public static final String KEY_SWITCH_VIEW = "switch_view";
 
     private Context mContext = this;
     //控件命名原则：１．控件名要简写　２．控件位置　３．控件的个性
@@ -126,7 +125,7 @@ public class MainActivity extends BaseActivity
     private FragmentManager mManager = getSupportFragmentManager();
     private PopWinShare mPopWinShare;
     public Fragment mCurFragment;
-    public SdStorageFragment mSdStorageFragment;
+    public ComputerFragment mComputerFragment;
     public boolean mIsSdStorageFragmentHided;
     private RightShowFileFragment mDeskFragment, mMusicFragment, mVideoFragment,
                                 mPictrueFragment, mAddressFragment,
@@ -323,7 +322,7 @@ public class MainActivity extends BaseActivity
                             break;
                         case Constants.USB_ONE:
                             if (Util.execUsb(new String[]{"df"}).size() != 1) {
-                                mSdStorageFragment.hideMountSpaceOne();
+                                mComputerFragment.hideMountSpaceOne();
                                 if (getCurPath() != null && getCurPath().equals(mUsb0[0])) {
                                     showSdSFragmentAfterInstallUSB();
                                 }
@@ -338,7 +337,7 @@ public class MainActivity extends BaseActivity
                         case Constants.USB_TWO:
                             mRl_usb_two.setVisibility(View.GONE);
                             if (Util.execUsb(new String[]{"df"}).size() != 1) {
-                                mSdStorageFragment.hideMountSpaceTwo();
+                                mComputerFragment.hideMountSpaceTwo();
                                 if (getCurPath() != null && getCurPath().equals(mUsb1[0])) {
                                     showSdSFragmentAfterInstallUSB();
                                 }
@@ -405,7 +404,7 @@ public class MainActivity extends BaseActivity
         mEtMainFilePath.setOnKeyListener(nivagationOnKeyLinstener);
         mEtMainFilePath.addTextChangedListener(new TextChangeListener());
         initUsb(-1);
-        mCurFragment = mSdStorageFragment;
+        mCurFragment = mComputerFragment;
         Intent intent = getIntent();
         String path = intent.getStringExtra("path");
         if (path != null) {
@@ -423,8 +422,8 @@ public class MainActivity extends BaseActivity
         //顶部的：path显示．例如：SD卡/Download/app
         L.i(TAG + ":" + displayPath);
         if (displayPath != null) {
-            if (mCurFragment == mSdStorageFragment &&
-                    mSdStorageFragment.mCurFragment != null) {
+            if (mCurFragment == mComputerFragment &&
+                    mComputerFragment.mCurFragment != null) {
                 mEtMainFilePath.setText(displayPath);
             } else {
                 if (mCurFragment instanceof RightShowFileFragment) {
@@ -536,30 +535,30 @@ public class MainActivity extends BaseActivity
     }
 
     private void showSdSFragmentAfterInstallUSB() {
-        mManager.beginTransaction().remove(mCurFragment).show(mSdStorageFragment).commit();
-        mCurFragment = mSdStorageFragment;
+        mManager.beginTransaction().remove(mCurFragment).show(mComputerFragment).commit();
+        mCurFragment = mComputerFragment;
     }
 
     private void removeMobileDevice() {
         if (TextUtils.isEmpty(getCurPath())
                 || (getCurPath() != null
                      && getCurPath().startsWith(Constants.PERMISS_DIR_STORAGE_USB))) {
-            mManager.beginTransaction().remove(mSdStorageFragment).commit();
+            mManager.beginTransaction().remove(mComputerFragment).commit();
             mManager.beginTransaction().hide(mCurFragment).commit();
-            mSdStorageFragment = new SdStorageFragment(mManager,
+            mComputerFragment = new ComputerFragment(mManager,
                     USB_DEVICE_DETACHED, MainActivity.this);
             setSelectedBackground(R.id.tv_main_computer);
-            mManager.beginTransaction().add(R.id.framelayout_right_mian, mSdStorageFragment)
-                    .show(mSdStorageFragment).commit();
-            mCurFragment = mSdStorageFragment;
+            mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                    .show(mComputerFragment).commit();
+            mCurFragment = mComputerFragment;
         } else {
             BaseFragment visibleFragment = (BaseFragment) getVisibleFragment();
-            mManager.beginTransaction().remove(mSdStorageFragment).commit();
-            mSdStorageFragment = new SdStorageFragment(mManager,
+            mManager.beginTransaction().remove(mComputerFragment).commit();
+            mComputerFragment = new ComputerFragment(mManager,
                     USB_DEVICE_DETACHED, MainActivity.this);
-            mManager.beginTransaction().add(R.id.framelayout_right_mian, mSdStorageFragment)
-                    .hide(mSdStorageFragment).commit();
-            mSdStorageFragment.mCurFragment = visibleFragment;
+            mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                    .hide(mComputerFragment).commit();
+            mComputerFragment.mCurFragment = visibleFragment;
         }
     }
 
@@ -598,22 +597,22 @@ public class MainActivity extends BaseActivity
                // }
             }
             if (TextUtils.isEmpty(getCurPath())) {
-                mManager.beginTransaction().remove(mSdStorageFragment).commit();
+                mManager.beginTransaction().remove(mComputerFragment).commit();
                 mManager.beginTransaction().hide(mCurFragment).commit();
-                mSdStorageFragment = new SdStorageFragment(mManager, USB_DEVICE_ATTACHED,
+                mComputerFragment = new ComputerFragment(mManager, USB_DEVICE_ATTACHED,
                         MainActivity.this);
                 setSelectedBackground(R.id.tv_main_computer);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mSdStorageFragment)
-                        .show(mSdStorageFragment).commit();
-                mCurFragment = mSdStorageFragment;
+                mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                        .show(mComputerFragment).commit();
+                mCurFragment = mComputerFragment;
             } else {
                 BaseFragment visibleFragment = (BaseFragment) getVisibleFragment();
-                mManager.beginTransaction().remove(mSdStorageFragment).commit();
-                mSdStorageFragment = new SdStorageFragment(mManager, USB_DEVICE_ATTACHED,
+                mManager.beginTransaction().remove(mComputerFragment).commit();
+                mComputerFragment = new ComputerFragment(mManager, USB_DEVICE_ATTACHED,
                         MainActivity.this);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mSdStorageFragment)
-                        .hide(mSdStorageFragment).commit();
-                mSdStorageFragment.mCurFragment = visibleFragment;
+                mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                        .hide(mComputerFragment).commit();
+                mComputerFragment.mCurFragment = visibleFragment;
             }
           //  T.showShort(MainActivity.this, getResources().getString(R.string.USB_device_connected));
           //  mTvMainComputer.performClick();
@@ -625,7 +624,7 @@ public class MainActivity extends BaseActivity
             mProgressDialog.setCancelable(true);
             mProgressDialog.setCanceledOnTouchOutside(true);
             mProgressDialog.show();
-          //  mCurFragment = mSdStorageFragment;
+          //  mCurFragment = mComputerFragment;
         } else if (flags == UsbConnectReceiver.USB_STATE_OFF) {
             if (!TextUtils.isEmpty(mUsbPath)) {
                 if (mUsb0 != null && mUsbPath.equals(mUsb0[0])) {
@@ -642,9 +641,9 @@ public class MainActivity extends BaseActivity
     private void initFragment() {
         mReceiver = new UsbConnectReceiver(this);
         FragmentTransaction transaction = mManager.beginTransaction();
-        if (mSdStorageFragment == null) {
-            mSdStorageFragment = new SdStorageFragment(mManager, null, MainActivity.this);
-            transaction.add(R.id.framelayout_right_mian, mSdStorageFragment).hide(mSdStorageFragment);
+        if (mComputerFragment == null) {
+            mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
+            transaction.add(R.id.framelayout_right_mian, mComputerFragment).hide(mComputerFragment);
         }
         if (mDeskFragment == null) {
             mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
@@ -862,7 +861,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_DEL && !mEtSearchView.hasFocus()
-                                                                  && !mEtMainFilePath.isFocused()) {
+                && !mEtMainFilePath.isFocused()) {
             onBackPressed();
         }
         if (event.isCtrlPressed()) {
@@ -950,7 +949,7 @@ public class MainActivity extends BaseActivity
 
     private boolean isCopyByHot() {
         return getVisibleFragment() instanceof PersonalSpaceFragment
-                || getVisibleFragment() instanceof SdStorageFragment
+                || getVisibleFragment() instanceof ComputerFragment
                 || getVisibleFragment() instanceof OnlineNeighborFragment
                 || mEtMainFilePath.isFocused() || mEtSearchView.isFocused();
     }
@@ -1096,9 +1095,9 @@ public class MainActivity extends BaseActivity
                     transaction.remove(fragment).commit();
                 }
 
-                showRightFileInfo(R.id.tv_main_computer, "", mSdStorageFragment);
-                if (mSdStorageFragment != null) {
-                    mSdStorageFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
+                showRightFileInfo(R.id.tv_main_computer, "", mComputerFragment);
+                if (mComputerFragment != null) {
+                    mComputerFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
                 }
                 break;
             case R.id.tv_main_storage_one:
@@ -1337,11 +1336,12 @@ public class MainActivity extends BaseActivity
         mPopWinShare.dismiss();
     }
 
+    //重写Activity中的方法．点击back回退按键．
     @Override
     public void onBackPressed() {
         mSearchOnKeyListener.setInputData(null);
         mManager.findFragmentById(R.id.framelayout_right_mian);
-        if (mCurFragment != mSdStorageFragment) {
+        if (mCurFragment != mComputerFragment) {
             if (mCurFragment instanceof RightShowFileFragment) {
                 RightShowFileFragment sdCurFrament = (RightShowFileFragment) mCurFragment;
                 String currentPath = sdCurFrament.getCurrentPath();
@@ -1367,8 +1367,8 @@ public class MainActivity extends BaseActivity
                     }
                 } else if (mCurFragment.getTag() != null &&
                           mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
-                    if (mSdStorageFragment.canGoBack()) {
-                        mSdStorageFragment.goBack();
+                    if (mComputerFragment.canGoBack()) {
+                        mComputerFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else {
@@ -1604,12 +1604,12 @@ public class MainActivity extends BaseActivity
     public void returnToRootDir() {
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
         fragmentTransaction.hide(mCurFragment);
-        fragmentTransaction.show(mSdStorageFragment);
+        fragmentTransaction.show(mComputerFragment);
         fragmentTransaction.commit();
         mEtMainFilePath.setText(null);
         setSelectedBackground(R.id.tv_main_computer);
-        mSdStorageFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
-        mCurFragment = mSdStorageFragment;
+        mComputerFragment.setSelectedCardBg(Constants.RETURN_TO_WHITE);
+        mCurFragment = mComputerFragment;
     }
 
     private void returnToSeafileDir() {

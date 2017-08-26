@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.openthos.filem.fragment.leftbar;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
@@ -16,6 +16,7 @@ import com.openthos.filem.BaseFragment;
 import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.component.DiskDialog;
+import com.openthos.filem.fragment.RightShowFileFragment;
 import com.openthos.filem.system.FileInfo;
 import com.openthos.filem.system.FileViewInteractionHub;
 import com.openthos.filem.system.Util;
@@ -28,8 +29,8 @@ import com.openthos.filem.view.CustomGridView;
 import java.io.File;
 import java.util.ArrayList;
 
-public class SdStorageFragment extends BaseFragment {
-    private static final String TAG = SdStorageFragment.class.getSimpleName();
+public class ComputerFragment extends BaseFragment {
+    private static final String TAG = ComputerFragment.class.getSimpleName();
 //    private String usbDeviceIsAttached;
 
     ArrayList<FileInfo> mFileInfoArrayList = null;
@@ -74,13 +75,13 @@ public class SdStorageFragment extends BaseFragment {
     private CustomGridView usbGrid;
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public SdStorageFragment(FragmentManager mManager,
-                             String usbDeviceIsAttached, MainActivity context) {
+    public ComputerFragment(FragmentManager mManager,
+                            String usbDeviceIsAttached, MainActivity context) {
         super(mManager,usbDeviceIsAttached,context);
     }
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public SdStorageFragment() {
+    public ComputerFragment() {
         super();
     }
 

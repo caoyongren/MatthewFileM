@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.openthos.filem.fragment.leftbar;
 
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -20,7 +20,7 @@ import com.openthos.filem.utils.L;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeskFragment extends BaseFragment {
+public class DesktopFragment extends BaseFragment {
     private ArrayList<AppInfo> appInfos = new ArrayList<>();
     private String packageName;
     private DeskAdapter deskAdapter;

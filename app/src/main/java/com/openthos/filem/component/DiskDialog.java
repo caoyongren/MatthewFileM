@@ -17,8 +17,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
+import com.openthos.filem.fragment.leftbar.ComputerFragment;
 import com.openthos.filem.system.Constants;
-import com.openthos.filem.fragment.SdStorageFragment;
+
 import java.util.ArrayList;
 import static android.R.color.holo_purple;
 import static android.R.color.transparent;
@@ -127,10 +128,10 @@ public class DiskDialog extends Dialog {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             String content = (String) view.getTag();
             if (mContext.getString(R.string.umount).equals(content)) {
-                ((SdStorageFragment) (((MainActivity)
+                ((ComputerFragment) (((MainActivity)
                                                mContext).getVisibleFragment())).uninstallUSB();
             } else if (mContext.getString(R.string.operation_open).equals(content)) {
-                ((SdStorageFragment) (((MainActivity) mContext).getVisibleFragment())).enter();
+                ((ComputerFragment) (((MainActivity) mContext).getVisibleFragment())).enter();
             }
             dismiss();
         }
