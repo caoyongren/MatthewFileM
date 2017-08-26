@@ -449,8 +449,8 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     }
 
     //TODO
-    public void onSortChanged(FileSortHelper.SortMethod s) {
-        if (mFileSortHelper.getSortMethod() != s) {
+    public void onSortChanged(FileSortHelper.SortStyle s) {
+        if (mFileSortHelper.getSortStyle() != s) {
             mFileSortHelper.setSortMethog(s);
             sortCurrentList();
         }
@@ -919,9 +919,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private void setupFileListView() {
         final String title = LocalCacheLayout.getViewTag();
         if ("list".equals(title)) {
-            mFileListView = (ListView) mFileViewListener.getViewById(R.id.file_path_list);
+            mFileListView = (ListView) mFileViewListener.getViewById(R.id.right_layout_list);
         } else if ("grid".equals(title)) {
-            mFileGridView = (GridView) mFileViewListener.getViewById(R.id.file_path_grid);
+            mFileGridView = (GridView) mFileViewListener.getViewById(R.id.right_layout_grid);
         }
     }
 
@@ -1286,19 +1286,19 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 //                // sort
 //                case MENU_SORT_NAME:
 //                    item.setChecked(true);
-//                    onSortChanged(FileSortHelper.SortMethod.name);
+//                    onSortChanged(FileSortHelper.SortStyle.name);
 //                    break;
 //                case MENU_SORT_SIZE:
 //                    item.setChecked(true);
-//                    onSortChanged(FileSortHelper.SortMethod.size);
+//                    onSortChanged(FileSortHelper.SortStyle.size);
 //                    break;
 //                case MENU_SORT_DATE:
 //                    item.setChecked(true);
-//                    onSortChanged(FileSortHelper.SortMethod.date);
+//                    onSortChanged(FileSortHelper.SortStyle.date);
 //                    break;
 //                case MENU_SORT_TYPE:
 //                    item.setChecked(true);
-//                    onSortChanged(FileSortHelper.SortMethod.type);
+//                    onSortChanged(FileSortHelper.SortStyle.type);
 //                    break;
 //
 //                case Constants.MENU_COPY:

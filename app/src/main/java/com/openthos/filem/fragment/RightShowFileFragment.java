@@ -47,26 +47,27 @@ import java.util.List;
 import java.util.HashMap;
 /**
  * Author: MasterMan
- * Date:
- *
+ * Describe:
+ *   Right layout show info to file.@inflateFileData
+ *   对于文件的监听．
  * */
 public class RightShowFileFragment extends BaseFragment implements
         IFileInteractionListener, MainActivity.IBackPressedListener {
     private static final String TAG = RightShowFileFragment.class.getSimpleName();
     public static final String ROOT_DIRECTORY = "root_directory";
+    private static final String sdDir = Util.getSdDirectory();
     private FileListAdapter mAdapter;
     private FileCategoryHelper mFileCagetoryHelper;
     private FileIconHelper mFileIconHelper;
     private ArrayList<FileInfo> mFileNameList = new ArrayList<>();
     private Activity mActivity;
     private MainActivity mMainActivity;
-    private DragListView file_path_list;
-    private DragGridView file_path_grid;
+    private DragListView mFileListView;
+    private DragGridView mFileGridView;
     private FrameLayout mFragmentSysFl;
-    private static final String sdDir = Util.getSdDirectory();
     private String curRootDir = "";
-    private boolean isCtrlPress;
     private String mouseRightTag = "mouse";
+    private boolean isCtrlPress;
     private boolean isDialogShow = false;
     private boolean isShow = false;
     private boolean mIsLeftItem;
@@ -74,16 +75,12 @@ public class RightShowFileFragment extends BaseFragment implements
     // memorize the scroll positions of previous paths
     private ArrayList<PathScrollPositionItem> mScrollPositionList = new ArrayList<>();
     private String mPreviousPath;
-    private boolean mSdCardReady;
     private View mEmptyView;
     private View mNoSdView;
     private HashMap<Enum, Boolean> mSortMap;
+    private boolean mSdCardReady;
     private long mCurrentTime;
     private int mPos = -1;
-    private boolean mNamePositive = true;
-    private boolean mSizePositive = true;
-    private boolean mDatePositive = true;
-    private boolean mTypePositive = true;
 
     private GridViewOnGenericMotionListener mGridMotionListener;
     private ListViewOnGenericMotionListener mListMotionListener;
@@ -132,10 +129,10 @@ public class RightShowFileFragment extends BaseFragment implements
         mEmptyView = rootView.findViewById(R.id.empty_view);
         mSdCardReady = Util.isSDCardReady();
         mNoSdView = rootView.findViewById(R.id.sd_not_available_page);
-        file_path_list = (DragListView) rootView.findViewById(R.id.file_path_list);
-        file_path_grid = (DragGridView) rootView.findViewById(R.id.file_path_grid);
+        mFileListView = (DragListView) rootView.findViewById(R.id.right_layout_list);
+        mFileGridView = (DragGridView) rootView.findViewById(R.id.right_layout_grid);
 
-        initSortMap();
+        initSortMap(true);
     }
 
     @Override
@@ -146,13 +143,13 @@ public class RightShowFileFragment extends BaseFragment implements
         //TODO  delete
         mFileIconHelper = new FileIconHelper(mActivity);
         mGridMotionListener = new GridViewOnGenericMotionListener();
-//        mListMotionListener = new ListViewOnGenericMotionListener();
-        if ("list".equals(LocalCacheLayout.getViewTag())) {
+        mListMotionListener = new ListViewOnGenericMotionListener();
+        if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mListMotionListener);
-        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
+        } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mGridMotionListener);
@@ -187,7 +184,7 @@ public class RightShowFileFragment extends BaseFragment implements
         mFileViewInteractionHub.setCurrentPath(currentDir);
         curRootDir = currentDir;
         Log.i(TAG, "CurrentDir = " + currentDir);
-        operatorData();
+        inflateFileData();
 
         if (mFileInfoList != null && mFileInfoList.size() > 0) {
             mFileViewInteractionHub.setCheckedFileList(mFileInfoList, mCopyOrMove);
@@ -201,9 +198,9 @@ public class RightShowFileFragment extends BaseFragment implements
     @Override
     protected void initListener() {
         //mFragmentSysFl.setOnGenericMotionListener(new MouseGridOnGenericMotionListener());
-        file_path_grid.setOnTouchListener(mGridMotionListener);
-        file_path_list.setOnTouchListener(mListMotionListener);
-        /*file_path_list.setOnDragChangeListener(new DragListView.OnChanageListener() {
+        mFileGridView.setOnTouchListener(mGridMotionListener);
+        mFileListView.setOnTouchListener(mListMotionListener);
+        /*mFileListView.setOnDragChangeListener(new DragListView.OnChanageListener() {
             @Override
             public void onChange(int from, int to) {
                 FileInfo fileInfo = mFileViewInteractionHub.getItem(to);
@@ -215,9 +212,9 @@ public class RightShowFileFragment extends BaseFragment implements
                 }
             }
         });
-        file_path_list.setOnGenericMotionListener(new MouseListOnGenericMotionListener());
+        mFileListView.setOnGenericMotionListener(new MouseListOnGenericMotionListener());
 
-        file_path_grid.setOnDragChangeListener(new DragGridView.OnChanageListener() {
+        mFileGridView.setOnDragChangeListener(new DragGridView.OnChanageListener() {
             @Override
             public void onChange(int from, int to) {
                 FileInfo fileInfo = mFileViewInteractionHub.getItem(to);
@@ -229,8 +226,8 @@ public class RightShowFileFragment extends BaseFragment implements
                 }
             }
         });
-        file_path_grid.setOnGenericMotionListener(new MouseGridOnGenericMotionListener());
-        file_path_grid.setOnTouchListener(new View.OnTouchListener() {
+        mFileGridView.setOnGenericMotionListener(new MouseGridOnGenericMotionListener());
+        mFileGridView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -326,20 +323,23 @@ public class RightShowFileFragment extends BaseFragment implements
             case "pop_cacel":
                 mFileViewInteractionHub.onOperationButtonCancel();
                 break;
-            case "grid":
-            case "list":
+            case MainActivity.DEFAULT_VIEW_TAG_GRID:
+            case MainActivity.DEFAULT_VIEW_TAG_LIST:
                 switchMode();
                 mFileViewInteractionHub.clearSelection();
+                break;
+            default:
                 break;
         }
     }
 
-    private void initSortMap() {
+    //将排序类型作为数据放入Ｍap集合．
+    private void initSortMap(boolean flag) {
         mSortMap = new HashMap<>();
-        mSortMap.put(FileSortHelper.SortMethod.name, mNamePositive);
-        mSortMap.put(FileSortHelper.SortMethod.size, mSizePositive);
-        mSortMap.put(FileSortHelper.SortMethod.date, mDatePositive);
-        mSortMap.put(FileSortHelper.SortMethod.type, mTypePositive);
+        mSortMap.put(FileSortHelper.SortStyle.name, flag);
+        mSortMap.put(FileSortHelper.SortStyle.size, flag);
+        mSortMap.put(FileSortHelper.SortStyle.date, flag);
+        mSortMap.put(FileSortHelper.SortStyle.type, flag);
     }
 
     private void switchMode() {
@@ -353,11 +353,11 @@ public class RightShowFileFragment extends BaseFragment implements
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mGridMotionListener);
         }
-        operatorData();
+        inflateFileData();
     }
 
     private void addHeadView(Context context) {
-        if (file_path_list.getHeaderViewsCount() == 0) {
+        if (mFileListView.getHeaderViewsCount() == 0) {
             View headView =
                     LayoutInflater.from(context).inflate(R.layout.file_browser_item_list, null);
             ImageView lFileImage = (ImageView) headView.findViewById(R.id.file_image);
@@ -374,10 +374,11 @@ public class RightShowFileFragment extends BaseFragment implements
                     context.getResources().getString(R.string.file_title_size),
                     context.getResources().getColor(R.color.file_title_color));
             lFileImage.setVisibility(View.GONE);
-            file_path_list.addHeaderView(headView);
+            mFileListView.addHeaderView(headView);
         }
     }
 
+    //对于网格视图文件监听．
     public class GridViewOnGenericMotionListener implements View.OnTouchListener {
         private boolean mIsShowDialog = false;
         private boolean mIsItem = false;
@@ -394,7 +395,7 @@ public class RightShowFileFragment extends BaseFragment implements
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     integerList = mAdapter.getSelectFileInfoList();
-                    calculateFileLocation(file_path_grid.getVerticalScrollDistance());
+                    calculateFileLocation(mFileGridView.getVerticalScrollDistance());
                     if (view.getTag() instanceof FileListAdapter.ViewHolder
                             || view.getId() == R.id.file_name) {
                             mDownX = -1;
@@ -541,6 +542,7 @@ public class RightShowFileFragment extends BaseFragment implements
         }
     }
 
+    //对于列表视图文件监听．
     public class ListViewOnGenericMotionListener implements View.OnTouchListener {
         private boolean mIsShowDialog = false;
         private boolean mIsItem = false;
@@ -652,15 +654,16 @@ public class RightShowFileFragment extends BaseFragment implements
               || (info.right >= Math.min(downX, toX) && info.right <= Math.max(downX, toX)))));
     }
 
-    private void operatorData() {
-        if ("list".equals(LocalCacheLayout.getViewTag())) {
-            file_path_grid.setVisibility(View.GONE);
-            file_path_list.setVisibility(View.VISIBLE);
-            file_path_list.setAdapter(mAdapter);
-        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
-            file_path_list.setVisibility(View.GONE);
-            file_path_grid.setVisibility(View.VISIBLE);
-            file_path_grid.setAdapter(mAdapter);
+    //根据不同的视图填充数据．
+    private void inflateFileData() {
+        if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
+            mFileGridView.setVisibility(View.GONE);
+            mFileListView.setVisibility(View.VISIBLE);
+            mFileListView.setAdapter(mAdapter);
+        } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
+            mFileListView.setVisibility(View.GONE);
+            mFileGridView.setVisibility(View.VISIBLE);
+            mFileGridView.setAdapter(mAdapter);
         }
     }
 
@@ -706,9 +709,9 @@ public class RightShowFileFragment extends BaseFragment implements
             if (path.startsWith(mPreviousPath)) {
                 int firstVisiblePosition = 0;
                 if ("list".equals(LocalCacheLayout.getViewTag())) {
-                    firstVisiblePosition = file_path_list.getFirstVisiblePosition();
+                    firstVisiblePosition = mFileListView.getFirstVisiblePosition();
                 } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
-                    firstVisiblePosition = file_path_grid.getFirstVisiblePosition();
+                    firstVisiblePosition = mFileGridView.getFirstVisiblePosition();
                 }
                 if (mScrollPositionList.size() != 0
                     && mPreviousPath.equals(mScrollPositionList
@@ -780,17 +783,17 @@ public class RightShowFileFragment extends BaseFragment implements
         sortCurrentList(sort);
         showEmptyView(fileList.size() == 0);
         if ("list".equals(LocalCacheLayout.getViewTag())) {
-            file_path_list.post(new Runnable() {
+            mFileListView.post(new Runnable() {
                 @Override
                 public void run() {
-                    file_path_list.setSelection(pos);
+                    mFileListView.setSelection(pos);
                 }
             });
         } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
-            file_path_grid.post(new Runnable() {
+            mFileGridView.post(new Runnable() {
                 @Override
                 public void run() {
-                    file_path_grid.setSelection(pos);
+                    mFileGridView.setSelection(pos);
                 }
             });
         }
@@ -802,9 +805,9 @@ public class RightShowFileFragment extends BaseFragment implements
     private void updateUI() {
         mNoSdView.setVisibility(mSdCardReady ? View.GONE : View.VISIBLE);
         if ("list".equals(LocalCacheLayout.getViewTag())) {
-            file_path_list.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
+            mFileListView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
         } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
-            file_path_grid.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
+            mFileGridView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
         }
 
         if (mSdCardReady) {
@@ -831,7 +834,6 @@ public class RightShowFileFragment extends BaseFragment implements
     @Override
     public void onDataChanged() {
         runOnUiThread(new Runnable() {
-
             @Override
             public void run() {
                 mAdapter.notifyDataSetChanged();
@@ -922,7 +924,7 @@ public class RightShowFileFragment extends BaseFragment implements
     @SuppressWarnings("unchecked")
     @Override
     public void sortCurrentList(FileSortHelper sort) {
-        if (mSortMap.get(sort.getSortMethod())) {
+        if (mSortMap.get(sort.getSortStyle())) {
             Collections.sort(mFileNameList, sort.getComparator());
         } else {
             Collections.sort(mFileNameList, Collections.reverseOrder(sort.getComparator()));
@@ -981,7 +983,7 @@ public class RightShowFileFragment extends BaseFragment implements
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            file_path_grid.setIsBlankArea(false);
+            mFileGridView.setIsBlankArea(false);
             FileInfo fileInfo = mAdapter.getFileInfoList().get(position);
             fileInfo.Selected = true;
             List<Integer> integerList = mAdapter.getSelectFileInfoList();
@@ -1026,26 +1028,26 @@ public class RightShowFileFragment extends BaseFragment implements
             switch (event.getButtonState()) {
                 case MotionEvent.BUTTON_PRIMARY:
                     mouseRightTag = "button_primary";
-                    file_path_grid.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
                     if (!isCtrlPress) {
                         mAdapter.getSelectFileInfoList().clear();
                         mFileViewInteractionHub.clearSelection();
                         mAdapter.notifyDataSetChanged();
                     }
-                    if (file_path_grid.isBlankArea() == false) {
+                    if (mFileGridView.isBlankArea() == false) {
                         return true;
                     }
-                    file_path_grid.setIsBlankArea(true);
+                    mFileGridView.setIsBlankArea(true);
                     break;
                 case MotionEvent.BUTTON_SECONDARY:
                     isDialogShow = false;
                     mouseRightTag = "button_secondary";
-                    file_path_grid.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
                     isShow =true;
 //                    mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub, event);
                     break;
                 case MotionEvent.BUTTON_TERTIARY:
-                    file_path_grid.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
                     break;
                 case MotionEvent.ACTION_SCROLL:
                     mFileViewInteractionHub.MouseScrollAction(event);
@@ -1063,24 +1065,24 @@ public class RightShowFileFragment extends BaseFragment implements
             switch (event.getButtonState()) {
                 case MotionEvent.BUTTON_PRIMARY:
                     mouseRightTag = "button_primary";
-                    file_path_list.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
                     if (!isCtrlPress) {
                         mAdapter.getSelectFileInfoList().clear();
                         mFileViewInteractionHub.clearSelection();
                         mAdapter.notifyDataSetChanged();
                     }
-                    if (file_path_list.isBlankArea() == false) {
+                    if (mFileListView.isBlankArea() == false) {
                         return true;
                     }
-                    file_path_list.setIsBlankArea(true);
+                    mFileListView.setIsBlankArea(true);
                     break;
                 case MotionEvent.BUTTON_SECONDARY:
                     mouseRightTag = "button_secondary";
-                    file_path_list.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
 //                    mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub, event);
                     break;
                 case MotionEvent.BUTTON_TERTIARY:
-                    file_path_list.setOnItemClickListener(new OnitemClickListener(event));
+                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
                     break;
                 case MotionEvent.ACTION_SCROLL:
                     mFileViewInteractionHub.MouseScrollAction(event);
@@ -1127,7 +1129,7 @@ public class RightShowFileFragment extends BaseFragment implements
     }
 
     public void calculateFileLocation(int fixY) {
-        int[] gridViewParams = file_path_grid.getParams();
+        int[] gridViewParams = mFileGridView.getParams();
         int[] itemParams = mAdapter.getParams();
         for (int i = 0; i < mFileListInfo.size(); i++) {
             mFileListInfo.get(i).left = gridViewParams[GRID_LEFT_POS]

@@ -170,7 +170,7 @@ public class FileCategoryHelper {
         return uri;
     }
 
-    private String buildSortOrder(FileSortHelper.SortMethod sort) {
+    private String buildSortOrder(FileSortHelper.SortStyle sort) {
         String sortOrder = null;
         switch (sort) {
             case name:
@@ -189,7 +189,7 @@ public class FileCategoryHelper {
         return sortOrder;
     }
 
-    public Cursor query(FileCategory fc, FileSortHelper.SortMethod sort) {
+    public Cursor query(FileCategory fc, FileSortHelper.SortStyle sort) {
         Uri uri = getContentUriByCategory(fc);
         String selection = buildSelectionByCategory(fc);
         String sortOrder = buildSortOrder(sort);

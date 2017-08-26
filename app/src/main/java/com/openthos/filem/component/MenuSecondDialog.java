@@ -75,23 +75,23 @@ public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dialog_sort_name:
-                setSortPositive(FileSortHelper.SortMethod.name);
-                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortMethod.name);
+                setSortPositive(FileSortHelper.SortStyle.name);
+                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortStyle.name);
                 this.dismiss();
                 break;
             case R.id.dialog_sort_size:
-                setSortPositive(FileSortHelper.SortMethod.size);
-                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortMethod.size);
+                setSortPositive(FileSortHelper.SortStyle.size);
+                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortStyle.size);
                 this.dismiss();
                 break;
             case R.id.dialog_sort_time:
-                setSortPositive(FileSortHelper.SortMethod.date);
-                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortMethod.date);
+                setSortPositive(FileSortHelper.SortStyle.date);
+                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortStyle.date);
                 this.dismiss();
                 break;
             case R.id.dialog_sort_type:
-                setSortPositive(FileSortHelper.SortMethod.type);
-                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortMethod.type);
+                setSortPositive(FileSortHelper.SortStyle.type);
+                mFileViewInteractionHub.onSortChanged(FileSortHelper.SortStyle.type);
                 this.dismiss();
                 break;
             default:

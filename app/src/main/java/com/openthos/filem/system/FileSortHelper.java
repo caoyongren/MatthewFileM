@@ -4,35 +4,35 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 public class FileSortHelper {
-    public enum SortMethod {
+    public enum SortStyle {
         name, size, date, type
     }
-    private SortMethod mSort;
+    private SortStyle mSort;
     private boolean mFileFirst;
-    private HashMap<SortMethod, Comparator> mComparatorList = new HashMap<>();
+    private HashMap<SortStyle, Comparator> mComparatorList = new HashMap<>();
     public FileSortHelper() {
-        mSort = SortMethod.name;
+        mSort = SortStyle.name;
         Comparator cmpName = new FileComparator() {
             @Override
             public int doCompare(FileInfo object1, FileInfo object2) {
                 return object1.fileName.compareToIgnoreCase(object2.fileName);
             }
         };
-        mComparatorList.put(SortMethod.name, cmpName);
+        mComparatorList.put(SortStyle.name, cmpName);
         Comparator cmpSize = new FileComparator() {
             @Override
             public int doCompare(FileInfo object1, FileInfo object2) {
                 return longToCompareInt(object1.fileSize - object2.fileSize);
             }
         };
-        mComparatorList.put(SortMethod.size, cmpSize);
+        mComparatorList.put(SortStyle.size, cmpSize);
         Comparator cmpDate = new FileComparator() {
             @Override
             public int doCompare(FileInfo object1, FileInfo object2) {
                 return longToCompareInt(object2.ModifiedDate - object1.ModifiedDate);
             }
         };
-        mComparatorList.put(SortMethod.date, cmpDate);
+        mComparatorList.put(SortStyle.date, cmpDate);
         Comparator cmpType = new FileComparator() {
             @Override
             public int doCompare(FileInfo object1, FileInfo object2) {
@@ -45,14 +45,14 @@ public class FileSortHelper {
                         Util.getNameFromFilename(object2.fileName));
             }
         };
-        mComparatorList.put(SortMethod.type, cmpType);
+        mComparatorList.put(SortStyle.type, cmpType);
     }
 
-    public void setSortMethog(SortMethod s) {
+    public void setSortMethog(SortStyle s) {
         mSort = s;
     }
 
-    public SortMethod getSortMethod() {
+    public SortStyle getSortStyle() {
         return mSort;
     }
 
