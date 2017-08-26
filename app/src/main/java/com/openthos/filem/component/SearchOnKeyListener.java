@@ -13,7 +13,7 @@ import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
 import com.openthos.filem.fragment.SdStorageFragment;
 import com.openthos.filem.fragment.SearchFragment;
-import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.BaseFragment;
 import com.openthos.filem.system.Constants;
 import java.io.File;
 import java.util.ArrayList;

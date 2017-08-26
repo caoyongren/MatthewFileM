@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.BaseFragment;
 import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.component.FrameSelectView;

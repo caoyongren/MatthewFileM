@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment.base;
+package com.openthos.filem;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.openthos.filem.R;
-import com.openthos.filem.UiInterface;
 import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.bean.ImageBean;
 import com.openthos.filem.bean.SearchInfo;
@@ -23,7 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class BaseFragment extends Fragment implements UiInterface {
+public abstract class BaseFragment extends Fragment implements UiInterface{
 
     public View rootView;
     public FragmentManager mManager;

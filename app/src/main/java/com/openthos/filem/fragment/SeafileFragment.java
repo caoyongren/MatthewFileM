@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.view.Window;
 
-import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.BaseFragment;
 import com.openthos.filem.R;
 import com.openthos.filem.adapter.SeafileAdapter;
 import com.openthos.filem.bean.SeafileLibrary;

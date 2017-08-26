@@ -30,7 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.BaseFragment;
 import com.openthos.filem.R;
 import com.openthos.filem.activity.base.BaseActivity;
 import com.openthos.filem.bean.SeafileAccount;
