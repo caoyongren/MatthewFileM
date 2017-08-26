@@ -4,7 +4,7 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/rl_android_system"
+        android:id="@+id/rl_system_computer_fg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/sd_page_bg_selector"

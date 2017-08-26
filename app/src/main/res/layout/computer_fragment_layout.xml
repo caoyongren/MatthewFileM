@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_sds_ll"
+    android:id="@+id/ll_layout_computer_fg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -39,7 +39,7 @@
         android:visibility="visible">
 
         <RelativeLayout
-            android:id="@+id/rl_personal_space"
+            android:id="@+id/rl_personal_space_computer_fg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,19 +49,19 @@
             android:paddingTop="10dp">
 
             <ImageView
-                android:id="@+id/iv_personal"
+                android:id="@+id/iv_personal_computer_fg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/storage" />
 
             <TextView
-                android:id="@+id/tv_personal_title"
+                android:id="@+id/tv_personal_title_computer_fg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:text="@string/text_personal"
-                android:layout_toRightOf="@id/iv_personal"
+                android:layout_toRightOf="@id/iv_personal_computer_fg"
                 android:textColor="@android:color/black"
                 android:textSize="16sp" />
 
@@ -73,7 +73,7 @@
             android:layout_weight="0.3" />
 
         <RelativeLayout
-            android:id="@+id/rl_android_system"
+            android:id="@+id/rl_system_computer_fg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -83,7 +83,7 @@
             android:paddingTop="10dp">
 
             <ImageView
-                android:id="@+id/iv_android"
+                android:id="@+id/iv_system_computer_fg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -93,11 +93,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv_android"
+                android:layout_toRightOf="@id/iv_system_computer_fg"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_system_title"
+                    android:id="@+id/tv_system_computer_fg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -106,7 +106,7 @@
                     android:textSize="16sp" />
 
                 <ProgressBar
-                    android:id="@+id/pb_system"
+                    android:id="@+id/progressbar_system_computer_fg"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="230dp"
                     android:layout_height="10dp"
@@ -123,14 +123,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_system_total_size"
+                        android:id="@+id/tv_system_total_size_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_size"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_system_total"
+                        android:id="@+id/tv_system_total_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -138,7 +138,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_system_avail_size"
+                        android:id="@+id/tv_system_size_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -148,7 +148,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_system_avail"
+                        android:id="@+id/tv_system_avail_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
@@ -165,7 +165,7 @@
             android:layout_weight="0.3" />
 
         <RelativeLayout
-            android:id="@+id/rl_sd_space"
+            android:id="@+id/rl_disk_computer_fg"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -189,7 +189,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_sd_title"
+                    android:id="@+id/tv_disk_computer_fg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -198,7 +198,7 @@
                     android:textSize="16sp" />
 
                 <ProgressBar
-                    android:id="@+id/pb_sd"
+                    android:id="@+id/progress_disk_computer_fg"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="230dp"
                     android:layout_height="10dp"
@@ -215,20 +215,20 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_sd_total_size"
+                        android:id="@+id/tv_disk_total_title_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_size"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_sd_total"
+                        android:id="@+id/tv_disk_total_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_sd_avail_size"
+                        android:id="@+id/tv_disk_avail_title_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -236,7 +236,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_sd_avail"
+                        android:id="@+id/tv_disk_avail_computer_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
@@ -272,7 +272,7 @@
     </LinearLayout>
 
     <com.openthos.filem.view.CustomGridView
-        android:id="@+id/usb"
+        android:id="@+id/usb_computer_fg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="3"

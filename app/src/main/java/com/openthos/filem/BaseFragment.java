@@ -94,16 +94,16 @@ public abstract class BaseFragment extends Fragment implements UiInterface{
 
     public void enter() {
         switch (mCurId) {
-            case R.id.rl_android_system:
+            case R.id.rl_system_computer_fg:
                 enter(Constants.SYSTEM_SPACE_FRAGMENT, null);
                 break;
-            case R.id.rl_sd_space:
+            case R.id.rl_disk_computer_fg:
                 enter(Constants.SD_SPACE_FRAGMENT, Constants.SD_PATH);
                 break;
             case R.id.rl_android_service:
                 enter(Constants.YUN_SPACE_FRAGMENT, null);
                 break;
-            case R.id.rl_personal_space:
+            case R.id.rl_personal_space_computer_fg:
                 enter(Constants.PERSONAL_TAG, null);
                 break;
             case R.id.ll_personal_videos:
@@ -142,8 +142,8 @@ public abstract class BaseFragment extends Fragment implements UiInterface{
 
     protected abstract void enter(String tag, String path);
 
+    public abstract int getLayoutId();
+    protected abstract void initView();
     protected abstract void initData();
     protected abstract void initListener();
-    protected abstract void initView();
-    public abstract int getLayoutId();
 }
