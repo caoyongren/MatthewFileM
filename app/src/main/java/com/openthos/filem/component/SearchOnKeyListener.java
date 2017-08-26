@@ -7,13 +7,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
 import com.openthos.filem.fragment.SdStorageFragment;
 import com.openthos.filem.fragment.SearchFragment;
-import com.openthos.filem.BaseFragment;
+import com.openthos.filem.fragment.base.BaseFragment;
 import com.openthos.filem.system.Constants;
 import java.io.File;
 import java.util.ArrayList;

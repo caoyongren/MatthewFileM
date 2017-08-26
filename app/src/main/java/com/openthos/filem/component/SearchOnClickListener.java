@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.view.View;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.bean.SearchInfo;
 import com.openthos.filem.fragment.SearchFragment;

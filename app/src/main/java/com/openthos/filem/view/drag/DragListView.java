@@ -1,4 +1,4 @@
-package com.openthos.filem.drag;
+package com.openthos.filem.view.drag;
 
 import android.app.Activity;
 import android.content.Context;

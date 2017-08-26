@@ -1,4 +1,4 @@
-package com.openthos.filem;
+package com.openthos.filem.activity;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -30,6 +30,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.R;
+import com.openthos.filem.activity.base.BaseActivity;
 import com.openthos.filem.bean.SeafileAccount;
 import com.openthos.filem.bean.SeafileLibrary;
 import com.openthos.filem.component.CopyInfoDialog;

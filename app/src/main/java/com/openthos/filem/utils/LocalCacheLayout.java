@@ -3,7 +3,7 @@ package com.openthos.filem.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 
 public class LocalCacheLayout {
     private static LocalCacheLayout localCache;

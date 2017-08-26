@@ -1,4 +1,4 @@
-package com.openthos.filem.view;
+package com.openthos.filem.view.listener;
 
 import android.view.MotionEvent;
 import android.view.View;

@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.openthos.filem.BaseFragment;
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.fragment.base.BaseFragment;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.component.DiskDialog;
 import com.openthos.filem.system.FileInfo;

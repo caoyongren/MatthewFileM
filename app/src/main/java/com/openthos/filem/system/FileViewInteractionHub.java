@@ -19,8 +19,8 @@ import android.view.Window;
 import android.widget.GridView;
 import android.widget.ListView;
 
-import com.openthos.filem.BaseActivity;
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.base.BaseActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.component.MenuFirstDialog;
 import com.openthos.filem.R;
 import com.openthos.filem.component.PropertyDialog;

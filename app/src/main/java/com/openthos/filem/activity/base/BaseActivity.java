@@ -1,4 +1,4 @@
-package com.openthos.filem;
+package com.openthos.filem.activity.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

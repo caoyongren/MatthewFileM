@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 
 public class PopWinShare extends PopupWindow {

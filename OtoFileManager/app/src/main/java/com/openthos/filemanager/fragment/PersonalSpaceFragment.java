@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import com.openthos.filem.BaseFragment;
 import com.openthos.filem.R;
 import com.openthos.filem.adapter.PersonalAdapter;
-import com.openthos.filem.drag.DragGridView;
+import com.openthos.filem.view.drag.DragGridView;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.system.FileInfo;
 import com.openthos.filem.system.FileViewInteractionHub;

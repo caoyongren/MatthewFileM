@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.openthos.filem.R;
-import com.openthos.filem.drag.DragGridView;
-import com.openthos.filem.drag.DragListView;
+import com.openthos.filem.view.drag.DragGridView;
+import com.openthos.filem.view.drag.DragListView;
 import com.openthos.filem.fragment.SearchFragment;
 import com.openthos.filem.fragment.SystemSpaceFragment;
 import com.openthos.filem.utils.LocalCache;

@@ -3,7 +3,7 @@ package com.openthos.filem.fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.openthos.filem.BaseFragment;
+import com.openthos.filem.fragment.base.BaseFragment;
 import com.openthos.filem.R;
 
 public class OnlineNeighborFragment extends BaseFragment{

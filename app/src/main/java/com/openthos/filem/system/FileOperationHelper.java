@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 
 public class FileOperationHelper {
     private static final String LOG_TAG = "FileOperation";

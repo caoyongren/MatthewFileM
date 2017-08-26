@@ -16,7 +16,7 @@ import android.view.Display;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.system.FileViewInteractionHub;
 import com.openthos.filem.system.Constants;

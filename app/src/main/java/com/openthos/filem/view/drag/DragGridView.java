@@ -1,4 +1,4 @@
-package com.openthos.filem.drag;
+package com.openthos.filem.view.drag;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

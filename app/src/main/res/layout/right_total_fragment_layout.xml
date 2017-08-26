@@ -19,7 +19,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1">
-        <com.openthos.filem.drag.DragListView
+        <com.openthos.filem.view.drag.DragListView
             android:id="@+id/right_layout_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,7 +28,7 @@
             android:scrollbars="none"
             android:visibility="gone"/>
 
-        <com.openthos.filem.drag.DragGridView
+        <com.openthos.filem.view.drag.DragGridView
             android:id="@+id/right_layout_grid"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

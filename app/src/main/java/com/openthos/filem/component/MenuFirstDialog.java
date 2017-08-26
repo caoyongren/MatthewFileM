@@ -19,7 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.openthos.filem.MainActivity;
+import com.openthos.filem.activity.MainActivity;
 import com.openthos.filem.R;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.system.FileInfo;
