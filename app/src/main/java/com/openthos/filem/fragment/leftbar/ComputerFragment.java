@@ -256,7 +256,6 @@ public class ComputerFragment extends BaseFragment {
                 case MotionEvent.ACTION_HOVER_ENTER:
                     break;
             }
-//            return false;
             return true;
         }
     }
@@ -497,6 +496,8 @@ public class ComputerFragment extends BaseFragment {
                     mRlPersonal.setSelected(false);
                 }
                 break;
+            default:
+                break;
         }
     }
 
@@ -513,10 +514,6 @@ public class ComputerFragment extends BaseFragment {
             RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
             canGoBack = rightShowFileFragment.canGoBack();
         }
-       //else {
-       //    PersonalSpaceFragment personalSpaceFragment = (PersonalSpaceFragment) baseFragment;
-       //    canGoBack = personalSpaceFragment.canGoBack();
-       //}
         return canGoBack;
     }
 
@@ -526,9 +523,5 @@ public class ComputerFragment extends BaseFragment {
             RightShowFileFragment rightShowFileFragment = (RightShowFileFragment) baseFragment;
             rightShowFileFragment.goBack();
         }
-       // else {
-       //     PersonalSpaceFragment personalSpaceFragment = (PersonalSpaceFragment) baseFragment;
-       //     personalSpaceFragment.goBack();
-       // }
     }
 }
