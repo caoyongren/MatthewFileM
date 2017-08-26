@@ -34,29 +34,29 @@ public class ComputerFragment extends BaseFragment {
     ArrayList<FileInfo> mFileInfoArrayList = null;
     FileViewInteractionHub.CopyOrMove copyOrMove = null;
 
-    private RelativeLayout mRl_android_system;
-    private RelativeLayout mRl_sd_space;
-    private RelativeLayout mRl_android_service;
-    private RelativeLayout mRl_mount_space_one;
-    private RelativeLayout mRl_mount_space_two;
-    private RelativeLayout mRl_mount_space_three;
-    private RelativeLayout mRl_personal_space;
-    private TextView tv_system_total;
-    private TextView tv_system_avail;
-    private ProgressBar pb_system;
-    private TextView tv_sd_total;
-    private TextView tv_sd_avail;
-    private ProgressBar pb_sd;
-    private TextView tv_usb_total_one;
-    private TextView tv_usb_avail_one;
-    private ProgressBar pb_usb_one;
-    private TextView tv_usb_total_two;
-    private TextView tv_usb_avail_two;
-    private ProgressBar pb_usb_two;
-    private TextView tv_usb_total_three;
-    private TextView tv_usb_avail_three;
-    private ProgressBar pb_usb_three;
-    private ProgressBar pb_service;
+    private RelativeLayout mRlSystem;
+    private RelativeLayout mRlDisk;
+    private RelativeLayout mRlCloudService;
+    private RelativeLayout mRlUsbOne;
+    private RelativeLayout mRlUsbTwo;
+    private RelativeLayout mRlUsbThree;
+    private RelativeLayout mRlPersonal;
+    private TextView mTvSystemTotal;
+    private TextView mTvSystemAvail;
+    private ProgressBar mProgressbarSystem;
+    private TextView mTvDiskTotal;
+    private TextView mTvDiskAvail;
+    private ProgressBar mProgressbarDisk;
+    private TextView mTvUsbTotalOne;
+    private TextView mTvUsbAvailOne;
+    private ProgressBar mProgressbarUsbOne;
+    private TextView mTvUsbTotalTwo;
+    private TextView mTvUsbAvailTwo;
+    private ProgressBar mProgressbarUsbTwo;
+    private TextView mTvUsbTotalThree;
+    private TextView mTvUsbAvailThree;
+    private ProgressBar mProgressbarUsbThree;
+    private ProgressBar mProgressbarService;
 
     public BaseFragment mCurFragment;
     private long lastBackTime = 0;
@@ -68,7 +68,7 @@ public class ComputerFragment extends BaseFragment {
     private String mountDiskPath = null;
     private LinearLayout mLlComputerFg;
     private LinearLayout mLlMobileDevice;
-    private CustomGridView usbGrid;
+    private CustomGridView mUsbGrid;
 
     @SuppressLint({"NewApi", "ValidFragment"})
     public ComputerFragment(FragmentManager mManager,
@@ -89,38 +89,40 @@ public class ComputerFragment extends BaseFragment {
     @Override
     protected void initView() {
         mLlComputerFg = (LinearLayout) rootView.findViewById(R.id.ll_layout_computer_fg);
-        mRl_android_system = (RelativeLayout) rootView.findViewById(R.id.rl_system_computer_fg);
-        mRl_sd_space = (RelativeLayout) rootView.findViewById(R.id.rl_disk_computer_fg);
-        mRl_android_service = (RelativeLayout) rootView.findViewById(R.id.rl_android_service);
-        mRl_mount_space_one = (RelativeLayout) rootView.findViewById(R.id.rl_mount_space_one);
-        mRl_mount_space_two = (RelativeLayout) rootView.findViewById(R.id.rl_mount_space_two);
-        mRl_mount_space_three = (RelativeLayout) rootView.findViewById(R.id.rl_mount_space_three);
-        mRl_personal_space = (RelativeLayout) rootView.findViewById(R.id.rl_personal_space_computer_fg);
-        mLlMobileDevice = (LinearLayout) rootView.findViewById(R.id.ll_mobile_device);
+        mRlPersonal = (RelativeLayout) rootView.findViewById(R.id.rl_personal_space_computer_fg);
+        mRlSystem = (RelativeLayout) rootView.findViewById(R.id.rl_system_computer_fg);
+        mRlDisk = (RelativeLayout) rootView.findViewById(R.id.rl_disk_computer_fg);
 
-        tv_system_total = (TextView) rootView.findViewById(R.id.tv_system_total_computer_fg);
-        tv_system_avail = (TextView) rootView.findViewById(R.id.tv_system_avail_computer_fg);
-        tv_sd_total = (TextView) rootView.findViewById(R.id.tv_disk_total_computer_fg);
-        tv_sd_avail = (TextView) rootView.findViewById(R.id.tv_disk_avail_computer_size);
-        tv_usb_total_one = (TextView) rootView.findViewById(R.id.tv_usb_total_one);
-        tv_usb_avail_one = (TextView) rootView.findViewById(R.id.tv_usb_avail_one);
-        tv_usb_total_two = (TextView) rootView.findViewById(R.id.tv_usb_total_two);
-        tv_usb_avail_two = (TextView) rootView.findViewById(R.id.tv_usb_avail_two);
-        tv_usb_total_three = (TextView) rootView.findViewById(R.id.tv_usb_total_three);
-        tv_usb_avail_three = (TextView) rootView.findViewById(R.id.tv_usb_avail_three);
+        mRlCloudService = (RelativeLayout) rootView.findViewById(R.id.rl_cloud_service_computer_fg);
+        mRlUsbOne = (RelativeLayout) rootView.findViewById(R.id.rl_usb_one_computer_fg);
+        mRlUsbTwo = (RelativeLayout) rootView.findViewById(R.id.rl_mount_space_two);
+        mRlUsbThree = (RelativeLayout) rootView.findViewById(R.id.rl_mount_space_three);
 
-        pb_system = (ProgressBar) rootView.findViewById(R.id.progressbar_system_computer_fg);
-        pb_sd = (ProgressBar) rootView.findViewById(R.id.progress_disk_computer_fg);
-        pb_usb_one = (ProgressBar) rootView.findViewById(R.id.pb_usb_one);
-        pb_usb_two = (ProgressBar) rootView.findViewById(R.id.pb_usb_two);
-        pb_usb_three = (ProgressBar) rootView.findViewById(R.id.pb_usb_three);
-        pb_service = (ProgressBar) rootView.findViewById(R.id.pb_service);
-        usbGrid = (CustomGridView) rootView.findViewById(R.id.usb_computer_fg);
+        mLlMobileDevice = (LinearLayout) rootView.findViewById(R.id.ll_mobile_device_computer_fg);
+        mTvSystemTotal = (TextView) rootView.findViewById(R.id.tv_system_total_computer_fg);
+        mTvSystemAvail = (TextView) rootView.findViewById(R.id.tv_system_avail_computer_fg);
+        mTvDiskTotal = (TextView) rootView.findViewById(R.id.tv_disk_total_computer_fg);
+        mTvDiskAvail = (TextView) rootView.findViewById(R.id.tv_disk_avail_computer_fg);
+
+        mTvUsbTotalOne = (TextView) rootView.findViewById(R.id.tv_usb_total_one_computer_fg);
+        mTvUsbAvailOne = (TextView) rootView.findViewById(R.id.tv_usb_avail_one_computer_fg);
+        mTvUsbTotalTwo = (TextView) rootView.findViewById(R.id.tv_usb_total_two);
+        mTvUsbAvailTwo = (TextView) rootView.findViewById(R.id.tv_usb_avail_two);
+        mTvUsbTotalThree = (TextView) rootView.findViewById(R.id.tv_usb_total_three);
+        mTvUsbAvailThree = (TextView) rootView.findViewById(R.id.tv_usb_avail_three);
+
+        mProgressbarSystem = (ProgressBar) rootView.findViewById(R.id.progressbar_system_computer_fg);
+        mProgressbarDisk = (ProgressBar) rootView.findViewById(R.id.progress_disk_computer_fg);
+        mProgressbarUsbOne = (ProgressBar) rootView.findViewById(R.id.progressbar_usb_one_computer_fg);
+        mProgressbarUsbTwo = (ProgressBar) rootView.findViewById(R.id.pb_usb_two);
+        mProgressbarUsbThree = (ProgressBar) rootView.findViewById(R.id.pb_usb_three);
+        mProgressbarService = (ProgressBar) rootView.findViewById(R.id.progressbar_cloud_service_computer_fg);
+        mUsbGrid = (CustomGridView) rootView.findViewById(R.id.usb_computer_fg);
     }
 
     @Override
     protected void initData() {
-        setVolumSize();
+        showStorageInfo();
         if (usbDeviceIsAttached != null && usbDeviceIsAttached.equals("usb_device_attached")) {
             String[] cmd = {"df"};
             ArrayList<String[]> list = Util.execUsb(cmd);
@@ -130,8 +132,8 @@ public class ComputerFragment extends BaseFragment {
                 if (usb1 != null && usb1.length > 0) {
                     showMountDevices(usb1, 1);
                     mLlMobileDevice.setVisibility(View.VISIBLE);
-                    mRl_mount_space_one.setVisibility(View.VISIBLE);
-                    mRl_mount_space_one.setOnGenericMotionListener
+                    mRlUsbOne.setVisibility(View.VISIBLE);
+                    mRlUsbOne.setOnGenericMotionListener
                             (new MouseRelativeOnGenericMotionListener());
                     mMainActivity.mHandler.sendEmptyMessage(Constants.USB1_READY);
                     if (list.size() >= 2) {
@@ -139,8 +141,8 @@ public class ComputerFragment extends BaseFragment {
                         mountPathTwo = usb2[0];
                         if (usb2 != null && usb2.length > 0) {
                             showMountDevices(usb2, 2);
-                            mRl_mount_space_two.setVisibility(View.VISIBLE);
-                            mRl_mount_space_two.setOnGenericMotionListener
+                            mRlUsbTwo.setVisibility(View.VISIBLE);
+                            mRlUsbTwo.setOnGenericMotionListener
                                     (new MouseRelativeOnGenericMotionListener());
                             mMainActivity.mHandler.sendEmptyMessage(Constants.USB2_READY);
                         }
@@ -150,9 +152,9 @@ public class ComputerFragment extends BaseFragment {
         } else if (usbDeviceIsAttached != null
                 && usbDeviceIsAttached.equals("usb_device_detached")) {
             mLlMobileDevice.setVisibility(View.GONE);
-            mRl_mount_space_one.setVisibility(View.GONE);
-            mRl_mount_space_two.setVisibility(View.GONE);
-            mRl_mount_space_three.setVisibility(View.GONE);
+            mRlUsbOne.setVisibility(View.GONE);
+            mRlUsbTwo.setVisibility(View.GONE);
+            mRlUsbThree.setVisibility(View.GONE);
             T.showShort(mMainActivity, getResources().getString(R.string.USB_device_disconnected));
         }
     }
@@ -160,42 +162,41 @@ public class ComputerFragment extends BaseFragment {
     @Override
     protected void initListener() {
         mLlComputerFg.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
-        mRl_android_system.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
-        mRl_sd_space.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
-        mRl_android_service.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
-        mRl_personal_space.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
+        mRlSystem.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
+        mRlDisk.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
+        mRlCloudService.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
+        mRlPersonal.setOnGenericMotionListener(new MouseRelativeOnGenericMotionListener());
     }
 
     public void hideMountSpaceOne() {
-        if (mRl_mount_space_one != null) {
-            mRl_mount_space_one.setVisibility(View.GONE);
+        if (mRlUsbOne != null) {
+            mRlUsbOne.setVisibility(View.GONE);
         }
     }
 
     public void hideMountSpaceTwo() {
-        if (mRl_mount_space_two != null) {
-            mRl_mount_space_two.setVisibility(View.GONE);
+        if (mRlUsbTwo != null) {
+            mRlUsbTwo.setVisibility(View.GONE);
         }
     }
 
     public void hideMountSpaceThree() {
-        if (mRl_mount_space_three != null) {
-            mRl_mount_space_three.setVisibility(View.GONE);
+        if (mRlUsbThree != null) {
+            mRlUsbThree.setVisibility(View.GONE);
         }
     }
 
-    private void setVolumSize() {
+    //展示各个存储的信息．
+    private void showStorageInfo() {
         Util.SystemInfo systemInfo = Util.getRomMemory();
         if (null != systemInfo) {
-            tv_system_total.setText(Util.convertStorage(systemInfo.romMemory));
-            tv_system_avail.setText(Util.convertStorage(systemInfo.avilMemory));
-//            L.e("tv_system_total", Util.convertStorage(systemInfo.romMemory).substring(0, 3));
-//            L.e("tv_system_avail", Util.convertStorage(systemInfo.avilMemory).substring(0, 3));
-            pb_system.setMax((int) Double.parseDouble(Util.convertStorage(systemInfo.romMemory)
+            mTvSystemTotal.setText(Util.convertStorage(systemInfo.totalMemory));
+            mTvSystemAvail.setText(Util.convertStorage(systemInfo.avilMemory));
+            mProgressbarSystem.setMax((int) Double.parseDouble(Util.convertStorage(systemInfo.totalMemory)
                                                           .substring(0, 3)) * 10);
-            pb_system.setSecondaryProgress
+            mProgressbarSystem.setSecondaryProgress
                       ((int) (Double.parseDouble
-                      (Util.convertStorage(systemInfo.romMemory - systemInfo.avilMemory)
+                      (Util.convertStorage(systemInfo.totalMemory - systemInfo.avilMemory)
                            .substring(0, 3)) * 10));
         }
 
@@ -208,28 +209,29 @@ public class ComputerFragment extends BaseFragment {
         }
     }
 
+    //展示存储信息．
     private void showDiskInfo(String[] usbs) {
         mountDiskPath = usbs[0];
-        tv_sd_total.setText(usbs[1]);
-        tv_sd_avail.setText(usbs[3]);
+        mTvDiskTotal.setText(usbs[1]);
+        mTvDiskAvail.setText(usbs[3]);
         int max = (int) Double.parseDouble(usbs[1].substring(0, 3)) * 10;
         int avail = (int) Double.parseDouble(usbs[3].substring(0, 2)) * 10;
-        pb_sd.setMax(max);
-        pb_sd.setProgress(max - avail);
+        mProgressbarDisk.setMax(max);
+        mProgressbarDisk.setProgress(max - avail);
     }
 
     private void showSdcardInfo() {
         Util.SDCardInfo sdCardInfo = Util.getSDCardInfo();
         if (null != sdCardInfo) {
-            tv_sd_total.setText(Util.convertStorage(sdCardInfo.total));
-            tv_sd_avail.setText(Util.convertStorage(sdCardInfo.free));
+            mTvDiskTotal.setText(Util.convertStorage(sdCardInfo.total));
+            mTvDiskAvail.setText(Util.convertStorage(sdCardInfo.free));
 
-            L.e("tv_sd_total", Util.convertStorage(sdCardInfo.total).substring(0, 3));
-            L.e("tv_sd_avail", Util.convertStorage(sdCardInfo.free).substring(0, 3));
+            L.e("mTvDiskTotal", Util.convertStorage(sdCardInfo.total).substring(0, 3));
+            L.e("mTvDiskAvail", Util.convertStorage(sdCardInfo.free).substring(0, 3));
 
-            pb_sd.setMax((int) Double.parseDouble
+            mProgressbarDisk.setMax((int) Double.parseDouble
                                (Util.convertStorage(sdCardInfo.total).substring(0, 3)) * 10);
-            pb_sd.setProgress((int) (Double.parseDouble
+            mProgressbarDisk.setProgress((int) (Double.parseDouble
                                     (Util.convertStorage(sdCardInfo.total - sdCardInfo.free)
                                          .substring(0, 3)) * 10));
         }
@@ -262,34 +264,34 @@ public class ComputerFragment extends BaseFragment {
     private void showMountDevices(String[] usbs, int flag) {
         switch (flag) {
             case 1:
-                tv_usb_total_one.setText(usbs[1]);
-                tv_usb_avail_one.setText(usbs[3]);
+                mTvUsbTotalOne.setText(usbs[1]);
+                mTvUsbAvailOne.setText(usbs[3]);
                 int maxOne = (int) (Double.parseDouble(usbs[1].substring(0, 3)) * 100);
                 int availOne = (int) (Double.parseDouble(usbs[3].substring(0, 3)) * 100);
                 int progressOne = maxOne - availOne >= 0?
                                   maxOne - availOne : maxOne -  (availOne / 1024);
-                pb_usb_one.setMax(maxOne);
-                pb_usb_one.setProgress(progressOne);
+                mProgressbarUsbOne.setMax(maxOne);
+                mProgressbarUsbOne.setProgress(progressOne);
                 break;
             case 2:
-                tv_usb_total_two.setText(usbs[1]);
-                tv_usb_avail_two.setText(usbs[3]);
+                mTvUsbTotalTwo.setText(usbs[1]);
+                mTvUsbAvailTwo.setText(usbs[3]);
                 int maxTwo = (int) (Double.parseDouble(usbs[1].substring(0, 3)) * 100);
                 int availTwo = (int) (Double.parseDouble(usbs[3].substring(0, 3)) * 100);
                 int progressTwo = maxTwo - availTwo >= 0?
                                   maxTwo - availTwo : maxTwo -  (availTwo / 1024);
-                pb_usb_two.setMax(maxTwo);
-                pb_usb_two.setProgress(progressTwo);
+                mProgressbarUsbTwo.setMax(maxTwo);
+                mProgressbarUsbTwo.setProgress(progressTwo);
                 break;
             case 3:
-                tv_usb_total_three.setText(usbs[1]);
-                tv_usb_avail_three.setText(usbs[3]);
+                mTvUsbTotalThree.setText(usbs[1]);
+                mTvUsbAvailThree.setText(usbs[3]);
                 int maxThree = (int) (Double.parseDouble(usbs[1].substring(0, 3)) * 100);
                 int availThree = (int) (Double.parseDouble(usbs[3].substring(0, 3)) * 100);
                 int progressThree = maxThree - availThree >= 0?
                                     maxThree - availThree : maxThree - (availThree / 1024);
-                pb_usb_three.setMax(maxThree);
-                pb_usb_three.setProgress(progressThree);
+                mProgressbarUsbThree.setMax(maxThree);
+                mProgressbarUsbThree.setProgress(progressThree);
                 break;
         }
     }
@@ -304,8 +306,8 @@ public class ComputerFragment extends BaseFragment {
                 setDiskClickInfo(R.id.rl_disk_computer_fg, Constants.SD_SPACE_FRAGMENT,
                                  Constants.SD_PATH);
                 break;
-            case R.id.rl_mount_space_one:
-                setDiskClickInfo(R.id.rl_mount_space_one, Constants.USB_SPACE_FRAGMENT,
+            case R.id.rl_usb_one_computer_fg:
+                setDiskClickInfo(R.id.rl_usb_one_computer_fg, Constants.USB_SPACE_FRAGMENT,
                                  mountPathOne);
                 break;
             case R.id.rl_mount_space_two:
@@ -316,8 +318,8 @@ public class ComputerFragment extends BaseFragment {
                 setDiskClickInfo(R.id.rl_mount_space_three, Constants.USB_SPACE_FRAGMENT,
                                  mountPathThree);
                 break;
-            case R.id.rl_android_service:
-                setDiskClickInfo(R.id.rl_android_service, Constants.YUN_SPACE_FRAGMENT, null);
+            case R.id.rl_cloud_service_computer_fg:
+                setDiskClickInfo(R.id.rl_cloud_service_computer_fg, Constants.YUN_SPACE_FRAGMENT, null);
                 break;
             case R.id.rl_personal_space_computer_fg:
                 setDiskClickInfo(R.id.rl_personal_space_computer_fg, Constants.PERSONAL_TAG, null);
@@ -331,7 +333,7 @@ public class ComputerFragment extends BaseFragment {
     public void secondaryClick(View view, MotionEvent event) {
         primaryClick(view);
         switch (view.getId()) {
-            case R.id.rl_mount_space_one:
+            case R.id.rl_usb_one_computer_fg:
                 showDiskDialog(view, event, true);
                 break;
             case R.id.rl_mount_space_two:
@@ -367,7 +369,7 @@ public class ComputerFragment extends BaseFragment {
     @Override
     public void enter() {
         super.enter();
-        if (mCurId == R.id.rl_mount_space_one) {
+        if (mCurId == R.id.rl_usb_one_computer_fg) {
             enter(Constants.USB_SPACE_FRAGMENT, mountPathOne);
         } else if (mCurId == R.id.rl_mount_space_two) {
             enter(Constants.USB_SPACE_FRAGMENT, mountPathTwo);
@@ -378,7 +380,7 @@ public class ComputerFragment extends BaseFragment {
 
    public void uninstallUSB() {
         switch (mCurId) {
-            case R.id.rl_mount_space_one:
+            case R.id.rl_usb_one_computer_fg:
                 mMainActivity.uninstallUSB(Constants.USB_ONE);
                 break;
             case R.id.rl_mount_space_two:
@@ -422,77 +424,77 @@ public class ComputerFragment extends BaseFragment {
     public void setSelectedCardBg(int id) {
         switch (id) {
             case R.id.rl_system_computer_fg:
-                mRl_android_system.setSelected(true);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(false);
+                mRlSystem.setSelected(true);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(false);
                 break;
             case R.id.rl_disk_computer_fg:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(true);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(false);
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(true);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(false);
                 break;
-            case R.id.rl_mount_space_one:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(true);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(false);
+            case R.id.rl_usb_one_computer_fg:
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(true);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(false);
                 break;
             case R.id.rl_mount_space_two:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(true);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(false);
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(true);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(false);
                 break;
             case R.id.rl_mount_space_three:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(true);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(false);
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(true);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(false);
                 break;
-            case R.id.rl_android_service:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(true);
-                mRl_personal_space.setSelected(false);
+            case R.id.rl_cloud_service_computer_fg:
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(true);
+                mRlPersonal.setSelected(false);
                 break;
             case R.id.rl_personal_space_computer_fg:
-                mRl_android_system.setSelected(false);
-                mRl_sd_space.setSelected(false);
-                mRl_mount_space_one.setSelected(false);
-                mRl_mount_space_two.setSelected(false);
-                mRl_mount_space_three.setSelected(false);
-                mRl_android_service.setSelected(false);
-                mRl_personal_space.setSelected(true);
+                mRlSystem.setSelected(false);
+                mRlDisk.setSelected(false);
+                mRlUsbOne.setSelected(false);
+                mRlUsbTwo.setSelected(false);
+                mRlUsbThree.setSelected(false);
+                mRlCloudService.setSelected(false);
+                mRlPersonal.setSelected(true);
                 break;
             case Constants.RETURN_TO_WHITE:
-                if (mRl_android_system != null) {
-                    mRl_android_system.setSelected(false);
-                    mRl_sd_space.setSelected(false);
-                    mRl_mount_space_one.setSelected(false);
-                    mRl_mount_space_two.setSelected(false);
-                    mRl_mount_space_three.setSelected(false);
-                    mRl_android_service.setSelected(false);
-                    mRl_personal_space.setSelected(false);
+                if (mRlSystem != null) {
+                    mRlSystem.setSelected(false);
+                    mRlDisk.setSelected(false);
+                    mRlUsbOne.setSelected(false);
+                    mRlUsbTwo.setSelected(false);
+                    mRlUsbThree.setSelected(false);
+                    mRlCloudService.setSelected(false);
+                    mRlPersonal.setSelected(false);
                 }
                 break;
         }

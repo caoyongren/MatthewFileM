@@ -100,7 +100,7 @@ public abstract class BaseFragment extends Fragment implements UiInterface{
             case R.id.rl_disk_computer_fg:
                 enter(Constants.SD_SPACE_FRAGMENT, Constants.SD_PATH);
                 break;
-            case R.id.rl_android_service:
+            case R.id.rl_cloud_service_computer_fg:
                 enter(Constants.YUN_SPACE_FRAGMENT, null);
                 break;
             case R.id.rl_personal_space_computer_fg:

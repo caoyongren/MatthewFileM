@@ -404,7 +404,7 @@ public class Util {
     }
 
     public static class SystemInfo {
-        public long romMemory;
+        public long totalMemory;
 
         public long avilMemory;
     }
@@ -436,7 +436,7 @@ public class Util {
         try {
             SystemInfo systemInfo = new SystemInfo();
             //Total rom memory
-            systemInfo.romMemory = getTotalInternalMemorySize();
+            systemInfo.totalMemory = getTotalInternalMemorySize();
 
             //Available rom memory
             File path = Environment.getRootDirectory();

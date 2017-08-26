@@ -236,7 +236,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_disk_avail_computer_size"
+                        android:id="@+id/tv_disk_avail_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
@@ -247,7 +247,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/ll_mobile_device"
+        android:id="@+id/ll_mobile_device_computer_fg"
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -292,7 +292,7 @@
         android:visibility="visible">
 
         <RelativeLayout
-            android:id="@+id/rl_mount_space_one"
+            android:id="@+id/rl_usb_one_computer_fg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -303,7 +303,7 @@
             android:visibility="gone">
 
             <ImageView
-                android:id="@+id/iv_mount_one"
+                android:id="@+id/iv_usb_one_computer_fg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -313,11 +313,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv_mount_one"
+                android:layout_toRightOf="@id/iv_usb_one_computer_fg"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_usb_title_one"
+                    android:id="@+id/tv_usb_title_one_computer_fg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -326,7 +326,7 @@
                     android:textSize="16sp" />
 
                 <ProgressBar
-                    android:id="@+id/pb_usb_one"
+                    android:id="@+id/progressbar_usb_one_computer_fg"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="230dp"
                     android:layout_height="10dp"
@@ -341,20 +341,20 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/tv_usb_total_size_one"
+                        android:id="@+id/tv_usb_total_title_one_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_size"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_usb_total_one"
+                        android:id="@+id/tv_usb_total_one_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_usb_avail_size_one"
+                        android:id="@+id/tv_usb_avail_title_one_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -362,7 +362,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/tv_usb_avail_one"
+                        android:id="@+id/tv_usb_avail_one_computer_fg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp" />
@@ -555,7 +555,7 @@
         android:visibility="visible">
 
         <RelativeLayout
-            android:id="@+id/rl_android_service"
+            android:id="@+id/rl_cloud_service_computer_fg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/sd_page_bg_selector"
@@ -564,7 +564,7 @@
             android:paddingTop="10dp">
 
             <ImageView
-                android:id="@+id/iv_service"
+                android:id="@+id/iv_cloud_service_computer_fg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -574,11 +574,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/iv_service"
+                android:layout_toRightOf="@id/iv_cloud_service_computer_fg"
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_service_title"
+                    android:id="@+id/tv_cloud_service_title_computer_fg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -587,7 +587,7 @@
                     android:textSize="16sp" />
 
                 <ProgressBar
-                    android:id="@+id/pb_service"
+                    android:id="@+id/progressbar_cloud_service_computer_fg"
                     style="@android:style/Widget.ProgressBar.Horizontal"
                     android:layout_width="230dp"
                     android:layout_height="10dp"
@@ -599,7 +599,7 @@
                     android:progressDrawable="@drawable/my_progressbar" />
 
                 <TextView
-                    android:id="@+id/tv_service_size"
+                    android:id="@+id/tv_cloud_service_size_title_computer_fg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_device_storage"
@@ -608,16 +608,4 @@
         </RelativeLayout>
 
     </LinearLayout>
-
-
-    <!--<GridView-->
-    <!--android:id="@+id/gv_picture"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:verticalSpacing="15dp"-->
-    <!--android:numColumns="auto_fit"-->
-    <!--android:columnWidth="80dp"-->
-    <!--android:stretchMode="columnWidth"-->
-    <!--android:scrollbars="none" />-->
-
 </LinearLayout>
