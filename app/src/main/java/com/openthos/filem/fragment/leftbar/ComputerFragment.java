@@ -86,6 +86,7 @@ public class ComputerFragment extends BaseFragment {
         return R.layout.computer_fragment_layout;
     }
 
+
     @Override
     protected void initView() {
         mLlComputerFg = (LinearLayout) rootView.findViewById(R.id.ll_layout_computer_fg);

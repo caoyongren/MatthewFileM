@@ -400,7 +400,7 @@ public class MainActivity extends BaseActivity
         //                                          mEtSearchView.getText(), MainActivity.this));
         mIvMainSearchView.setOnClickListener(this);
         NivagationOnClickLinstener nivagationOnClickLinstener = new NivagationOnClickLinstener();
-        NivagationOnKeyLinstener nivagationOnKeyLinstener =new NivagationOnKeyLinstener();
+        NivagationOnKeyLinstener nivagationOnKeyLinstener = new NivagationOnKeyLinstener();
         mEtMainFilePath.setOnClickListener(nivagationOnClickLinstener);
         mEtMainFilePath.setOnKeyListener(nivagationOnKeyLinstener);
         mEtMainFilePath.addTextChangedListener(new TextChangeListener());
@@ -642,53 +642,52 @@ public class MainActivity extends BaseActivity
     private void initFragment() {
         mReceiver = new UsbConnectReceiver(this);
         FragmentTransaction transaction = mManager.beginTransaction();
+        if (mDeskFragment == null) {
+            mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.DESKTOP_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mDeskFragment, Constants.DESKFRAGMENT_TAG)
+                    .hide(mDeskFragment);
+        }
+        if (mMusicFragment == null) {
+            mMusicFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.MUSIC_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
+                    .hide(mMusicFragment);
+        }
+        if (mVideoFragment == null) {
+            mVideoFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.VIDEOS_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
+                    .hide(mVideoFragment);
+        }
+        if (mPictrueFragment == null) {
+            mPictrueFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.PICTURES_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
+                    .hide(mPictrueFragment);
+        }
+        if (mDocumentFragment == null) {
+            mDocumentFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.DOCUMENT_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
+                    .hide(mDocumentFragment);
+        }
+        if (mDownloadFragment == null) {
+            mDownloadFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.DOWNLOAD_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
+                    .hide(mDownloadFragment);
+        }
+        if (mRecycleFragment == null) {
+            mRecycleFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+                    Constants.RECYCLE_PATH, null, null, true);
+            transaction.add(R.id.framelayout_right_mian, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
+                    .hide(mRecycleFragment);
+        }
         if (mComputerFragment == null) {
             mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
             transaction.add(R.id.framelayout_right_mian, mComputerFragment).hide(mComputerFragment);
         }
-        if (mDeskFragment == null) {
-            mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                    Constants.DESKTOP_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDeskFragment, Constants.DESKFRAGMENT_TAG)
-                       .hide(mDeskFragment);
-        }
-        if (mMusicFragment == null) {
-            mMusicFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                     Constants.MUSIC_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
-                       .hide(mMusicFragment);
-        }
-        if (mVideoFragment == null) {
-            mVideoFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                     Constants.VIDEOS_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
-                       .hide(mVideoFragment);
-        }
-        if (mPictrueFragment == null) {
-            mPictrueFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                       Constants.PICTURES_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
-                       .hide(mPictrueFragment);
-        }
-        if (mDocumentFragment == null) {
-            mDocumentFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                        Constants.DOCUMENT_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
-                       .hide(mDocumentFragment);
-        }
-        if (mDownloadFragment == null) {
-            mDownloadFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                        Constants.DOWNLOAD_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
-                       .hide(mDownloadFragment);
-        }
-        if (mRecycleFragment == null) {
-            mRecycleFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
-                                                        Constants.RECYCLE_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
-                       .hide(mRecycleFragment);
-        }
-
         if (mOnlineNeighborFragment == null) {
             mOnlineNeighborFragment = new OnlineNeighborFragment();
             transaction.add(R.id.framelayout_right_mian, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
@@ -1343,13 +1342,12 @@ public class MainActivity extends BaseActivity
         mSearchOnKeyListener.setInputData(null);
         mManager.findFragmentById(R.id.framelayout_right_mian);
         if (mCurFragment != mComputerFragment) {
-            if (mCurFragment instanceof RightShowFileFragment) {
+            if (mCurFragment instanceof RightShowFileFragment && mCurFragment.getTag() != null) {
                 RightShowFileFragment sdCurFrament = (RightShowFileFragment) mCurFragment;
                 String currentPath = sdCurFrament.getCurrentPath();
                 setCurPath(currentPath);
                 mEtMainFilePath.setText(currentPath);
-                if (mCurFragment.getTag() != null &&
-                    mCurFragment.getTag().equals(Constants.PERSONALSYSTEMSPACE_TAG)) {
+                if (mCurFragment.getTag().equals(Constants.PERSONALSYSTEMSPACE_TAG)) {
                     if (mPersonalSpaceFragment.canGoBack()) {
                         //逐级返回但是不能返回到根部
                         mPersonalSpaceFragment.goBack();
@@ -1358,8 +1356,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         backToUpDir("SDCard", mPersonalSpaceFragment, R.id.tv_main_computer);
                     }
-                } else if (mCurFragment.getTag() != null &&
-                        mCurFragment.getTag().equals(Constants.SEAFILESYSTEMSPACE_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.SEAFILESYSTEMSPACE_TAG)) {
                     if (mSeafileFragment.canGoBack()) {
                         mSeafileFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1367,8 +1364,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         backToUpDir("seafile", mSeafileFragment, R.id.tv_main_cloud_service);
                     }
-                } else if (mCurFragment.getTag() != null &&
-                          mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
                     if (mComputerFragment.canGoBack()) {
                         mComputerFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1376,8 +1372,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null &&
-                          mCurFragment.getTag().equals(Constants.USBFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.USBFRAGMENT_TAG)) {
                     if (mUsbStorageFragment.canGoBack()) {
                         mUsbStorageFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1385,8 +1380,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.DESKFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.DESKFRAGMENT_TAG)) {
                     if (mDeskFragment.canGoBack()) {
                         mDeskFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1396,8 +1390,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.MUSICFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.MUSICFRAGMENT_TAG)) {
                     if (mMusicFragment.canGoBack()) {
                         mMusicFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1407,8 +1400,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.VIDEOFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.VIDEOFRAGMENT_TAG)) {
                     if (mVideoFragment.canGoBack()) {
                         mVideoFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1418,8 +1410,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.PICTRUEFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.PICTRUEFRAGMENT_TAG)) {
                     if (mPictrueFragment.canGoBack()) {
                         mPictrueFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1429,8 +1420,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.DOCUMENTFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.DOCUMENTFRAGMENT_TAG)) {
                     if (mDocumentFragment.canGoBack()) {
                         mDocumentFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1440,8 +1430,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.DOWNLOADFRRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.DOWNLOADFRRAGMENT_TAG)) {
                     if (mDownloadFragment.canGoBack()) {
                         mDownloadFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1451,8 +1440,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.RECYCLEFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.RECYCLEFRAGMENT_TAG)) {
                     if (mRecycleFragment.canGoBack()) {
                         mRecycleFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1462,8 +1450,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToRootDir();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.SEARCHSYSTEMSPACE_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.SEARCHSYSTEMSPACE_TAG)) {
                     RightShowFileFragment searchSysFragment = (RightShowFileFragment) mCurFragment;
                     if (searchSysFragment.canGoBack()) {
                         searchSysFragment.goBack();
@@ -1472,8 +1459,7 @@ public class MainActivity extends BaseActivity
                     } else {
                         returnToSearchFragment();
                     }
-                } else if (mCurFragment.getTag() != null
-                               && mCurFragment.getTag().equals(Constants.ADDRESSFRAGMENT_TAG)) {
+                } else if (mCurFragment.getTag().equals(Constants.ADDRESSFRAGMENT_TAG)) {
                     RightShowFileFragment addressFragment = (RightShowFileFragment) mCurFragment;
                     if (addressFragment.canGoBack()) {
                         addressFragment.goBack();
@@ -1516,9 +1502,7 @@ public class MainActivity extends BaseActivity
     //Desktop/music/video/picture/document/download/recycler/
     private void backToUpDir(String path, Fragment fragment, int tvId) {
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(fragment);
-        fragmentTransaction.commit();
+        fragmentTransaction.hide(getVisibleFragment()).show(fragment).commit();
         mEtMainFilePath.setText(path);
         setSelectedBackground(tvId);
         mCurFragment = fragment;
