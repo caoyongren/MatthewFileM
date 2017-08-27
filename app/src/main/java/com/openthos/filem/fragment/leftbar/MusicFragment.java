@@ -8,7 +8,6 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -19,32 +18,34 @@ import com.openthos.filem.R;
 import com.openthos.filem.adapter.AudioAdapter;
 import com.openthos.filem.bean.AudioItem;
 import com.openthos.filem.system.Constants;
+import com.openthos.filem.utils.L;
 
 import java.io.File;
 import java.util.ArrayList;
 
 public class MusicFragment  extends BaseFragment implements AdapterView.OnItemClickListener {
-    private static final String TAG = MusicFragment.class.getSimpleName();
+    private static final String TAG = "MusicFragment.java -- > DEBUG:";
     private static final int MUSIC_OK = 0;
     private ArrayList<AudioItem> audioItems;
-    private ContentResolver contentResolver;
+    private ContentResolver mContentResolver;
     private ProgressDialog mProgressDialog;
-    private GridView gv_audio_pager;
-    private TextView tv_no_audio;
+    private GridView mGridViewMusic;
+    private TextView mTvNoMusic;
 
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-
             switch (msg.what){
                 case MUSIC_OK:
                     mProgressDialog.dismiss();
                     if (audioItems != null && audioItems.size() > 0) {
-                        gv_audio_pager.setAdapter(new AudioAdapter(getActivity(), audioItems));
+                        mGridViewMusic.setAdapter(new AudioAdapter(getActivity(), audioItems));
                     } else {
-                        tv_no_audio.setVisibility(View.VISIBLE);
+                        mTvNoMusic.setVisibility(View.VISIBLE);
                     }
                     handler.removeCallbacksAndMessages(null);
+                    break;
+                default:
                     break;
             }
         }
@@ -57,8 +58,8 @@ public class MusicFragment  extends BaseFragment implements AdapterView.OnItemCl
 
     @Override
     protected void initView() {
-        gv_audio_pager = (GridView) rootView.findViewById(R.id.gv_audio_pager);
-        tv_no_audio = (TextView) rootView.findViewById(R.id.tv_no_audio);
+        mGridViewMusic = (GridView) rootView.findViewById(R.id.gv_audio_pager);
+        mTvNoMusic = (TextView) rootView.findViewById(R.id.tv_no_audio);
     }
 
     protected void initData() {
@@ -67,11 +68,12 @@ public class MusicFragment  extends BaseFragment implements AdapterView.OnItemCl
 
     @Override
     protected void initListener() {
-        gv_audio_pager.setOnItemClickListener(this);
+        mGridViewMusic.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        L.i("MasterMan", TAG + "click");
         File f = new File(audioItems.get(i).getData());
         Intent intent = new Intent();
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -87,13 +89,13 @@ public class MusicFragment  extends BaseFragment implements AdapterView.OnItemCl
             public void run() {
                 audioItems = new ArrayList<> ();
                 Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
-                contentResolver = getActivity().getContentResolver();
+                mContentResolver = getActivity().getContentResolver();
                 String[] projection = {
                         MediaStore.Audio.Media.DISPLAY_NAME,
                         MediaStore.Audio.Media.SIZE,
                         MediaStore.Audio.Media.DATA
                 };
-                Cursor cursor = contentResolver.query(uri, projection, null, null, null);
+                Cursor cursor = mContentResolver.query(uri, projection, null, null, null);
                 if (cursor != null) {
                     while (cursor.moveToNext()) {
                         AudioItem item = new AudioItem();
@@ -105,7 +107,6 @@ public class MusicFragment  extends BaseFragment implements AdapterView.OnItemCl
                         item.setSize(size);
                         String data = cursor.getString
                                       (cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
-                        Log.e(TAG, data);
                         item.setData(data);
                         audioItems.add(item);
                     }

@@ -33,13 +33,14 @@ import static android.widget.Toast.LENGTH_SHORT;
 
 public class PictrueFragment extends BaseFragment {
     private static final int SCAN_OK = 1;
-    private GridView gv_pictrue;
-    private TextView tv_no_pictrue;
-    private GroupAdapter adapter;
+    private GridView mGridViewPicture;
+    private TextView mTvNoPictrue;
+    private GroupAdapter mGroupAdapter;
     private ProgressDialog mProgressDialog;
-    private ArrayList<ImageBean> list = new ArrayList<>();
+    private ArrayList<ImageBean> mImageBeenList = new ArrayList<>();
     private HashMap<String, List<String>> mGruopMap = new HashMap<>();
     private ContentResolver mContentResolver;
+
     private Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -47,16 +48,18 @@ public class PictrueFragment extends BaseFragment {
             switch (msg.what) {
                 case SCAN_OK:
                     mProgressDialog.dismiss();
-                    list = subGroupOfImage(mGruopMap);
-                    if (null != list) {
-                        adapter = new GroupAdapter(getActivity(), list, gv_pictrue);
+                    mImageBeenList = subGroupOfImage(mGruopMap);
+                    if (null != mImageBeenList) {
+                        mGroupAdapter = new GroupAdapter(getActivity(), mImageBeenList, mGridViewPicture);
                     } else {
-                        tv_no_pictrue.setVisibility(View.VISIBLE);
+                        mTvNoPictrue.setVisibility(View.VISIBLE);
                     }
-                    if (adapter != null) {
-                        gv_pictrue.setAdapter(adapter);
+                    if (mGroupAdapter != null) {
+                        mGridViewPicture.setAdapter(mGroupAdapter);
                     }
                     mHandler.removeCallbacksAndMessages(null);
+                    break;
+                default:
                     break;
             }
         }
@@ -79,26 +82,26 @@ public class PictrueFragment extends BaseFragment {
 
     @Override
     protected void initView() {
-        gv_pictrue = (GridView) rootView.findViewById(R.id.gv_pictrue);
-        tv_no_pictrue = (TextView) rootView.findViewById(R.id.tv_no_pictrue);
+        mGridViewPicture = (GridView) rootView.findViewById(R.id.gv_pictrue);
+        mTvNoPictrue = (TextView) rootView.findViewById(R.id.tv_no_pictrue);
     }
 
     protected void initData() {
-        if (null != list) {
-            list.clear();
+        if (null != mImageBeenList) {
+            mImageBeenList.clear();
         }
         getImages();
     }
 
     @Override
     protected void initListener() {
-        gv_pictrue.setOnItemClickListener(new FolderOnItemClickListener());
+        mGridViewPicture.setOnItemClickListener(new FolderOnItemClickListener());
     }
 
     private class FolderOnItemClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            DetailFragment fragment = new DetailFragment(mGruopMap, list, i);
+            DetailFragment fragment = new DetailFragment(mGruopMap, mImageBeenList, i);
             mManager.beginTransaction().hide(mMainActivity.mCurFragment).commit();
             mManager.beginTransaction().add(R.id.framelayout_right_mian, fragment, Constants.DETAILFRAGMENT_TAG)
                                            .addToBackStack(null).commit();
@@ -117,9 +120,9 @@ public class PictrueFragment extends BaseFragment {
             mImageBean.setFolderName(key);
             mImageBean.setImageCounts(value.size());
             mImageBean.setTopImagePath(value.get(0));
-            list.add(mImageBean);
+            mImageBeenList.add(mImageBean);
         }
-        return list;
+        return mImageBeenList;
     }
 
     private void getImages() {

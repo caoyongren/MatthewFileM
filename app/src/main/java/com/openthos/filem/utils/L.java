@@ -10,7 +10,7 @@ public class L {
     }
 
     public static boolean isDebug = true;
-    private static final String TAG = "way";
+    private static final String TAG = "MasterMan";
 
     public static void i(String msg) {
         if (isDebug)

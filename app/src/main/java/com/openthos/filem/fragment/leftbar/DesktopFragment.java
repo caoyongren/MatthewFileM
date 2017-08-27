@@ -21,40 +21,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DesktopFragment extends BaseFragment {
-    private ArrayList<AppInfo> appInfos = new ArrayList<>();
-    private String packageName;
+    private ArrayList<AppInfo> mAppInfos = new ArrayList<>();
+    private String mPackageName;
     private DeskAdapter deskAdapter;
-    private GridView gv_desk_icon;
-    private PackageManager pm;
-
-    @Override
-    protected void initView() {
-        gv_desk_icon = (GridView) rootView.findViewById(R.id.gv_desk_icon);
-    }
-
-    protected void initData() {
-        if (appInfos != null){
-            appInfos.clear();
-        }
-        getInstallPackageInfo();
-        deskAdapter = new DeskAdapter(appInfos, getActivity());
-        gv_desk_icon.setAdapter(deskAdapter);
-    }
-
-    @Override
-    protected void initListener() {
-        gv_desk_icon.setOnGenericMotionListener(new DeskOnGenericMotionListener());
-    }
+    private GridView mGridViewDesk;
+    private PackageManager mPm;
 
     @Override
     public int getLayoutId() {
         return R.layout.desk_fragment_layout;
     }
 
+    @Override
+    protected void initView() {
+        mGridViewDesk = (GridView) rootView.findViewById(R.id.gv_desk_icon);//.mGridViewDesk
+    }
+
+    protected void initData() {
+        if (mAppInfos != null){
+            mAppInfos.clear();
+        }
+        getInstallPackageInfo();
+        deskAdapter = new DeskAdapter(mAppInfos, getActivity());
+        mGridViewDesk.setAdapter(deskAdapter);
+    }
+
+    @Override
+    protected void initListener() {
+        mGridViewDesk.setOnGenericMotionListener(new DeskOnGenericMotionListener());
+    }
+
     private void getInstallPackageInfo() {
-        pm = getActivity().getPackageManager();
+        mPm = getActivity().getPackageManager();
         List<PackageInfo> packages
-                          = pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
+                          = mPm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
         for(int i = 0; i< packages.size(); i++) {
             PackageInfo packageInfo = packages.get(i);
             AppInfo appInfo =new AppInfo();
@@ -67,7 +67,7 @@ public class DesktopFragment extends BaseFragment {
             String packageName = packageInfo.packageName;
             appInfo.setPackageName(packageName);
             if ((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
-                appInfos.add(appInfo);
+                mAppInfos.add(appInfo);
             }
         }
     }
@@ -94,11 +94,11 @@ public class DesktopFragment extends BaseFragment {
     }
 
     private void IconItemClickListener() {
-        gv_desk_icon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridViewDesk.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                packageName = appInfos.get(i).getPackageName();
-                Intent intent = pm.getLaunchIntentForPackage(packageName);
+                mPackageName = mAppInfos.get(i).getPackageName();
+                Intent intent = mPm.getLaunchIntentForPackage(mPackageName);
                 if (null != intent){
                     startActivity(intent);
                 }
@@ -107,11 +107,11 @@ public class DesktopFragment extends BaseFragment {
     }
 
     private void IconUninstallItemClickListener() {
-        gv_desk_icon.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridViewDesk.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                packageName = appInfos.get(i).getPackageName();
-                uninstallAPK(packageName);
+                mPackageName = mAppInfos.get(i).getPackageName();
+                uninstallAPK(mPackageName);
             }
         });
     }

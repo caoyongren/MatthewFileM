@@ -25,16 +25,17 @@ import java.util.ArrayList;
 public class VideoFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private ArrayList<VideoItem> videoItems;
     private ProgressDialog mProgressDialog;
-    private TextView tv_no_video;
-    private GridView gv_video_pager;
+    private TextView mTvNoVideo;
+    private GridView mGridViewVideo;
+
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             mProgressDialog.dismiss();
             if (videoItems != null && videoItems.size() > 0) {
-                gv_video_pager.setAdapter(new VideoAdapter(getActivity(), videoItems));
+                mGridViewVideo.setAdapter(new VideoAdapter(getActivity(), videoItems));
             }else {
-                tv_no_video.setVisibility(View.VISIBLE);
+                mTvNoVideo.setVisibility(View.VISIBLE);
             }
             handler.removeCallbacksAndMessages(null);
         }
@@ -47,8 +48,8 @@ public class VideoFragment extends BaseFragment implements AdapterView.OnItemCli
 
     @Override
     protected void initView() {
-        tv_no_video = (TextView) rootView.findViewById(R.id.tv_no_video);
-        gv_video_pager = (GridView) rootView.findViewById(R.id.gv_video_pager);
+        mTvNoVideo = (TextView) rootView.findViewById(R.id.tv_no_video);
+        mGridViewVideo = (GridView) rootView.findViewById(R.id.gv_video_pager);
     }
 
     protected void initData() {
@@ -57,7 +58,7 @@ public class VideoFragment extends BaseFragment implements AdapterView.OnItemCli
 
     @Override
     protected void initListener() {
-        gv_video_pager.setOnItemClickListener(this);
+        mGridViewVideo.setOnItemClickListener(this);
     }
 
     private void getVideoList() {
