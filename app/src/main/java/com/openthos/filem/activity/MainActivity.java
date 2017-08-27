@@ -43,9 +43,9 @@ import com.openthos.filem.component.UsbPropertyDialog;
 import com.openthos.filem.fragment.OnlineNeighborFragment;
 import com.openthos.filem.fragment.PersonalSpaceFragment;
 import com.openthos.filem.fragment.RightShowFileFragment;
-import com.openthos.filem.fragment.leftbar.ComputerFragment;
 import com.openthos.filem.fragment.SeafileFragment;
 import com.openthos.filem.fragment.SearchFragment;
+import com.openthos.filem.fragment.leftbar.ComputerFragment;
 import com.openthos.filem.system.Constants;
 import com.openthos.filem.system.FileInfo;
 import com.openthos.filem.system.FileListAdapter;
@@ -55,6 +55,7 @@ import com.openthos.filem.system.Util;
 import com.openthos.filem.utils.L;
 import com.openthos.filem.utils.LocalCacheLayout;
 import com.openthos.filem.utils.SeafileUtils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -1350,11 +1351,12 @@ public class MainActivity extends BaseActivity
                 if (mCurFragment.getTag() != null &&
                     mCurFragment.getTag().equals(Constants.PERSONALSYSTEMSPACE_TAG)) {
                     if (mPersonalSpaceFragment.canGoBack()) {
+                        //逐级返回但是不能返回到根部
                         mPersonalSpaceFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else {
-                        returnToPersonalDir();
+                        backToUpDir("SDCard", mPersonalSpaceFragment, R.id.tv_main_computer);
                     }
                 } else if (mCurFragment.getTag() != null &&
                         mCurFragment.getTag().equals(Constants.SEAFILESYSTEMSPACE_TAG)) {
@@ -1363,7 +1365,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else {
-                        returnToSeafileDir();
+                        backToUpDir("seafile", mSeafileFragment, R.id.tv_main_cloud_service);
                     }
                 } else if (mCurFragment.getTag() != null &&
                           mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
@@ -1390,7 +1392,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToDeskDir();
+                        backToUpDir(Constants.DESKTOP_PATH, mDeskFragment, R.id.tv_main_desk);
                     } else {
                         returnToRootDir();
                     }
@@ -1401,7 +1403,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToMusicDir();
+                        backToUpDir(Constants.MUSIC_PATH, mMusicFragment, R.id.tv_main_music);
                     } else {
                         returnToRootDir();
                     }
@@ -1412,7 +1414,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToVideoDir();
+                        backToUpDir(Constants.VIDEOS_PATH, mVideoFragment, R.id.tv_main_video);
                     } else {
                         returnToRootDir();
                     }
@@ -1423,7 +1425,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToPicDir();
+                        backToUpDir(Constants.PICTURES_PATH, mPictrueFragment, R.id.tv_main_picture);
                     } else {
                         returnToRootDir();
                     }
@@ -1434,7 +1436,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToDocDir();
+                        backToUpDir(Constants.DOCUMENT_PATH, mDocumentFragment, R.id.tv_main_document);
                     } else {
                         returnToRootDir();
                     }
@@ -1445,7 +1447,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToDownloadDir();
+                        backToUpDir(Constants.DOWNLOAD_PATH, mDownloadFragment, R.id.tv_main_download);
                     } else {
                         returnToRootDir();
                     }
@@ -1456,7 +1458,7 @@ public class MainActivity extends BaseActivity
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
                     } else if (mManager.getBackStackEntryCount() == ACTIVITY_MIN_COUNT_FOR_BACK) {
-                        returnToRecycleDir();
+                        backToUpDir(Constants.RECYCLE_PATH, mRecycleFragment, R.id.tv_main_recycle);
                     } else {
                         returnToRootDir();
                     }
@@ -1511,14 +1513,15 @@ public class MainActivity extends BaseActivity
         mCurFragment = mSearchFragment;
     }
 
-    private void returnToDeskDir() {
+    //Desktop/music/video/picture/document/download/recycler/
+    private void backToUpDir(String path, Fragment fragment, int tvId) {
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
         fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mDeskFragment);
+        fragmentTransaction.show(fragment);
         fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.DESKTOP_PATH);
-        setSelectedBackground(R.id.tv_main_desk);
-        mCurFragment = mDeskFragment;
+        mEtMainFilePath.setText(path);
+        setSelectedBackground(tvId);
+        mCurFragment = fragment;
     }
 
     private void returnToMusicDir() {
@@ -1529,76 +1532,6 @@ public class MainActivity extends BaseActivity
         mEtMainFilePath.setText(Constants.MUSIC_PATH);
         setSelectedBackground(R.id.tv_main_music);
         mCurFragment = mMusicFragment;
-    }
-
-    private void returnToVideoDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mVideoFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.VIDEOS_PATH);
-        setSelectedBackground(R.id.tv_main_video);
-        mCurFragment = mVideoFragment;
-    }
-
-    private void returnToPicDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mPictrueFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.PICTURES_PATH);
-        setSelectedBackground(R.id.tv_main_picture);
-        mCurFragment = mPictrueFragment;
-    }
-
-    private void returnToDocDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mDocumentFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.DOCUMENT_PATH);
-        setSelectedBackground(R.id.tv_main_document);
-        mCurFragment = mDocumentFragment;
-    }
-
-    private void returnToDownloadDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mDownloadFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.DOWNLOAD_PATH);
-        setSelectedBackground(R.id.tv_main_download);
-        mCurFragment = mDownloadFragment;
-    }
-
-    private void returnToRecycleDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mRecycleFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.RECYCLE_PATH);
-        setSelectedBackground(R.id.tv_main_recycle);
-        mCurFragment = mRecycleFragment;
-    }
-
-    private void returnToCloudDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mSeafileFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(getResources().getString(R.string.cloud));
-        setSelectedBackground(R.id.tv_main_computer);
-        mCurFragment = mSeafileFragment;
-    }
-
-    private void returnToPersonalDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mPersonalSpaceFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText("SDCard");
-        setSelectedBackground(R.id.tv_main_computer);
-        mCurFragment = mPersonalSpaceFragment;
     }
 
     public void returnToRootDir() {
