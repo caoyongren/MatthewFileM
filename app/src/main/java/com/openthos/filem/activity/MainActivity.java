@@ -1524,16 +1524,6 @@ public class MainActivity extends BaseActivity
         mCurFragment = fragment;
     }
 
-    private void returnToMusicDir() {
-        FragmentTransaction fragmentTransaction = mManager.beginTransaction();
-        fragmentTransaction.hide(getVisibleFragment());
-        fragmentTransaction.show(mMusicFragment);
-        fragmentTransaction.commit();
-        mEtMainFilePath.setText(Constants.MUSIC_PATH);
-        setSelectedBackground(R.id.tv_main_music);
-        mCurFragment = mMusicFragment;
-    }
-
     public void returnToRootDir() {
         FragmentTransaction fragmentTransaction = mManager.beginTransaction();
         fragmentTransaction.hide(mCurFragment);
