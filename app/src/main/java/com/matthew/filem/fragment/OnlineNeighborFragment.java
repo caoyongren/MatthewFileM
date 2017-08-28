@@ -3,7 +3,7 @@ package com.matthew.filem.fragment;
 import android.view.View;
 import android.widget.TextView;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 
 public class OnlineNeighborFragment extends BaseFragment{

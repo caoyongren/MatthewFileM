@@ -18,7 +18,7 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.component.FrameSelectView;

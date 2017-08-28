@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.PersonalAdapter;
 import com.matthew.filem.fragment.RightShowFileFragment;

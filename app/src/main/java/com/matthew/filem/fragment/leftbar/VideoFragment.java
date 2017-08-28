@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.VideoAdapter;
 import com.matthew.filem.adapter.VideoItem;

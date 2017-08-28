@@ -1,4 +1,4 @@
-package com.matthew.filem;
+package com.matthew.filem.fragment.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.matthew.filem.R;
+import com.matthew.filem.UiInterface;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.bean.ImageBean;
 import com.matthew.filem.bean.SearchInfo;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class BaseFragment extends Fragment implements UiInterface{
+public abstract class BaseFragment extends Fragment implements UiInterface {
 
     public View rootView;
     public FragmentManager mManager;

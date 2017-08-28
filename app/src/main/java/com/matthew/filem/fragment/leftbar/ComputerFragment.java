@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.component.DiskDialog;

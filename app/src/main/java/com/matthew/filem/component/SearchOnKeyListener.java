@@ -13,7 +13,7 @@ import com.matthew.filem.bean.SearchInfo;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.fragment.SearchFragment;
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.system.Constants;
 import java.io.File;
 import java.util.ArrayList;

@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.view.Window;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.CloudAdapter;
 import com.matthew.filem.component.CloudDialog;

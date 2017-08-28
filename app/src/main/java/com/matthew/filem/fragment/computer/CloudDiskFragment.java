@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.GridView;
 import android.view.Window;
 
-import com.matthew.filem.BaseFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
 import com.matthew.filem.bean.SeafileLibrary;
