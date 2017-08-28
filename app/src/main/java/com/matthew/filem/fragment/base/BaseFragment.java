@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.matthew.filem.R;
-import com.matthew.filem.UiInterface;
+import com.matthew.filem.impl.UiInterface;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.bean.ImageBean;
 import com.matthew.filem.bean.SearchInfo;
