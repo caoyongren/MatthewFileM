@@ -30,7 +30,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.bean.SeafileAccount;
@@ -40,12 +39,12 @@ import com.matthew.filem.component.PopOnClickLintener;
 import com.matthew.filem.component.PopWinShare;
 import com.matthew.filem.component.SearchOnKeyListener;
 import com.matthew.filem.component.UsbPropertyDialog;
-import com.matthew.filem.fragment.OnlineNeighborFragment;
-import com.matthew.filem.fragment.computer.PersonalDiskFragment;
-import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
-import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.SearchFragment;
+import com.matthew.filem.fragment.base.BaseFragment;
+import com.matthew.filem.fragment.computer.CloudDiskFragment;
+import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.system.Constants;
 import com.matthew.filem.system.FileInfo;
 import com.matthew.filem.system.FileListAdapter;
@@ -68,6 +67,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+//import com.matthew.filem.fragment.OnlineNeighborFragment;
 
 public class MainActivity extends BaseActivity
                  implements View.OnClickListener, View.OnTouchListener {
@@ -132,7 +133,7 @@ public class MainActivity extends BaseActivity
                                 mPictrueFragment, mAddressFragment,
                                 mDocumentFragment, mDownloadFragment,
                                 mRecycleFragment;
-    private OnlineNeighborFragment mOnlineNeighborFragment;
+    //private OnlineNeighborFragment mOnlineNeighborFragment;
     private CloudDiskFragment mCloudDiskFragment;
     private UsbConnectReceiver mReceiver;
     private String[] mUsb0;
@@ -688,10 +689,10 @@ public class MainActivity extends BaseActivity
             mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
             transaction.add(R.id.framelayout_right_main, mComputerFragment).hide(mComputerFragment);
         }
-        if (mOnlineNeighborFragment == null) {
-            mOnlineNeighborFragment = new OnlineNeighborFragment();
-            transaction.add(R.id.framelayout_right_main, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
-        }
+        //if (mOnlineNeighborFragment == null) {
+        //    mOnlineNeighborFragment = new OnlineNeighborFragment();
+        //    transaction.add(R.id.framelayout_right_main, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
+        //}
         if (mPersonalDiskFragment == null) {
             mPersonalDiskFragment = new PersonalDiskFragment();
             transaction.add(R.id.framelayout_right_main, mPersonalDiskFragment).hide(mPersonalDiskFragment);
@@ -950,7 +951,7 @@ public class MainActivity extends BaseActivity
     private boolean isCopyByHot() {
         return getVisibleFragment() instanceof PersonalDiskFragment
                 || getVisibleFragment() instanceof ComputerFragment
-                || getVisibleFragment() instanceof OnlineNeighborFragment
+              //  || getVisibleFragment() instanceof OnlineNeighborFragment
                 || mEtMainFilePath.isFocused() || mEtSearchView.isFocused();
     }
 
