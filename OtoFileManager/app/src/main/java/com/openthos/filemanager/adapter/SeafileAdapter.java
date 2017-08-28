@@ -1,4 +1,4 @@
-package com.openthos.filem.adapter;
+package com.matthew.filem.adapter;
 
 import android.content.Context;
 import android.view.View;
@@ -7,12 +7,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.ImageView;
 
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.bean.SeafileAccount;
-import com.openthos.filem.bean.SeafileLibrary;
-import com.openthos.filem.utils.SeafileUtils;
-import com.openthos.filem.fragment.SeafileFragment;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.bean.SeafileAccount;
+import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.utils.SeafileUtils;
+import com.matthew.filem.fragment.SeafileFragment;
 
 import java.io.File;
 import java.util.ArrayList;

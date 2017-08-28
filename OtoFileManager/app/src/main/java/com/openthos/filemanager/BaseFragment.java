@@ -1,4 +1,4 @@
-package com.openthos.filem;
+package com.matthew.filem;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,11 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.openthos.filem.bean.ImageBean;
-import com.openthos.filem.bean.SearchInfo;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.FileInfo;
-import com.openthos.filem.system.FileViewInteractionHub;
+import com.matthew.filem.bean.ImageBean;
+import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.system.FileViewInteractionHub;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.matthew.filem.fragment;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -7,14 +7,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.openthos.filem.BaseFragment;
-import com.openthos.filem.R;
-import com.openthos.filem.adapter.PersonalAdapter;
-import com.openthos.filem.view.drag.DragGridView;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.FileInfo;
-import com.openthos.filem.system.FileViewInteractionHub;
-import com.openthos.filem.utils.T;
+import com.matthew.filem.BaseFragment;
+import com.matthew.filem.R;
+import com.matthew.filem.adapter.PersonalAdapter;
+import com.matthew.filem.view.drag.DragGridView;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.system.FileViewInteractionHub;
+import com.matthew.filem.utils.T;
 
 import java.util.ArrayList;
 import java.io.File;

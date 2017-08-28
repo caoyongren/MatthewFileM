@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,13 +15,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.bean.SeafileAccount;
-import com.openthos.filem.bean.SeafileLibrary;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.TextInputDialog;
-import com.openthos.filem.utils.SeafileUtils;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.bean.SeafileAccount;
+import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.TextInputDialog;
+import com.matthew.filem.utils.SeafileUtils;
 
 import java.io.File;
 import java.util.HashMap;

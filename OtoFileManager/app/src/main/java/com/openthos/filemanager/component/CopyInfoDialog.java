@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -14,9 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.openthos.filem.R;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.Util;
+import com.matthew.filem.R;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.Util;
 
 import java.io.BufferedReader;
 import java.io.File;

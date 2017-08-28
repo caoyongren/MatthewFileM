@@ -1,9 +1,9 @@
-package com.openthos.filem.bean;
+package com.matthew.filem.bean;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.openthos.filem.bean.SeafileLibrary;
+import com.matthew.filem.bean.SeafileLibrary;
 
 /**
  * Created by Wang Zhixu on 12/23/16.

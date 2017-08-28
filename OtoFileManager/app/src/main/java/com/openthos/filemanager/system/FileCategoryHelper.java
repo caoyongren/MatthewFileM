@@ -1,4 +1,4 @@
-package com.openthos.filem.system;
+package com.matthew.filem.system;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import android.provider.MediaStore.Images;
 import android.provider.MediaStore.Video;
 import android.util.Log;
 
-import com.openthos.filem.R;
+import com.matthew.filem.R;
 
 import java.io.FilenameFilter;
 import java.util.HashMap;

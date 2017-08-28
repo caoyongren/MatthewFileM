@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.matthew.filem.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
@@ -13,12 +13,12 @@ import android.widget.GridView;
 import android.widget.Toast;
 import android.view.Window;
 
-import com.openthos.filem.BaseFragment;
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.adapter.CloudAdapter;
-import com.openthos.filem.component.CloudDialog;
-import com.openthos.filem.utils.SeafileUtils;
+import com.matthew.filem.BaseFragment;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.adapter.CloudAdapter;
+import com.matthew.filem.component.CloudDialog;
+import com.matthew.filem.utils.SeafileUtils;
 
 import java.util.ArrayList;
 

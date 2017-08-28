@@ -8,7 +8,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
-        <com.openthos.filem.component.MyImageView
+        <com.matthew.filem.component.MyImageView
             android:id="@+id/group_image"
             android:background="@mipmap/albums_bg"
             android:src="@mipmap/pictures_no"

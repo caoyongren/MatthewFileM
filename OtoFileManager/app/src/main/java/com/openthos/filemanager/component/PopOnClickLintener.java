@@ -1,12 +1,12 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.utils.T;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.utils.T;
 
 public class PopOnClickLintener implements View.OnClickListener {
     private static final String VIEW_OR_DISMISS = "view_or_dismiss";

@@ -1,11 +1,11 @@
-package com.openthos.filem;
+package com.matthew.filem;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
-import com.openthos.filem.component.AppManager;
-import com.openthos.filem.system.FileSortHelper;
+import com.matthew.filem.component.AppManager;
+import com.matthew.filem.system.FileSortHelper;
 
 public abstract class BaseActivity extends FragmentActivity {
 

@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,10 +22,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.FileInfo;
-import com.openthos.filem.system.FileViewInteractionHub;
+import com.matthew.filem.R;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.system.FileViewInteractionHub;
 
 import java.io.File;
 import java.util.ArrayList;

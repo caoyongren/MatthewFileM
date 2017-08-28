@@ -1,4 +1,4 @@
-package com.openthos.filem.adapter;
+package com.matthew.filem.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,11 +12,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.bean.ImageBean;
-import com.openthos.filem.component.CloudDialog;
-import com.openthos.filem.component.MyImageView;
-import com.openthos.filem.component.NativeImageLoader;
+import com.matthew.filem.R;
+import com.matthew.filem.bean.ImageBean;
+import com.matthew.filem.component.CloudDialog;
+import com.matthew.filem.component.MyImageView;
+import com.matthew.filem.component.NativeImageLoader;
 
 import java.util.List;
 

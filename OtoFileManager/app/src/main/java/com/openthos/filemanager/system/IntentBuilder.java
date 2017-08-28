@@ -1,4 +1,4 @@
-package com.openthos.filem.system;
+package com.matthew.filem.system;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,9 +10,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.pm.ApplicationInfo;
 
-import com.openthos.filem.R;
-import com.openthos.filem.view.TextSelectDialog;
-import com.openthos.filem.component.OpenWithDialog;
+import com.matthew.filem.R;
+import com.matthew.filem.view.TextSelectDialog;
+import com.matthew.filem.component.OpenWithDialog;
 
 import java.io.File;
 import java.util.List;

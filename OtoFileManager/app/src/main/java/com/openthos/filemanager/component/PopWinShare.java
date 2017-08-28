@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -7,8 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
 
 public class PopWinShare extends PopupWindow {
     private static final String IV_SETTING_TAG = "iv_setting";

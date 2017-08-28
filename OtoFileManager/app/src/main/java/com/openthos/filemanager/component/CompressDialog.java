@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,10 +11,10 @@ import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.system.CompressFormatType;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.system.FileOperationHelper;
+import com.matthew.filem.R;
+import com.matthew.filem.system.CompressFormatType;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.system.FileOperationHelper;
 
 import java.io.File;
 import java.io.IOException;

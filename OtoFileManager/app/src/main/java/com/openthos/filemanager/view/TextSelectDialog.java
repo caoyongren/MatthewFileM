@@ -1,4 +1,4 @@
-package com.openthos.filem.view;
+package com.matthew.filem.view;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.openthos.filem.R;
+import com.matthew.filem.R;
 
 import java.io.File;
 

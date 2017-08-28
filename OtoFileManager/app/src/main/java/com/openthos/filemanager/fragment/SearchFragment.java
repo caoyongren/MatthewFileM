@@ -1,4 +1,4 @@
-package com.openthos.filem.fragment;
+package com.matthew.filem.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -15,15 +15,15 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.openthos.filem.BaseFragment;
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.bean.SearchInfo;
-import com.openthos.filem.system.FileIconHelper;
-import com.openthos.filem.system.IntentBuilder;
-import com.openthos.filem.system.Util;
-import com.openthos.filem.utils.LocalCache;
-import com.openthos.filem.system.Constants;
+import com.matthew.filem.BaseFragment;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.IntentBuilder;
+import com.matthew.filem.system.Util;
+import com.matthew.filem.utils.LocalCache;
+import com.matthew.filem.system.Constants;
 import java.io.File;
 import java.util.ArrayList;
 

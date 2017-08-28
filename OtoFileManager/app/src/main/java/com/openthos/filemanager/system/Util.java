@@ -1,4 +1,4 @@
-package com.openthos.filem.system;
+package com.matthew.filem.system;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 
-import com.openthos.filem.utils.L;
-import com.openthos.filem.system.Constants;
+import com.matthew.filem.utils.L;
+import com.matthew.filem.system.Constants;
 
 import java.io.BufferedReader;
 import java.io.File;

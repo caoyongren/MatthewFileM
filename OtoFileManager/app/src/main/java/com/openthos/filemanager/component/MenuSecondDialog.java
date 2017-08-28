@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -10,10 +10,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.system.FileSortHelper;
-import com.openthos.filem.system.FileViewInteractionHub;
-import com.openthos.filem.fragment.SystemSpaceFragment;
+import com.matthew.filem.R;
+import com.matthew.filem.system.FileSortHelper;
+import com.matthew.filem.system.FileViewInteractionHub;
+import com.matthew.filem.fragment.SystemSpaceFragment;
 
 public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     private TextView dialog_sort_name;

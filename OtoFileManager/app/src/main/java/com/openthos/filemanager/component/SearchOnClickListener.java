@@ -1,4 +1,4 @@
-package com.openthos.filem.component;
+package com.matthew.filem.component;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -7,13 +7,13 @@ import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.view.View;
 
-import com.openthos.filem.MainActivity;
-import com.openthos.filem.R;
-import com.openthos.filem.bean.SearchInfo;
-import com.openthos.filem.fragment.SearchFragment;
-import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.LocalCache;
-import com.openthos.filem.utils.T;
+import com.matthew.filem.MainActivity;
+import com.matthew.filem.R;
+import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.fragment.SearchFragment;
+import com.matthew.filem.utils.L;
+import com.matthew.filem.utils.LocalCache;
+import com.matthew.filem.utils.T;
 
 import java.io.File;
 import java.util.ArrayList;

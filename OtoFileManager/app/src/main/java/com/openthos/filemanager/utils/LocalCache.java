@@ -1,4 +1,4 @@
-package com.openthos.filem.utils;
+package com.matthew.filem.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

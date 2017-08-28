@@ -1,11 +1,11 @@
-package com.openthos.filem.system;
+package com.matthew.filem.system;
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.utils.LocalCache;
+import com.matthew.filem.R;
+import com.matthew.filem.utils.LocalCache;
 
 public class FileListItem {
     public static void setupFileListItemInfo(Context context, View view, int position,

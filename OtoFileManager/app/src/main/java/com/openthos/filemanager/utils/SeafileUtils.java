@@ -1,4 +1,4 @@
-package com.openthos.filem.utils;
+package com.matthew.filem.utils;
 
 
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.text.TextUtils;
 
-import com.openthos.filem.system.SeafileSQLiteHelper;
-import com.openthos.filem.system.Constants;
-import com.openthos.filem.MainActivity;
+import com.matthew.filem.system.SeafileSQLiteHelper;
+import com.matthew.filem.system.Constants;
+import com.matthew.filem.MainActivity;
 
 import java.io.BufferedReader;
 import java.io.File;

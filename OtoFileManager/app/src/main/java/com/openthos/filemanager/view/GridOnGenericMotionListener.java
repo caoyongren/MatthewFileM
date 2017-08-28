@@ -1,4 +1,4 @@
-package com.openthos.filem.view;
+package com.matthew.filem.view;
 
 import android.content.Context;
 import android.view.MotionEvent;
@@ -6,11 +6,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.openthos.filem.R;
-import com.openthos.filem.system.FileViewInteractionHub;
-import com.openthos.filem.utils.L;
-import com.openthos.filem.utils.T;
-import com.openthos.filem.system.Constants;
+import com.matthew.filem.R;
+import com.matthew.filem.system.FileViewInteractionHub;
+import com.matthew.filem.utils.L;
+import com.matthew.filem.utils.T;
+import com.matthew.filem.system.Constants;
 
 public class GridOnGenericMotionListener implements View.OnGenericMotionListener {
     private GridView file_path_grid;

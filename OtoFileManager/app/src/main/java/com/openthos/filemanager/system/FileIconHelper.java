@@ -1,4 +1,4 @@
-package com.openthos.filem.system;
+package com.matthew.filem.system;
 
 import android.content.Context;
 import android.view.View;
@@ -7,7 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 
-import com.openthos.filem.R;
+import com.matthew.filem.R;
 
 import java.util.HashMap;
 public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
