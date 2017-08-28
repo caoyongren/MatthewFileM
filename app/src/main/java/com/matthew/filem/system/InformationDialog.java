@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
+import com.matthew.filem.bean.FileInfo;
 
 import java.io.File;
 

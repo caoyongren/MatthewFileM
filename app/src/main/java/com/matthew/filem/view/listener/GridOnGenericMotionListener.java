@@ -9,7 +9,7 @@ import android.widget.GridView;
 import com.matthew.filem.R;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.utils.L;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 
 public class GridOnGenericMotionListener implements View.OnGenericMotionListener {
     private GridView file_path_grid;

@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.system.Util;
 
 import java.io.BufferedReader;

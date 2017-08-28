@@ -7,7 +7,7 @@ import android.widget.ListView;
 
 import com.matthew.filem.R;
 import com.matthew.filem.system.FileViewInteractionHub;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 
 public class ListOnGenericMotionListener implements View.OnGenericMotionListener {
     private ListView file_path_list;

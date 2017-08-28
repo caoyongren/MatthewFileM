@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
 
 import com.matthew.filem.R;
+import com.matthew.filem.bean.FileInfo;
 
 import java.util.HashMap;
 public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {

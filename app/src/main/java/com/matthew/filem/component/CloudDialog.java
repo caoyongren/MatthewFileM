@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matthew.filem.R;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 
 public class CloudDialog extends Dialog implements View.OnClickListener {
     private Context mContext;

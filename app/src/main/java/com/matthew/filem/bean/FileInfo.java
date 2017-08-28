@@ -1,4 +1,4 @@
-package com.matthew.filem.system;
+package com.matthew.filem.bean;
 
 public class FileInfo {
     public String fileName;

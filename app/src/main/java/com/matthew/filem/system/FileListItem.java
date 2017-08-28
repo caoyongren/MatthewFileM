@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.matthew.filem.R;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.IconHolder;
 

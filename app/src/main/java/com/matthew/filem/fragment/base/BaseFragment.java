@@ -15,8 +15,8 @@ import com.matthew.filem.impl.UiInterface;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.bean.ImageBean;
 import com.matthew.filem.bean.SearchInfo;
-import com.matthew.filem.system.Constants;
-import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.utils.Constants;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 
 import java.util.ArrayList;

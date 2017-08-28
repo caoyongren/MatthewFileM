@@ -22,7 +22,7 @@ import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.LocalCacheLayout;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 import java.io.File;
 import java.util.ArrayList;
 

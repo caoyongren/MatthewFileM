@@ -11,8 +11,8 @@ import com.matthew.filem.R;
 import com.matthew.filem.adapter.PersonalAdapter;
 import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.view.drag.DragGridView;
-import com.matthew.filem.system.Constants;
-import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.utils.Constants;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.utils.T;
 

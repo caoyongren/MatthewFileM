@@ -19,8 +19,8 @@ import android.view.MotionEvent;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.system.FileViewInteractionHub;
-import com.matthew.filem.system.Constants;
-import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.utils.Constants;
+import com.matthew.filem.bean.FileInfo;
 
 import java.util.ArrayList;
 

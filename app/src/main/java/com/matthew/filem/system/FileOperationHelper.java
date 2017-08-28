@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.utils.Constants;
 
 public class FileOperationHelper {
     private static final String LOG_TAG = "FileOperation";

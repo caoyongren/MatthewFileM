@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.L;
 
 import java.io.BufferedReader;

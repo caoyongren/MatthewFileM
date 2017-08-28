@@ -21,10 +21,12 @@ import android.widget.ListView;
 
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.component.MenuFirstDialog;
 import com.matthew.filem.R;
 import com.matthew.filem.component.PropertyDialog;
 import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 

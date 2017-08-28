@@ -16,13 +16,13 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.component.DiskDialog;
-import com.matthew.filem.system.FileInfo;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.T;
-import com.matthew.filem.system.Constants;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.view.CustomGridView;
 
 import java.io.File;

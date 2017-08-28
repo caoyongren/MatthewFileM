@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.matthew.filem.R;
+import com.matthew.filem.utils.Constants;
 
 import java.io.File;
 
