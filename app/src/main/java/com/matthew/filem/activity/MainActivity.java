@@ -68,8 +68,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-//import com.matthew.filem.fragment.OnlineNeighborFragment;
-
 public class MainActivity extends BaseActivity
                  implements View.OnClickListener, View.OnTouchListener {
 
@@ -689,10 +687,6 @@ public class MainActivity extends BaseActivity
             mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
             transaction.add(R.id.framelayout_right_main, mComputerFragment).hide(mComputerFragment);
         }
-        //if (mOnlineNeighborFragment == null) {
-        //    mOnlineNeighborFragment = new OnlineNeighborFragment();
-        //    transaction.add(R.id.framelayout_right_main, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
-        //}
         if (mPersonalDiskFragment == null) {
             mPersonalDiskFragment = new PersonalDiskFragment();
             transaction.add(R.id.framelayout_right_main, mPersonalDiskFragment).hide(mPersonalDiskFragment);
@@ -776,7 +770,6 @@ public class MainActivity extends BaseActivity
             mAddressFragment = new RightShowFileFragment(
                                    Constants.LEFT_FAVORITES, path, null, null, false);
             transaction.add(R.id.framelayout_right_main, mAddressFragment, Constants.ADDRESSFRAGMENT_TAG);
-            //transaction.show(mAddressFragment).addToBackStack(null).commit();
             transaction.show(mAddressFragment).commit();
             mCurFragment = mAddressFragment;
             showRightFileInfo(R.id.et_main_file_path, path, mAddressFragment);
@@ -835,8 +828,6 @@ public class MainActivity extends BaseActivity
                         MainActivity.mHandler.sendEmptyMessage(Constants.USB_ONE);
                     } else if (mUsb1 != null && mUsbPath.equals(mUsb1[0])) {
                         MainActivity.mHandler.sendEmptyMessage(Constants.USB_TWO);
-                   // } else if (mUsb2 != null && mUsbPath.equals(mUsb2[0])) {
-                   //     MainActivity.mHandler.sendEmptyMessage(Constants.USB_THREE);
                     }
                 }
             }
@@ -951,7 +942,6 @@ public class MainActivity extends BaseActivity
     private boolean isCopyByHot() {
         return getVisibleFragment() instanceof PersonalDiskFragment
                 || getVisibleFragment() instanceof ComputerFragment
-              //  || getVisibleFragment() instanceof OnlineNeighborFragment
                 || mEtMainFilePath.isFocused() || mEtSearchView.isFocused();
     }
 
