@@ -17,6 +17,7 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;

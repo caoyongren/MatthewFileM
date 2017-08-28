@@ -16,7 +16,7 @@ import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
 import com.matthew.filem.bean.SeafileLibrary;
 import com.matthew.filem.component.SeafileDialog;
-import com.matthew.filem.fragment.RightShowFileFragment;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.system.Constants;
 import com.matthew.filem.utils.SeafileUtils;
 

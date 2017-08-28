@@ -9,7 +9,7 @@ import android.view.View;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.PersonalAdapter;
-import com.matthew.filem.fragment.RightShowFileFragment;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.view.drag.DragGridView;
 import com.matthew.filem.system.Constants;
 import com.matthew.filem.system.FileInfo;

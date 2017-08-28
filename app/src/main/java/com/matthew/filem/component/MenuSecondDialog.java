@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.matthew.filem.R;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
-import com.matthew.filem.fragment.RightShowFileFragment;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 
 public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     private TextView dialog_sort_name;

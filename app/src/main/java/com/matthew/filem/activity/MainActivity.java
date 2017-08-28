@@ -42,7 +42,7 @@ import com.matthew.filem.component.SearchOnKeyListener;
 import com.matthew.filem.component.UsbPropertyDialog;
 import com.matthew.filem.fragment.OnlineNeighborFragment;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
-import com.matthew.filem.fragment.RightShowFileFragment;
+import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.SearchFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
