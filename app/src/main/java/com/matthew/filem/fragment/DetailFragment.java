@@ -18,8 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class DetailFragment extends BaseFragment {
-    private GridView gv_detail_pictrue;
-    private List<String> childPathList;
+    private GridView mDetailPictrueGridView;
+    private List<String> mChildPathList;
 
     @SuppressLint("ValidFragment")
     public DetailFragment(HashMap<String, List<String>> mGruopMap,
@@ -36,25 +36,25 @@ public class DetailFragment extends BaseFragment {
     }
 
     protected void initView() {
-        gv_detail_pictrue = (GridView) rootView.findViewById(R.id.gv_detail_pictrue);
+        mDetailPictrueGridView = (GridView) rootView.findViewById(R.id.gv_detail_pictrue);
     }
 
     protected void initData() {
-        childPathList = mGruopMap.get(list.get(index).getFolderName());
-        ChildAdapter adapter = new ChildAdapter(getActivity(), childPathList, gv_detail_pictrue);
-        gv_detail_pictrue.setAdapter(adapter);
+        mChildPathList = mGruopMap.get(list.get(index).getFolderName());
+        ChildAdapter adapter = new ChildAdapter(getActivity(), mChildPathList, mDetailPictrueGridView);
+        mDetailPictrueGridView.setAdapter(adapter);
     }
 
     @Override
     protected void initListener() {
-        gv_detail_pictrue.setOnItemClickListener(new DetailOnItemClickListener());
+        mDetailPictrueGridView.setOnItemClickListener(new DetailOnItemClickListener());
     }
 
     private class DetailOnItemClickListener implements
                                             android.widget.AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            String path = childPathList.get(i);
+            String path = mChildPathList.get(i);
             File file = new File(path);
             if (file.isFile()) {
                 Intent intent = new Intent();

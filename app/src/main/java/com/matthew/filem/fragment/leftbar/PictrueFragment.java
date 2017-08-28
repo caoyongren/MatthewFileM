@@ -103,7 +103,7 @@ public class PictrueFragment extends BaseFragment {
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             DetailFragment fragment = new DetailFragment(mGruopMap, mImageBeenList, i);
             mManager.beginTransaction().hide(mMainActivity.mCurFragment).commit();
-            mManager.beginTransaction().add(R.id.framelayout_right_mian, fragment, Constants.DETAILFRAGMENT_TAG)
+            mManager.beginTransaction().add(R.id.framelayout_right_main, fragment, Constants.DETAILFRAGMENT_TAG)
                                            .addToBackStack(null).commit();
         }
     }

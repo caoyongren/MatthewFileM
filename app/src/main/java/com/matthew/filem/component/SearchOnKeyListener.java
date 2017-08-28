@@ -169,7 +169,7 @@ public class SearchOnKeyListener implements TextView.OnKeyListener {
             }
         }
         mCurSearchFragment = new SearchFragment(manager, mFileList);
-        manager.beginTransaction().add(R.id.framelayout_right_mian, mCurSearchFragment,
+        manager.beginTransaction().add(R.id.framelayout_right_main, mCurSearchFragment,
                                        Constants.SEARCHFRAGMENT_TAG).commit();
         mMainActivity.mCurFragment = mCurSearchFragment;
         progressDialog.dismiss();
@@ -190,7 +190,7 @@ public class SearchOnKeyListener implements TextView.OnKeyListener {
             }
         }
         mCurSearchFragment = new SearchFragment(manager,null);
-        manager.beginTransaction().add(R.id.framelayout_right_mian, mCurSearchFragment,
+        manager.beginTransaction().add(R.id.framelayout_right_main, mCurSearchFragment,
                                        Constants.SEARCHFRAGMENT_TAG).commit();
         mMainActivity.mCurFragment = mCurSearchFragment;
         progressDialog.dismiss();

@@ -34,7 +34,7 @@
             android:background="@android:color/darker_gray" />
 
         <FrameLayout
-            android:id="@+id/framelayout_right_mian"
+            android:id="@+id/framelayout_right_main"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="6" />

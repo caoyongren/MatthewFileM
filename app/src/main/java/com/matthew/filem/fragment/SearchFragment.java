@@ -89,7 +89,7 @@ public class SearchFragment extends BaseFragment{
                     mActivity = (MainActivity) getActivity();
                     mManager.beginTransaction().hide(mActivity.getVisibleFragment()).commit();
                     mCurFragment = new RightShowFileFragment(TAG, fileRealPath, null,null, false);
-                    mManager.beginTransaction().add(R.id.framelayout_right_mian, mCurFragment,
+                    mManager.beginTransaction().add(R.id.framelayout_right_main, mCurFragment,
                             Constants.SEARCHSYSTEMSPACE_TAG).commit();
                     mActivity.mCurFragment = mCurFragment;
                     notifyModify();

@@ -160,7 +160,7 @@ public class PersonalDiskFragment extends BaseFragment {
         mCurFragment = new RightShowFileFragment(tag, path, mFileInfoArrayList, mCopyOrMove, false);
         FragmentTransaction transaction = mManager.beginTransaction();
         transaction.hide(mMainActivity.mCurFragment);
-        transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.PERSONALSYSTEMSPACE_TAG).commit();
+        transaction.add(R.id.framelayout_right_main, mCurFragment, Constants.PERSONALSYSTEMSPACE_TAG).commit();
         mMainActivity.mCurFragment = mCurFragment;
     }
 }

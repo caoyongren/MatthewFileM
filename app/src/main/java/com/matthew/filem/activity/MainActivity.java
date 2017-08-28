@@ -549,7 +549,7 @@ public class MainActivity extends BaseActivity
             mComputerFragment = new ComputerFragment(mManager,
                     USB_DEVICE_DETACHED, MainActivity.this);
             setSelectedBackground(R.id.tv_main_computer);
-            mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+            mManager.beginTransaction().add(R.id.framelayout_right_main, mComputerFragment)
                     .show(mComputerFragment).commit();
             mCurFragment = mComputerFragment;
         } else {
@@ -557,7 +557,7 @@ public class MainActivity extends BaseActivity
             mManager.beginTransaction().remove(mComputerFragment).commit();
             mComputerFragment = new ComputerFragment(mManager,
                     USB_DEVICE_DETACHED, MainActivity.this);
-            mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+            mManager.beginTransaction().add(R.id.framelayout_right_main, mComputerFragment)
                     .hide(mComputerFragment).commit();
             mComputerFragment.mCurFragment = visibleFragment;
         }
@@ -603,7 +603,7 @@ public class MainActivity extends BaseActivity
                 mComputerFragment = new ComputerFragment(mManager, USB_DEVICE_ATTACHED,
                         MainActivity.this);
                 setSelectedBackground(R.id.tv_main_computer);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                mManager.beginTransaction().add(R.id.framelayout_right_main, mComputerFragment)
                         .show(mComputerFragment).commit();
                 mCurFragment = mComputerFragment;
             } else {
@@ -611,7 +611,7 @@ public class MainActivity extends BaseActivity
                 mManager.beginTransaction().remove(mComputerFragment).commit();
                 mComputerFragment = new ComputerFragment(mManager, USB_DEVICE_ATTACHED,
                         MainActivity.this);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mComputerFragment)
+                mManager.beginTransaction().add(R.id.framelayout_right_main, mComputerFragment)
                         .hide(mComputerFragment).commit();
                 mComputerFragment.mCurFragment = visibleFragment;
             }
@@ -645,60 +645,60 @@ public class MainActivity extends BaseActivity
         if (mDeskFragment == null) {
             mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.DESKTOP_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDeskFragment, Constants.DESKFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mDeskFragment, Constants.DESKFRAGMENT_TAG)
                     .hide(mDeskFragment);
         }
         if (mMusicFragment == null) {
             mMusicFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.MUSIC_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
                     .hide(mMusicFragment);
         }
         if (mVideoFragment == null) {
             mVideoFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.VIDEOS_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
                     .hide(mVideoFragment);
         }
         if (mPictrueFragment == null) {
             mPictrueFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.PICTURES_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
                     .hide(mPictrueFragment);
         }
         if (mDocumentFragment == null) {
             mDocumentFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.DOCUMENT_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
                     .hide(mDocumentFragment);
         }
         if (mDownloadFragment == null) {
             mDownloadFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.DOWNLOAD_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
                     .hide(mDownloadFragment);
         }
         if (mRecycleFragment == null) {
             mRecycleFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
                     Constants.RECYCLE_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_mian, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
+            transaction.add(R.id.framelayout_right_main, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
                     .hide(mRecycleFragment);
         }
         if (mComputerFragment == null) {
             mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
-            transaction.add(R.id.framelayout_right_mian, mComputerFragment).hide(mComputerFragment);
+            transaction.add(R.id.framelayout_right_main, mComputerFragment).hide(mComputerFragment);
         }
         if (mOnlineNeighborFragment == null) {
             mOnlineNeighborFragment = new OnlineNeighborFragment();
-            transaction.add(R.id.framelayout_right_mian, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
+            transaction.add(R.id.framelayout_right_main, mOnlineNeighborFragment).hide(mOnlineNeighborFragment);
         }
         if (mPersonalDiskFragment == null) {
             mPersonalDiskFragment = new PersonalDiskFragment();
-            transaction.add(R.id.framelayout_right_mian, mPersonalDiskFragment).hide(mPersonalDiskFragment);
+            transaction.add(R.id.framelayout_right_main, mPersonalDiskFragment).hide(mPersonalDiskFragment);
         }
         if (mCloudDiskFragment == null) {
             mCloudDiskFragment = new CloudDiskFragment();
-            transaction.add(R.id.framelayout_right_mian, mCloudDiskFragment).hide(mCloudDiskFragment);
+            transaction.add(R.id.framelayout_right_main, mCloudDiskFragment).hide(mCloudDiskFragment);
         }
         transaction.commit();
     }
@@ -774,7 +774,7 @@ public class MainActivity extends BaseActivity
             transaction.hide(mCurFragment);
             mAddressFragment = new RightShowFileFragment(
                                    Constants.LEFT_FAVORITES, path, null, null, false);
-            transaction.add(R.id.framelayout_right_mian, mAddressFragment, Constants.ADDRESSFRAGMENT_TAG);
+            transaction.add(R.id.framelayout_right_main, mAddressFragment, Constants.ADDRESSFRAGMENT_TAG);
             //transaction.show(mAddressFragment).addToBackStack(null).commit();
             transaction.show(mAddressFragment).commit();
             mCurFragment = mAddressFragment;
@@ -1107,7 +1107,7 @@ public class MainActivity extends BaseActivity
                 }
                 mUsbStorageFragment = new RightShowFileFragment(
                                       Constants.USB_SPACE_FRAGMENT, mUsb0[0], null, null, false);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mUsbStorageFragment,
+                mManager.beginTransaction().add(R.id.framelayout_right_main, mUsbStorageFragment,
                                                Constants.USBFRAGMENT_TAG).commit();
                 mCurFragment = mUsbStorageFragment;
                 break;
@@ -1118,7 +1118,7 @@ public class MainActivity extends BaseActivity
                 }
                 mUsbStorageFragment = new RightShowFileFragment(
                         Constants.USB_SPACE_FRAGMENT, mUsb1[0], null, null, false);
-                mManager.beginTransaction().add(R.id.framelayout_right_mian, mUsbStorageFragment,
+                mManager.beginTransaction().add(R.id.framelayout_right_main, mUsbStorageFragment,
                         Constants.USBFRAGMENT_TAG).commit();
                 mCurFragment = mUsbStorageFragment;
                 break;
@@ -1340,7 +1340,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         mSearchOnKeyListener.setInputData(null);
-        mManager.findFragmentById(R.id.framelayout_right_mian);
+        mManager.findFragmentById(R.id.framelayout_right_main);
         if (mCurFragment != mComputerFragment) {
             if (mCurFragment instanceof RightShowFileFragment && mCurFragment.getTag() != null) {
                 RightShowFileFragment sdCurFrament = (RightShowFileFragment) mCurFragment;

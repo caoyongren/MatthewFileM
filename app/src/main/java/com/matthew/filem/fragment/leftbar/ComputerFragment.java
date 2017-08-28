@@ -415,7 +415,7 @@ public class ComputerFragment extends BaseFragment {
         } else {
             mCurFragment = new RightShowFileFragment(tag, path,
                                                    mFileInfoArrayList, copyOrMove, false);
-            transaction.add(R.id.framelayout_right_mian, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
+            transaction.add(R.id.framelayout_right_main, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
         }
         mMainActivity.mCurFragment = mCurFragment;
         mCurId = Constants.RETURN_TO_WHITE;
