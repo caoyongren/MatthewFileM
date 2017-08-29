@@ -52,6 +52,7 @@ public abstract class Constants {
     public static final String PERMISS_DIR_STORAGE_EMULATED_LEGACY = "/storage/emulated/legacy";
     public static final String PERMISS_DIR_STORAGE_EMULATED_0 = "/storage/emulated/0";
     public static final String PERMISS_DIR_SEAFILE = "/data/sea/data";
+    public static final int HEIGHT_MASK = 0x3fffffff;
 
     private static String TAG = "Constants";
 //    public static final String SDCARD_PATH = "/storage/emulated/0";
