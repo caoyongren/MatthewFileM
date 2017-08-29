@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.5">
 
-        <include layout="@layout/title_bar_main" />
+        <include layout="@layout/main_title_bar" />
 
     </RelativeLayout>
 

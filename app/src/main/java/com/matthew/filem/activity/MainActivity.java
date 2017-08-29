@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.FileObserver;
@@ -32,6 +31,7 @@ import android.widget.Toast;
 
 import com.matthew.filem.R;
 import com.matthew.filem.activity.base.BaseActivity;
+import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.bean.SeafileAccount;
 import com.matthew.filem.bean.SeafileLibrary;
 import com.matthew.filem.component.CopyInfoDialog;
@@ -45,12 +45,11 @@ import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
-import com.matthew.filem.utils.Constants;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.FileListAdapter;
 import com.matthew.filem.system.FileOperationHelper;
-import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.Util;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.SeafileUtils;
@@ -107,7 +106,6 @@ public class MainActivity extends BaseActivity
     private TextView mTvMainSdaTwo;
     private TextView mTvMainThree;
 
-    private TextView mTv_net_service;
     private ImageView mIvMainListView;
     private ImageView mIvMainGridView;
     private ImageView mIvMainBack;
@@ -126,19 +124,17 @@ public class MainActivity extends BaseActivity
     private PopWinShare mPopWinShare;
     public Fragment mCurFragment;
     public ComputerFragment mComputerFragment;
-    public boolean mIsSdStorageFragmentHided;
     private RightShowFileFragment mDeskFragment, mMusicFragment, mVideoFragment,
                                 mPictrueFragment, mAddressFragment,
                                 mDocumentFragment, mDownloadFragment,
                                 mRecycleFragment;
-    //private OnlineNeighborFragment mOnlineNeighborFragment;
+
     private CloudDiskFragment mCloudDiskFragment;
     private UsbConnectReceiver mReceiver;
     private String[] mUsb0;
     private String[] mUsb1;
     private boolean mIsMutiSelect;
     private SharedPreferences mSharedPreferences;
-    private Editor mEditor;
     public boolean mIsSdStorageFragment;
 
     public static Handler mHandler;
@@ -204,7 +200,7 @@ public class MainActivity extends BaseActivity
         String strViewTag = mSharedPreferences.getString(KEY_VIEW_TAG, DEFAULT_VIEW_TAG_GRID);
         L.i(TAG + "strViewTag:" +strViewTag);
         LocalCacheLayout.getInstance(mContext).setViewTag(strViewTag);
-        //mEditor = mSharedPreferences.edit();
+
         //set default state.
         if (LocalCacheLayout.getViewTag() != null) {
             mIvMainGridView.setSelected(DEFAULT_VIEW_TAG_GRID.
@@ -600,7 +596,7 @@ public class MainActivity extends BaseActivity
             mProgressDialog.setCancelable(true);
             mProgressDialog.setCanceledOnTouchOutside(true);
             mProgressDialog.show();
-          //  mCurFragment = mComputerFragment;
+
         } else if (flags == UsbConnectReceiver.USB_STATE_OFF) {
             if (!TextUtils.isEmpty(mUsbPath)) {
                 if (mUsb0 != null && mUsbPath.equals(mUsb0[0])) {

@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar_main" />
+    <include layout="@layout/main_title_bar" />
 
     <View
         android:layout_width="match_parent"
