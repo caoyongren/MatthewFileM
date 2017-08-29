@@ -116,7 +116,7 @@ public class RightShowFileFragment extends BaseFragment implements
 
     @Override
     public int getLayoutId() {
-        return R.layout.right_total_fragment_layout;
+        return R.layout.fragment_right_layout;
     }
 
     @Override

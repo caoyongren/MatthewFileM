@@ -76,7 +76,7 @@ public class PersonalDiskFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.personal_fragments_layout;
+        return R.layout.fragment_personal;
 
     }
 

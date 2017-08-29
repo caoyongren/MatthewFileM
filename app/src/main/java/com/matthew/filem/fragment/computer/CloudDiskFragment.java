@@ -44,7 +44,7 @@ public class CloudDiskFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.cloud_fragment_layout;
+        return R.layout.fragment_cloud;
     }
 
     @Override
