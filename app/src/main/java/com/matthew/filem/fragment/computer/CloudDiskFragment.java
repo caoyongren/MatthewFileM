@@ -14,7 +14,7 @@ import android.view.Window;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
-import com.matthew.filem.fragment.leftbar.RightCommonFragment;
+import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.info.SeafileLibraryInfo;
 import com.matthew.filem.component.SeafileDialog;
 import com.matthew.filem.utils.Constants;
@@ -93,9 +93,9 @@ public class CloudDiskFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            canGoBack = rightCommonFragment.canGoBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            canGoBack = commonRightFragment.canGoBack();
         }
         return canGoBack;
     }
@@ -103,9 +103,9 @@ public class CloudDiskFragment extends BaseFragment {
     @Override
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            rightCommonFragment.goBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            commonRightFragment.goBack();
         }
     }
 
@@ -184,7 +184,7 @@ public class CloudDiskFragment extends BaseFragment {
             return;
         }
         transaction.hide(mMainActivity.mCurFragment);
-        mCurFragment = new RightCommonFragment(
+        mCurFragment = new CommonRightFragment(
                 Constants.LEFT_FAVORITES, path, null, null, false);
         transaction.add(R.id.framelayout_right_main, mCurFragment, Constants.SEAFILESYSTEMSPACE_TAG);
         transaction.show(mCurFragment).commit();

@@ -9,7 +9,7 @@ import android.view.View;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.PersonalAdapter;
-import com.matthew.filem.fragment.leftbar.RightCommonFragment;
+import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.view.drag.DragGridView;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.info.FileInfo;
@@ -84,9 +84,9 @@ public class PersonalDiskFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            canGoBack = rightCommonFragment.canGoBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            canGoBack = commonRightFragment.canGoBack();
         }
         return canGoBack;
     }
@@ -94,9 +94,9 @@ public class PersonalDiskFragment extends BaseFragment {
     @Override
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            rightCommonFragment.goBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            commonRightFragment.goBack();
         }
     }
 
@@ -150,14 +150,14 @@ public class PersonalDiskFragment extends BaseFragment {
     @Override
     protected void enter(String tag, String path) {
         if (mCurFragment != null) {
-            mFileInfoArrayList = ((RightCommonFragment) mCurFragment).getFileInfoList();
-            mCopyOrMove = ((RightCommonFragment) mCurFragment).getCurCopyOrMoveMode();
+            mFileInfoArrayList = ((CommonRightFragment) mCurFragment).getFileInfoList();
+            mCopyOrMove = ((CommonRightFragment) mCurFragment).getCurCopyOrMoveMode();
         }
         if (mFileInfoArrayList != null && mCopyOrMove != null) {
             T.showShort(context,
                     context.getString(R.string.operation_failed_permission_refuse));
         }
-        mCurFragment = new RightCommonFragment(tag, path, mFileInfoArrayList, mCopyOrMove, false);
+        mCurFragment = new CommonRightFragment(tag, path, mFileInfoArrayList, mCopyOrMove, false);
         FragmentTransaction transaction = mManager.beginTransaction();
         transaction.hide(mMainActivity.mCurFragment);
         transaction.add(R.id.framelayout_right_main, mCurFragment, Constants.PERSONALSYSTEMSPACE_TAG).commit();

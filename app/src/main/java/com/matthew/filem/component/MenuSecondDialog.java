@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.fragment.leftbar.RightCommonFragment;
+import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 
@@ -100,7 +100,7 @@ public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     }
 
     private void setSortPositive(Enum sort) {
-        RightCommonFragment fragment = (RightCommonFragment)(mFileViewInteractionHub.
+        CommonRightFragment fragment = (CommonRightFragment)(mFileViewInteractionHub.
                                                      getMainActivity().mCurFragment);
         fragment.setSortTag(sort, !fragment.getSortTag(sort));
     }

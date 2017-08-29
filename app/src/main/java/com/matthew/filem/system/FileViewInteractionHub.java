@@ -22,7 +22,7 @@ import android.widget.ListView;
 import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.fragment.leftbar.RightCommonFragment;
+import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.component.MenuFirstDialog;
 import com.matthew.filem.R;
@@ -861,7 +861,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         }
         String[] files = FileOperationHelper.list(file.filePath);
         for (String s : files) {
-            for (FileInfo info : ((RightCommonFragment) mFileViewListener).getAllFiles()) {
+            for (FileInfo info : ((CommonRightFragment) mFileViewListener).getAllFiles()) {
                 if (info.fileName.equals(s)) {
                     new AlertDialog.Builder(mMainActivity)
                          .setMessage(String.format(mMainActivity.getResources().getString(
@@ -932,7 +932,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private FileViewInteractionHub.Mode mCurrentMode;
     private String mCurrentPath;
     private String mRoot;
-    private RightCommonFragment.SelectFilesCallback mSelectFilesCallback;
+    private CommonRightFragment.SelectFilesCallback mSelectFilesCallback;
     public boolean isFileSelected(String filePath) {
         return mFileOperationHelper.isFileSelected(filePath);
     }
@@ -971,7 +971,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             }
         } else if (doubleTag != null && Constants.DOUBLE_TAG.equals(doubleTag)) {
 //            mCheckedFileNameList.remove(lFileInfo);  //
-            ((RightCommonFragment) mFileViewListener).getAdapter().getSelectFileInfoList().clear();
+            ((CommonRightFragment) mFileViewListener).getAdapter().getSelectFileInfoList().clear();
             clearSelection();
             mCurrentPath = getAbsoluteName(mCurrentPath, fileInfo.fileName);
             refreshFileList();
@@ -1107,7 +1107,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         notifyFileSystemChanged(path);
     }
 //
-//    public void startSelectFiles(RightCommonFragment.SelectFilesCallback callback) {
+//    public void startSelectFiles(CommonRightFragment.SelectFilesCallback callback) {
 //        mSelectFilesCallback = callback;
 //        showConfirmOperationBar(true);
 //        updateConfirmButtons();

@@ -396,9 +396,9 @@ public class ComputerFragment extends BaseFragment {
     @Override
     protected void enter(String tag, String path) {
         if (mCurFragment != null) {
-            if (mCurFragment instanceof RightCommonFragment) {
-                mFileInfoArrayList = ((RightCommonFragment) mCurFragment).getFileInfoList();
-                copyOrMove = ((RightCommonFragment) mCurFragment).getCurCopyOrMoveMode();
+            if (mCurFragment instanceof CommonRightFragment) {
+                mFileInfoArrayList = ((CommonRightFragment) mCurFragment).getFileInfoList();
+                copyOrMove = ((CommonRightFragment) mCurFragment).getCurCopyOrMoveMode();
             }
         }
         if (mFileInfoArrayList != null && copyOrMove != null) {
@@ -412,7 +412,7 @@ public class ComputerFragment extends BaseFragment {
             transaction.show(mMainActivity.mPersonalDiskFragment).commit();
             mCurFragment = mMainActivity.mPersonalDiskFragment;
         } else {
-            mCurFragment = new RightCommonFragment(tag, path,
+            mCurFragment = new CommonRightFragment(tag, path,
                                                    mFileInfoArrayList, copyOrMove, false);
             transaction.add(R.id.framelayout_right_main, mCurFragment, Constants.SDSSYSTEMSPACE_TAG).commit();
         }
@@ -510,18 +510,18 @@ public class ComputerFragment extends BaseFragment {
     public boolean canGoBack() {
         boolean canGoBack = false;
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            canGoBack = rightCommonFragment.canGoBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            canGoBack = commonRightFragment.canGoBack();
         }
         return canGoBack;
     }
 
     public void goBack() {
         Fragment baseFragment = mCurFragment;
-        if (baseFragment instanceof RightCommonFragment) {
-            RightCommonFragment rightCommonFragment = (RightCommonFragment) baseFragment;
-            rightCommonFragment.goBack();
+        if (baseFragment instanceof CommonRightFragment) {
+            CommonRightFragment commonRightFragment = (CommonRightFragment) baseFragment;
+            commonRightFragment.goBack();
         }
     }
 }

@@ -50,9 +50,9 @@ import java.util.List;
  *   Right layout show info to file.@inflateFileData
  *   对于文件的监听．
  * */
-public class RightCommonFragment extends BaseFragment implements
+public class CommonRightFragment extends BaseFragment implements
         IFileInteractionListener, MainActivity.IBackPressedListener {
-    private static final String TAG = "RightCommonFragment : DEBUG:";
+    private static final String TAG = "CommonRightFragment : DEBUG:";
     public static final String ROOT_DIRECTORY = "root_directory";
     private static final String sdDir = Util.getSdDirectory();
     private FileListAdapter mAdapter;
@@ -94,7 +94,7 @@ public class RightCommonFragment extends BaseFragment implements
     private int ADAPTER_HEIGHT_POS = 1;
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public RightCommonFragment(String sdSpaceFragment, String directPath,
+    public CommonRightFragment(String sdSpaceFragment, String directPath,
                                ArrayList<FileInfo> fileInfoList,
                                FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
         super(sdSpaceFragment,directPath,fileInfoList,mCopyOrMove);
@@ -102,7 +102,7 @@ public class RightCommonFragment extends BaseFragment implements
     }
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public RightCommonFragment() {
+    public CommonRightFragment() {
         super();
     }
 
