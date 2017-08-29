@@ -128,7 +128,7 @@ public class OpenWithDialog extends Dialog implements AdapterView.OnItemClickLis
             View convertView = view;
             if (convertView == null) {
                 convertView = LayoutInflater.from(mContext).
-                                             inflate(R.layout.list_item, viewGroup, false);
+                                             inflate(R.layout.item_list, viewGroup, false);
                 holder = new ViewHolder(convertView);
                 convertView.setTag(holder);
             }

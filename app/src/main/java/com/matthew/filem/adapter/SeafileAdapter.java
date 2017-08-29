@@ -62,7 +62,7 @@ public class SeafileAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(mContext, R.layout.icon_item, null);
+            convertView = View.inflate(mContext, R.layout.item_icon, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
             convertView.setOnTouchListener(mMotionListener);
