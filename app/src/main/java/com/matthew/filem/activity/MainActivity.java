@@ -49,7 +49,7 @@ import com.matthew.filem.utils.Constants;
 import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.system.FileListAdapter;
 import com.matthew.filem.system.FileOperationHelper;
-import com.matthew.filem.system.IFileInteractionListener;
+import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;

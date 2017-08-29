@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU General Public License
  * along with SwiFTP.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.matthew.filem.system;
+package com.matthew.filem.utils;
 
 import java.io.File;
 import java.io.FileInputStream;

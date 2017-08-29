@@ -32,7 +32,7 @@ import com.matthew.filem.system.FileListAdapter;
 import com.matthew.filem.system.FileManagerPreferenceActivity;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
-import com.matthew.filem.system.IFileInteractionListener;
+import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.Settings;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.L;
