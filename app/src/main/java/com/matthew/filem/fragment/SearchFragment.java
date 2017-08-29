@@ -16,8 +16,8 @@ import android.widget.Toast;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
+import com.matthew.filem.fragment.leftbar.RightCommonFragment;
 import com.matthew.filem.info.SearchInfo;
-import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;
@@ -89,7 +89,7 @@ public class SearchFragment extends BaseFragment{
                     }
                     mActivity = (MainActivity) getActivity();
                     mManager.beginTransaction().hide(mActivity.getVisibleFragment()).commit();
-                    mCurFragment = new RightShowFileFragment(TAG, fileRealPath, null,null, false);
+                    mCurFragment = new RightCommonFragment(TAG, fileRealPath, null,null, false);
                     mManager.beginTransaction().add(R.id.framelayout_right_main, mCurFragment,
                             Constants.SEARCHSYSTEMSPACE_TAG).commit();
                     mActivity.mCurFragment = mCurFragment;

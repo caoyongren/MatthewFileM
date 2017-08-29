@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.matthew.filem.R;
 
 /**
- * Created by xu on 2016/12/06.
+ *  2016/12/06.
  */
 public class CopyInfoDialog extends Dialog {
     private Activity mContext;
@@ -47,9 +47,9 @@ public class CopyInfoDialog extends Dialog {
     public void showDialog() {
         show();
         Window dialogWindow = getWindow();
+        dialogWindow.setGravity(Gravity.CENTER);
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.dimAmount = 0.0f;
-        dialogWindow.setGravity(Gravity.CENTER);
         dialogWindow.setAttributes(lp);
     }
 

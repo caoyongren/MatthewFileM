@@ -31,6 +31,7 @@ import android.widget.Toast;
 
 import com.matthew.filem.R;
 import com.matthew.filem.activity.base.BaseActivity;
+import com.matthew.filem.fragment.leftbar.RightCommonFragment;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.info.SeafileAccountInfo;
 import com.matthew.filem.info.SeafileLibraryInfo;
@@ -44,7 +45,6 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
-import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.FileListAdapter;
 import com.matthew.filem.system.FileOperationHelper;
@@ -100,7 +100,6 @@ public class MainActivity extends BaseActivity
     private TextView mTvMainDownload;
     private TextView mTvMainRecycle;
     private TextView mTvMainComputer;
-   // private TextView mTvMainCloudService;
 
     private TextView mTvMainSdaOne;
     private TextView mTvMainSdaTwo;
@@ -124,10 +123,9 @@ public class MainActivity extends BaseActivity
     private PopWinShare mPopWinShare;
     public Fragment mCurFragment;
     public ComputerFragment mComputerFragment;
-    private RightShowFileFragment mDeskFragment, mMusicFragment, mVideoFragment,
-                                mPictrueFragment, mAddressFragment,
-                                mDocumentFragment, mDownloadFragment,
-                                mRecycleFragment;
+
+    private RightCommonFragment mDeskFragment, mMusicFragment, mVideoFragment, mPictrueFragment,
+            mAddressFragment, mDocumentFragment, mDownloadFragment, mRecycleFragment;
 
     private CloudDiskFragment mCloudDiskFragment;
     private UsbConnectReceiver mReceiver;
@@ -145,7 +143,7 @@ public class MainActivity extends BaseActivity
     private ProgressDialog mProgressDialog;
     private ProgressDialog mPopUpProgressDialog;
     public PersonalDiskFragment mPersonalDiskFragment;
-    private RightShowFileFragment mUsbStorageFragment;
+    private RightCommonFragment mUsbStorageFragment;
     public BaseFragment mStartSearchFragment;
     private SearchFragment mSearchFragment;
     public String mCurPath;
@@ -229,6 +227,7 @@ public class MainActivity extends BaseActivity
         mHashMap.put(Constants.ADDRESSFRAGMENT_TAG, R.id.tv_main_storage_one);
         mHashMap.put(Constants.SYSTEM_SPACE_FRAGMENT_TAG, R.id.tv_main_computer);
         mHashMap.put(Constants.USBFRAGMENT_TAG,R.id.tv_main_storage_one);
+
         mCopyInfoDialog = CopyInfoDialog.getInstance(MainActivity.this);
         mHandler = new Handler() {
             @Override
@@ -301,6 +300,7 @@ public class MainActivity extends BaseActivity
                             mCopyInfoDialog.showDialog();
                             mCopyInfoDialog.changeTitle(MainActivity.this.getResources()
                                     .getString(R.string.copy_info));
+                            L.i(TAG, "copy_info_show:" + Constants.COPY_INFO_SHOW);
                             break;
                         case Constants.COPY_INFO:
                             mCopyInfoDialog.changeMsg((String) msg.obj);
@@ -412,7 +412,7 @@ public class MainActivity extends BaseActivity
                     mComputerFragment.mCurFragment != null) {
                 mEtMainFilePath.setText(displayPath);
             } else {
-                if (mCurFragment instanceof RightShowFileFragment) {
+                if (mCurFragment instanceof RightCommonFragment) {
                     mEtMainFilePath.setText(displayPath);
                 } else {
                     mEtMainFilePath.setText(null);
@@ -612,43 +612,43 @@ public class MainActivity extends BaseActivity
         mReceiver = new UsbConnectReceiver(this);
         FragmentTransaction transaction = mManager.beginTransaction();
         if (mDeskFragment == null) {
-            mDeskFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mDeskFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.DESKTOP_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mDeskFragment, Constants.DESKFRAGMENT_TAG)
                     .hide(mDeskFragment);
         }
         if (mMusicFragment == null) {
-            mMusicFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mMusicFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.MUSIC_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
                     .hide(mMusicFragment);
         }
         if (mVideoFragment == null) {
-            mVideoFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mVideoFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.VIDEOS_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
                     .hide(mVideoFragment);
         }
         if (mPictrueFragment == null) {
-            mPictrueFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mPictrueFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.PICTURES_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
                     .hide(mPictrueFragment);
         }
         if (mDocumentFragment == null) {
-            mDocumentFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mDocumentFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.DOCUMENT_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
                     .hide(mDocumentFragment);
         }
         if (mDownloadFragment == null) {
-            mDownloadFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mDownloadFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.DOWNLOAD_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
                     .hide(mDownloadFragment);
         }
         if (mRecycleFragment == null) {
-            mRecycleFragment = new RightShowFileFragment(Constants.LEFT_FAVORITES,
+            mRecycleFragment = new RightCommonFragment(Constants.LEFT_FAVORITES,
                     Constants.RECYCLE_PATH, null, null, true);
             transaction.add(R.id.framelayout_right_main, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
                     .hide(mRecycleFragment);
@@ -686,7 +686,7 @@ public class MainActivity extends BaseActivity
         }
         //刷新file path 'storage/emulated/0/Desktop' --> 'SD卡'
         if (fragment != null) {
-            ((RightShowFileFragment) fragment).refreshUI();
+            ((RightCommonFragment) fragment).refreshUI();
         }
     }
 
@@ -737,7 +737,7 @@ public class MainActivity extends BaseActivity
         File file = new File(path);
         if (file.exists()) {
             transaction.hide(mCurFragment);
-            mAddressFragment = new RightShowFileFragment(
+            mAddressFragment = new RightCommonFragment(
                                    Constants.LEFT_FAVORITES, path, null, null, false);
             transaction.add(R.id.framelayout_right_main, mAddressFragment, Constants.ADDRESSFRAGMENT_TAG);
             transaction.show(mAddressFragment).commit();
@@ -859,8 +859,8 @@ public class MainActivity extends BaseActivity
         }
         if (event.isCtrlPressed() && keyCode == KeyEvent.KEYCODE_A) {
             sendBroadcastMessage("iv_menu", "pop_cacel", false);
-            if (getVisibleFragment() instanceof RightShowFileFragment) {
-                final RightShowFileFragment fragment = (RightShowFileFragment) getVisibleFragment();
+            if (getVisibleFragment() instanceof RightCommonFragment) {
+                final RightCommonFragment fragment = (RightCommonFragment) getVisibleFragment();
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
                 FileListAdapter adapter = fragment.getAdapter();
                 List<FileInfo> list = adapter.getFileInfoList();
@@ -1066,7 +1066,7 @@ public class MainActivity extends BaseActivity
                 if (mCurFragment != null) {
                     mManager.beginTransaction().hide(mCurFragment).commit();
                 }
-                mUsbStorageFragment = new RightShowFileFragment(
+                mUsbStorageFragment = new RightCommonFragment(
                                       Constants.USB_SPACE_FRAGMENT, mUsb0[0], null, null, false);
                 mManager.beginTransaction().add(R.id.framelayout_right_main, mUsbStorageFragment,
                                                Constants.USBFRAGMENT_TAG).commit();
@@ -1077,7 +1077,7 @@ public class MainActivity extends BaseActivity
                 if (mCurFragment != null) {
                     mManager.beginTransaction().hide(mCurFragment).commit();
                 }
-                mUsbStorageFragment = new RightShowFileFragment(
+                mUsbStorageFragment = new RightCommonFragment(
                         Constants.USB_SPACE_FRAGMENT, mUsb1[0], null, null, false);
                 mManager.beginTransaction().add(R.id.framelayout_right_main, mUsbStorageFragment,
                         Constants.USBFRAGMENT_TAG).commit();
@@ -1089,9 +1089,6 @@ public class MainActivity extends BaseActivity
             case R.id.tv_pop_up_two:
                 uninstallUSB(Constants.USB_TWO);
                 break;
-           /* case R.id.tv_main_cloud_service:
-                showRightFileInfo(R.id.tv_main_cloud_service, "", mCloudDiskFragment);
-                break;*/
             case R.id.iv_main_back:
                 onBackPressed();
                 break;
@@ -1153,12 +1150,12 @@ public class MainActivity extends BaseActivity
 
     //通过点击左侧导航栏显示右侧的文件夹信息．－－> 碎片展示
     private void showRightFileInfo(int id, String path, Fragment fragment) {
-        if (fragment instanceof RightShowFileFragment) {
-            ((RightShowFileFragment) fragment).setPath(path);
-            FileListAdapter adapter = ((RightShowFileFragment) fragment).getAdapter();
+        if (fragment instanceof RightCommonFragment) {
+            ((RightCommonFragment) fragment).setPath(path);
+            FileListAdapter adapter = ((RightCommonFragment) fragment).getAdapter();
             if (adapter != null) {
                 adapter.getSelectFileInfoList().clear();
-                ((RightShowFileFragment) fragment).getFileViewInteractionHub().clearSelection();
+                ((RightCommonFragment) fragment).getFileViewInteractionHub().clearSelection();
             }
         }
         setSelectedBackground(id);
@@ -1212,12 +1209,6 @@ public class MainActivity extends BaseActivity
             case R.id.tv_main_storage_three:
                 mTvMainThree.setSelected(true);
                 break;
-           /* case R.id.tv_main_net_service:
-                mTv_net_service.setSelected(true);
-                break;*/
-           /* case R.id.tv_main_cloud_service:
-                mTvMainCloudService.setSelected(true);
-                break;*/
             default:
                 break;
         }
@@ -1232,11 +1223,9 @@ public class MainActivity extends BaseActivity
         mTvMainSdaOne.setSelected(false);
         mTvMainSdaTwo.setSelected(false);
         mTvMainThree.setSelected(false);
-        //mTv_net_service.setSelected(false);
         mTvMainDocument.setSelected(false);
         mTvMainDownload.setSelected(false);
         mTvMainRecycle.setSelected(false);
-        //mTvMainCloudService.setSelected(false);
     }
 
     // send Message to System package
@@ -1303,8 +1292,8 @@ public class MainActivity extends BaseActivity
         mSearchOnKeyListener.setInputData(null);
         mManager.findFragmentById(R.id.framelayout_right_main);
         if (mCurFragment != mComputerFragment) {
-            if (mCurFragment instanceof RightShowFileFragment && mCurFragment.getTag() != null) {
-                RightShowFileFragment sdCurFrament = (RightShowFileFragment) mCurFragment;
+            if (mCurFragment instanceof RightCommonFragment && mCurFragment.getTag() != null) {
+                RightCommonFragment sdCurFrament = (RightCommonFragment) mCurFragment;
                 String currentPath = sdCurFrament.getCurrentPath();
                 setCurPath(currentPath);
                 mEtMainFilePath.setText(currentPath);
@@ -1322,9 +1311,7 @@ public class MainActivity extends BaseActivity
                         mCloudDiskFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
-                    } /*else {
-                        backToUpDir("seafile", mCloudDiskFragment, R.id.tv_main_cloud_service);
-                    }*/
+                    }
                 } else if (mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
                     if (mComputerFragment.canGoBack()) {
                         mComputerFragment.goBack();
@@ -1412,7 +1399,7 @@ public class MainActivity extends BaseActivity
                         returnToRootDir();
                     }
                 } else if (mCurFragment.getTag().equals(Constants.SEARCHSYSTEMSPACE_TAG)) {
-                    RightShowFileFragment searchSysFragment = (RightShowFileFragment) mCurFragment;
+                    RightCommonFragment searchSysFragment = (RightCommonFragment) mCurFragment;
                     if (searchSysFragment.canGoBack()) {
                         searchSysFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {
@@ -1421,7 +1408,7 @@ public class MainActivity extends BaseActivity
                         returnToSearchFragment();
                     }
                 } else if (mCurFragment.getTag().equals(Constants.ADDRESSFRAGMENT_TAG)) {
-                    RightShowFileFragment addressFragment = (RightShowFileFragment) mCurFragment;
+                    RightCommonFragment addressFragment = (RightCommonFragment) mCurFragment;
                     if (addressFragment.canGoBack()) {
                         addressFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() > ACTIVITY_MIN_COUNT_FOR_BACK) {

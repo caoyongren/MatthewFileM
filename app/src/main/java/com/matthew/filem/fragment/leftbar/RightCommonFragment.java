@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,42 +17,42 @@ import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.matthew.filem.fragment.base.BaseFragment;
-import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
+import com.matthew.filem.activity.FileManagerPreferenceActivity;
+import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.component.FrameSelectView;
-import com.matthew.filem.view.drag.DragGridView;
-import com.matthew.filem.view.drag.DragListView;
-import com.matthew.filem.utils.Constants;
+import com.matthew.filem.fragment.base.BaseFragment;
+import com.matthew.filem.impl.IFileInteractionListener;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconHelper;
-import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileListAdapter;
-import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
-import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.system.Settings;
 import com.matthew.filem.system.Util;
+import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.T;
+import com.matthew.filem.view.drag.DragGridView;
+import com.matthew.filem.view.drag.DragListView;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 /**
  * Author: MasterMan
  * Describe:
  *   Right layout show info to file.@inflateFileData
  *   对于文件的监听．
  * */
-public class RightShowFileFragment extends BaseFragment implements
+public class RightCommonFragment extends BaseFragment implements
         IFileInteractionListener, MainActivity.IBackPressedListener {
-    private static final String TAG = RightShowFileFragment.class.getSimpleName();
+    private static final String TAG = "RightCommonFragment : DEBUG:";
     public static final String ROOT_DIRECTORY = "root_directory";
     private static final String sdDir = Util.getSdDirectory();
     private FileListAdapter mAdapter;
@@ -79,7 +78,6 @@ public class RightShowFileFragment extends BaseFragment implements
     private View mNoSdView;
     private HashMap<Enum, Boolean> mSortMap;
     private boolean mSdCardReady;
-    private long mCurrentTime;
     private int mPos = -1;
 
     private GridViewOnGenericMotionListener mGridMotionListener;
@@ -96,15 +94,15 @@ public class RightShowFileFragment extends BaseFragment implements
     private int ADAPTER_HEIGHT_POS = 1;
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public RightShowFileFragment(String sdSpaceFragment, String directPath,
-                                 ArrayList<FileInfo> fileInfoList,
-                                 FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
+    public RightCommonFragment(String sdSpaceFragment, String directPath,
+                               ArrayList<FileInfo> fileInfoList,
+                               FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
         super(sdSpaceFragment,directPath,fileInfoList,mCopyOrMove);
         mIsLeftItem = isLeftItem;
     }
 
     @SuppressLint({"NewApi", "ValidFragment"})
-    public RightShowFileFragment() {
+    public RightCommonFragment() {
         super();
     }
 
@@ -156,7 +154,6 @@ public class RightShowFileFragment extends BaseFragment implements
         }
         boolean baseSd = intent.getBooleanExtra(Constants.KEY_BASE_SD,
                 !FileManagerPreferenceActivity.isReadRoot(mActivity));
-        Log.i(TAG, "baseSd = " + baseSd);
 
         String rootDir = intent.getStringExtra(ROOT_DIRECTORY);
         if (!TextUtils.isEmpty(rootDir)) {
@@ -183,7 +180,6 @@ public class RightShowFileFragment extends BaseFragment implements
         }
         mFileViewInteractionHub.setCurrentPath(currentDir);
         curRootDir = currentDir;
-        Log.i(TAG, "CurrentDir = " + currentDir);
         inflateFileData();
 
         if (mFileInfoList != null && mFileInfoList.size() > 0) {
@@ -197,7 +193,6 @@ public class RightShowFileFragment extends BaseFragment implements
 
     @Override
     protected void initListener() {
-        //mFragmentSysFl.setOnGenericMotionListener(new MouseGridOnGenericMotionListener());
         mFileGridView.setOnTouchListener(mGridMotionListener);
         mFileListView.setOnTouchListener(mListMotionListener);
         /*mFileListView.setOnDragChangeListener(new DragListView.OnChanageListener() {
@@ -718,14 +713,10 @@ public class RightShowFileFragment extends BaseFragment implements
                                     .get(mScrollPositionList.size() - 1).path)) {
                     mScrollPositionList.get(mScrollPositionList.size() - 1).pos
                     = firstVisiblePosition;
-                    Log.i(TAG, "computeScrollPosition: update item: " + mPreviousPath + " "
-                          + firstVisiblePosition + " stack count:" + mScrollPositionList.size());
                     pos = firstVisiblePosition;
                 } else {
                     mScrollPositionList.add(new PathScrollPositionItem(mPreviousPath,
                                                                        firstVisiblePosition));
-                    Log.i(TAG, "computeScrollPosition: add item: " + mPreviousPath + " "
-                          + firstVisiblePosition + " stack count:" + mScrollPositionList.size());
                 }
             } else {
                 int i;
@@ -744,9 +735,6 @@ public class RightShowFileFragment extends BaseFragment implements
                 }
             }
         }
-
-        Log.i(TAG, "computeScrollPosition: result pos: " + path + " "
-              + pos + " stack count:" + mScrollPositionList.size());
         mPreviousPath = path;
         return pos;
     }

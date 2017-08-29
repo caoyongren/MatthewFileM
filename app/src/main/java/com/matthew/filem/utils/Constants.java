@@ -599,27 +599,27 @@ public abstract class Constants {
     public static final int COPY_INFO_HIDE = 0x1006;
     public static final int COPY_INFO = 0x1007;
     public static final int ONLY_REFRESH = 0x1008;
-    public static final int DESKTOP_DELETE_FILE = 0x1010;
     public static final int DESKTOP_SHOW_FILE = 0x1009;
+    public static final int DESKTOP_DELETE_FILE = 0x1010;
 
-    public static final int REFRESH_PERSONAL = 0x1011;
+    /*public static final int REFRESH_PERSONAL = 0x1011;
     public static final int DELETE_INFO_SHOW = 0x1012;
     public static final int COMPRESS_INFO_SHOW = 0x1013;
     public static final int DECOMPRESS_INFO_SHOW = 0x1014;
     public static final int SET_CLIPBOARD_TEXT = 0x1015;
-    public static final int REFRESH_BY_OBSERVER = 0x1016;
+    public static final int REFRESH_BY_OBSERVER = 0x1016;*/
 
     public static final String SUFFIX_TAR = ".tar";
     public static final String SUFFIX_ZIP = ".zip";
     public static final String SUFFIX_RAR = ".rar";
-    public static final String SUFFIX_7z = ".7z";
     public static final String SUFFIX_TAR_GZIP = ".gz";
     public static final String SUFFIX_TAR_BZIP2 = ".bz2";
+    public static final String SUFFIX_7z = ".7z";
 
-    public static final String PATH_TAG = "path";
+    /*public static final String PATH_TAG = "path";
     public static final String EXTRA_CROP_FILE_HEADER = "OtoCropFile:///";
     public static final String EXTRA_FILE_HEADER = "OtoFile:///";
     public static final String PACKAGENAME_TAG = "package";
     public static final String APPNAME_OTO_LAUNCHER = "com.android.launcher3";
-    public static final String EXTRA_DELETE_FILE_HEADER = "OtoDeleteFile:///";
+    public static final String EXTRA_DELETE_FILE_HEADER = "OtoDeleteFile:///";*/
 }
