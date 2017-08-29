@@ -183,7 +183,6 @@ public class MainActivity extends BaseActivity
         mTvMainSdaOne = (TextView) findViewById(R.id.tv_main_storage_one);//sda1
         mTvMainSdaTwo = (TextView) findViewById(R.id.tv_main_storage_two);//sda2
         mTvMainThree = (TextView) findViewById(R.id.tv_main_storage_three);//sda3
-        //mTvMainCloudService = (TextView) findViewById(R.id.tv_main_cloud_service);//云服务
 
         mIvMainBack = (ImageView) findViewById(R.id.iv_main_back);//返回键
         mIvMainSetting = (ImageView) findViewById(R.id.iv_main_setting);//设置
@@ -193,7 +192,6 @@ public class MainActivity extends BaseActivity
         mEtSearchView = (EditText) findViewById(R.id.et_search_main_view);//搜索输入
         mIvMainSearchView = (ImageView) findViewById(R.id.iv_main_search);//搜索图标
 
-        //mTv_net_service = (TextView) findViewById(R.id.tv_main_net_service);
         mTv_pop_up_one = (TextView) findViewById(R.id.tv_pop_up_one);
         mTv_pop_up_two = (TextView) findViewById(R.id.tv_pop_up_two);
         mTv_pop_up_three = (TextView) findViewById(R.id.tv_pop_up_three);
@@ -230,8 +228,6 @@ public class MainActivity extends BaseActivity
         mHashMap.put(Constants.DOWNLOADFRRAGMENT_TAG, R.id.tv_main_download);
         mHashMap.put(Constants.RECYCLEFRAGMENT_TAG, R.id.tv_main_recycle);
         mHashMap.put(Constants.SDSTORAGEFRAGMENT_TAG, R.id.tv_main_computer);
-        //mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_main_net_service);
-        //mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_main_cloud_service);
         mHashMap.put(Constants.DETAILFRAGMENT_TAG, R.id.tv_main_picture);
         mHashMap.put(Constants.SYSTEMSPACEFRAGMENT_TAG, R.id.tv_main_storage_one);
         mHashMap.put(Constants.ADDRESSFRAGMENT_TAG, R.id.tv_main_storage_one);
@@ -380,8 +376,6 @@ public class MainActivity extends BaseActivity
         mTvMainDocument.setOnClickListener(this);
         mTvMainDownload.setOnClickListener(this);
         mTvMainRecycle.setOnClickListener(this);
-        //mTvMainCloudService.setOnClickListener(this);
-        //mTv_net_service.setOnClickListener(this);
         mIvMainListView.setOnClickListener(this);
         mIvMainGridView.setOnClickListener(this);
         mIvMainBack.setOnClickListener(this);
@@ -390,13 +384,9 @@ public class MainActivity extends BaseActivity
         mTvMainSdaOne.setOnTouchListener(this);
         mTvMainSdaTwo.setOnTouchListener(this);
         mTvMainThree.setOnTouchListener(this);
-        //search_view.addTextChangedListener(new EditTextChangeListener(mManager,
-        //                                                       MainActivity.this));
         mSearchOnKeyListener = new SearchOnKeyListener(mManager,
                 mEtSearchView.getText(), MainActivity.this);
         mEtSearchView.setOnKeyListener(mSearchOnKeyListener);
-        //mIvMainSearchView.setOnClickListener(new SearchOnClickListener(mManager,
-        //                                          mEtSearchView.getText(), MainActivity.this));
         mIvMainSearchView.setOnClickListener(this);
         NivagationOnClickLinstener nivagationOnClickLinstener = new NivagationOnClickLinstener();
         NivagationOnKeyLinstener nivagationOnKeyLinstener = new NivagationOnKeyLinstener();
@@ -575,26 +565,14 @@ public class MainActivity extends BaseActivity
                 if (mUsb1 != null && mUsb1.length > 0 && flags != 0 && flags != 1) {
                     sendMsg(2);
                 }
-               // if (list.size() >= 3) {
-               //     mUsb2 = list.get(2);
-               //     if (mUsb2 != null && mUsb2.length > 0 && flags != 0 && flags != 1) {
-               //         sendMsg(2);
-               //     }
-               // }
             }
         }
         if (flags == UsbConnectReceiver.USB_STATE_ON || flags == 2) {
-         // T.showShort(MainActivity.this, getResources().getString(R.string.USB_device_connected));
-         // mRl_usb.setVisibility(View.VISIBLE);
             mTvMainSdaOne.setOnClickListener(MainActivity.this);
             mTv_pop_up_one.setOnClickListener(this);
             if (list.size() >= 2) {
                 mTvMainSdaTwo.setOnClickListener(MainActivity.this);
                 mTv_pop_up_two.setOnClickListener(this);
-               // if (list.size() >= 3) {
-               //     mTvMainThree.setOnClickListener(MainActivity.this);
-               //     mTv_pop_up_three.setOnClickListener(this);
-               // }
             }
             if (TextUtils.isEmpty(getCurPath())) {
                 mManager.beginTransaction().remove(mComputerFragment).commit();
@@ -614,8 +592,6 @@ public class MainActivity extends BaseActivity
                         .hide(mComputerFragment).commit();
                 mComputerFragment.mCurFragment = visibleFragment;
             }
-          //  T.showShort(MainActivity.this, getResources().getString(R.string.USB_device_connected));
-          //  mTvMainComputer.performClick();
             if (mProgressDialog == null) {
                 mProgressDialog = new ProgressDialog(this);
             }
@@ -631,8 +607,6 @@ public class MainActivity extends BaseActivity
                     mTv_pop_up_one.performClick();
                 } else if (mUsb1 != null && mUsbPath.equals(mUsb1[0])) {
                     mTv_pop_up_two.performClick();
-               // } else if (mUsb2 != null && mUsbPath.equals(mUsb2[0])) {
-               //     mTv_pop_up_three.performClick();
                 }
             }
         }

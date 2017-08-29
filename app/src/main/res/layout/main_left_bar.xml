@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
     <!--
    左侧：　从上到下
-   (收藏)　桌面　　音乐　　视频　　图片　　文档　　下载　　回收站　(本机)　计算机　(网络)　云服务．
+   (收藏)　桌面　　音乐　　视频　　图片　　文档　　下载　　回收站　(本机)　计算机.
  -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -143,29 +143,5 @@
                     android:layout_alignParentRight="true"
                     android:background="@drawable/usb_pop_up_selector"/>
             </RelativeLayout>
-
-            <!--<TextView
-                android:id="@+id/left_main_net_up"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="@string/left_net_up"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="13sp" />-->
-
-          <!--  <TextView
-                android:id="@+id/tv_main_net_service"
-                style="@style/textSet"
-                android:drawableLeft="@drawable/left_internet_selector"
-                android:text="@string/internet"
-                android:visibility="gone" />-->
-
-          <!--  <TextView
-                android:id="@+id/tv_main_cloud_service"
-                style="@style/textSet"
-                android:drawableLeft="@drawable/left_cloud_selector"
-                android:text="@string/cloud" />-->
         </LinearLayout>
     </RelativeLayout>
