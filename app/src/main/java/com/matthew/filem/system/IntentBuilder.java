@@ -10,7 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 
 import com.matthew.filem.R;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.utils.MimeUtils;
 import com.matthew.filem.view.TextSelectDialog;
 import com.matthew.filem.component.OpenWithDialog;

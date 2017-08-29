@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.matthew.filem.BaseFragment;
 import com.matthew.filem.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.info.SearchInfo;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;

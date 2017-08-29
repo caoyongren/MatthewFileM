@@ -34,8 +34,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.app.ProgressDialog;
 
-import com.matthew.filem.bean.SeafileAccount;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileAccount;
+import com.matthew.filem.info.SeafileLibrary;
 import com.matthew.filem.component.CopyInfoDialog;
 import com.matthew.filem.component.PopOnClickLintener;
 import com.matthew.filem.component.PopWinShare;

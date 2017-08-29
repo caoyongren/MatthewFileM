@@ -10,8 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.matthew.filem.bean.ImageBean;
-import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.info.ImageBean;
+import com.matthew.filem.info.SearchInfo;
 import com.matthew.filem.system.Constants;
 import com.matthew.filem.system.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;

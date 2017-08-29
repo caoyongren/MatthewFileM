@@ -27,7 +27,7 @@ import com.matthew.filem.view.drag.DragListView;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconHelper;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileListAdapter;
 import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.system.FileSortHelper;

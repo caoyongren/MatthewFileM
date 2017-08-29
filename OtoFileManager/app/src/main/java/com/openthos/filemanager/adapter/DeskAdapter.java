@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.bean.AppInfo;
+import com.matthew.filem.info.AppInfo;
 
 import java.util.ArrayList;
 

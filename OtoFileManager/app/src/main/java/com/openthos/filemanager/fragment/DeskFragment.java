@@ -18,7 +18,7 @@ import android.widget.GridView;
 import com.matthew.filem.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.DeskAdapter;
-import com.matthew.filem.bean.AppInfo;
+import com.matthew.filem.info.AppInfo;
 import com.matthew.filem.utils.L;
 
 import java.util.ArrayList;

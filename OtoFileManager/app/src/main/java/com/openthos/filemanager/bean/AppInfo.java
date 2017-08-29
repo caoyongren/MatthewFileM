@@ -1,4 +1,4 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 import android.graphics.drawable.Drawable;
 public class AppInfo {

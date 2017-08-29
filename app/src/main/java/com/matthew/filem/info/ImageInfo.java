@@ -1,6 +1,6 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
-public class ImageBean {
+public class ImageInfo {
     private String topImagePath;
     private String folderName;
     private int imageCounts;

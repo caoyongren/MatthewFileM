@@ -16,7 +16,7 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.component.DiskDialog;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.L;

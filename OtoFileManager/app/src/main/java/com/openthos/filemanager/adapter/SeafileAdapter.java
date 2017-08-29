@@ -9,8 +9,8 @@ import android.widget.ImageView;
 
 import com.matthew.filem.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SeafileAccount;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileAccount;
+import com.matthew.filem.info.SeafileLibrary;
 import com.matthew.filem.utils.SeafileUtils;
 import com.matthew.filem.fragment.SeafileFragment;
 

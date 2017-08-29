@@ -14,7 +14,7 @@ import android.widget.GridView;
 import com.matthew.filem.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.ChildAdapter;
-import com.matthew.filem.bean.ImageBean;
+import com.matthew.filem.info.ImageBean;
 import com.matthew.filem.system.Constants;
 
 import java.io.File;

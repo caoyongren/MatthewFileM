@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.matthew.filem.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.AudioAdapter;
-import com.matthew.filem.bean.AudioItem;
+import com.matthew.filem.info.AudioItem;
 import com.matthew.filem.system.Constants;
 
 import java.io.File;

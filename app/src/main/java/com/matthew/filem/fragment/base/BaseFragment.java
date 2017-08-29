@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import com.matthew.filem.R;
 import com.matthew.filem.impl.UiInterface;
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.bean.ImageBean;
-import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.info.ImageInfo;
+import com.matthew.filem.info.SearchInfo;
 import com.matthew.filem.utils.Constants;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment implements UiInterface {
     public Context context;
     public MainActivity mMainActivity;
     public HashMap<String, List<String>> mGruopMap;
-    public List<ImageBean> list;
+    public List<ImageInfo> list;
     public int index;
     public int mCurId;
 
@@ -68,7 +68,7 @@ public abstract class BaseFragment extends Fragment implements UiInterface {
     }
 
     @SuppressLint("ValidFragment")
-    public BaseFragment(HashMap<String, List<String>> mGruopMap, List<ImageBean> list, int index) {
+    public BaseFragment(HashMap<String, List<String>> mGruopMap, List<ImageInfo> list, int index) {
         this.mGruopMap = mGruopMap;
         this.list = list;
         this.index = index;

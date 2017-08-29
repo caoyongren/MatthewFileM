@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.matthew.filem.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.GroupAdapter;
-import com.matthew.filem.bean.ImageBean;
+import com.matthew.filem.info.ImageBean;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.fragment.DetailFragment;
 import com.matthew.filem.system.Constants;

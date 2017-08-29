@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.bean.ImageBean;
+import com.matthew.filem.info.ImageBean;
 import com.matthew.filem.component.CloudDialog;
 import com.matthew.filem.component.MyImageView;
 import com.matthew.filem.component.NativeImageLoader;

@@ -1,4 +1,4 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 /**
  * Created by Wang Zhixu on 01/19/17.

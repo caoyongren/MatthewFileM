@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileLibraryInfo;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.system.TextInputDialog;
 import com.matthew.filem.utils.SeafileUtils;
@@ -33,10 +33,10 @@ public class SeafileDialog extends Dialog implements View.OnClickListener {
     private int mDialogWidth;
     private int mDialogHeight;
     private boolean mIsItem;
-    private SeafileLibrary mLibrary;
+    private SeafileLibraryInfo mLibrary;
     private int mPos;
 
-    public SeafileDialog(Context context, boolean isItem, SeafileLibrary library, int pos) {
+    public SeafileDialog(Context context, boolean isItem, SeafileLibraryInfo library, int pos) {
         super(context);
         mMainActivity = (MainActivity) context;
         mIsItem = isItem;
@@ -162,7 +162,7 @@ public class SeafileDialog extends Dialog implements View.OnClickListener {
         String id = SeafileUtils.create(text);
         int isSync = mMainActivity.mConsole.insertLibrary(
                                                       mMainActivity.mAccount.mUserId, id, text);
-        SeafileLibrary seafileLibrary = new SeafileLibrary();
+        SeafileLibraryInfo seafileLibrary = new SeafileLibraryInfo();
         seafileLibrary.libraryId = id;
         seafileLibrary.libraryName = text;
         seafileLibrary.isSync = isSync;

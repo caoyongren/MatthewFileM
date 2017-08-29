@@ -1,4 +1,4 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 public class SearchInfo {
     public String fileAbsolutePath;

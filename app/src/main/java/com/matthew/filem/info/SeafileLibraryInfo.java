@@ -1,14 +1,14 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 /**
  * Created by Wang Zhixu on 01/19/17.
  */
 
-public class SeafileLibrary {
+public class SeafileLibraryInfo {
     public String libraryId;
     public String libraryName;
     public int isSync;
 
-    public SeafileLibrary(){
+    public SeafileLibraryInfo(){
     }
 }

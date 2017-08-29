@@ -1,4 +1,4 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -7,13 +7,13 @@ import java.util.ArrayList;
  * Created by Wang Zhixu on 12/23/16.
  */
 
-public class SeafileAccount {
+public class SeafileAccountInfo {
     public String mUserName;
     public int mUserId;
-    public ArrayList<SeafileLibrary> mLibrarys;
+    public ArrayList<SeafileLibraryInfo> mLibrarys;
     public File mFile;
 
-    public SeafileAccount(){
+    public SeafileAccountInfo(){
         mLibrarys = new ArrayList<>();
     }
 

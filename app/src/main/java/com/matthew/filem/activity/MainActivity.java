@@ -31,9 +31,9 @@ import android.widget.Toast;
 
 import com.matthew.filem.R;
 import com.matthew.filem.activity.base.BaseActivity;
-import com.matthew.filem.bean.FileInfo;
-import com.matthew.filem.bean.SeafileAccount;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.info.SeafileAccountInfo;
+import com.matthew.filem.info.SeafileLibraryInfo;
 import com.matthew.filem.component.CopyInfoDialog;
 import com.matthew.filem.component.PopOnClickLintener;
 import com.matthew.filem.component.PopWinShare;
@@ -149,7 +149,7 @@ public class MainActivity extends BaseActivity
     public BaseFragment mStartSearchFragment;
     private SearchFragment mSearchFragment;
     public String mCurPath;
-    public SeafileAccount mAccount;
+    public SeafileAccountInfo mAccount;
     public SeafileUtils.SeafileSQLConsole mConsole;
     public CustomFileObserver mCustomFileObserver;
     private InitSeafileThread mInitSeafileThread;
@@ -456,7 +456,7 @@ public class MainActivity extends BaseActivity
                 return;
             }
             String librarys = SeafileUtils.listRemote();
-            mAccount = new SeafileAccount();
+            mAccount = new SeafileAccountInfo();
             mAccount.mUserName = SeafileUtils.mUserId;
             mConsole = new SeafileUtils.SeafileSQLConsole(MainActivity.this);
             mAccount.mUserId = mConsole.queryAccountId(mAccount.mUserName);
@@ -471,7 +471,7 @@ public class MainActivity extends BaseActivity
                 }
                 JSONArray jsonArray = new JSONArray(librarys);
                 for (int i = 0; i < jsonArray.length(); i++) {
-                    SeafileLibrary seafileLibrary = new SeafileLibrary();
+                    SeafileLibraryInfo seafileLibrary = new SeafileLibraryInfo();
                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                     seafileLibrary.libraryId = jsonObject.getString("id");
                     seafileLibrary.libraryName =jsonObject.getString("name");
@@ -488,7 +488,7 @@ public class MainActivity extends BaseActivity
                 e.printStackTrace();
             }
             if (mAccount.mLibrarys.size() > 0) {
-                for (SeafileLibrary seafileLibrary : mAccount.mLibrarys) {
+                for (SeafileLibraryInfo seafileLibrary : mAccount.mLibrarys) {
                     String name = seafileLibrary.libraryName;
                     int isSync = mConsole.queryFile(mAccount.mUserId,
                             seafileLibrary.libraryId, seafileLibrary.libraryName);

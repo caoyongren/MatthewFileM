@@ -12,7 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import com.matthew.filem.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.info.SearchInfo;
 import com.matthew.filem.fragment.PersonalSpaceFragment;
 import com.matthew.filem.fragment.SdStorageFragment;
 import com.matthew.filem.fragment.SearchFragment;

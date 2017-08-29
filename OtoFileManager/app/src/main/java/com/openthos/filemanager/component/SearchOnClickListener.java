@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.matthew.filem.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SearchInfo;
+import com.matthew.filem.info.SearchInfo;
 import com.matthew.filem.fragment.SearchFragment;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCache;

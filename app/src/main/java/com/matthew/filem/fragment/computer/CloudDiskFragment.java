@@ -14,7 +14,7 @@ import android.view.Window;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileLibraryInfo;
 import com.matthew.filem.component.SeafileDialog;
 import com.matthew.filem.fragment.leftbar.RightShowFileFragment;
 import com.matthew.filem.utils.Constants;
@@ -32,7 +32,7 @@ public class CloudDiskFragment extends BaseFragment {
 
     private GridView mGvCloud;
     private SeafileAdapter mAdapter;
-    private ArrayList<SeafileLibrary> mList;
+    private ArrayList<SeafileLibraryInfo> mList;
     private Timer mTimer;
     private GridViewOnGenericMotionListener mMotionListener;
     public Fragment mCurFragment;
@@ -72,7 +72,7 @@ public class CloudDiskFragment extends BaseFragment {
         mGvCloud.setOnTouchListener(mMotionListener);
     }
 
-    public ArrayList<SeafileLibrary> getList() {
+    public ArrayList<SeafileLibraryInfo> getList() {
         return mList;
     }
 
@@ -80,7 +80,7 @@ public class CloudDiskFragment extends BaseFragment {
         return mAdapter;
     }
 
-    public void setData(ArrayList<SeafileLibrary> librarys) {
+    public void setData(ArrayList<SeafileLibraryInfo> librarys) {
         if (librarys.size() > 0) {
             mTimer.schedule(new LiftLimitTask(SeafileUtils.SEAFILE_DATA_PATH_REAlLY),
                     DELAY_TIME, SLEEP_TIME);
@@ -165,7 +165,7 @@ public class CloudDiskFragment extends BaseFragment {
         }
     }
 
-    private void showItemDialog(MotionEvent motionEvent, SeafileLibrary library, int pos) {
+    private void showItemDialog(MotionEvent motionEvent, SeafileLibraryInfo library, int pos) {
         SeafileDialog seafileDialog = new SeafileDialog(mMainActivity, true, library, pos);
         seafileDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         seafileDialog.showDialog((int) motionEvent.getRawX(), (int) motionEvent.getRawY());

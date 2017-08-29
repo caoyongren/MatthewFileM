@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.utils.Constants;
 
 public class FileOperationHelper {

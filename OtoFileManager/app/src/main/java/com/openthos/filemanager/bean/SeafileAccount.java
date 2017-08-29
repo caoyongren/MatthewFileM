@@ -1,9 +1,9 @@
-package com.matthew.filem.bean;
+package com.matthew.filem.info;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileLibrary;
 
 /**
  * Created by Wang Zhixu on 12/23/16.

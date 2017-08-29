@@ -22,7 +22,7 @@ import android.widget.ListView;
 import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.bean.FileInfo;
+import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.component.MenuFirstDialog;
 import com.matthew.filem.R;
 import com.matthew.filem.component.PropertyDialog;

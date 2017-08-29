@@ -8,26 +8,26 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.bean.SeafileLibrary;
+import com.matthew.filem.info.SeafileLibraryInfo;
 import com.matthew.filem.utils.SeafileUtils;
 import com.matthew.filem.fragment.computer.CloudDiskFragment;
 
 import java.util.ArrayList;
 
 public class SeafileAdapter extends BaseAdapter {
-    private ArrayList<SeafileLibrary> mList;
+    private ArrayList<SeafileLibraryInfo> mList;
     private Context mContext;
     private CloudDiskFragment.GridViewOnGenericMotionListener mMotionListener;
     private View mView;
 
-    public SeafileAdapter(Context context, ArrayList<SeafileLibrary> mList,
+    public SeafileAdapter(Context context, ArrayList<SeafileLibraryInfo> mList,
                           CloudDiskFragment.GridViewOnGenericMotionListener motionListener) {
         this.mList = mList;
         mContext = context;
         mMotionListener = motionListener;
     }
 
-    public void setData(ArrayList<SeafileLibrary> librarys) {
+    public void setData(ArrayList<SeafileLibraryInfo> librarys) {
         mList = librarys;
     }
 
