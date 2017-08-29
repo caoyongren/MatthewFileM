@@ -24,7 +24,7 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <include layout="@layout/left_bar_main" />
+            <include layout="@layout/main_left_bar" />
 
         </LinearLayout>
 

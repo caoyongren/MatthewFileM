@@ -32,7 +32,7 @@
             android:layout_weight="1"
             android:background="@drawable/left_bg_shape">
 
-            <include layout="@layout/left_bar_main" />
+            <include layout="@layout/main_left_bar" />
 
         </RelativeLayout>
 

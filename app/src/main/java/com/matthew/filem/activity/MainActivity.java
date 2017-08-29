@@ -101,7 +101,7 @@ public class MainActivity extends BaseActivity
     private TextView mTvMainDownload;
     private TextView mTvMainRecycle;
     private TextView mTvMainComputer;
-    private TextView mTvMainCloudService;
+   // private TextView mTvMainCloudService;
 
     private TextView mTvMainSdaOne;
     private TextView mTvMainSdaTwo;
@@ -183,7 +183,7 @@ public class MainActivity extends BaseActivity
         mTvMainSdaOne = (TextView) findViewById(R.id.tv_main_storage_one);//sda1
         mTvMainSdaTwo = (TextView) findViewById(R.id.tv_main_storage_two);//sda2
         mTvMainThree = (TextView) findViewById(R.id.tv_main_storage_three);//sda3
-        mTvMainCloudService = (TextView) findViewById(R.id.tv_main_cloud_service);//云服务
+        //mTvMainCloudService = (TextView) findViewById(R.id.tv_main_cloud_service);//云服务
 
         mIvMainBack = (ImageView) findViewById(R.id.iv_main_back);//返回键
         mIvMainSetting = (ImageView) findViewById(R.id.iv_main_setting);//设置
@@ -193,7 +193,7 @@ public class MainActivity extends BaseActivity
         mEtSearchView = (EditText) findViewById(R.id.et_search_main_view);//搜索输入
         mIvMainSearchView = (ImageView) findViewById(R.id.iv_main_search);//搜索图标
 
-        mTv_net_service = (TextView) findViewById(R.id.tv_main_net_service);
+        //mTv_net_service = (TextView) findViewById(R.id.tv_main_net_service);
         mTv_pop_up_one = (TextView) findViewById(R.id.tv_pop_up_one);
         mTv_pop_up_two = (TextView) findViewById(R.id.tv_pop_up_two);
         mTv_pop_up_three = (TextView) findViewById(R.id.tv_pop_up_three);
@@ -230,8 +230,8 @@ public class MainActivity extends BaseActivity
         mHashMap.put(Constants.DOWNLOADFRRAGMENT_TAG, R.id.tv_main_download);
         mHashMap.put(Constants.RECYCLEFRAGMENT_TAG, R.id.tv_main_recycle);
         mHashMap.put(Constants.SDSTORAGEFRAGMENT_TAG, R.id.tv_main_computer);
-        mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_main_net_service);
-        mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_main_cloud_service);
+        //mHashMap.put(Constants.ONLINENEIGHBORFRAGMENT_TAG, R.id.tv_main_net_service);
+        //mHashMap.put(Constants.CLOUDSERVICEFRAGMENT_TAG, R.id.tv_main_cloud_service);
         mHashMap.put(Constants.DETAILFRAGMENT_TAG, R.id.tv_main_picture);
         mHashMap.put(Constants.SYSTEMSPACEFRAGMENT_TAG, R.id.tv_main_storage_one);
         mHashMap.put(Constants.ADDRESSFRAGMENT_TAG, R.id.tv_main_storage_one);
@@ -380,8 +380,8 @@ public class MainActivity extends BaseActivity
         mTvMainDocument.setOnClickListener(this);
         mTvMainDownload.setOnClickListener(this);
         mTvMainRecycle.setOnClickListener(this);
-        mTvMainCloudService.setOnClickListener(this);
-        mTv_net_service.setOnClickListener(this);
+        //mTvMainCloudService.setOnClickListener(this);
+        //mTv_net_service.setOnClickListener(this);
         mIvMainListView.setOnClickListener(this);
         mIvMainGridView.setOnClickListener(this);
         mIvMainBack.setOnClickListener(this);
@@ -1119,9 +1119,9 @@ public class MainActivity extends BaseActivity
             case R.id.tv_pop_up_two:
                 uninstallUSB(Constants.USB_TWO);
                 break;
-            case R.id.tv_main_cloud_service:
+           /* case R.id.tv_main_cloud_service:
                 showRightFileInfo(R.id.tv_main_cloud_service, "", mCloudDiskFragment);
-                break;
+                break;*/
             case R.id.iv_main_back:
                 onBackPressed();
                 break;
@@ -1242,12 +1242,12 @@ public class MainActivity extends BaseActivity
             case R.id.tv_main_storage_three:
                 mTvMainThree.setSelected(true);
                 break;
-            case R.id.tv_main_net_service:
+           /* case R.id.tv_main_net_service:
                 mTv_net_service.setSelected(true);
-                break;
-            case R.id.tv_main_cloud_service:
+                break;*/
+           /* case R.id.tv_main_cloud_service:
                 mTvMainCloudService.setSelected(true);
-                break;
+                break;*/
             default:
                 break;
         }
@@ -1262,11 +1262,11 @@ public class MainActivity extends BaseActivity
         mTvMainSdaOne.setSelected(false);
         mTvMainSdaTwo.setSelected(false);
         mTvMainThree.setSelected(false);
-        mTv_net_service.setSelected(false);
+        //mTv_net_service.setSelected(false);
         mTvMainDocument.setSelected(false);
         mTvMainDownload.setSelected(false);
         mTvMainRecycle.setSelected(false);
-        mTvMainCloudService.setSelected(false);
+        //mTvMainCloudService.setSelected(false);
     }
 
     // send Message to System package
@@ -1352,9 +1352,9 @@ public class MainActivity extends BaseActivity
                         mCloudDiskFragment.goBack();
                     } else if (mManager.getBackStackEntryCount() >= ACTIVITY_MIN_COUNT_FOR_BACK) {
                         mManager.popBackStack();
-                    } else {
+                    } /*else {
                         backToUpDir("seafile", mCloudDiskFragment, R.id.tv_main_cloud_service);
-                    }
+                    }*/
                 } else if (mCurFragment.getTag().equals(Constants.SDSSYSTEMSPACE_TAG)) {
                     if (mComputerFragment.canGoBack()) {
                         mComputerFragment.goBack();
@@ -1516,7 +1516,7 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.show(mCloudDiskFragment);
         fragmentTransaction.commit();
         mEtMainFilePath.setText("seafile");
-        setSelectedBackground(R.id.tv_main_cloud_service);
+        //setSelectedBackground(R.id.tv_main_cloud_service);
         mCurFragment = mCloudDiskFragment;
     }
 

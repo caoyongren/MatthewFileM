@@ -144,7 +144,7 @@
                     android:background="@drawable/usb_pop_up_selector"/>
             </RelativeLayout>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/left_main_net_up"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,19 +153,19 @@
                 android:gravity="center"
                 android:text="@string/left_net_up"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="13sp" />
+                android:textSize="13sp" />-->
 
-            <TextView
+          <!--  <TextView
                 android:id="@+id/tv_main_net_service"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_internet_selector"
                 android:text="@string/internet"
-                android:visibility="gone" />
+                android:visibility="gone" />-->
 
-            <TextView
+          <!--  <TextView
                 android:id="@+id/tv_main_cloud_service"
                 style="@style/textSet"
                 android:drawableLeft="@drawable/left_cloud_selector"
-                android:text="@string/cloud" />
+                android:text="@string/cloud" />-->
         </LinearLayout>
     </RelativeLayout>
