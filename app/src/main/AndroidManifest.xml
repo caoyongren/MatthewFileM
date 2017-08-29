@@ -37,7 +37,7 @@
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
 
-        <activity
+  <!--      <activity
             android:name="com.matthew.filem.activity.PickerActivity"
             android:label="@string/app_name"
             android:uiOptions="none"
@@ -62,6 +62,6 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
-
+-->
     </application>
 </manifest>
