@@ -19,6 +19,7 @@ import android.view.Window;
 import android.widget.GridView;
 import android.widget.ListView;
 
+import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.bean.FileInfo;

@@ -1,4 +1,4 @@
-package com.matthew.filem.system;
+package com.matthew.filem.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -10,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 
 import com.matthew.filem.R;
+import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.Constants;
 
 import java.io.File;

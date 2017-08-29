@@ -31,7 +31,7 @@
         <activity
             android:label="@string/menu_setting"
             android:launchMode="singleTop"
-            android:name="com.matthew.filem.system.FileManagerPreferenceActivity"
+            android:name="com.matthew.filem.activity.FileManagerPreferenceActivity"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
         </activity>
 

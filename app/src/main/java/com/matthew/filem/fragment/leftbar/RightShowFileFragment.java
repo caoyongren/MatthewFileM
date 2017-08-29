@@ -29,7 +29,7 @@ import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.bean.FileInfo;
 import com.matthew.filem.system.FileListAdapter;
-import com.matthew.filem.system.FileManagerPreferenceActivity;
+import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.impl.IFileInteractionListener;
