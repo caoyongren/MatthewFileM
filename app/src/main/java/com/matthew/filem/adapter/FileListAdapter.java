@@ -1,4 +1,4 @@
-package com.matthew.filem.system;
+package com.matthew.filem.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 import com.matthew.filem.R;
 import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileListItem;
+import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.IconHolder;
 

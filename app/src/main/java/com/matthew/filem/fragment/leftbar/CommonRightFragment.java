@@ -26,7 +26,7 @@ import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconHelper;
-import com.matthew.filem.system.FileListAdapter;
+import com.matthew.filem.adapter.FileListAdapter;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Settings;

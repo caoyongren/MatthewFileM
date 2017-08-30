@@ -46,7 +46,7 @@ import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
-import com.matthew.filem.system.FileListAdapter;
+import com.matthew.filem.adapter.FileListAdapter;
 import com.matthew.filem.system.FileOperationHelper;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.Constants;
@@ -76,8 +76,6 @@ public class MainActivity extends BaseActivity
     public static final String KEY_SWITCH_VIEW = "switch_view";
     public static final String DEFAULT_VIEW_TAG_GRID = "grid";
     public static final String DEFAULT_VIEW_TAG_LIST = "list";
-    private static final int POPWINDOW_WINTH = 120;
-    private static final int POPWINDOW_HEIGHT = 40;
     private static final int POPWINDOW_X = -15;
     private static final int POPWINDOW_Y = 10;
     private static final int USB_POPWINDOW_X = 60;
