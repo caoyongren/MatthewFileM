@@ -862,7 +862,7 @@ public class MainActivity extends BaseActivity
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
                 CommonFileAdapter adapter = fragment.getAdapter();
                 List<FileInfo> list = adapter.getFileInfoList();
-                List<Integer> integerList = adapter.getSelectFileInfoList();
+                List<Integer> integerList = adapter.getSelectFileList();
                 for (int i = 0; i < list.size(); i++) {
                     integerList.add(i);
                 }
@@ -1159,7 +1159,8 @@ public class MainActivity extends BaseActivity
             ((CommonRightFragment) fragment).setPath(path);
             CommonFileAdapter adapter = ((CommonRightFragment) fragment).getAdapter();
             if (adapter != null) {
-                adapter.getSelectFileInfoList().clear();
+                L.i(TAG, "showRightFileInfo: list" + adapter.getSelectFileList());
+                adapter.getSelectFileList().clear();
                 ((CommonRightFragment) fragment).getFileViewInteractionHub().clearSelection();
             }
         }

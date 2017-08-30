@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.matthew.filem.R;
+import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.FileListItem;
@@ -24,10 +25,10 @@ public class CommonFileAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private FileViewInteractionHub mFileViewInteractionHub;
     private FileIconHelper mFileIcon;
-    private Context mContext;
     private int layoutId;
-    private List<FileInfo> fileInfoList;
-    private List<Integer> selectFileInfoListIndex = new ArrayList<>();
+    private Context mContext;
+    private List<FileInfo> mFileInfoList;
+    private List<Integer> mSelectFileList = new ArrayList<>();
     private View.OnTouchListener mMotionListener;
     private int mWidth, mHeight;
     private IconHolder mIconHolder;
@@ -36,7 +37,7 @@ public class CommonFileAdapter extends BaseAdapter {
                              List<FileInfo> objects, FileViewInteractionHub f,
                              FileIconHelper fileIcon,
                              View.OnTouchListener motionListener) {
-        fileInfoList = objects;
+        mFileInfoList = objects;
         layoutId = resource;
         mInflater = LayoutInflater.from(context);
         mFileViewInteractionHub = f;
@@ -51,21 +52,21 @@ public class CommonFileAdapter extends BaseAdapter {
     }
 
     public List<FileInfo> getFileInfoList() {
-        return fileInfoList;
+        return mFileInfoList;
     }
 
-    public List<Integer> getSelectFileInfoList() {
-        return selectFileInfoListIndex;
+    public List<Integer> getSelectFileList() {
+        return mSelectFileList;
     }
 
     @Override
     public int getCount() {
-        return fileInfoList.size();
+        return mFileInfoList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return fileInfoList.get(position);
+        return mFileInfoList.get(position);
     }
 
     @Override
@@ -77,9 +78,9 @@ public class CommonFileAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null)  {
-            if ("list".equals(LocalCacheLayout.getViewTag())) {
+            if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
                 convertView = mInflater.inflate(R.layout.file_browser_item_list, parent, false);
-            } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
+            } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
                 convertView = mInflater.inflate(R.layout.file_browser_item_grid, parent, false);
             }
             viewHolder = new ViewHolder(convertView);
@@ -92,15 +93,12 @@ public class CommonFileAdapter extends BaseAdapter {
         viewHolder.name.setTag(position);
         viewHolder.name.setOnTouchListener(mMotionListener);
 
-        FileInfo lFileInfo = fileInfoList.get(position);
+        FileInfo lFileInfo = mFileInfoList.get(position);
         FileListItem.setupFileListItemInfo(mContext, convertView, lFileInfo,
                                            mIconHolder, mFileViewInteractionHub);
         LinearLayout background = (LinearLayout)convertView;
-        background.setBackgroundResource(selectFileInfoListIndex.contains(position) ?
+        background.setBackgroundResource(mSelectFileList.contains(position) ?
                                          R.drawable.list_item_bg_shape : R.color.white);
-//        convertView.findViewById(R.id.file_checkbox).setOnClickListener(
-//                new FileListItem.FileItemOnClickListener(
-//                        mFileViewInteractionHub));
         return convertView;
     }
 
