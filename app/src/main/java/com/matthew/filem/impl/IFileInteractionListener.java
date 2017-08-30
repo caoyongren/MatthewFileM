@@ -14,7 +14,7 @@ public interface IFileInteractionListener {
     View getViewById(int id);
     Context getContext();
     void startActivity(Intent intent);
-    void onDataChanged();
+    void onDataRefresh();
     void onPick(FileInfo f);
 
     boolean shouldShowOperationPane();

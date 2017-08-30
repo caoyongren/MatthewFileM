@@ -14,7 +14,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.widget.GridView;
 import android.widget.ListView;
@@ -236,7 +235,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             f.Selected = true;
             mCheckedFileNameList.add(f);
         }
-        mFileViewListener.onDataChanged();
+        mFileViewListener.onDataRefresh();
     }
 
     public boolean onOperationUpLevel() {
@@ -543,7 +542,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         }
         if (mFileOperationHelper.Rename(f, text)) {
             f.fileName = text;
-            mFileViewListener.onDataChanged();
+            mFileViewListener.onDataRefresh();
         } else {
             new AlertDialog.Builder(mContext)
                     .setMessage(mContext.getString(R.string.fail_to_rename))
@@ -923,7 +922,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         return path.equals(Constants.SD_PATH) ? path + name : path + File.separator + name;
     }
 
-    // check or uncheck
+/*    // check or uncheck
     public boolean onCheckItem(FileInfo f, View v) {
         if (isMoveState())
             return false;
@@ -937,7 +936,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             mCheckedFileNameList.remove(f);
         }
         return true;
-    }
+    }*/
 
     private boolean isSelectingFiles() {
         return mSelectFilesCallback != null;
@@ -958,7 +957,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                 f.Selected = false;
             }
             mCheckedFileNameList.clear();
-            mFileViewListener.onDataChanged();
+            mFileViewListener.onDataRefresh();
         }
     }
 
@@ -984,14 +983,14 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         notifyFileSystemChanged(path);
     }
 
-    public void MouseScrollAction(MotionEvent event) {
+/*    public void MouseScrollAction(MotionEvent event) {
         if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
             L.i("fortest::onGenericMotionEvent", "down");
         }
         else {
             L.i("fortest::onGenericMotionEvent", "up");
         }
-    }
+    }*/
 
     public void showContextDialog(FileViewInteractionHub fileViewInteractionHub,
                                    MotionEvent event) {

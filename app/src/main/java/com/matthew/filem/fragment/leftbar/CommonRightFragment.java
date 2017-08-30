@@ -818,7 +818,7 @@ public class CommonRightFragment extends BaseFragment implements
     }
 
     @Override
-    public void onDataChanged() {
+    public void onDataRefresh() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -915,7 +915,7 @@ public class CommonRightFragment extends BaseFragment implements
         } else {
             Collections.sort(mFileNameList, Collections.reverseOrder(sort.getComparator()));
         }
-        onDataChanged();
+        onDataRefresh();
     }
 
     @Override
@@ -926,7 +926,7 @@ public class CommonRightFragment extends BaseFragment implements
     @Override
     public void addSingleFile(FileInfo file) {
         mFileNameList.add(file);
-        onDataChanged();
+        onDataRefresh();
     }
 
     @Override
