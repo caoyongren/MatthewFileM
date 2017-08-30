@@ -20,7 +20,7 @@ import com.matthew.filem.utils.IconHolder;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileListAdapter extends BaseAdapter {
+public class CommonFileAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private FileViewInteractionHub mFileViewInteractionHub;
     private FileIconHelper mFileIcon;
@@ -32,10 +32,10 @@ public class FileListAdapter extends BaseAdapter {
     private int mWidth, mHeight;
     private IconHolder mIconHolder;
 
-    public FileListAdapter(Context context, int resource,
-                           List<FileInfo> objects, FileViewInteractionHub f,
-                           FileIconHelper fileIcon,
-                           View.OnTouchListener motionListener) {
+    public CommonFileAdapter(Context context, int resource,
+                             List<FileInfo> objects, FileViewInteractionHub f,
+                             FileIconHelper fileIcon,
+                             View.OnTouchListener motionListener) {
         fileInfoList = objects;
         layoutId = resource;
         mInflater = LayoutInflater.from(context);

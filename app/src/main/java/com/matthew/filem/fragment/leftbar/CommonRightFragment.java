@@ -26,7 +26,7 @@ import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconHelper;
-import com.matthew.filem.adapter.FileListAdapter;
+import com.matthew.filem.adapter.CommonFileAdapter;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Settings;
@@ -55,7 +55,7 @@ public class CommonRightFragment extends BaseFragment implements
     private static final String TAG = "CommonRightFragment : DEBUG:";
     public static final String ROOT_DIRECTORY = "root_directory";
     private static final String sdDir = Util.getSdDirectory();
-    private FileListAdapter mAdapter;
+    private CommonFileAdapter mAdapter;
     private FileCategoryHelper mFileCagetoryHelper;
     private FileIconHelper mFileIconHelper;
     private ArrayList<FileInfo> mFileNameList = new ArrayList<>();
@@ -144,11 +144,11 @@ public class CommonRightFragment extends BaseFragment implements
         mListMotionListener = new ListViewOnGenericMotionListener();
         if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
+            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_list,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
+            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_grid,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mGridMotionListener);
         }
@@ -340,11 +340,11 @@ public class CommonRightFragment extends BaseFragment implements
     private void switchMode() {
      if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_list,
+            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_list,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-            mAdapter = new FileListAdapter(mActivity, R.layout.file_browser_item_grid,
+            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_grid,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mGridMotionListener);
         }
@@ -391,7 +391,7 @@ public class CommonRightFragment extends BaseFragment implements
                 case MotionEvent.ACTION_DOWN:
                     integerList = mAdapter.getSelectFileInfoList();
                     calculateFileLocation(mFileGridView.getVerticalScrollDistance());
-                    if (view.getTag() instanceof FileListAdapter.ViewHolder
+                    if (view.getTag() instanceof CommonFileAdapter.ViewHolder
                             || view.getId() == R.id.file_name) {
                             mDownX = -1;
                             mIsItem = true;
@@ -401,7 +401,7 @@ public class CommonRightFragment extends BaseFragment implements
                         if (view.getId() == R.id.file_name) {
                             mPos = (int) view.getTag();
                         } else {
-                            mPos = (int) ((FileListAdapter.ViewHolder) view.getTag()).name.getTag();
+                            mPos = (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
                         }
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_PRIMARY) {
                             mouseRightTag = "button_primary";
@@ -548,12 +548,12 @@ public class CommonRightFragment extends BaseFragment implements
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     integerList = mAdapter.getSelectFileInfoList();
-                    if (view.getTag() instanceof FileListAdapter.ViewHolder) {
+                    if (view.getTag() instanceof CommonFileAdapter.ViewHolder) {
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
                             mIsShowDialog = true;
                             mIsItem = true;
                         }
-                        mPos = (int) ((FileListAdapter.ViewHolder) view.getTag()).name.getTag();
+                        mPos = (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_PRIMARY) {
                             mouseRightTag = "button_primary";
                         }
@@ -1100,7 +1100,7 @@ public class CommonRightFragment extends BaseFragment implements
     protected void enter(String tag, String path) {
     }
 
-    public FileListAdapter getAdapter() {
+    public CommonFileAdapter getAdapter() {
         return mAdapter;
     }
 

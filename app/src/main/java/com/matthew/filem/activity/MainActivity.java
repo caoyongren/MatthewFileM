@@ -46,7 +46,7 @@ import com.matthew.filem.fragment.computer.CloudDiskFragment;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
-import com.matthew.filem.adapter.FileListAdapter;
+import com.matthew.filem.adapter.CommonFileAdapter;
 import com.matthew.filem.system.FileOperationHelper;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.Constants;
@@ -860,7 +860,7 @@ public class MainActivity extends BaseActivity
             if (getVisibleFragment() instanceof CommonRightFragment) {
                 final CommonRightFragment fragment = (CommonRightFragment) getVisibleFragment();
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
-                FileListAdapter adapter = fragment.getAdapter();
+                CommonFileAdapter adapter = fragment.getAdapter();
                 List<FileInfo> list = adapter.getFileInfoList();
                 List<Integer> integerList = adapter.getSelectFileInfoList();
                 for (int i = 0; i < list.size(); i++) {
@@ -1149,14 +1149,21 @@ public class MainActivity extends BaseActivity
 
     //通过点击左侧导航栏显示右侧的文件夹信息．－－> 碎片展示
     private void showRightFileInfo(int id, String path, Fragment fragment) {
+        /**
+         * 例如：　点击桌面，然后，进入里面一个文件夹，然后点击计算机
+         * 　　再回到桌面，应该显示为最初的界面(不应该是进入的文件夹的界面)
+         * 方式：　将数据清空！
+         * */
         if (fragment instanceof CommonRightFragment) {
+            L.i(TAG, "showRightFileInfo: path -- >" + path);
             ((CommonRightFragment) fragment).setPath(path);
-            FileListAdapter adapter = ((CommonRightFragment) fragment).getAdapter();
+            CommonFileAdapter adapter = ((CommonRightFragment) fragment).getAdapter();
             if (adapter != null) {
                 adapter.getSelectFileInfoList().clear();
                 ((CommonRightFragment) fragment).getFileViewInteractionHub().clearSelection();
             }
         }
+
         setSelectedBackground(id);
         mEtMainFilePath.setText(path);
         setCurPath(path);

@@ -11,31 +11,33 @@ import com.matthew.filem.system.FileSortHelper;
 import java.util.Collection;
 
 public interface IFileInteractionListener {
-     View getViewById(int id);
-     Context getContext();
-     void startActivity(Intent intent);
-     void onDataChanged();
-     void onPick(FileInfo f);
-     boolean shouldShowOperationPane();
+    View getViewById(int id);
+    Context getContext();
+    void startActivity(Intent intent);
+    void onDataChanged();
+    void onPick(FileInfo f);
+
+    boolean shouldShowOperationPane();
 
     /**
      * Handle operation listener.
      * @param id
      * @return true: indicate have operated it; false: otherwise.
      */
-     boolean onOperation(int id);
-     String getDisplayPath(String path);
-     String getRealPath(String displayPath);
-     void runOnUiThread(Runnable r);
-    // return true indicates the navigation has been handled
-     boolean onNavigation(String path);
-     boolean shouldHideMenu(int menu);
-     FileIconHelper getFileIconHelper();
-     FileInfo getItem(int pos);
-     void sortCurrentList(FileSortHelper sort);
-     Collection<FileInfo> getAllFiles();
-     void addSingleFile(FileInfo file);
-     boolean onBack();
-     boolean onRefreshFileList(String path, FileSortHelper sort);
-     int getItemCount();
+    boolean onOperation(int id);
+    String getDisplayPath(String path);
+    void runOnUiThread(Runnable r);
+    FileInfo getItem(int pos);
+    void sortCurrentList(FileSortHelper sort);
+    Collection<FileInfo> getAllFiles();
+    void addSingleFile(FileInfo file);
+    boolean onRefreshFileList(String path, FileSortHelper sort);
+    int getItemCount();
+
+
+    FileIconHelper getFileIconHelper();
+    boolean shouldHideMenu(int menu);
+    boolean onBack();
+    String getRealPath(String displayPath);
+    boolean onNavigation(String path);
 }
