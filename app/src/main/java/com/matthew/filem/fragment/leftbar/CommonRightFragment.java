@@ -13,7 +13,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
@@ -962,7 +961,7 @@ public class CommonRightFragment extends BaseFragment implements
     private int mLastClickId;
     private long mLastClickTime = 0;
 
-    public class OnitemClickListener implements AdapterView.OnItemClickListener {
+/*    public class OnitemClickListener implements AdapterView.OnItemClickListener {
         MotionEvent motionEvent;
         public OnitemClickListener(MotionEvent event) {
             motionEvent = event;
@@ -991,8 +990,6 @@ public class CommonRightFragment extends BaseFragment implements
                     integerList.clear();
                     mFileViewInteractionHub.clearSelection();
                 } else if (mouseRightTag.equals("button_secondary") && isDialogShow == false) {
-//                    mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub,
-//                                                               motionEvent);
                     mouseRightTag = "mouse";
                     isDialogShow = true;
                 } else {
@@ -1006,79 +1003,6 @@ public class CommonRightFragment extends BaseFragment implements
                 }
             }
             mAdapter.notifyDataSetChanged();
-        }
-    }
-
-/*    private class MouseGridOnGenericMotionListener implements View.OnGenericMotionListener {
-        @Override
-        public boolean onGenericMotion(View v, MotionEvent event) {
-            switch (event.getButtonState()) {
-                case MotionEvent.BUTTON_PRIMARY:
-                    mouseRightTag = "button_primary";
-                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
-                    if (!isCtrlPress) {
-                        mAdapter.getSelectFileList().clear();
-                        mFileViewInteractionHub.clearSelection();
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    if (mFileGridView.isBlankArea() == false) {
-                        return true;
-                    }
-                    mFileGridView.setIsBlankArea(true);
-                    break;
-                case MotionEvent.BUTTON_SECONDARY:
-                    isDialogShow = false;
-                    mouseRightTag = "button_secondary";
-                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
-                    isShow =true;
-//                    mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub, event);
-                    break;
-                case MotionEvent.BUTTON_TERTIARY:
-                    mFileGridView.setOnItemClickListener(new OnitemClickListener(event));
-                    break;
-                case MotionEvent.ACTION_SCROLL:
-                    mFileViewInteractionHub.MouseScrollAction(event);
-                    break;
-                case MotionEvent.ACTION_HOVER_ENTER:
-                    L.d("ACTION_HOVER_ENTER");
-                    break;
-            }
-            return false;
-        }
-    }*/
-/*    private class MouseListOnGenericMotionListener implements View.OnGenericMotionListener {
-        @Override
-        public boolean onGenericMotion(View v, MotionEvent event) {
-            switch (event.getButtonState()) {
-                case MotionEvent.BUTTON_PRIMARY:
-                    mouseRightTag = "button_primary";
-                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
-                    if (!isCtrlPress) {
-                        mAdapter.getSelectFileList().clear();
-                        mFileViewInteractionHub.clearSelection();
-                        mAdapter.notifyDataSetChanged();
-                    }
-                    if (mFileListView.isBlankArea() == false) {
-                        return true;
-                    }
-                    mFileListView.setIsBlankArea(true);
-                    break;
-                case MotionEvent.BUTTON_SECONDARY:
-                    mouseRightTag = "button_secondary";
-                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
-//                    mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub, event);
-                    break;
-                case MotionEvent.BUTTON_TERTIARY:
-                    mFileListView.setOnItemClickListener(new OnitemClickListener(event));
-                    break;
-                case MotionEvent.ACTION_SCROLL:
-                    mFileViewInteractionHub.MouseScrollAction(event);
-                    break;
-                case MotionEvent.ACTION_HOVER_ENTER:
-                    L.d("ACTION_HOVER_ENTER");
-                    break;
-            }
-            return false;
         }
     }*/
 
