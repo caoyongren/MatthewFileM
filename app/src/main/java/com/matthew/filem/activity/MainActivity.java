@@ -72,15 +72,18 @@ public class MainActivity extends BaseActivity
 
     public static final String TAG = "MainActivity -- > DEBUG::";
     public static final String KEY_VIEW_TAG = "viewtag";
-    public static final String INTENT_SWITCH_VIEW = "com.switchview";
+    public static final String SWITCH_VIEW_INTENT = "com.switchview";
     public static final String KEY_SWITCH_VIEW = "switch_view";
     public static final String DEFAULT_VIEW_TAG_GRID = "grid";
     public static final String DEFAULT_VIEW_TAG_LIST = "list";
+    public static final String SWITCH_MENU_INTENT = "com.switchmenu";
+
     private static final int POPWINDOW_X = -15;
     private static final int POPWINDOW_Y = 10;
     private static final int USB_POPWINDOW_X = 60;
     private static final int USB_POPWINDOW_Y = 10;
     private static final int ACTIVITY_MIN_COUNT_FOR_BACK = 3;
+
     private static final String USB_SPACE_FRAGMENT = "usb_space_fragment";
     private static final String USB_DEVICE_ATTACHED = "usb_device_attached";
     private static final String USB_DEVICE_DETACHED = "usb_device_detached";
@@ -1242,14 +1245,14 @@ public class MainActivity extends BaseActivity
         Intent intent = new Intent();
         switch (name) {
             case IV_SWITCH_VIEW:
-                intent.setAction(INTENT_SWITCH_VIEW);
+                intent.setAction(SWITCH_VIEW_INTENT);
                 intent.putExtra(KEY_SWITCH_VIEW, tag);
                 break;
             case "iv_fresh":
                 intent.setAction("com.refreshview");
                 break;
             case "iv_menu":
-                intent.setAction("com.switchmenu");
+                intent.setAction(SWITCH_MENU_INTENT);
                 intent.putExtra("pop_menu", tag);
                 break;
             case "is_ctrl_press":
@@ -1514,7 +1517,7 @@ public class MainActivity extends BaseActivity
                 case R.id.pop_usb_view:
                     uninstallUSB(mWhichUsb);
                     Intent intent = new Intent();
-                    intent.setAction("com.switchmenu");
+                    intent.setAction(SWITCH_MENU_INTENT);
                     intent.putExtra("pop_menu", "view_or_dismiss");
                     sendBroadcast(intent);
                     break;

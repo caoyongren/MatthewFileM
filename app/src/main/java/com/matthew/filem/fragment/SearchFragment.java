@@ -27,9 +27,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class SearchFragment extends BaseFragment{
-    private static final String TAG = Constants.LEFT_FAVORITES;
+    private static final String TAG = "SearchFragment --> DEBUG::";
     private Fragment mCurFragment;
-    private ListView lv_mian_search;
+    private ListView mLvMianSearch;
     private SearchAdapter mSearchAdapter;
     private MainActivity mActivity;
     private LinearLayout mLlEmptyView;
@@ -51,25 +51,25 @@ public class SearchFragment extends BaseFragment{
 
     @Override
     protected void initView() {
-        lv_mian_search = (ListView) rootView.findViewById(R.id.lv_mian_search);
+        mLvMianSearch = (ListView) rootView.findViewById(R.id.lv_mian_search);
         mLlEmptyView = (LinearLayout) rootView.findViewById(R.id.empty_view);
         if (mSearchList == null) {
-            lv_mian_search.setVisibility(View.GONE);
+            mLvMianSearch.setVisibility(View.GONE);
             mLlEmptyView.setVisibility(View.VISIBLE);
         } else {
-            lv_mian_search.setVisibility(View.VISIBLE);
+            mLvMianSearch.setVisibility(View.VISIBLE);
             mLlEmptyView.setVisibility(View.GONE);
         }
     }
 
     protected void initData() {
         mSearchAdapter = new SearchAdapter();
-        lv_mian_search.setAdapter(mSearchAdapter);
+        mLvMianSearch.setAdapter(mSearchAdapter);
     }
 
     @Override
     protected void initListener() {
-        lv_mian_search.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mLvMianSearch.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

@@ -31,6 +31,7 @@ import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Settings;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.Constants;
+import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.T;
 import com.matthew.filem.view.drag.DragGridView;
@@ -65,8 +66,6 @@ public class CommonRightFragment extends BaseFragment implements
     private String curRootDir = "";
     private String mouseRightTag = "mouse";
     private boolean isCtrlPress;
-    private boolean isDialogShow = false;
-    private boolean isShow = false;
     private boolean mIsLeftItem;
 
     // memorize the scroll positions of previous paths
@@ -81,8 +80,8 @@ public class CommonRightFragment extends BaseFragment implements
     private GridViewOnGenericMotionListener mGridMotionListener;
     private ListViewOnGenericMotionListener mListMotionListener;
     private FrameSelectView mFrameSelectView;
-    private List<FileInfo> fileInfoList;
-    private List<FileInfo> mFileListInfo;
+    //private List<FileInfo> fileInfoList;
+    private List<FileInfo> mFileInfoTotalList;//文件数据源
     private int GRID_LEFT_POS = 0;
     private int GRID_TOP_POS = 1;
     private int GRID_WIDTH_POS = 2;
@@ -92,16 +91,17 @@ public class CommonRightFragment extends BaseFragment implements
     private int ADAPTER_HEIGHT_POS = 1;
 
     @SuppressLint({"NewApi", "ValidFragment"})
+    public CommonRightFragment() {
+        super();
+    }
+
+    //在父中进行了初始化；
+    @SuppressLint({"NewApi", "ValidFragment"})
     public CommonRightFragment(String sdSpaceFragment, String directPath,
                                ArrayList<FileInfo> fileInfoList,
                                FileViewInteractionHub.CopyOrMove mCopyOrMove, boolean isLeftItem) {
         super(sdSpaceFragment,directPath,fileInfoList,mCopyOrMove);
         mIsLeftItem = isLeftItem;
-    }
-
-    @SuppressLint({"NewApi", "ValidFragment"})
-    public CommonRightFragment() {
-        super();
     }
 
     @Override
@@ -186,58 +186,14 @@ public class CommonRightFragment extends BaseFragment implements
         initRegisterBroadcast();
         updateUI();
         setHasOptionsMenu(true);
-        mFileListInfo = mAdapter.getFileInfoList();
+        mFileInfoTotalList = mAdapter.getFileInfoList();
+        L.i(TAG, "mFileInfoTotalList-- >" + mFileInfoTotalList.size());
     }
 
     @Override
     protected void initListener() {
         mFileGridView.setOnTouchListener(mGridMotionListener);
         mFileListView.setOnTouchListener(mListMotionListener);
-        /*mFileListView.setOnDragChangeListener(new DragListView.OnChanageListener() {
-            @Override
-            public void onChange(int from, int to) {
-                FileInfo fileInfo = mFileViewInteractionHub.getItem(to);
-                if (from != -1 && to != -1 && fileInfo.IsDir) {
-                    mFileViewInteractionHub.addDragSelectedItem(from);
-                    mFileViewInteractionHub.onOperationMove();
-                    mFileViewInteractionHub.onOperationDragConfirm(fileInfo.filePath);
-                    L.e("from____________to", from + "______________" + to);
-                }
-            }
-        });
-        mFileListView.setOnGenericMotionListener(new MouseListOnGenericMotionListener());
-
-        mFileGridView.setOnDragChangeListener(new DragGridView.OnChanageListener() {
-            @Override
-            public void onChange(int from, int to) {
-                FileInfo fileInfo = mFileViewInteractionHub.getItem(to);
-                if (from != -1 && to != -1 && fileInfo.IsDir) {
-                    mFileViewInteractionHub.addDragSelectedItem(from);
-                    mFileViewInteractionHub.onOperationMove();
-                    mFileViewInteractionHub.onOperationDragConfirm(fileInfo.filePath);
-                    L.e("from____________to", from + "______________" + to);
-                }
-            }
-        });
-        mFileGridView.setOnGenericMotionListener(new MouseGridOnGenericMotionListener());
-        mFileGridView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_UP:
-                        if (isShow==true && isDialogShow == false) {
-                            isShow = false;
-                            isDialogShow = true;
-                            mFileViewInteractionHub.shownContextDialog(mFileViewInteractionHub,
-                                                                       event);
-                            if (mAdapter.getSelectFileList().size() != 0) {
-                                mAdapter.notifyDataSetChanged();
-                            }
-                        }
-                }
-                return false;
-            }
-        });*/
     }
 
     private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
@@ -245,13 +201,13 @@ public class CommonRightFragment extends BaseFragment implements
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             switch (action) {
-                case MainActivity.INTENT_SWITCH_VIEW:
+                case MainActivity.SWITCH_VIEW_INTENT:
                     if (null != intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW)) {
                         String switch_view = intent.getExtras().getString(MainActivity.KEY_SWITCH_VIEW);
                         selectorMenuId(switch_view);
                     }
                     break;
-                case "com.switchmenu":
+                case MainActivity.SWITCH_MENU_INTENT:
                     if (null != intent.getExtras().getString("pop_menu")) {
                         String pop_menu = intent.getExtras().getString("pop_menu");
                         //selectorMenuId(pop_menu);
@@ -448,8 +404,8 @@ public class CommonRightFragment extends BaseFragment implements
                         mFrameSelectView.invalidate();
                         int i;
                         integerList.clear();
-                        for (i = 0; i < mFileListInfo.size(); i++) {
-                            info = mFileListInfo.get(i);
+                        for (i = 0; i < mFileInfoTotalList.size(); i++) {
+                            info = mFileInfoTotalList.get(i);
                             if (frameSelectionJudge(info, mDownX, mDownY, mMoveX, mMoveY)) {
                                 info.Selected = true;
                                 integerList.add(i);
@@ -492,8 +448,8 @@ public class CommonRightFragment extends BaseFragment implements
                     if (isMove) {
                         isMove = false;
                         FileInfo info;
-                        for (int i = 0; i < mFileListInfo.size(); i++) {
-                            info = mFileListInfo.get(i);
+                        for (int i = 0; i < mFileInfoTotalList.size(); i++) {
+                            info = mFileInfoTotalList.get(i);
                             if (frameSelectionJudge(info, mDownX, mDownY, upX, upY)) {
                                 info.Selected = true;
                                 if (!integerList.contains(i)) {
@@ -662,8 +618,8 @@ public class CommonRightFragment extends BaseFragment implements
 
     private void initRegisterBroadcast() {
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.switchview");
-        intentFilter.addAction("com.switchmenu");
+        intentFilter.addAction(MainActivity.SWITCH_VIEW_INTENT);
+        intentFilter.addAction(MainActivity.SWITCH_MENU_INTENT);
         intentFilter.addAction("com.isTouchEvent");
         intentFilter.addAction("com.isCtrlPress");
         intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
@@ -768,14 +724,14 @@ public class CommonRightFragment extends BaseFragment implements
 
         sortCurrentList(sort);
         showEmptyView(fileList.size() == 0);
-        if ("list".equals(LocalCacheLayout.getViewTag())) {
+        if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             mFileListView.post(new Runnable() {
                 @Override
                 public void run() {
                     mFileListView.setSelection(pos);
                 }
             });
-        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
+        } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mFileGridView.post(new Runnable() {
                 @Override
                 public void run() {
@@ -790,9 +746,10 @@ public class CommonRightFragment extends BaseFragment implements
 
     private void updateUI() {
         mNoSdView.setVisibility(mSdCardReady ? View.GONE : View.VISIBLE);
-        if ("list".equals(LocalCacheLayout.getViewTag())) {
+
+        if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             mFileListView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
-        } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
+        } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mFileGridView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
         }
 
@@ -961,51 +918,6 @@ public class CommonRightFragment extends BaseFragment implements
     private int mLastClickId;
     private long mLastClickTime = 0;
 
-/*    public class OnitemClickListener implements AdapterView.OnItemClickListener {
-        MotionEvent motionEvent;
-        public OnitemClickListener(MotionEvent event) {
-            motionEvent = event;
-        }
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            mFileGridView.setIsBlankArea(false);
-            FileInfo fileInfo = mAdapter.getFileInfoList().get(position);
-            fileInfo.Selected = true;
-            List<Integer> integerList = mAdapter.getSelectFileList();
-            if (isCtrlPress) {
-                if (integerList.contains(position)) {
-                    integerList.remove(new Integer(position));
-                    mFileViewInteractionHub.removeDialogSelectedItem(fileInfo);
-                } else {
-                    integerList.add(position);
-                    mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
-                }
-            } else {
-                if ("button_primary".equals(mouseRightTag) && mLastClickId == position
-                        && (Math.abs(System.currentTimeMillis() - mLastClickTime)
-                            < Constants.DOUBLE_CLICK_INTERVAL_TIME)) {
-                    mFileViewInteractionHub.onListItemClick(position,
-                                            Constants.DOUBLE_TAG, motionEvent, fileInfo);
-                    integerList.clear();
-                    mFileViewInteractionHub.clearSelected();
-                } else if (mouseRightTag.equals("button_secondary") && isDialogShow == false) {
-                    mouseRightTag = "mouse";
-                    isDialogShow = true;
-                } else {
-                    mLastClickTime = System.currentTimeMillis();
-                    mLastClickId = position;
-                    integerList.clear();
-                    mFileViewInteractionHub.clearSelected();
-                    integerList.add(position);
-                    mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
-                    mouseRightTag = "mouse";
-                }
-            }
-            mAdapter.notifyDataSetChanged();
-        }
-    }*/
-
     public String getCurrentPath() {
         return mFileViewInteractionHub.getCurrentPath();
     }
@@ -1042,16 +954,16 @@ public class CommonRightFragment extends BaseFragment implements
     public void calculateFileLocation(int fixY) {
         int[] gridViewParams = mFileGridView.getParams();
         int[] itemParams = mAdapter.getParams();
-        for (int i = 0; i < mFileListInfo.size(); i++) {
-            mFileListInfo.get(i).left = gridViewParams[GRID_LEFT_POS]
+        for (int i = 0; i < mFileInfoTotalList.size(); i++) {
+            mFileInfoTotalList.get(i).left = gridViewParams[GRID_LEFT_POS]
                     + (i % gridViewParams[GRID_NUMCOLUMNS_POS]) * (gridViewParams[GRID_WIDTH_POS]);
-            mFileListInfo.get(i).top = gridViewParams[GRID_TOP_POS]
+            mFileInfoTotalList.get(i).top = gridViewParams[GRID_TOP_POS]
                     + (i / gridViewParams[GRID_NUMCOLUMNS_POS])
                     * (itemParams[ADAPTER_HEIGHT_POS] + gridViewParams[GRID_SPACE_POS]) - fixY;
-            mFileListInfo.get(i).right = gridViewParams[GRID_LEFT_POS]
+            mFileInfoTotalList.get(i).right = gridViewParams[GRID_LEFT_POS]
                     + itemParams[ADAPTER_WIDTH_POS]
                     + (i % gridViewParams[GRID_NUMCOLUMNS_POS]) * (gridViewParams[GRID_WIDTH_POS]);
-            mFileListInfo.get(i).bottom = gridViewParams[GRID_TOP_POS]
+            mFileInfoTotalList.get(i).bottom = gridViewParams[GRID_TOP_POS]
                     + itemParams[ADAPTER_HEIGHT_POS] + (i / gridViewParams[GRID_NUMCOLUMNS_POS])
                     * (itemParams[ADAPTER_HEIGHT_POS] + gridViewParams[GRID_SPACE_POS]) - fixY;
         }

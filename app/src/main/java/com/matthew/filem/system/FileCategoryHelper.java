@@ -1,26 +1,16 @@
 package com.matthew.filem.system;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.net.Uri;
-import android.provider.MediaStore.Audio;
-import android.provider.MediaStore.Files;
-import android.provider.MediaStore.Files.FileColumns;
-import android.provider.MediaStore.Images;
-import android.provider.MediaStore.Video;
-import android.util.Log;
 
 import com.matthew.filem.R;
 
 import java.io.FilenameFilter;
 import java.util.HashMap;
 
+
+
 public class FileCategoryHelper {
-//    public static final int COLUMN_ID = 0;
-//    public static final int COLUMN_PATH = 1;
-//    public static final int COLUMN_SIZE = 2;
-//    public static final int COLUMN_DATE = 3;
-    private static final String LOG_TAG = "FileCategoryHelper";
+    private static final String LOG_TAG = "FileCategoryHelper -- > DEBUG::";
 
     public enum FileCategory {
         All, Music, Video, Picture, Theme, Doc, Zip, Apk, Custom, Other, Favorite
@@ -47,10 +37,10 @@ public class FileCategoryHelper {
         categoryNames.put(FileCategory.Favorite, R.string.category_favorite);
     }
 
-    public static FileCategory[] sCategories = new FileCategory[] {
+    /*public static FileCategory[] sCategories = new FileCategory[] {
             FileCategory.Music, FileCategory.Video, FileCategory.Picture, FileCategory.Theme,
             FileCategory.Doc, FileCategory.Zip, FileCategory.Apk, FileCategory.Other
-    };
+    };*/
 
     private FileCategory mCategory;
     private Context mContext;
@@ -60,53 +50,55 @@ public class FileCategoryHelper {
         mCategory = FileCategory.All;
     }
 
-    public FileCategory getCurCategory() {
+    /*public FileCategory getCurCategory() {
         return mCategory;
-    }
+    }*/
 
-    public void setCurCategory(FileCategory c) {
+    /*public void setCurCategory(FileCategory c) {
         mCategory = c;
-    }
+    }*/
 
-    public int getCurCategoryNameResId() {
+    /*public int getCurCategoryNameResId() {
         return categoryNames.get(mCategory);
-    }
+    }*/
 
-    public void setCustomCategory(String[] exts) {
+    /*public void setCustomCategory(String[] exts) {
         mCategory = FileCategory.Custom;
         if (filters.containsKey(FileCategory.Custom)) {
             filters.remove(FileCategory.Custom);
         }
 
         filters.put(FileCategory.Custom, new FilenameExtFilter(exts));
+    }*/
+
+    /*public HashMap<FileCategory, CategoryInfo> getCategoryInfos() {
+        return mCategoryInfo;
+    }*/
+
+    /*public CategoryInfo getCategoryInfo(FileCategory fc) {
+    if (mCategoryInfo.containsKey(fc)) {
+        return mCategoryInfo.get(fc);
+    } else {
+        CategoryInfo info = new CategoryInfo();
+        mCategoryInfo.put(fc, info);
+        return info;
     }
+    }*/
+
+    private HashMap<FileCategory, CategoryInfo> mCategoryInfo = new HashMap<>();
 
     public FilenameFilter getFilter() {
         return filters.get(mCategory);
     }
 
-    private HashMap<FileCategory, CategoryInfo> mCategoryInfo = new HashMap<>();
 
-    public HashMap<FileCategory, CategoryInfo> getCategoryInfos() {
-        return mCategoryInfo;
-    }
-
-    public CategoryInfo getCategoryInfo(FileCategory fc) {
-        if (mCategoryInfo.containsKey(fc)) {
-            return mCategoryInfo.get(fc);
-        } else {
-            CategoryInfo info = new CategoryInfo();
-            mCategoryInfo.put(fc, info);
-            return info;
-        }
-    }
 
     public class CategoryInfo {
         public long count;
         public long size;
     }
 
-    private void setCategoryInfo(FileCategory fc, long count, long size) {
+    /*private void setCategoryInfo(FileCategory fc, long count, long size) {
         CategoryInfo info = mCategoryInfo.get(fc);
         if (info == null) {
             info = new CategoryInfo();
@@ -114,17 +106,17 @@ public class FileCategoryHelper {
         }
         info.count = count;
         info.size = size;
-    }
+    }*/
 
-    private String buildDocSelection() {
+    /*private String buildDocSelection() {
         StringBuilder selection = new StringBuilder();
         for (String aSDocMimeTypesSet : Util.sDocMimeTypesSet) {
             selection.append("(" + FileColumns.MIME_TYPE + "=='" + aSDocMimeTypesSet + "') OR ");
         }
         return  selection.substring(0, selection.lastIndexOf(")") + 1);
-    }
+    }*/
 
-    private String buildSelectionByCategory(FileCategory cat) {
+    /*private String buildSelectionByCategory(FileCategory cat) {
         String selection;
         switch (cat) {
             case Theme:
@@ -143,9 +135,9 @@ public class FileCategoryHelper {
                 selection = null;
         }
         return selection;
-    }
+    }*/
 
-    private Uri getContentUriByCategory(FileCategory cat) {
+    /*private Uri getContentUriByCategory(FileCategory cat) {
         Uri uri;
         String volumeName = "external";
         switch(cat) {
@@ -168,9 +160,9 @@ public class FileCategoryHelper {
                uri = null;
         }
         return uri;
-    }
+    }*/
 
-    private String buildSortOrder(FileSortHelper.SortStyle sort) {
+    /*private String buildSortOrder(FileSortHelper.SortStyle sort) {
         String sortOrder = null;
         switch (sort) {
             case name:
@@ -187,9 +179,9 @@ public class FileCategoryHelper {
                 break;
         }
         return sortOrder;
-    }
+    }*/
 
-    public Cursor query(FileCategory fc, FileSortHelper.SortStyle sort) {
+    /*public Cursor query(FileCategory fc, FileSortHelper.SortStyle sort) {
         Uri uri = getContentUriByCategory(fc);
         String selection = buildSelectionByCategory(fc);
         String sortOrder = buildSortOrder(sort);
@@ -204,9 +196,9 @@ public class FileCategoryHelper {
         };
 
         return mContext.getContentResolver().query(uri, columns, selection, null, sortOrder);
-    }
+    }*/
 
-    public void refreshCategoryInfo() {
+    /*public void refreshCategoryInfo() {
         // clear
         for (FileCategory fc : sCategories) {
             setCategoryInfo(fc, 0, 0);
@@ -229,9 +221,9 @@ public class FileCategoryHelper {
         refreshMediaCategory(FileCategory.Doc, uri);
         refreshMediaCategory(FileCategory.Zip, uri);
         refreshMediaCategory(FileCategory.Apk, uri);
-    }
+    }*/
 
-    private boolean refreshMediaCategory(FileCategory fc, Uri uri) {
+    /*private boolean refreshMediaCategory(FileCategory fc, Uri uri) {
         String[] columns = new String[] {
                 "COUNT(*)", "SUM(_size)"
         };
@@ -251,7 +243,7 @@ public class FileCategoryHelper {
         }
 
         return false;
-    }
+    }*/
 
     public static FileCategory getCategoryFromPath(String path) {
         MediaFile.MediaFileType type = MediaFile.getFileType(path);
