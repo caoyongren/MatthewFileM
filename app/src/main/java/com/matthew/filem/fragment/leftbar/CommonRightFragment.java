@@ -319,7 +319,7 @@ public class CommonRightFragment extends BaseFragment implements
             case MainActivity.DEFAULT_VIEW_TAG_GRID:
             case MainActivity.DEFAULT_VIEW_TAG_LIST:
                 switchMode();
-                mFileViewInteractionHub.clearSelection();
+                mFileViewInteractionHub.clearSelected();
                 break;
             default:
                 break;
@@ -417,7 +417,7 @@ public class CommonRightFragment extends BaseFragment implements
                             mPos = -1;
                             mLastClickId = -1;
                             integerList.clear();
-                            mFileViewInteractionHub.clearSelection();
+                            mFileViewInteractionHub.clearSelected();
                         } else {
                             mLastClickTime = System.currentTimeMillis();
                             mLastClickId = mPos;
@@ -480,12 +480,12 @@ public class CommonRightFragment extends BaseFragment implements
                                 && integerList.contains(mPos))) {
                             integerList.clear();
                             integerList.add(mPos);
-                            mFileViewInteractionHub.clearSelection();
+                            mFileViewInteractionHub.clearSelected();
                             mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
                         }
                     } else {
                         integerList.clear();
-                        mFileViewInteractionHub.clearSelection();
+                        mFileViewInteractionHub.clearSelected();
                     }
                     float upX = motionEvent.getX();
                     float upY = motionEvent.getY();
@@ -568,7 +568,7 @@ public class CommonRightFragment extends BaseFragment implements
                             mPos = -1;
                             mLastClickId = -1;
                             integerList.clear();
-                            mFileViewInteractionHub.clearSelection();
+                            mFileViewInteractionHub.clearSelected();
                         } else {
                             mLastClickTime = System.currentTimeMillis();
                             mLastClickId = mPos;
@@ -600,12 +600,12 @@ public class CommonRightFragment extends BaseFragment implements
                                 || !integerList.contains(mPos)) {
                             integerList.clear();
                             integerList.add(mPos);
-                            mFileViewInteractionHub.clearSelection();
+                            mFileViewInteractionHub.clearSelected();
                             mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
                         }
                     } else {
                         integerList.clear();
-                        mFileViewInteractionHub.clearSelection();
+                        mFileViewInteractionHub.clearSelected();
                     }
                     mAdapter.notifyDataSetChanged();
                     mouseRightTag = "mouse";
@@ -946,7 +946,7 @@ public class CommonRightFragment extends BaseFragment implements
 
     public void goBack() {
         mAdapter.getSelectFileList().clear();
-        mFileViewInteractionHub.clearSelection();
+        mFileViewInteractionHub.clearSelected();
         mFileViewInteractionHub.onBackPressed();
     }
 
@@ -988,7 +988,7 @@ public class CommonRightFragment extends BaseFragment implements
                     mFileViewInteractionHub.onListItemClick(position,
                                             Constants.DOUBLE_TAG, motionEvent, fileInfo);
                     integerList.clear();
-                    mFileViewInteractionHub.clearSelection();
+                    mFileViewInteractionHub.clearSelected();
                 } else if (mouseRightTag.equals("button_secondary") && isDialogShow == false) {
                     mouseRightTag = "mouse";
                     isDialogShow = true;
@@ -996,7 +996,7 @@ public class CommonRightFragment extends BaseFragment implements
                     mLastClickTime = System.currentTimeMillis();
                     mLastClickId = position;
                     integerList.clear();
-                    mFileViewInteractionHub.clearSelection();
+                    mFileViewInteractionHub.clearSelected();
                     integerList.add(position);
                     mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
                     mouseRightTag = "mouse";

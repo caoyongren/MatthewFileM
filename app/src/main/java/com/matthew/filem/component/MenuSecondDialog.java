@@ -38,7 +38,7 @@ public class MenuSecondDialog extends Dialog implements View.OnClickListener {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
                 dialogInterface.dismiss();
-                mFileViewInteractionHub.clearSelection();
+                mFileViewInteractionHub.clearSelected();
                 mFileViewInteractionHub.refreshFileList();
             }
         });

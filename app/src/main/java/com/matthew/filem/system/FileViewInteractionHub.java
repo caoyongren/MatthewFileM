@@ -19,7 +19,6 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.activity.FileManagerPreferenceActivity;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.activity.base.BaseActivity;
 import com.matthew.filem.component.MenuFirstDialog;
@@ -93,14 +92,14 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         mFileViewListener.sortCurrentList(mFileSortHelper);
     }
 
-    public boolean canShowCheckBox() {
+/*    public boolean canShowCheckBox() {
         return true;
-    }
+    }*/
     public void addDialogSelectedItem(FileInfo fileInfo) {
         mCheckedFileNameList.add(fileInfo);
     }
 
-    public void addDragSelectedItem(int position) {
+/*    public void addDragSelectedItem(int position) {
         if (mCheckedFileNameList.size() == 0) {
             selectedDialogItem = position;
             if (selectedDialogItem != -1) {
@@ -111,7 +110,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                 }
             }
         }
-    }
+    }*/
 
     public void removeDialogSelectedItem(FileInfo fileInfo){
         mCheckedFileNameList.remove(fileInfo);
@@ -125,11 +124,11 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         return mFileOperationHelper.getFileList();
     }
 
-    public void onOperationDragConfirm(String filePath) {
+/*    public void onOperationDragConfirm(String filePath) {
         if (isSelectingFiles()) {
             mSelectFilesCallback.selected(mCheckedFileNameList);
             mSelectFilesCallback = null;
-            clearSelection();
+            clearSelected();
         } else if (mFileOperationHelper.isMoveState()) {
             if (mFileOperationHelper.EndMove(filePath)) {
                 showProgress(mContext.getString(R.string.operation_moving));
@@ -137,7 +136,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         } else {
             onOperationDragPaste(filePath);
         }
-    }
+    }*/
 
     public void onOperationDragPaste(String filePath) {
         if (mFileOperationHelper.Paste(filePath)) {
@@ -163,9 +162,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         return copyOrMoveMode;
     }
 
-    public boolean canPaste() {
+/*    public boolean canPaste() {
         return mFileOperationHelper.canPaste();
-    }
+    }*/
 
     // operation finish notification
     @Override
@@ -179,15 +178,15 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             @Override
             public void run() {
 //                showConfirmOperationBar(false);
-                clearSelection();
+                clearSelected();
                 refreshFileList();
             }
         });
     }
 
-    public FileInfo getItem(int pos) {
+/*    public FileInfo getItem(int pos) {
         return mFileViewListener.getItem(pos);
-    }
+    }*/
 
     public boolean isInSelection() {
         return mCheckedFileNameList.size() > 0;
@@ -205,15 +204,15 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         refreshFileList();
     }
 
-    private void onOperationSetting() {
+/*    private void onOperationSetting() {
         Intent intent = new Intent(mContext, FileManagerPreferenceActivity.class);
         try {
             mContext.startActivity(intent);
-            clearSelection();
+            clearSelected();
         } catch (ActivityNotFoundException e) {
             Log.e(LOG_TAG, "fail to start setting: " + e.toString());
         }
-    }
+    }*/
 
     public void onOperationShowSysFiles() {
         Settings.instance().setShowDotAndHiddenFiles(!Settings.instance()
@@ -225,16 +224,18 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         if (!isSelectedAll()) {
             onOperationSelectAll();
         } else {
-            clearSelection();
+            clearSelected();
         }
     }
 
+    //ctrl + A
     public void onOperationSelectAll() {
         mCheckedFileNameList.clear();
         for (FileInfo f : mFileViewListener.getAllFiles()) {
             f.Selected = true;
             mCheckedFileNameList.add(f);
         }
+        L.i(TAG, "onOperationSelectAll-- >" + mCheckedFileNameList.size());
         mFileViewListener.onDataRefresh();
     }
 
@@ -323,12 +324,12 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                 mFileGridView.setSelection(mFileGridView.getCount() - 1);
             }
-            clearSelection();
+            clearSelected();
         } else {
             new AlertDialog.Builder(mContext)
                     .setMessage(mContext.getString(R.string.fail_to_create_folder))
                     .setPositiveButton(R.string.confirm, null).create().show();
-            clearSelection();
+            clearSelected();
             return false;
         }
 
@@ -390,12 +391,12 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
                 mFileGridView.setSelection(mFileGridView.getCount() - 1);
             }
-            clearSelection();
+            clearSelected();
         } else {
             new AlertDialog.Builder(mContext)
                            .setMessage(mContext.getString(R.string.fail_to_create_folder))
                            .setPositiveButton(R.string.confirm, null).create().show();
-            clearSelection();
+            clearSelected();
             return false;
         }
         return true;
@@ -422,7 +423,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         if (getSelectedFileList().size() == 1) {
             copy(getSelectedFileList().get(0).filePath);
         }
-        clearSelection();
+        clearSelected();
     }
 
     private void copy(CharSequence text) {
@@ -439,13 +440,13 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 
     public void onOperationMove() {
         mFileOperationHelper.StartMove(getSelectedFileList());
-        clearSelection();
+        clearSelected();
         refreshFileList();
         copyOrMoveMode = CopyOrMove.Move;
     }
 
     public void refreshFileList() {
-        clearSelection();
+        clearSelected();
         updateNavigationPane();
         mFileViewListener.onRefreshFileList(mCurrentPath, mFileSortHelper);
     }
@@ -474,7 +475,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                 Log.e(LOG_TAG, "fail to view file: " + e.toString());
             }
         }
-        clearSelection();
+        clearSelected();
     }
 
     public void onOperationRename() {
@@ -744,7 +745,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         if (isSelectingFiles()) {
             mSelectFilesCallback.selected(mCheckedFileNameList);
             mSelectFilesCallback = null;
-            clearSelection();
+            clearSelected();
         } else if (mFileOperationHelper.isMoveState()) {
             if (mFileOperationHelper.EndMove(mCurrentPath)) {
                 showProgress(mContext.getString(R.string.operation_moving));
@@ -859,7 +860,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         } else if (doubleTag != null && Constants.DOUBLE_TAG.equals(doubleTag)) {
 //            mCheckedFileNameList.remove(lFileInfo);  //
             ((CommonRightFragment) mFileViewListener).getAdapter().getSelectFileList().clear();
-            clearSelection();
+            clearSelected();
             mCurrentPath = getAbsoluteName(mCurrentPath, fileInfo.fileName);
             refreshFileList();
             mMainActivity.setCurPath(mCurrentPath);
@@ -893,13 +894,13 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         L.e("mCheckedFileNameList", mCheckedFileNameList.size() + "");
     }
 
-    public void setMode(Mode m) {
+/*    public void setMode(Mode m) {
         mCurrentMode = m;
     }
 
     public Mode getMode() {
         return mCurrentMode;
-    }
+    }*/
 
     public void setRootPath(String path) {
         mRoot = path;
@@ -947,9 +948,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                && mCheckedFileNameList.size() == mFileViewListener.getItemCount();
     }
 
-    public void clearSelection() {
+    public void clearSelected() {
         if (mCheckedFileNameList.size() > 0) {
-            L.i(TAG, "clearSelection::-- >" + mCheckedFileNameList.size());
+            L.i(TAG, "clearSelected::-- >" + mCheckedFileNameList.size());
             for (FileInfo f : mCheckedFileNameList) {
                 if (f == null) {
                     continue;
@@ -971,7 +972,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 
     public boolean onBackPressed() {
         if (isInSelection()) {
-            clearSelection();
+            clearSelected();
         } else if (!onOperationUpLevel()) {
             return false;
         }
@@ -983,14 +984,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         notifyFileSystemChanged(path);
     }
 
-/*    public void MouseScrollAction(MotionEvent event) {
-        if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
-            L.i("fortest::onGenericMotionEvent", "down");
-        }
-        else {
-            L.i("fortest::onGenericMotionEvent", "up");
-        }
-    }*/
 
     public void showContextDialog(FileViewInteractionHub fileViewInteractionHub,
                                    MotionEvent event) {

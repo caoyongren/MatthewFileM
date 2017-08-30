@@ -1153,6 +1153,7 @@ public class MainActivity extends BaseActivity
          * 例如：　点击桌面，然后，进入里面一个文件夹，然后点击计算机
          * 　　再回到桌面，应该显示为最初的界面(不应该是进入的文件夹的界面)
          * 方式：　将数据清空！
+         * {clearSelected: 选中的文件}
          * */
         if (fragment instanceof CommonRightFragment) {
             L.i(TAG, "showRightFileInfo: path -- >" + path);
@@ -1161,7 +1162,7 @@ public class MainActivity extends BaseActivity
             if (adapter != null) {
                 L.i(TAG, "showRightFileInfo: list" + adapter.getSelectFileList());
                 adapter.getSelectFileList().clear();
-                ((CommonRightFragment) fragment).getFileViewInteractionHub().clearSelection();
+                ((CommonRightFragment) fragment).getFileViewInteractionHub().clearSelected();
             }
         }
 
