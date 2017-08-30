@@ -33,6 +33,7 @@
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray" />
 
+        <!-- 占位布局　-->
         <FrameLayout
             android:id="@+id/framelayout_right_main"
             android:layout_width="0dp"

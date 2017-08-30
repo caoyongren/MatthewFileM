@@ -614,44 +614,44 @@ public class MainActivity extends BaseActivity
         if (mDeskFragment == null) {
             mDeskFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.DESKTOP_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mDeskFragment, Constants.DESKFRAGMENT_TAG)
-                    .hide(mDeskFragment);
+            transaction.add(R.id.framelayout_right_main, mDeskFragment,
+                    Constants.DESKFRAGMENT_TAG).hide(mDeskFragment);
         }
         if (mMusicFragment == null) {
             mMusicFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.MUSIC_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mMusicFragment, Constants.MUSICFRAGMENT_TAG)
-                    .hide(mMusicFragment);
+            transaction.add(R.id.framelayout_right_main, mMusicFragment,
+                    Constants.MUSICFRAGMENT_TAG).hide(mMusicFragment);
         }
         if (mVideoFragment == null) {
             mVideoFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.VIDEOS_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mVideoFragment, Constants.VIDEOFRAGMENT_TAG)
-                    .hide(mVideoFragment);
+            transaction.add(R.id.framelayout_right_main, mVideoFragment,
+                    Constants.VIDEOFRAGMENT_TAG).hide(mVideoFragment);
         }
         if (mPictrueFragment == null) {
             mPictrueFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.PICTURES_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mPictrueFragment, Constants.PICTRUEFRAGMENT_TAG)
-                    .hide(mPictrueFragment);
+            transaction.add(R.id.framelayout_right_main, mPictrueFragment,
+                    Constants.PICTRUEFRAGMENT_TAG).hide(mPictrueFragment);
         }
         if (mDocumentFragment == null) {
             mDocumentFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.DOCUMENT_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mDocumentFragment, Constants.DOCUMENTFRAGMENT_TAG)
-                    .hide(mDocumentFragment);
+            transaction.add(R.id.framelayout_right_main, mDocumentFragment,
+                    Constants.DOCUMENTFRAGMENT_TAG).hide(mDocumentFragment);
         }
         if (mDownloadFragment == null) {
             mDownloadFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.DOWNLOAD_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mDownloadFragment, Constants.DOWNLOADFRRAGMENT_TAG)
-                    .hide(mDownloadFragment);
+            transaction.add(R.id.framelayout_right_main, mDownloadFragment,
+                    Constants.DOWNLOADFRRAGMENT_TAG).hide(mDownloadFragment);
         }
         if (mRecycleFragment == null) {
             mRecycleFragment = new CommonRightFragment(Constants.LEFT_FAVORITES,
                     Constants.RECYCLE_PATH, null, null, true);
-            transaction.add(R.id.framelayout_right_main, mRecycleFragment, Constants.RECYCLEFRAGMENT_TAG)
-                    .hide(mRecycleFragment);
+            transaction.add(R.id.framelayout_right_main, mRecycleFragment,
+                    Constants.RECYCLEFRAGMENT_TAG).hide(mRecycleFragment);
         }
         if (mComputerFragment == null) {
             mComputerFragment = new ComputerFragment(mManager, null, MainActivity.this);
@@ -1015,6 +1015,7 @@ public class MainActivity extends BaseActivity
         }
     }
 
+    //通过点击事件，触发碎片的切换～
     @Override
     public void onClick(View view) {
         clearNivagateFocus();
