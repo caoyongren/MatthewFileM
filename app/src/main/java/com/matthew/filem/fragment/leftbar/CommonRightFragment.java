@@ -398,9 +398,9 @@ public class CommonRightFragment extends BaseFragment implements
                         mFrameSelectView.setVisibility(View.VISIBLE);
                         mMoveX = motionEvent.getX();
                         mMoveY = motionEvent.getY();
-                        mFrameSelectView.setPositionCoordinate(mDownX < mMoveX? mDownX : mMoveX,
-                                mDownY < mMoveY? mDownY : mMoveY,
-                                mDownX > mMoveX? mDownX : mMoveX, mDownY > mMoveY? mDownY : mMoveY);
+                        mFrameSelectView.setPosition(mDownX < mMoveX? mDownX : mMoveX,
+                                mDownY < mMoveY ? mDownY : mMoveY,
+                                mDownX > mMoveX ? mDownX : mMoveX, mDownY > mMoveY ? mDownY : mMoveY);
                         mFrameSelectView.invalidate();
                         int i;
                         integerList.clear();

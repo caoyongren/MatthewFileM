@@ -19,7 +19,7 @@ public class FrameSelectView extends View {
         mPaint.setStrokeWidth(5.0f);
     }
 
-    public void setPositionCoordinate(float left, float top, float right, float bootom) {
+    public void setPosition(float left, float top, float right, float bootom) {
         mLeft = left;
         mTop = top;
         mRight = right;
