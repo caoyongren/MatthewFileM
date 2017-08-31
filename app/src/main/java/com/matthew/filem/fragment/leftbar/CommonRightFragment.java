@@ -74,7 +74,7 @@ public class CommonRightFragment extends BaseFragment implements
     private View mEmptyView;
     private View mNoSdView;
     private HashMap<Enum, Boolean> mSortMap;
-    private boolean mSdCardReady;
+    private boolean mIsSdCardReady;
     private int mPos = -1;
 
     private GridViewOnGenericMotionListener mGridMotionListener;
@@ -112,21 +112,23 @@ public class CommonRightFragment extends BaseFragment implements
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_right_layout;
+        return R.layout.fragment_common_right_layout;
     }
 
     @Override
     protected void initView() {
         mActivity = getActivity();
         mMainActivity = (MainActivity) getActivity();
-        mFragmentSysFl = (FrameLayout) rootView.findViewById(R.id.fragment_sys_fl);
+        mFragmentSysFl = (FrameLayout) rootView.findViewById(R.id.fl_common_right);
         mFrameSelectView = new FrameSelectView(mMainActivity);
         mFragmentSysFl.addView(mFrameSelectView);
-        mEmptyView = rootView.findViewById(R.id.empty_view);
-        mSdCardReady = Util.isSDCardReady();
-        mNoSdView = rootView.findViewById(R.id.sd_not_available_page);
-        mFileListView = (DragListView) rootView.findViewById(R.id.right_layout_list);
-        mFileGridView = (DragGridView) rootView.findViewById(R.id.right_layout_grid);
+
+        mEmptyView = rootView.findViewById(R.id.ll_common_right_empty_view);
+        mIsSdCardReady = Util.isSDCardReady();
+        mNoSdView = rootView.findViewById(R.id.ll_common_right_no_avail_sd);
+
+        mFileListView = (DragListView) rootView.findViewById(R.id.drag_list_view_common_right);
+        mFileGridView = (DragGridView) rootView.findViewById(R.id.drag_grid_view_common_right);
 
         initSortMap(true);
     }
@@ -745,21 +747,21 @@ public class CommonRightFragment extends BaseFragment implements
     }
 
     private void updateUI() {
-        mNoSdView.setVisibility(mSdCardReady ? View.GONE : View.VISIBLE);
+        mNoSdView.setVisibility(mIsSdCardReady ? View.GONE : View.VISIBLE);
 
         if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
-            mFileListView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
+            mFileListView.setVisibility(mIsSdCardReady ? View.VISIBLE : View.GONE);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-            mFileGridView.setVisibility(mSdCardReady ? View.VISIBLE : View.GONE);
+            mFileGridView.setVisibility(mIsSdCardReady ? View.VISIBLE : View.GONE);
         }
 
-        if (mSdCardReady) {
+        if (mIsSdCardReady) {
             mFileViewInteractionHub.refreshFileList();
         }
     }
 
     private void showEmptyView(boolean show) {
-        View mEmptyView = rootView.findViewById(R.id.empty_view);
+        View mEmptyView = rootView.findViewById(R.id.ll_common_right_empty_view);
         if (mEmptyView != null)
             mEmptyView.setVisibility(show ? View.VISIBLE : View.GONE);
     }

@@ -15,12 +15,12 @@
 
 -->
     <FrameLayout
-        android:id="@+id/fragment_sys_fl"
+        android:id="@+id/fl_common_right"
         android:layout_width="fill_parent"
         android:layout_height="0dip"
         android:layout_weight="1">
         <com.matthew.filem.view.drag.DragListView
-            android:id="@+id/right_layout_list"
+            android:id="@+id/drag_list_view_common_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="10dp"
@@ -29,7 +29,7 @@
             android:visibility="gone"/>
 
         <com.matthew.filem.view.drag.DragGridView
-            android:id="@+id/right_layout_grid"
+            android:id="@+id/drag_grid_view_common_right"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="16dp"
@@ -43,7 +43,7 @@
             android:scrollbars="none" />
 
         <LinearLayout
-            android:id="@+id/empty_view"
+            android:id="@+id/ll_common_right_empty_view"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -62,7 +62,7 @@
                 android:singleLine="true" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/sd_not_available_page"
+            android:id="@+id/ll_common_right_no_avail_sd"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

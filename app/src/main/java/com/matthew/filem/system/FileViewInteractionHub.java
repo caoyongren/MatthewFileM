@@ -830,9 +830,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private void setupFileListView() {
         final String title = LocalCacheLayout.getViewTag();
         if ("list".equals(title)) {
-            mFileListView = (ListView) mFileViewListener.getViewById(R.id.right_layout_list);
+            mFileListView = (ListView) mFileViewListener.getViewById(R.id.drag_list_view_common_right);
         } else if ("grid".equals(title)) {
-            mFileGridView = (GridView) mFileViewListener.getViewById(R.id.right_layout_grid);
+            mFileGridView = (GridView) mFileViewListener.getViewById(R.id.drag_grid_view_common_right);
         }
     }
 

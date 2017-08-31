@@ -52,7 +52,7 @@ public class SearchFragment extends BaseFragment{
     @Override
     protected void initView() {
         mLvMianSearch = (ListView) rootView.findViewById(R.id.lv_mian_search);
-        mLlEmptyView = (LinearLayout) rootView.findViewById(R.id.empty_view);
+        mLlEmptyView = (LinearLayout) rootView.findViewById(R.id.ll_common_right_empty_view);
         if (mSearchList == null) {
             mLvMianSearch.setVisibility(View.GONE);
             mLlEmptyView.setVisibility(View.VISIBLE);

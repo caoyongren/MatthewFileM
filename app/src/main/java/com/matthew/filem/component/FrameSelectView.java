@@ -6,6 +6,10 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.View;
 
+/**
+ *  右侧视图中，选中的文件视图．
+ *
+ * */
 public class FrameSelectView extends View {
     private Paint mPaint;
     private float mLeft, mTop, mRight, mBootom;

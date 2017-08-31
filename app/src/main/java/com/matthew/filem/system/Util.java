@@ -108,6 +108,7 @@ public class Util {
         return strs;
     }
 
+    //是否已经挂载．
     public static boolean isSDCardReady() {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
     }
