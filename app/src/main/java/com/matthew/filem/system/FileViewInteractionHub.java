@@ -92,25 +92,9 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         mFileViewListener.sortCurrentList(mFileSortHelper);
     }
 
-/*    public boolean canShowCheckBox() {
-        return true;
-    }*/
     public void addDialogSelectedItem(FileInfo fileInfo) {
         mCheckedFileNameList.add(fileInfo);
     }
-
-/*    public void addDragSelectedItem(int position) {
-        if (mCheckedFileNameList.size() == 0) {
-            selectedDialogItem = position;
-            if (selectedDialogItem != -1) {
-                FileInfo fileInfo = mFileViewListener.getItem(selectedDialogItem);
-                if (fileInfo != null) {
-                    fileInfo.Selected = true;
-                    mCheckedFileNameList.add(fileInfo);
-                }
-            }
-        }
-    }*/
 
     public void removeDialogSelectedItem(FileInfo fileInfo){
         mCheckedFileNameList.remove(fileInfo);
@@ -122,26 +106,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 
     public ArrayList<FileInfo> getCheckedFileList() {
         return mFileOperationHelper.getFileList();
-    }
-
-/*    public void onOperationDragConfirm(String filePath) {
-        if (isSelectingFiles()) {
-            mSelectFilesCallback.selected(mCheckedFileNameList);
-            mSelectFilesCallback = null;
-            clearSelected();
-        } else if (mFileOperationHelper.isMoveState()) {
-            if (mFileOperationHelper.EndMove(filePath)) {
-                showProgress(mContext.getString(R.string.operation_moving));
-            }
-        } else {
-            onOperationDragPaste(filePath);
-        }
-    }*/
-
-    public void onOperationDragPaste(String filePath) {
-        if (mFileOperationHelper.Paste(filePath)) {
-            showProgress(mContext.getString(R.string.operation_pasting));
-        }
     }
 
     public void setCheckedFileList(ArrayList<FileInfo> fileInfoList, CopyOrMove copyOrMove) {
@@ -162,9 +126,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         return copyOrMoveMode;
     }
 
-/*    public boolean canPaste() {
-        return mFileOperationHelper.canPaste();
-    }*/
 
     // operation finish notification
     @Override
@@ -184,9 +145,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         });
     }
 
-/*    public FileInfo getItem(int pos) {
-        return mFileViewListener.getItem(pos);
-    }*/
 
     public boolean isInSelection() {
         return mCheckedFileNameList.size() > 0;
@@ -203,16 +161,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     public void onOperationReferesh() {
         refreshFileList();
     }
-
-/*    private void onOperationSetting() {
-        Intent intent = new Intent(mContext, FileManagerPreferenceActivity.class);
-        try {
-            mContext.startActivity(intent);
-            clearSelected();
-        } catch (ActivityNotFoundException e) {
-            Log.e(LOG_TAG, "fail to start setting: " + e.toString());
-        }
-    }*/
 
     public void onOperationShowSysFiles() {
         Settings.instance().setShowDotAndHiddenFiles(!Settings.instance()
@@ -602,16 +550,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         doOperationDeleteDirect(getSelectedFileList());
     }
 
-    public void onOperationDelete(int position) {
-        FileInfo file = mFileViewListener.getItem(position);
-        if (file == null) {
-            return;
-        }
-        ArrayList<FileInfo> selectedFileList = new ArrayList<FileInfo>();
-        selectedFileList.add(file);
-        doOperationDelete(selectedFileList);
-    }
-
     private void doOperationDelete(final ArrayList<FileInfo> selectedFileList) {
         final ArrayList<FileInfo> selectedFiles = new ArrayList<>(selectedFileList);
         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
@@ -810,7 +748,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
 
     public void onOperationButtonCancel() {
         mFileOperationHelper.clear();
-//        showConfirmOperationBar(false);
+        //showConfirmOperationBar(false);
         if (isSelectingFiles()) {
             mSelectFilesCallback.selected(null);
             mSelectFilesCallback = null;
@@ -858,7 +796,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                 viewFile(fileInfo,event);
             }
         } else if (doubleTag != null && Constants.DOUBLE_TAG.equals(doubleTag)) {
-//            mCheckedFileNameList.remove(lFileInfo);  //
             ((CommonRightFragment) mFileViewListener).getCommonFileAdapter().getSelectedFileList().clear();
             clearSelected();
             mCurrentPath = getAbsoluteName(mCurrentPath, fileInfo.fileName);
@@ -874,33 +811,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         }
     }
 
-    public void setBackground(int position, FileInfo lFileInfo) {
-        if (lFileInfo == null) {
-            Log.e(LOG_TAG, "file does not exist on position:" + position);
-            return;
-        }
-        if (!lFileInfo.Selected ) {
-            lFileInfo.Selected = true;
-
-            mCheckedFileNameList.add(lFileInfo);
-//            view.setSelected(true);
-        } else {
-            lFileInfo.Selected = false;
-            mCheckedFileNameList.remove(lFileInfo);
-//            view.setSelected(false);
-        }
-//        lFileInfo.Selected = !selected;
-
-        L.e("mCheckedFileNameList", mCheckedFileNameList.size() + "");
-    }
-
-/*    public void setMode(Mode m) {
-        mCurrentMode = m;
-    }
-
-    public Mode getMode() {
-        return mCurrentMode;
-    }*/
 
     public void setRootPath(String path) {
         mRoot = path;
@@ -922,22 +832,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private String getAbsoluteName(String path, String name) {
         return path.equals(Constants.SD_PATH) ? path + name : path + File.separator + name;
     }
-
-/*    // check or uncheck
-    public boolean onCheckItem(FileInfo f, View v) {
-        if (isMoveState())
-            return false;
-
-        if (isSelectingFiles() && f.IsDir)
-            return false;
-
-        if (f.Selected) {
-            mCheckedFileNameList.add(f);
-        } else {
-            mCheckedFileNameList.remove(f);
-        }
-        return true;
-    }*/
 
     private boolean isSelectingFiles() {
         return mSelectFilesCallback != null;

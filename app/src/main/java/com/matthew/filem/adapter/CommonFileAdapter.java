@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.matthew.filem.R;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.info.FileInfo;
-import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.FileListItem;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.utils.L;
@@ -26,7 +26,7 @@ public class CommonFileAdapter extends BaseAdapter {
     public static final String TAG = "CommonFileAdapter: -- >DEBUG::";
     private LayoutInflater mInflater;
     private FileViewInteractionHub mFileViewInteractionHub;
-    private FileIconHelper mFileIcon;
+    private FileIconTypeHelper mFileIcon;
     private int layoutId;
     private Context mContext;
     private List<FileInfo> mFileInfoTotalList;//数据源
@@ -35,16 +35,17 @@ public class CommonFileAdapter extends BaseAdapter {
     private int mWidth, mHeight;
     private IconHolder mIconHolder;
 
+    //1.上下文　2.　资源布局　3. 数据源　 4. ? 5. 图标分类　6. 事件监听
     public CommonFileAdapter(Context context, int resource,
                              List<FileInfo> list, FileViewInteractionHub f,
-                             FileIconHelper fileIcon,
+                             FileIconTypeHelper fileIcon,
                              View.OnTouchListener motionListener) {
+        mContext = context;
+        mInflater = LayoutInflater.from(context);
         mFileInfoTotalList = list;
         layoutId = resource;
-        mInflater = LayoutInflater.from(context);
         mFileViewInteractionHub = f;
         mFileIcon = fileIcon;
-        mContext = context;
         mMotionListener = motionListener;
         initIconHolder();
     }

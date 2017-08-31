@@ -3,15 +3,11 @@ package com.matthew.filem.system;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
 
 import com.matthew.filem.R;
-import com.matthew.filem.info.FileInfo;
 
 import java.util.HashMap;
-public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
+public class FileIconTypeHelper implements FileIconLoader.IconLoadFinishListener {
     private static HashMap<ImageView, ImageView> imageFrames = new HashMap<>();
     private static HashMap<String, Integer> fileExtToIcons = new HashMap<>();
     private FileIconLoader mIconLoader;
@@ -56,7 +52,7 @@ public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
         }, R.mipmap.file_icon_rar);
     }
 
-    public FileIconHelper(Context context) {
+    public FileIconTypeHelper(Context context) {
         mIconLoader = new FileIconLoader(context, this);
         mContext = context;
     }
@@ -100,12 +96,6 @@ public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
     private static final String SUFFIX_JPEG = "jpeg";
 
     public static int getFileIcon(String ext) {
-        // Integer i = fileExtToIcons.get(ext.toLowerCase());
-        // if (i != null) {
-        //     return i;
-        // } else {
-        //     return R.mipmap.file_icon_default;
-        // }
         switch (ext) {
             case SUFFIX_APE:
                 return R.mipmap.suffix_ape;
@@ -167,7 +157,16 @@ public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
         }
     }
 
-    public void setIcon(FileInfo fileInfo, ImageView fileImage) {
+    @Override
+    public void onIconLoadFinished(ImageView view) {
+        ImageView frame = imageFrames.get(view);
+        if (frame != null) {
+            frame.setVisibility(View.VISIBLE);
+            imageFrames.remove(view);
+        }
+    }
+
+    /*public void setIcon(FileInfo fileInfo, ImageView fileImage) {
         String filePath = fileInfo.filePath;
         long fileId = fileInfo.dbId;
         String extFromFilename = Util.getExtFromFilename(filePath);
@@ -207,9 +206,9 @@ public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
 
         if (!set)
             fileImage.setImageResource(R.mipmap.file_icon_default);
-    }
+    }*/
 
-    private Bitmap getImageThumbnail(String imagePath, int width, int height) {
+    /*private Bitmap getImageThumbnail(String imagePath, int width, int height) {
         Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -234,14 +233,5 @@ public class FileIconHelper implements FileIconLoader.IconLoadFinishListener {
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
                                  ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
         return bitmap;
-    }
-
-    @Override
-    public void onIconLoadFinished(ImageView view) {
-        ImageView frame = imageFrames.get(view);
-        if (frame != null) {
-            frame.setVisibility(View.VISIBLE);
-            imageFrames.remove(view);
-        }
-    }
+    }*/
 }

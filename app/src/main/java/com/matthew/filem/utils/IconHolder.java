@@ -12,7 +12,7 @@ import android.os.Message;
 import android.widget.ImageView;
 
 import com.matthew.filem.system.FileCategoryHelper;
-import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.Util;
 
 import java.lang.ref.WeakReference;
@@ -182,7 +182,7 @@ public class IconHolder {
     public Drawable getDrawable(String resid) {
         String extFromFilename = Util.getExtFromFilename(resid);
         Drawable dw = mContext.getResources().getDrawable(
-                                                    FileIconHelper.getFileIcon(extFromFilename));
+                                                    FileIconTypeHelper.getFileIcon(extFromFilename));
         return dw;
     }
 

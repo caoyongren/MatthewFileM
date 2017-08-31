@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.matthew.filem.info.FileInfo;
-import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.FileSortHelper;
 
 import java.util.Collection;
@@ -35,7 +35,7 @@ public interface IFileInteractionListener {
     int getItemCount();
 
 
-    FileIconHelper getFileIconHelper();
+    FileIconTypeHelper getFileIconTypeHelper();
     boolean shouldHideMenu(int menu);
     boolean onBack();
     String getRealPath(String displayPath);

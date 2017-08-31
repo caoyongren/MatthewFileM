@@ -18,7 +18,7 @@ import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.info.SearchInfo;
-import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;
 import com.matthew.filem.utils.LocalCacheLayout;
@@ -140,7 +140,7 @@ public class SearchFragment extends BaseFragment{
                                        fileAbsolutePath.lastIndexOf(Constants.SD_PATH));
                 search_file_path.setText(fileAbsolutePath);
                 boolean isDirectory = new File(filePath).isDirectory();
-                int fileIcon = FileIconHelper.getFileIcon(Util.getExtFromFilename(filePath));
+                int fileIcon = FileIconTypeHelper.getFileIcon(Util.getExtFromFilename(filePath));
                 image.setBackgroundResource(!isDirectory ? fileIcon : R.mipmap.folder);
                 return view;
             } else {

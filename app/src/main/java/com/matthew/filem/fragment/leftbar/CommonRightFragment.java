@@ -25,7 +25,7 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileCategoryHelper;
-import com.matthew.filem.system.FileIconHelper;
+import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.system.Settings;
@@ -54,11 +54,11 @@ public class CommonRightFragment extends BaseFragment implements
     private static final String TAG = "CommonRightFragment : DEBUG:";
     public static final String ROOT_DIRECTORY = "root_directory";
     private static final String sdDir = Util.getSdDirectory();
+    private Activity mActivity;
     private CommonFileAdapter mCommonFileAdapter;
     private FileCategoryHelper mFileCagetoryHelper;
-    private FileIconHelper mFileIconHelper;
+    private FileIconTypeHelper mFileIconTypeHelper;
     private ArrayList<FileInfo> mFileNameList = new ArrayList<>();
-    private Activity mActivity;
     private MainActivity mMainActivity;
     private DragListView mFileListView;
     private DragGridView mFileGridView;
@@ -139,18 +139,18 @@ public class CommonRightFragment extends BaseFragment implements
         mFileViewInteractionHub = new FileViewInteractionHub(this);
         Intent intent = getActivity().getIntent();
         //TODO  delete
-        mFileIconHelper = new FileIconHelper(mActivity);
+        mFileIconTypeHelper = new FileIconTypeHelper(mActivity);
         mGridMotionListener = new GridViewOnGenericMotionListener();
         mListMotionListener = new ListViewOnGenericMotionListener();
         if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
             mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_list_common,
                     mFileNameList, mFileViewInteractionHub,
-                    mFileIconHelper, mListMotionListener);
+                    mFileIconTypeHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_grid_common,
                     mFileNameList, mFileViewInteractionHub,
-                    mFileIconHelper, mGridMotionListener);
+                    mFileIconTypeHelper, mGridMotionListener);
         }
         boolean baseSd = intent.getBooleanExtra(Constants.KEY_BASE_SD,
                 !FileManagerPreferenceActivity.isReadRoot(mActivity));
@@ -298,11 +298,11 @@ public class CommonRightFragment extends BaseFragment implements
             addHeadView(mActivity);
             mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_list_common,
                                            mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mListMotionListener);
+                    mFileIconTypeHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_grid_common,
                                            mFileNameList, mFileViewInteractionHub,
-                                           mFileIconHelper, mGridMotionListener);
+                    mFileIconTypeHelper, mGridMotionListener);
         }
         inflateFileData();
     }
@@ -714,11 +714,13 @@ public class CommonRightFragment extends BaseFragment implements
         fileList.clear();
 
         File[] listFiles = file.listFiles(mFileCagetoryHelper.getFilter());
+
         if (listFiles == null)
             return true;
 
         for (File child : listFiles) {
             // do not show selected file if in move state
+            L.i(TAG, "listFiles::-->" + child);
             if (mFileViewInteractionHub.isMoveState()
                 && mFileViewInteractionHub.isFileSelected(child.getPath()))
                 continue;
@@ -852,9 +854,8 @@ public class CommonRightFragment extends BaseFragment implements
         void selected(ArrayList<FileInfo> files);
     }
 
-    @Override
-    public FileIconHelper getFileIconHelper() {
-        return mFileIconHelper;
+    public FileIconTypeHelper getFileIconTypeHelper() {
+        return mFileIconTypeHelper;
     }
 
     public boolean setPath(String location) {
