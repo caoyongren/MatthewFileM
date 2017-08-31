@@ -859,7 +859,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             }
         } else if (doubleTag != null && Constants.DOUBLE_TAG.equals(doubleTag)) {
 //            mCheckedFileNameList.remove(lFileInfo);  //
-            ((CommonRightFragment) mFileViewListener).getAdapter().getSelectFileList().clear();
+            ((CommonRightFragment) mFileViewListener).getCommonFileAdapter().getSelectedFileList().clear();
             clearSelected();
             mCurrentPath = getAbsoluteName(mCurrentPath, fileInfo.fileName);
             refreshFileList();

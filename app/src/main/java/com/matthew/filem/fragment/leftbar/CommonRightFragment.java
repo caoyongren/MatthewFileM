@@ -46,7 +46,7 @@ import java.util.List;
 /**
  * Author: MasterMan
  * Describe:
- *   Right layout show info to file.@inflateFileData
+ *   Right layout show mInfo to file.@inflateFileData
  *   对于文件的监听．
  * */
 public class CommonRightFragment extends BaseFragment implements
@@ -54,7 +54,7 @@ public class CommonRightFragment extends BaseFragment implements
     private static final String TAG = "CommonRightFragment : DEBUG:";
     public static final String ROOT_DIRECTORY = "root_directory";
     private static final String sdDir = Util.getSdDirectory();
-    private CommonFileAdapter mAdapter;
+    private CommonFileAdapter mCommonFileAdapter;
     private FileCategoryHelper mFileCagetoryHelper;
     private FileIconHelper mFileIconHelper;
     private ArrayList<FileInfo> mFileNameList = new ArrayList<>();
@@ -62,10 +62,10 @@ public class CommonRightFragment extends BaseFragment implements
     private MainActivity mMainActivity;
     private DragListView mFileListView;
     private DragGridView mFileGridView;
-    private FrameLayout mFragmentSysFl;
+    private FrameLayout mCommonRightFl;
     private String curRootDir = "";
-    private String mouseRightTag = "mouse";
-    private boolean isCtrlPress;
+    private String mMouseRightTag = "mouse";
+    private boolean mIsCtrlPress;
     private boolean mIsLeftItem;
 
     // memorize the scroll positions of previous paths
@@ -119,9 +119,9 @@ public class CommonRightFragment extends BaseFragment implements
     protected void initView() {
         mActivity = getActivity();
         mMainActivity = (MainActivity) getActivity();
-        mFragmentSysFl = (FrameLayout) rootView.findViewById(R.id.fl_common_right);
+        mCommonRightFl = (FrameLayout) rootView.findViewById(R.id.fl_common_right);
         mFrameSelectView = new FrameSelectView(mMainActivity);
-        mFragmentSysFl.addView(mFrameSelectView);
+        mCommonRightFl.addView(mFrameSelectView);
 
         mEmptyView = rootView.findViewById(R.id.ll_common_right_empty_view);
         mIsSdCardReady = Util.isSDCardReady();
@@ -144,11 +144,11 @@ public class CommonRightFragment extends BaseFragment implements
         mListMotionListener = new ListViewOnGenericMotionListener();
         if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
-            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_list,
+            mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_list_common,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_grid,
+            mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_grid_common,
                     mFileNameList, mFileViewInteractionHub,
                     mFileIconHelper, mGridMotionListener);
         }
@@ -188,7 +188,7 @@ public class CommonRightFragment extends BaseFragment implements
         initRegisterBroadcast();
         updateUI();
         setHasOptionsMenu(true);
-        mFileInfoTotalList = mAdapter.getFileInfoList();
+        mFileInfoTotalList = mCommonFileAdapter.getFileInfoList();
         L.i(TAG, "mFileInfoTotalList-- >" + mFileInfoTotalList.size());
     }
 
@@ -215,8 +215,8 @@ public class CommonRightFragment extends BaseFragment implements
                         //selectorMenuId(pop_menu);
                     }
                     break;
-                case "com.isCtrlPress":
-                    isCtrlPress = intent.getExtras().getBoolean("is_ctrl_press");
+                case "com.mIsCtrlPress":
+                    mIsCtrlPress = intent.getExtras().getBoolean("is_ctrl_press");
                     break;
                 case Intent.ACTION_MEDIA_MOUNTED:
                 case Intent.ACTION_MEDIA_UNMOUNTED:
@@ -296,11 +296,11 @@ public class CommonRightFragment extends BaseFragment implements
     private void switchMode() {
      if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             addHeadView(mActivity);
-            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_list,
+            mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_list_common,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mListMotionListener);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-            mAdapter = new CommonFileAdapter(mActivity, R.layout.file_browser_item_grid,
+            mCommonFileAdapter = new CommonFileAdapter(mActivity, R.layout.item_file_grid_common,
                                            mFileNameList, mFileViewInteractionHub,
                                            mFileIconHelper, mGridMotionListener);
         }
@@ -310,18 +310,18 @@ public class CommonRightFragment extends BaseFragment implements
     private void addHeadView(Context context) {
         if (mFileListView.getHeaderViewsCount() == 0) {
             View headView =
-                    LayoutInflater.from(context).inflate(R.layout.file_browser_item_list, null);
-            ImageView lFileImage = (ImageView) headView.findViewById(R.id.file_image);
-            Util.setText(headView, R.id.file_name,
+                    LayoutInflater.from(context).inflate(R.layout.item_file_list_common, null);
+            ImageView lFileImage = (ImageView) headView.findViewById(R.id.iv_file_image_item_grid);
+            Util.setText(headView, R.id.et_file_name_item_grid,
                     context.getResources().getString(R.string.file_title_name),
                     context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.file_count,
+            Util.setText(headView, R.id.tv_file_count_item_grid,
                     context.getResources().getString(R.string.file_title_type),
                     context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.modified_time,
+            Util.setText(headView, R.id.tv_modified_time_item_grid,
                     context.getResources().getString(R.string.file_title_modified),
                     context.getResources().getColor(R.color.file_title_color));
-            Util.setText(headView, R.id.file_size,
+            Util.setText(headView, R.id.tv_file_size_item_grid,
                     context.getResources().getString(R.string.file_title_size),
                     context.getResources().getColor(R.color.file_title_color));
             lFileImage.setVisibility(View.GONE);
@@ -333,40 +333,53 @@ public class CommonRightFragment extends BaseFragment implements
     public class GridViewOnGenericMotionListener implements View.OnTouchListener {
         private boolean mIsShowDialog = false;
         private boolean mIsItem = false;
-        private List<Integer> integerList = new ArrayList<>();
+        private List<Integer> mIntegerList = new ArrayList<>();
         private float mDownX = -1;
         private float mDownY, mMoveX, mMoveY;
         private boolean isMove;
         private List<Integer> list = new ArrayList<>();
-        private FileInfo info;
+        private FileInfo mInfo;
 
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
             mMainActivity.clearNivagateFocus();
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    integerList = mAdapter.getSelectFileList();
+                    T.showShort(getActivity(), TAG + "-- >ACTION_DOWN");
+                    mIntegerList = mCommonFileAdapter.getSelectedFileList();
+                    L.i(TAG, "选中的：mIntegerList" + mIntegerList);
                     calculateFileLocation(mFileGridView.getVerticalScrollDistance());
+
                     if (view.getTag() instanceof CommonFileAdapter.ViewHolder
-                            || view.getId() == R.id.file_name) {
+                            || view.getId() == R.id.et_file_name_item_grid) {
                             mDownX = -1;
                             mIsItem = true;
+                        //右键弹出dialog.
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
+                            T.showShort(getActivity(), TAG + "-- > BUTTON_SECONDARY");
                             mIsShowDialog = true;
                         }
-                        if (view.getId() == R.id.file_name) {
+
+                        /*if (view.getId() == R.id.et_file_name_item_grid) {
                             mPos = (int) view.getTag();
                         } else {
                             mPos = (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
-                        }
+                        }*/
+                        //ｍPos是索引位置
+                        mPos = (view.getId() == R.id.et_file_name_item_grid) ? (int) view.getTag() :
+                                (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
+                        L.i(TAG, "mPos:: -->" + mPos);
+
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_PRIMARY) {
-                            mouseRightTag = "button_primary";
+                            mMouseRightTag = "button_primary";
                         }
+
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
-                            mouseRightTag = "button_secondary";
+                            mMouseRightTag = "button_secondary";
                         }
-                        FileInfo fileInfo = mAdapter.getFileInfoList().get(mPos);
-                        if (!isCtrlPress && "button_primary".equals(mouseRightTag)
+
+                        FileInfo fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                        if (!mIsCtrlPress && "button_primary".equals(mMouseRightTag)
                                 && mLastClickId == mPos
                                 && (Math.abs(System.currentTimeMillis() - mLastClickTime)
                                 < Constants.DOUBLE_CLICK_INTERVAL_TIME)) {
@@ -374,7 +387,7 @@ public class CommonRightFragment extends BaseFragment implements
                                     Constants.DOUBLE_TAG, motionEvent, fileInfo);
                             mPos = -1;
                             mLastClickId = -1;
-                            integerList.clear();
+                            mIntegerList.clear();
                             mFileViewInteractionHub.clearSelected();
                         } else {
                             mLastClickTime = System.currentTimeMillis();
@@ -405,44 +418,44 @@ public class CommonRightFragment extends BaseFragment implements
                                 mDownX > mMoveX ? mDownX : mMoveX, mDownY > mMoveY ? mDownY : mMoveY);
                         mFrameSelectView.invalidate();
                         int i;
-                        integerList.clear();
+                        mIntegerList.clear();
                         for (i = 0; i < mFileInfoTotalList.size(); i++) {
-                            info = mFileInfoTotalList.get(i);
-                            if (frameSelectionJudge(info, mDownX, mDownY, mMoveX, mMoveY)) {
-                                info.Selected = true;
-                                integerList.add(i);
+                            mInfo = mFileInfoTotalList.get(i);
+                            if (frameSelectionJudge(mInfo, mDownX, mDownY, mMoveX, mMoveY)) {
+                                mInfo.Selected = true;
+                                mIntegerList.add(i);
                             }
                         }
-                        if (!(list.containsAll(integerList) && list.size() == integerList.size())) {
-                            mAdapter.notifyDataSetChanged();
+                        if (!(list.containsAll(mIntegerList) && list.size() == mIntegerList.size())) {
+                            mCommonFileAdapter.notifyDataSetChanged();
                         }
                         list.clear();
-                        list.addAll(integerList);
+                        list.addAll(mIntegerList);
                     }
                     return true;
                 case MotionEvent.ACTION_UP:
                     mFrameSelectView.setVisibility(View.INVISIBLE);
                     FileInfo fileInfo = null;
                     if (mPos != -1) {
-                         fileInfo = mAdapter.getFileInfoList().get(mPos);
+                         fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
                         fileInfo.Selected = true;
-                        if (isCtrlPress) {
-                            if (!integerList.contains(mPos)) {
-                                integerList.add(mPos);
+                        if (mIsCtrlPress) {
+                            if (!mIntegerList.contains(mPos)) {
+                                mIntegerList.add(mPos);
                                 mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
                             } else {
-                                integerList.remove(new Integer(mPos));
+                                mIntegerList.remove(new Integer(mPos));
                                 mFileViewInteractionHub.removeDialogSelectedItem(fileInfo);
                             }
-                        } else if (!(mouseRightTag == "button_secondary"
-                                && integerList.contains(mPos))) {
-                            integerList.clear();
-                            integerList.add(mPos);
+                        } else if (!(mMouseRightTag == "button_secondary"
+                                && mIntegerList.contains(mPos))) {
+                            mIntegerList.clear();
+                            mIntegerList.add(mPos);
                             mFileViewInteractionHub.clearSelected();
                             mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
                         }
                     } else {
-                        integerList.clear();
+                        mIntegerList.clear();
                         mFileViewInteractionHub.clearSelected();
                     }
                     float upX = motionEvent.getX();
@@ -454,18 +467,18 @@ public class CommonRightFragment extends BaseFragment implements
                             info = mFileInfoTotalList.get(i);
                             if (frameSelectionJudge(info, mDownX, mDownY, upX, upY)) {
                                 info.Selected = true;
-                                if (!integerList.contains(i)) {
-                                    integerList.add(i);
+                                if (!mIntegerList.contains(i)) {
+                                    mIntegerList.add(i);
                                     mFileViewInteractionHub.addDialogSelectedItem(info);
                                 } else {
-                                    integerList.remove(new Integer(i));
+                                    mIntegerList.remove(new Integer(i));
                                     mFileViewInteractionHub.removeDialogSelectedItem(info);
                                 }
                             }
                         }
                     }
-                    mAdapter.notifyDataSetChanged();
-                    mouseRightTag = "mouse";
+                    mCommonFileAdapter.notifyDataSetChanged();
+                    mMouseRightTag = "mouse";
 
                     if (mIsShowDialog == true) {
                          int compressFileState = Constants.COMPRESSIBLE;
@@ -503,7 +516,7 @@ public class CommonRightFragment extends BaseFragment implements
         public boolean onTouch(View view, MotionEvent motionEvent) {
             switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-                    integerList = mAdapter.getSelectFileList();
+                    integerList = mCommonFileAdapter.getSelectedFileList();
                     if (view.getTag() instanceof CommonFileAdapter.ViewHolder) {
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
                             mIsShowDialog = true;
@@ -511,13 +524,13 @@ public class CommonRightFragment extends BaseFragment implements
                         }
                         mPos = (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_PRIMARY) {
-                            mouseRightTag = "button_primary";
+                            mMouseRightTag = "button_primary";
                         }
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
-                            mouseRightTag = "button_secondary";
+                            mMouseRightTag = "button_secondary";
                         }
-                        fileInfo = mAdapter.getFileInfoList().get(mPos);
-                        if (!isCtrlPress && "button_primary".equals(mouseRightTag)
+                        fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                        if (!mIsCtrlPress && "button_primary".equals(mMouseRightTag)
                                 && mLastClickId == mPos
                                 && (Math.abs(System.currentTimeMillis() - mLastClickTime)
                                 < Constants.DOUBLE_CLICK_INTERVAL_TIME)) {
@@ -544,9 +557,9 @@ public class CommonRightFragment extends BaseFragment implements
                     break;
                 case MotionEvent.ACTION_UP:
                     if (mPos != -1) {
-                        fileInfo = mAdapter.getFileInfoList().get(mPos);
+                        fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
                         fileInfo.Selected = true;
-                        if (isCtrlPress) {
+                        if (mIsCtrlPress) {
                             if (!integerList.contains(mPos)) {
                                 integerList.add(mPos);
                                 mFileViewInteractionHub.addDialogSelectedItem(fileInfo);
@@ -554,7 +567,7 @@ public class CommonRightFragment extends BaseFragment implements
                                 integerList.remove(new Integer(mPos));
                                 mFileViewInteractionHub.removeDialogSelectedItem(fileInfo);
                             }
-                        } else if (mouseRightTag != "button_secondary"
+                        } else if (mMouseRightTag != "button_secondary"
                                 || !integerList.contains(mPos)) {
                             integerList.clear();
                             integerList.add(mPos);
@@ -565,8 +578,8 @@ public class CommonRightFragment extends BaseFragment implements
                         integerList.clear();
                         mFileViewInteractionHub.clearSelected();
                     }
-                    mAdapter.notifyDataSetChanged();
-                    mouseRightTag = "mouse";
+                    mCommonFileAdapter.notifyDataSetChanged();
+                    mMouseRightTag = "mouse";
 
                     if (mIsShowDialog == true) {
                         int compressFileState = Constants.COMPRESSIBLE;
@@ -610,11 +623,11 @@ public class CommonRightFragment extends BaseFragment implements
         if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
             mFileGridView.setVisibility(View.GONE);
             mFileListView.setVisibility(View.VISIBLE);
-            mFileListView.setAdapter(mAdapter);
+            mFileListView.setAdapter(mCommonFileAdapter);
         } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
             mFileListView.setVisibility(View.GONE);
             mFileGridView.setVisibility(View.VISIBLE);
-            mFileGridView.setAdapter(mAdapter);
+            mFileGridView.setAdapter(mCommonFileAdapter);
         }
     }
 
@@ -623,7 +636,7 @@ public class CommonRightFragment extends BaseFragment implements
         intentFilter.addAction(MainActivity.SWITCH_VIEW_INTENT);
         intentFilter.addAction(MainActivity.SWITCH_MENU_INTENT);
         intentFilter.addAction("com.isTouchEvent");
-        intentFilter.addAction("com.isCtrlPress");
+        intentFilter.addAction("com.mIsCtrlPress");
         intentFilter.addAction(Intent.ACTION_MEDIA_MOUNTED);
         intentFilter.addAction(Intent.ACTION_MEDIA_UNMOUNTED);
         mActivity.registerReceiver(mReceiver, intentFilter);
@@ -632,7 +645,7 @@ public class CommonRightFragment extends BaseFragment implements
     @Override
     public void onDestroyView() {
         mActivity.unregisterReceiver(mReceiver);
-        mAdapter.dispose();
+        mCommonFileAdapter.dispose();
         super.onDestroyView();
     }
 
@@ -659,9 +672,9 @@ public class CommonRightFragment extends BaseFragment implements
         if (mPreviousPath != null) {
             if (path.startsWith(mPreviousPath)) {
                 int firstVisiblePosition = 0;
-                if ("list".equals(LocalCacheLayout.getViewTag())) {
+                if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
                     firstVisiblePosition = mFileListView.getFirstVisiblePosition();
-                } else if ("grid".equals(LocalCacheLayout.getViewTag())) {
+                } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
                     firstVisiblePosition = mFileGridView.getFirstVisiblePosition();
                 }
                 if (mScrollPositionList.size() != 0
@@ -741,8 +754,8 @@ public class CommonRightFragment extends BaseFragment implements
                 }
             });
         }
-        mAdapter.getSelectFileList().clear();
-        mAdapter.notifyDataSetChanged();
+        mCommonFileAdapter.getSelectedFileList().clear();
+        mCommonFileAdapter.notifyDataSetChanged();
         return true;
     }
 
@@ -781,7 +794,7 @@ public class CommonRightFragment extends BaseFragment implements
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                mAdapter.notifyDataSetChanged();
+                mCommonFileAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -904,7 +917,7 @@ public class CommonRightFragment extends BaseFragment implements
     }
 
     public void goBack() {
-        mAdapter.getSelectFileList().clear();
+        mCommonFileAdapter.getSelectedFileList().clear();
         mFileViewInteractionHub.clearSelected();
         mFileViewInteractionHub.onBackPressed();
     }
@@ -937,8 +950,8 @@ public class CommonRightFragment extends BaseFragment implements
     protected void enter(String tag, String path) {
     }
 
-    public CommonFileAdapter getAdapter() {
-        return mAdapter;
+    public CommonFileAdapter getCommonFileAdapter() {
+        return mCommonFileAdapter;
     }
 
     public FileViewInteractionHub getFileViewInteractionHub() {
@@ -955,7 +968,7 @@ public class CommonRightFragment extends BaseFragment implements
 
     public void calculateFileLocation(int fixY) {
         int[] gridViewParams = mFileGridView.getParams();
-        int[] itemParams = mAdapter.getParams();
+        int[] itemParams = mCommonFileAdapter.getParams();
         for (int i = 0; i < mFileInfoTotalList.size(); i++) {
             mFileInfoTotalList.get(i).left = gridViewParams[GRID_LEFT_POS]
                     + (i % gridViewParams[GRID_NUMCOLUMNS_POS]) * (gridViewParams[GRID_WIDTH_POS]);

@@ -19,7 +19,7 @@
             android:layout_weight="7">
 
             <ImageView
-                android:id="@+id/file_image"
+                android:id="@+id/iv_file_image_item_grid"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
@@ -29,7 +29,7 @@
                 android:src="@mipmap/folder" />
 
             <TextView
-                android:id="@+id/file_name"
+                android:id="@+id/et_file_name_item_grid"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -38,7 +38,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/modified_time"
+            android:id="@+id/tv_modified_time_item_grid"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -46,7 +46,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/file_count"
+            android:id="@+id/tv_file_count_item_grid"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -55,7 +55,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/file_size"
+            android:id="@+id/tv_file_size_item_grid"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

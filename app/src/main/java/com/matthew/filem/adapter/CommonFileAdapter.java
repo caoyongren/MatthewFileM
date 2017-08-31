@@ -28,7 +28,7 @@ public class CommonFileAdapter extends BaseAdapter {
     private int layoutId;
     private Context mContext;
     private List<FileInfo> mFileInfoList;
-    private List<Integer> mSelectFileList = new ArrayList<>();
+    private List<Integer> mSelectedFileList = new ArrayList<>();
     private View.OnTouchListener mMotionListener;
     private int mWidth, mHeight;
     private IconHolder mIconHolder;
@@ -55,8 +55,8 @@ public class CommonFileAdapter extends BaseAdapter {
         return mFileInfoList;
     }
 
-    public List<Integer> getSelectFileList() {
-        return mSelectFileList;
+    public List<Integer> getSelectedFileList() {
+        return mSelectedFileList;
     }
 
     @Override
@@ -79,9 +79,9 @@ public class CommonFileAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null)  {
             if (MainActivity.DEFAULT_VIEW_TAG_LIST.equals(LocalCacheLayout.getViewTag())) {
-                convertView = mInflater.inflate(R.layout.file_browser_item_list, parent, false);
+                convertView = mInflater.inflate(R.layout.item_file_list_common, parent, false);
             } else if (MainActivity.DEFAULT_VIEW_TAG_GRID.equals(LocalCacheLayout.getViewTag())) {
-                convertView = mInflater.inflate(R.layout.file_browser_item_grid, parent, false);
+                convertView = mInflater.inflate(R.layout.item_file_grid_common, parent, false);
             }
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
@@ -97,7 +97,7 @@ public class CommonFileAdapter extends BaseAdapter {
         FileListItem.setupFileListItemInfo(mContext, convertView, lFileInfo,
                                            mIconHolder, mFileViewInteractionHub);
         LinearLayout background = (LinearLayout)convertView;
-        background.setBackgroundResource(mSelectFileList.contains(position) ?
+        background.setBackgroundResource(mSelectedFileList.contains(position) ?
                                          R.drawable.list_item_bg_shape : R.color.white);
         return convertView;
     }
@@ -106,8 +106,8 @@ public class CommonFileAdapter extends BaseAdapter {
         public TextView name;
         public ImageView icon;
         public ViewHolder(View view) {
-            name = (TextView) view.findViewById(R.id.file_name);
-            icon = (ImageView) view.findViewById(R.id.file_image);
+            name = (TextView) view.findViewById(R.id.et_file_name_item_grid);
+            icon = (ImageView) view.findViewById(R.id.iv_file_image_item_grid);
         }
     }
 

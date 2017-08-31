@@ -239,13 +239,13 @@ public class DragGridView extends GridView {
         void onChange(int from, int to);
     }
 
-    public void setIsBlankArea(boolean isBlankArea) {
+    /*public void setIsBlankArea(boolean isBlankArea) {
         this.mIsBlankArea = isBlankArea;
     }
 
     public boolean isBlankArea() {
         return mIsBlankArea;
-    }
+    }*/
 
     @Override
     protected void onDraw(Canvas canvas) {

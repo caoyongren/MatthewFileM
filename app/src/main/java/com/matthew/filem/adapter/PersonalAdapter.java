@@ -49,7 +49,7 @@ public class PersonalAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder;
         if (view == null)  {
-            view = mInflater.inflate(R.layout.file_browser_item_grid, viewGroup, false);
+            view = mInflater.inflate(R.layout.item_file_grid_common, viewGroup, false);
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
             view.setOnGenericMotionListener(mMotionListener);
@@ -67,7 +67,7 @@ public class PersonalAdapter extends BaseAdapter {
         public TextView name;
         public LinearLayout ll;
         public ViewHolder(View view) {
-            name = (TextView) view.findViewById(R.id.file_name);
+            name = (TextView) view.findViewById(R.id.et_file_name_item_grid);
             ll = (LinearLayout) view.findViewById(R.id.ll_grid_item_bg);
         }
     }

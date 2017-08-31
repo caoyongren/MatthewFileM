@@ -863,9 +863,9 @@ public class MainActivity extends BaseActivity
             if (getVisibleFragment() instanceof CommonRightFragment) {
                 final CommonRightFragment fragment = (CommonRightFragment) getVisibleFragment();
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
-                CommonFileAdapter adapter = fragment.getAdapter();
+                CommonFileAdapter adapter = fragment.getCommonFileAdapter();
                 List<FileInfo> list = adapter.getFileInfoList();
-                List<Integer> integerList = adapter.getSelectFileList();
+                List<Integer> integerList = adapter.getSelectedFileList();
                 for (int i = 0; i < list.size(); i++) {
                     integerList.add(i);
                 }
@@ -1161,10 +1161,10 @@ public class MainActivity extends BaseActivity
         if (fragment instanceof CommonRightFragment) {
             L.i(TAG, "showRightFileInfo: path -- >" + path);
             ((CommonRightFragment) fragment).setPath(path);
-            CommonFileAdapter adapter = ((CommonRightFragment) fragment).getAdapter();
+            CommonFileAdapter adapter = ((CommonRightFragment) fragment).getCommonFileAdapter();
             if (adapter != null) {
-                L.i(TAG, "showRightFileInfo: list" + adapter.getSelectFileList());
-                adapter.getSelectFileList().clear();
+                L.i(TAG, "showRightFileInfo: list" + adapter.getSelectedFileList());
+                adapter.getSelectedFileList().clear();
                 ((CommonRightFragment) fragment).getFileViewInteractionHub().clearSelected();
             }
         }
@@ -1608,11 +1608,11 @@ public class MainActivity extends BaseActivity
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mReceiver.unregisterReceiver();
         if (mCustomFileObserver != null) {
             mCustomFileObserver.stopWatching();
             mCustomFileObserver = null;
         }
+        super.onDestroy();
     }
 }
