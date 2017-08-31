@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 
 public class FileCategoryHelper {
-    private static final String LOG_TAG = "FileCategoryHelper -- > DEBUG::";
+    private static final String TAG = "FileCategoryHelper -- > DEBUG::";
 
     public enum FileCategory {
         All, Music, Video, Picture, Theme, Doc, Zip, Apk, Custom, Other, Favorite
@@ -85,7 +85,7 @@ public class FileCategoryHelper {
     }
     }*/
 
-    private HashMap<FileCategory, CategoryInfo> mCategoryInfo = new HashMap<>();
+    //private HashMap<FileCategory, CategoryInfo> mCategoryInfo = new HashMap<>();
 
     public FilenameFilter getFilter() {
         return filters.get(mCategory);
@@ -93,10 +93,10 @@ public class FileCategoryHelper {
 
 
 
-    public class CategoryInfo {
+    /*public class CategoryInfo {
         public long count;
         public long size;
-    }
+    }*/
 
     /*private void setCategoryInfo(FileCategory fc, long count, long size) {
         CategoryInfo info = mCategoryInfo.get(fc);

@@ -15,6 +15,7 @@ import com.matthew.filem.info.FileInfo;
 import com.matthew.filem.system.FileIconHelper;
 import com.matthew.filem.system.FileListItem;
 import com.matthew.filem.system.FileViewInteractionHub;
+import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;
 import com.matthew.filem.utils.IconHolder;
 
@@ -22,22 +23,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommonFileAdapter extends BaseAdapter {
+    public static final String TAG = "CommonFileAdapter: -- >DEBUG::";
     private LayoutInflater mInflater;
     private FileViewInteractionHub mFileViewInteractionHub;
     private FileIconHelper mFileIcon;
     private int layoutId;
     private Context mContext;
-    private List<FileInfo> mFileInfoList;
+    private List<FileInfo> mFileInfoTotalList;//数据源
     private List<Integer> mSelectedFileList = new ArrayList<>();
     private View.OnTouchListener mMotionListener;
     private int mWidth, mHeight;
     private IconHolder mIconHolder;
 
     public CommonFileAdapter(Context context, int resource,
-                             List<FileInfo> objects, FileViewInteractionHub f,
+                             List<FileInfo> list, FileViewInteractionHub f,
                              FileIconHelper fileIcon,
                              View.OnTouchListener motionListener) {
-        mFileInfoList = objects;
+        mFileInfoTotalList = list;
         layoutId = resource;
         mInflater = LayoutInflater.from(context);
         mFileViewInteractionHub = f;
@@ -51,22 +53,14 @@ public class CommonFileAdapter extends BaseAdapter {
         mIconHolder = IconHolder.getIconHolder(mContext);
     }
 
-    public List<FileInfo> getFileInfoList() {
-        return mFileInfoList;
-    }
-
-    public List<Integer> getSelectedFileList() {
-        return mSelectedFileList;
-    }
-
     @Override
     public int getCount() {
-        return mFileInfoList.size();
+        return mFileInfoTotalList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mFileInfoList.get(position);
+        return mFileInfoTotalList.get(position);
     }
 
     @Override
@@ -87,13 +81,14 @@ public class CommonFileAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
             convertView.setOnTouchListener(mMotionListener);
             ViewGroup.LayoutParams params = convertView.getLayoutParams();
+            L.i(TAG, "getView--> mWidth:::" + params.width + "mHeight :::" + params.height);
             setParams(params.width, params.height);
         }
         viewHolder = (ViewHolder) convertView.getTag();
         viewHolder.name.setTag(position);
         viewHolder.name.setOnTouchListener(mMotionListener);
 
-        FileInfo lFileInfo = mFileInfoList.get(position);
+        FileInfo lFileInfo = mFileInfoTotalList.get(position);
         FileListItem.setupFileListItemInfo(mContext, convertView, lFileInfo,
                                            mIconHolder, mFileViewInteractionHub);
         LinearLayout background = (LinearLayout)convertView;
@@ -103,6 +98,7 @@ public class CommonFileAdapter extends BaseAdapter {
     }
 
     public static class ViewHolder {
+
         public TextView name;
         public ImageView icon;
         public ViewHolder(View view) {
@@ -114,6 +110,15 @@ public class CommonFileAdapter extends BaseAdapter {
     private void setParams(int width, int height) {
         mWidth = width;
         mHeight = height;
+    }
+
+    public List<FileInfo> getFileInfoTotalList() {
+        L.i(TAG, "mFileInfoTotalList -->" + mFileInfoTotalList.size());
+        return mFileInfoTotalList;
+    }
+
+    public List<Integer> getSelectedFileList() {
+        return mSelectedFileList;
     }
 
     public int[] getParams() {

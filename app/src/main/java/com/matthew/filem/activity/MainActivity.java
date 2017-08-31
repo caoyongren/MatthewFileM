@@ -864,7 +864,7 @@ public class MainActivity extends BaseActivity
                 final CommonRightFragment fragment = (CommonRightFragment) getVisibleFragment();
                 fragment.mFileViewInteractionHub.onOperationSelectAll();
                 CommonFileAdapter adapter = fragment.getCommonFileAdapter();
-                List<FileInfo> list = adapter.getFileInfoList();
+                List<FileInfo> list = adapter.getFileInfoTotalList();
                 List<Integer> integerList = adapter.getSelectedFileList();
                 for (int i = 0; i < list.size(); i++) {
                     integerList.add(i);

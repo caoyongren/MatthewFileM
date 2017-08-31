@@ -188,7 +188,7 @@ public class CommonRightFragment extends BaseFragment implements
         initRegisterBroadcast();
         updateUI();
         setHasOptionsMenu(true);
-        mFileInfoTotalList = mCommonFileAdapter.getFileInfoList();
+        mFileInfoTotalList = mCommonFileAdapter.getFileInfoTotalList();
         L.i(TAG, "mFileInfoTotalList-- >" + mFileInfoTotalList.size());
     }
 
@@ -347,6 +347,7 @@ public class CommonRightFragment extends BaseFragment implements
                 case MotionEvent.ACTION_DOWN:
                     T.showShort(getActivity(), TAG + "-- >ACTION_DOWN");
                     mIntegerList = mCommonFileAdapter.getSelectedFileList();
+                    //总是ｍPos的上一个数值．
                     L.i(TAG, "选中的：mIntegerList" + mIntegerList);
                     calculateFileLocation(mFileGridView.getVerticalScrollDistance());
 
@@ -360,12 +361,7 @@ public class CommonRightFragment extends BaseFragment implements
                             mIsShowDialog = true;
                         }
 
-                        /*if (view.getId() == R.id.et_file_name_item_grid) {
-                            mPos = (int) view.getTag();
-                        } else {
-                            mPos = (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
-                        }*/
-                        //ｍPos是索引位置
+                        //ｍPos是索引位置第几个～
                         mPos = (view.getId() == R.id.et_file_name_item_grid) ? (int) view.getTag() :
                                 (int) ((CommonFileAdapter.ViewHolder) view.getTag()).name.getTag();
                         L.i(TAG, "mPos:: -->" + mPos);
@@ -378,7 +374,7 @@ public class CommonRightFragment extends BaseFragment implements
                             mMouseRightTag = "button_secondary";
                         }
 
-                        FileInfo fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                        FileInfo fileInfo = mCommonFileAdapter.getFileInfoTotalList().get(mPos);
                         if (!mIsCtrlPress && "button_primary".equals(mMouseRightTag)
                                 && mLastClickId == mPos
                                 && (Math.abs(System.currentTimeMillis() - mLastClickTime)
@@ -437,7 +433,7 @@ public class CommonRightFragment extends BaseFragment implements
                     mFrameSelectView.setVisibility(View.INVISIBLE);
                     FileInfo fileInfo = null;
                     if (mPos != -1) {
-                         fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                         fileInfo = mCommonFileAdapter.getFileInfoTotalList().get(mPos);
                         fileInfo.Selected = true;
                         if (mIsCtrlPress) {
                             if (!mIntegerList.contains(mPos)) {
@@ -529,7 +525,7 @@ public class CommonRightFragment extends BaseFragment implements
                         if (motionEvent.getButtonState() == MotionEvent.BUTTON_SECONDARY) {
                             mMouseRightTag = "button_secondary";
                         }
-                        fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                        fileInfo = mCommonFileAdapter.getFileInfoTotalList().get(mPos);
                         if (!mIsCtrlPress && "button_primary".equals(mMouseRightTag)
                                 && mLastClickId == mPos
                                 && (Math.abs(System.currentTimeMillis() - mLastClickTime)
@@ -557,7 +553,7 @@ public class CommonRightFragment extends BaseFragment implements
                     break;
                 case MotionEvent.ACTION_UP:
                     if (mPos != -1) {
-                        fileInfo = mCommonFileAdapter.getFileInfoList().get(mPos);
+                        fileInfo = mCommonFileAdapter.getFileInfoTotalList().get(mPos);
                         fileInfo.Selected = true;
                         if (mIsCtrlPress) {
                             if (!integerList.contains(mPos)) {
