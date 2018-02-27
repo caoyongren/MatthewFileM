@@ -1,4 +1,4 @@
-package com.matthew.filem.activity.base;
+package com.matthew.filem.view.activity.base;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

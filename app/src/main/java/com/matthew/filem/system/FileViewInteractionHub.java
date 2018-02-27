@@ -18,11 +18,11 @@ import android.widget.GridView;
 import android.widget.ListView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.activity.base.BaseActivity;
+import com.matthew.filem.view.activity.MainActivity;
+import com.matthew.filem.view.activity.base.BaseActivity;
 import com.matthew.filem.component.MenuFirstDialog;
 import com.matthew.filem.component.PropertyDialog;
-import com.matthew.filem.fragment.leftbar.CommonRightFragment;
+import com.matthew.filem.view.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.utils.Constants;

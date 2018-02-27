@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.model.SeafileLibraryInfo;
 import com.matthew.filem.utils.Constants;

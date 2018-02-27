@@ -19,7 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.model.FileInfo;

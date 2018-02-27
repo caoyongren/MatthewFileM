@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 
 public class PopWinShare extends PopupWindow {

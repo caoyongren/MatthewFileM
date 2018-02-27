@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import com.matthew.filem.R;
 import com.matthew.filem.model.SeafileLibraryInfo;
 import com.matthew.filem.utils.SeafileUtils;
-import com.matthew.filem.fragment.computer.CloudDiskFragment;
+import com.matthew.filem.view.fragment.computer.CloudDiskFragment;
 
 import java.util.ArrayList;
 

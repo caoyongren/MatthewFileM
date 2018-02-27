@@ -1,4 +1,4 @@
-package com.matthew.filem.activity;
+package com.matthew.filem.view.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;

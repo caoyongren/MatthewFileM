@@ -4,18 +4,18 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-public class MyImageView extends ImageView {
+public class FileImageView extends ImageView {
     private OnMeasureListener onMeasureListener;
 
     public void setOnMeasureListener(OnMeasureListener onMeasureListener) {
         this.onMeasureListener = onMeasureListener;
     }
 
-    public MyImageView(Context context, AttributeSet attrs) {
+    public FileImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyImageView(Context context, AttributeSet attrs, int defStyle) {
+    public FileImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

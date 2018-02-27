@@ -7,13 +7,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.model.SearchInfo;
-import com.matthew.filem.fragment.computer.PersonalDiskFragment;
-import com.matthew.filem.fragment.leftbar.ComputerFragment;
-import com.matthew.filem.fragment.SearchFragment;
-import com.matthew.filem.fragment.base.BaseFragment;
+import com.matthew.filem.view.fragment.computer.PersonalDiskFragment;
+import com.matthew.filem.view.fragment.leftbar.ComputerFragment;
+import com.matthew.filem.view.fragment.SearchFragment;
+import com.matthew.filem.view.fragment.base.BaseFragment;
 import com.matthew.filem.utils.Constants;
 import java.io.File;
 import java.util.ArrayList;

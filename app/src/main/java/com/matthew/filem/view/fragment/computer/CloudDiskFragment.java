@@ -1,4 +1,4 @@
-package com.matthew.filem.fragment.computer;
+package com.matthew.filem.view.fragment.computer;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.GridView;
 import android.view.Window;
 
-import com.matthew.filem.fragment.base.BaseFragment;
+import com.matthew.filem.view.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
-import com.matthew.filem.fragment.leftbar.CommonRightFragment;
+import com.matthew.filem.view.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.model.SeafileLibraryInfo;
 import com.matthew.filem.component.SeafileDialog;
 import com.matthew.filem.utils.Constants;

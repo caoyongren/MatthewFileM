@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.utils.Constants;
 

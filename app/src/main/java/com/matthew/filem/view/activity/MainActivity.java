@@ -1,4 +1,4 @@
-package com.matthew.filem.activity;
+package com.matthew.filem.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
@@ -30,8 +30,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.matthew.filem.R;
-import com.matthew.filem.activity.base.BaseActivity;
-import com.matthew.filem.fragment.leftbar.CommonRightFragment;
+import com.matthew.filem.view.activity.base.BaseActivity;
+import com.matthew.filem.view.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.model.SeafileAccountInfo;
 import com.matthew.filem.model.SeafileLibraryInfo;
@@ -40,11 +40,11 @@ import com.matthew.filem.component.PopOnClickLintener;
 import com.matthew.filem.component.PopWinShare;
 import com.matthew.filem.component.SearchOnKeyListener;
 import com.matthew.filem.component.UsbPropertyDialog;
-import com.matthew.filem.fragment.SearchFragment;
-import com.matthew.filem.fragment.base.BaseFragment;
-import com.matthew.filem.fragment.computer.CloudDiskFragment;
-import com.matthew.filem.fragment.computer.PersonalDiskFragment;
-import com.matthew.filem.fragment.leftbar.ComputerFragment;
+import com.matthew.filem.view.fragment.SearchFragment;
+import com.matthew.filem.view.fragment.base.BaseFragment;
+import com.matthew.filem.view.fragment.computer.CloudDiskFragment;
+import com.matthew.filem.view.fragment.computer.PersonalDiskFragment;
+import com.matthew.filem.view.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
 import com.matthew.filem.adapter.CommonFileAdapter;
 import com.matthew.filem.system.FileOperationHelper;

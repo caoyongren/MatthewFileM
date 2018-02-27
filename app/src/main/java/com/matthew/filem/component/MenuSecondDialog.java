@@ -11,7 +11,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.matthew.filem.R;
-import com.matthew.filem.fragment.leftbar.CommonRightFragment;
+import com.matthew.filem.view.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.system.FileSortHelper;
 import com.matthew.filem.system.FileViewInteractionHub;
 

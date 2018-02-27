@@ -3,7 +3,7 @@ package com.matthew.filem.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 
 public class LocalCacheLayout {
     private static LocalCacheLayout localCache;

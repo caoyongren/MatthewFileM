@@ -1,4 +1,4 @@
-package com.matthew.filem.fragment.base;
+package com.matthew.filem.view.fragment.base;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.matthew.filem.R;
 import com.matthew.filem.impl.UiInterface;
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.model.ImageInfo;
 import com.matthew.filem.model.SearchInfo;
 import com.matthew.filem.utils.Constants;

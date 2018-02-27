@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.utils.T;
 

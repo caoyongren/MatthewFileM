@@ -1,4 +1,4 @@
-package com.matthew.filem.fragment.computer;
+package com.matthew.filem.view.fragment.computer;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.matthew.filem.fragment.base.BaseFragment;
+import com.matthew.filem.view.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.PersonalAdapter;
-import com.matthew.filem.fragment.leftbar.CommonRightFragment;
+import com.matthew.filem.view.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.view.drag.DragGridView;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.model.FileInfo;

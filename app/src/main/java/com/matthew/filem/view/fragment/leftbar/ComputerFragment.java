@@ -1,4 +1,4 @@
-package com.matthew.filem.fragment.leftbar;
+package com.matthew.filem.view.fragment.leftbar;
 
 import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.matthew.filem.fragment.base.BaseFragment;
-import com.matthew.filem.activity.MainActivity;
+import com.matthew.filem.view.fragment.base.BaseFragment;
+import com.matthew.filem.view.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.component.DiskDialog;
 import com.matthew.filem.model.FileInfo;
