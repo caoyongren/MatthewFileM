@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.widget.GridView;
@@ -42,7 +41,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private static final int FILE_NAME_NULL = 1;
     private static final int FILE_NAME_ILLEGAL = 2;
     private static final int FILE_NAME_WARNING = 3;
-    private static final String LOG_TAG = "FileViewInteractionHub";
     private IFileInteractionListener mFileViewListener;
     public static Map<String,Integer> saveMulti = new HashMap<>();
     private ArrayList<FileInfo> mCheckedFileNameList = new ArrayList<>();
@@ -51,7 +49,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     private ProgressDialog progressDialog;
     private Context mContext;
     private CopyOrMove copyOrMoveMode;
-    private int selectedDialogItem;
+    private int mSelectedDialogItem;
     private MenuFirstDialog menuFirstDialog;
     private MainActivity mMainActivity;
 
@@ -138,7 +136,6 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         mFileViewListener.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-//                showConfirmOperationBar(false);
                 clearSelected();
                 refreshFileList();
             }
@@ -420,14 +417,14 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
             try {
                 mFileViewListener.startActivity(intent);
             } catch (ActivityNotFoundException e) {
-                Log.e(LOG_TAG, "fail to view file: " + e.toString());
+                L.i(TAG, "fail to view file: " + e.toString());
             }
         }
         clearSelected();
     }
 
     public void onOperationRename() {
-        int pos = selectedDialogItem;
+        int pos = mSelectedDialogItem;
         if (pos == -1)
             return;
 
@@ -532,11 +529,11 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
                 intent.setClassName("com.android.providers.media",
                                     "com.android.providers.media.MediaScannerReceiver");
                 intent.setData(Uri.fromFile(Environment.getExternalStorageDirectory()));
-                Log.v(LOG_TAG, "directory changed, send broadcast:" + intent.toString());
+                L.i(TAG, "directory changed, send broadcast:" + intent.toString());
             } else {
                 intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                 intent.setData(Uri.fromFile(new File(path)));
-                Log.v(LOG_TAG, "file changed, send broadcast:" + intent.toString());
+                L.i(TAG, "file changed, send broadcast:" + intent.toString());
             }
             mContext.sendBroadcast(intent);
         }
@@ -785,7 +782,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     public void onListItemClick(int position, String doubleTag,
                                 MotionEvent event, FileInfo fileInfo) {
         if (fileInfo == null) {
-            Log.e(LOG_TAG, "file does not exist on position:" + position);
+            L.i(TAG, "file does not exist on position:" + position);
             return;
         }
 
@@ -807,7 +804,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
     public void onOperationOpen(MotionEvent event) {
         if (getSelectedFileList().size() != 0) {
             FileInfo fileInfo = getSelectedFileList().get(0);
-            onListItemClick(selectedDialogItem, Constants.DOUBLE_TAG, event, fileInfo);
+            onListItemClick(mSelectedDialogItem, Constants.DOUBLE_TAG, event, fileInfo);
         }
     }
 
@@ -860,7 +857,7 @@ public class FileViewInteractionHub implements FileOperationHelper.IOperationPro
         try {
             IntentBuilder.viewFile(mContext, lFileInfo.filePath, event);
         } catch (ActivityNotFoundException e) {
-            Log.e(LOG_TAG, "fail to view file: " + e.toString());
+            L.i(TAG, "fail to view file: " + e.toString());
         }
     }
 

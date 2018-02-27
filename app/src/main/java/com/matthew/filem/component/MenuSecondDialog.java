@@ -32,7 +32,7 @@ public class MenuSecondDialog extends Dialog implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_sort_dialog);
+        setContentView(R.layout.dialog_sort_menu);
         initView();
         setOnDismissListener(new OnDismissListener() {
             @Override
