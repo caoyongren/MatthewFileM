@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.matthew.filem.R;
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.FileListItem;
 import com.matthew.filem.system.FileViewInteractionHub;

@@ -15,7 +15,7 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.R;
 import com.matthew.filem.adapter.SeafileAdapter;
 import com.matthew.filem.fragment.leftbar.CommonRightFragment;
-import com.matthew.filem.info.SeafileLibraryInfo;
+import com.matthew.filem.model.SeafileLibraryInfo;
 import com.matthew.filem.component.SeafileDialog;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.SeafileUtils;

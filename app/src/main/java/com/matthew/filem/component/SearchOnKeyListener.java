@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.info.SearchInfo;
+import com.matthew.filem.model.SearchInfo;
 import com.matthew.filem.fragment.computer.PersonalDiskFragment;
 import com.matthew.filem.fragment.leftbar.ComputerFragment;
 import com.matthew.filem.fragment.SearchFragment;

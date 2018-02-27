@@ -17,7 +17,7 @@ import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.fragment.leftbar.CommonRightFragment;
-import com.matthew.filem.info.SearchInfo;
+import com.matthew.filem.model.SearchInfo;
 import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.IntentBuilder;
 import com.matthew.filem.system.Util;

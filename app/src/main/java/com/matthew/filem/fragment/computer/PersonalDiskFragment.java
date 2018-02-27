@@ -12,7 +12,7 @@ import com.matthew.filem.adapter.PersonalAdapter;
 import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.view.drag.DragGridView;
 import com.matthew.filem.utils.Constants;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 import com.matthew.filem.utils.T;
 

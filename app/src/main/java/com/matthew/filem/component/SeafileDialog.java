@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
-import com.matthew.filem.info.SeafileLibraryInfo;
+import com.matthew.filem.model.SeafileLibraryInfo;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.system.TextInputDialog;
 import com.matthew.filem.utils.SeafileUtils;

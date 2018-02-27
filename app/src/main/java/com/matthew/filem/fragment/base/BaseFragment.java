@@ -13,10 +13,10 @@ import android.view.ViewGroup;
 import com.matthew.filem.R;
 import com.matthew.filem.impl.UiInterface;
 import com.matthew.filem.activity.MainActivity;
-import com.matthew.filem.info.ImageInfo;
-import com.matthew.filem.info.SearchInfo;
+import com.matthew.filem.model.ImageInfo;
+import com.matthew.filem.model.SearchInfo;
 import com.matthew.filem.utils.Constants;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 
 import java.util.ArrayList;

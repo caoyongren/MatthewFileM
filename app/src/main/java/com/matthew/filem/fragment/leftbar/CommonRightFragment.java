@@ -23,7 +23,7 @@ import com.matthew.filem.adapter.CommonFileAdapter;
 import com.matthew.filem.component.FrameSelectView;
 import com.matthew.filem.fragment.base.BaseFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.system.FileCategoryHelper;
 import com.matthew.filem.system.FileIconTypeHelper;
 import com.matthew.filem.system.FileSortHelper;

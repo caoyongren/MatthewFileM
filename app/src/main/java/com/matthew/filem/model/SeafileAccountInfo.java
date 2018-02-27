@@ -1,4 +1,4 @@
-package com.matthew.filem.info;
+package com.matthew.filem.model;
 
 import java.io.File;
 import java.util.ArrayList;

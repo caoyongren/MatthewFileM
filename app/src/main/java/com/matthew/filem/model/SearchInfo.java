@@ -1,4 +1,4 @@
-package com.matthew.filem.info;
+package com.matthew.filem.model;
 
 public class SearchInfo {
     public String fileAbsolutePath;

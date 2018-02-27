@@ -24,7 +24,7 @@ import com.matthew.filem.component.MenuFirstDialog;
 import com.matthew.filem.component.PropertyDialog;
 import com.matthew.filem.fragment.leftbar.CommonRightFragment;
 import com.matthew.filem.impl.IFileInteractionListener;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.utils.Constants;
 import com.matthew.filem.utils.L;
 import com.matthew.filem.utils.LocalCacheLayout;

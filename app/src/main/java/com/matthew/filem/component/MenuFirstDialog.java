@@ -22,7 +22,7 @@ import android.widget.TextView;
 import com.matthew.filem.activity.MainActivity;
 import com.matthew.filem.R;
 import com.matthew.filem.utils.Constants;
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 import com.matthew.filem.system.FileViewInteractionHub;
 import java.util.ArrayList;
 import static android.R.color.holo_purple;

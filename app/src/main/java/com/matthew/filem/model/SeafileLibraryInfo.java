@@ -1,4 +1,4 @@
-package com.matthew.filem.info;
+package com.matthew.filem.model;
 
 /**
  * Created by Wang Zhixu on 01/19/17.

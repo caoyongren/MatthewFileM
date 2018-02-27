@@ -1,6 +1,6 @@
 package com.matthew.filem.system;
 
-import com.matthew.filem.info.FileInfo;
+import com.matthew.filem.model.FileInfo;
 
 import java.util.Comparator;
 import java.util.HashMap;
